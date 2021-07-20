@@ -1,0 +1,139 @@
+diff --git a/agent/core/src/main/java/org/jolokia/discovery/MulticastUtil.java b/agent/core/src/main/java/org/jolokia/discovery/MulticastUtil.java
+index ade6fe32..7bf417c0 100755
+--- a/agent/core/src/main/java/org/jolokia/discovery/MulticastUtil.java
++++ b/agent/core/src/main/java/org/jolokia/discovery/MulticastUtil.java
+@@ -1,4 +1,25 @@
+ package org.jolokia.discovery;
++import java.util.concurrent.TimeUnit;
++import java.net.UnknownHostException;
++import java.util.HashSet;
++import java.net.NetworkInterface;
++import java.util.Enumeration;
++import java.net.SocketTimeoutException;
++import java.net.InetSocketAddress;
++import java.net.SocketException;
++import java.util.concurrent.Callable;
++import java.util.Set;
++import java.util.List;
++import java.net.DatagramPacket;
++import java.util.concurrent.TimeoutException;
++import java.net.DatagramSocket;
++import java.net.InetAddress;
++import java.util.ArrayList;
++import java.util.concurrent.Executors;
++import java.net.MulticastSocket;
++import java.util.concurrent.ExecutorService;
++import java.util.concurrent.ExecutionException;
++import java.util.concurrent.Future;
+ 
+ import java.io.IOException;
+ import java.net.*;
+@@ -26,15 +47,15 @@ public final class MulticastUtil {
+         // TODO: IpV6 (not supported yet)
+         InetSocketAddress socketAddress =
+                 new InetSocketAddress(pMulticastGroup, pMulticastPort);
+-
+-        MulticastSocket socket = new MulticastSocket(pMulticastPort);
+-        socket.setReuseAddress(true);
+-        setOutgoingInterfaceForMulticastRequest(pAddress, socket);
+-        socket.setTimeToLive(255);
+-        if (joinMcGroupsOnAllNetworkInterfaces(socket, socketAddress, pLogHandler) == 0) {
+-            throw new IOException("Couldn't join multicast group " + socketAddress + " on any network interfaces");
++        try (MulticastSocket socket = new MulticastSocket(pMulticastPort)) {
++            socket.setReuseAddress(true);
++            setOutgoingInterfaceForMulticastRequest(pAddress, socket);
++            socket.setTimeToLive(255);
++            if (joinMcGroupsOnAllNetworkInterfaces(socket, socketAddress, pLogHandler) == 0) {
++                throw new IOException("Couldn't join multicast group " + socketAddress + " on any network interfaces");
++            }
++            return socket;
+         }
+-        return socket;
+     }
+ 
+     /**
+@@ -180,40 +201,35 @@ public final class MulticastUtil {
+         }
+ 
+         public List<DiscoveryIncomingMessage> call() throws IOException {
+-            final DatagramSocket socket = new DatagramSocket(0, address);
+-
+-            List<DiscoveryIncomingMessage> ret = new ArrayList<DiscoveryIncomingMessage>();
+-
+-            try {
+-                socket.setSoTimeout(timeout);
+-                logHandler.debug(address + "--> Sending");
+-                socket.send(outPacket);
+-            } catch (IOException exp) {
+-                throw new CouldntSendDiscoveryPacketException(
+-                    address,
+-                    "Can't send discovery UDP packet from " + address + ": " + exp.getMessage(),
+-                    exp);
+-            }
+-
+-            try {
+-
++            try (final DatagramSocket socket = new DatagramSocket(0, address)) {
++                List<DiscoveryIncomingMessage> ret = new ArrayList<DiscoveryIncomingMessage>();
+                 try {
+-                    do {
+-                        byte[] buf = new byte[AbstractDiscoveryMessage.MAX_MSG_SIZE];
+-                        DatagramPacket in = new DatagramPacket(buf, buf.length);
+-                        socket.receive(in);
+-                        logHandler.debug(address + "--> Received answer from " + in.getAddress());
+-                        addIncomingMessage(ret, in);
+-                    } while (true); // Leave loop with a SocketTimeoutException in receive()
+-                } catch (SocketTimeoutException exp) {
+-                    logHandler.debug(address + "--> Timeout");
+-                    // Expected until no responses are returned anymore
++                    socket.setSoTimeout(timeout);
++                    logHandler.debug(address + "--> Sending");
++                    socket.send(outPacket);
+                 } catch (IOException exp) {
+-                    throw new IOException("Cannot receive broadcast answer on " + address + ": " + exp.getMessage(),exp);
++                    throw new CouldntSendDiscoveryPacketException(address, "Can't send discovery UDP packet from " + address + ": " + exp.getMessage(), exp);
++                }
++                try {
++                    try {
++                        do {
++                            byte[] buf = new byte[AbstractDiscoveryMessage.MAX_MSG_SIZE];
++                            DatagramPacket in = new DatagramPacket(buf, buf.length);
++                            socket.receive(in);
++                            logHandler.debug(address + "--> Received answer from " + in.getAddress());
++                            addIncomingMessage(ret, in);
++                        } while (true );// Leave loop with a SocketTimeoutException in receive()
++
++                    } catch (SocketTimeoutException exp) {
++                        logHandler.debug(address + "--> Timeout");
++                        // Expected until no responses are returned anymore
++                    } catch (IOException exp) {
++                        throw new IOException("Cannot receive broadcast answer on " + address + ": " + exp.getMessage(), exp);
++                    }
++                    return ret;
++                } finally {
++                    socket.close();
+                 }
+-                return ret;
+-            } finally {
+-                socket.close();
+             }
+         }
+ 
+diff --git a/agent/jvm/src/main/java/org/jolokia/jvmagent/client/command/ListCommand.java b/agent/jvm/src/main/java/org/jolokia/jvmagent/client/command/ListCommand.java
+index f6765bb7..961e722d 100644
+--- a/agent/jvm/src/main/java/org/jolokia/jvmagent/client/command/ListCommand.java
++++ b/agent/jvm/src/main/java/org/jolokia/jvmagent/client/command/ListCommand.java
+@@ -43,10 +43,9 @@ public class ListCommand extends AbstractBaseCommand {
+     int execute(OptionsAndArgs pOpts, Object pVm, VirtualMachineHandler pHandler) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+         List<ProcessDescription> vmDescriptors = pHandler.listProcesses();
+         for (ProcessDescription descriptor : vmDescriptors) {
+-            Formatter formatter = new Formatter().format("%7.7s   %-100.100s",
+-                                                         stripNewline(descriptor.getId()),
+-                                                         stripNewline(descriptor.getDisplay()));
+-            System.out.println(formatter.toString().trim());
++            try (Formatter formatter = new Formatter().format("%7.7s   %-100.100s", stripNewline(descriptor.getId()), stripNewline(descriptor.getDisplay()))) {
++                System.out.println(formatter.toString().trim());
++            }
+         }
+         return 0;
+     }

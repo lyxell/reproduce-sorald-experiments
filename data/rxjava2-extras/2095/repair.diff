@@ -1,0 +1,304 @@
+diff --git a/src/test/java/com/github/davidmoten/rx2/BytesTest.java b/src/test/java/com/github/davidmoten/rx2/BytesTest.java
+index f10073d..afa0499 100644
+--- a/src/test/java/com/github/davidmoten/rx2/BytesTest.java
++++ b/src/test/java/com/github/davidmoten/rx2/BytesTest.java
+@@ -111,24 +111,25 @@ public class BytesTest {
+     public void testBytesFromFileLowBufferSize() throws IOException {
+         File file = new File("target/testFromFile");
+         file.delete();
+-        FileOutputStream out = new FileOutputStream(file);
+-        out.write("abcdefg".getBytes());
+-        out.close();
+-        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+-        Bytes //
+-                .from(file, 4) //
+-                .doOnNext(new Consumer<byte[]>() {
+-                    @Override
+-                    public void accept(byte[] b) {
+-                        try {
+-                            bytes.write(b);
+-                        } catch (IOException e) {
+-                            throw new RuntimeException();
+-                        }
++        try (FileOutputStream out = new FileOutputStream(file)) {
++            out.write("abcdefg".getBytes());
++            out.close();
++            final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
++            // 
++            // 
++            Bytes.from(file, 4).doOnNext(new Consumer<byte[]>() {
++                @Override
++                public void accept(byte[] b) {
++                    try {
++                        bytes.write(b);
++                    } catch (IOException e) {
++                        throw new RuntimeException();
+                     }
+-                }).subscribe();
+-        bytes.close();
+-        assertArrayEquals("abcdefg".getBytes(), bytes.toByteArray());
++                }
++            }).subscribe();
++            bytes.close();
++            assertArrayEquals("abcdefg".getBytes(), bytes.toByteArray());
++        }
+     }
+ 
+     @Test
+@@ -158,24 +159,25 @@ public class BytesTest {
+     public void testBytesFromFileDefaultBufferSize() throws IOException {
+         File file = new File("target/testFromFile");
+         file.delete();
+-        FileOutputStream out = new FileOutputStream(file);
+-        out.write("abcdefg".getBytes());
+-        out.close();
+-        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+-        Bytes //
+-                .from(file) //
+-                .doOnNext(new Consumer<byte[]>() {
+-                    @Override
+-                    public void accept(byte[] b) {
+-                        try {
+-                            bytes.write(b);
+-                        } catch (IOException e) {
+-                            throw new RuntimeException();
+-                        }
++        try (FileOutputStream out = new FileOutputStream(file)) {
++            out.write("abcdefg".getBytes());
++            out.close();
++            final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
++            // 
++            // 
++            Bytes.from(file).doOnNext(new Consumer<byte[]>() {
++                @Override
++                public void accept(byte[] b) {
++                    try {
++                        bytes.write(b);
++                    } catch (IOException e) {
++                        throw new RuntimeException();
+                     }
+-                }).subscribe();
+-        bytes.close();
+-        assertArrayEquals("abcdefg".getBytes(), bytes.toByteArray());
++                }
++            }).subscribe();
++            bytes.close();
++            assertArrayEquals("abcdefg".getBytes(), bytes.toByteArray());
++        }
+     }
+ 
+     @Test
+diff --git a/src/test/java/com/github/davidmoten/rx2/internal/flowable/FlowableServerSocketTest.java b/src/test/java/com/github/davidmoten/rx2/internal/flowable/FlowableServerSocketTest.java
+index 8e11489..8ef7525 100644
+--- a/src/test/java/com/github/davidmoten/rx2/internal/flowable/FlowableServerSocketTest.java
++++ b/src/test/java/com/github/davidmoten/rx2/internal/flowable/FlowableServerSocketTest.java
+@@ -145,18 +145,18 @@ public final class FlowableServerSocketTest {
+     @Test
+     public void testCloserWhenThrows() {
+         final IOException ex = new IOException();
+-        Closeable c = new Closeable() {
+-
++        try (Closeable c = new Closeable() {
+             @Override
+             public void close() throws IOException {
+                 throw ex;
+             }
+-        };
+-        try {
+-            Consumers.close().accept(c);
+-            Assert.fail();
+-        } catch (Exception e) {
+-            assertTrue(ex == e);
++        }) {
++            try {
++                Consumers.close().accept(c);
++                Assert.fail();
++            } catch (Exception e) {
++                assertTrue(ex == e);
++            }
+         }
+     }
+ 
+@@ -170,44 +170,39 @@ public final class FlowableServerSocketTest {
+         reset();
+         TestSubscriber<Object> ts = TestSubscriber.create();
+         final AtomicReference<byte[]> result = new AtomicReference<byte[]>();
+-        try {
++        try (Socket socket = new Socket(LOCALHOST, port.get())) {
+             int bufferSize = 4;
+             AtomicInteger port = new AtomicInteger();
+-            IO.serverSocketAutoAllocatePort(Consumers.set(port)) //
+-                    .readTimeoutMs(10000) //
+-                    .bufferSize(bufferSize) //
+-                    .create() //
+-                    .flatMap(new Function<Flowable<byte[]>, Flowable<byte[]>>() {
++            // 
++            // 
++            // 
++            // 
++            // 
++            // 
++            IO.serverSocketAutoAllocatePort(Consumers.set(port)).readTimeoutMs(10000).bufferSize(bufferSize).create().flatMap(new Function<Flowable<byte[]>, Flowable<byte[]>>() {
++                @Override
++                public Flowable<byte[]> apply(Flowable<byte[]> g) {
++                    return // 
++                    // 
++                    // 
++                    // 
++                    // 
++                    // 
++                    g.firstOrError().toFlowable().doOnNext(Consumers.set(result)).doOnNext(new Consumer<byte[]>() {
+                         @Override
+-                        public Flowable<byte[]> apply(Flowable<byte[]> g) {
+-                            return g //
+-                                    .firstOrError() //
+-                                    .toFlowable() //
+-                                    .doOnNext(Consumers.set(result)) //
+-                                    .doOnNext(new Consumer<byte[]>() {
+-                                        @Override
+-                                        public void accept(byte[] bytes) {
+-                                            System.out.println(
+-                                                    Thread.currentThread().getName() + ": " + new String(bytes));
+-                                        }
+-                                    }) //
+-                                    .onErrorResumeNext(Flowable.<byte[]>empty()) //
+-                                    .subscribeOn(scheduler);
++                        public void accept(byte[] bytes) {
++                            System.out.println(Thread.currentThread().getName() + ": " + new String(bytes));
+                         }
+-                    }) //
+-                    .subscribeOn(scheduler) //
+-                    .subscribe(ts);
++                    }).onErrorResumeNext(Flowable.<byte[]>empty()).subscribeOn(scheduler);
++                }
++            }).subscribeOn(scheduler).subscribe(ts);
+             Thread.sleep(300);
+-            Socket socket = new Socket(LOCALHOST, port.get());
+             OutputStream out = socket.getOutputStream();
+             out.write("12345678901234567890".getBytes());
+             out.close();
+             socket.close();
+             Thread.sleep(1000);
+             assertEquals("1234", new String(result.get(), UTF_8));
+-        } finally {
+-            // will close server socket
+-            ts.dispose();
+         }
+     }
+ 
+@@ -218,37 +213,35 @@ public final class FlowableServerSocketTest {
+         TestSubscriber<Object> ts = TestSubscriber.create();
+         final AtomicReference<byte[]> result = new AtomicReference<byte[]>();
+         AtomicInteger port = new AtomicInteger();
+-        try {
++        try (@SuppressWarnings("resource")
++        Socket socket = new Socket(LOCALHOST, port.get())) {
+             int bufferSize = 4;
+-            IO.serverSocketAutoAllocatePort(Consumers.set(port)) //
+-                    .readTimeoutMs(Integer.MAX_VALUE).bufferSize(bufferSize).create()
+-                    .flatMap(new Function<Flowable<byte[]>, Flowable<String>>() {
++            // 
++            // 
++            IO.serverSocketAutoAllocatePort(Consumers.set(port)).readTimeoutMs(Integer.MAX_VALUE).bufferSize(bufferSize).create().flatMap(new Function<Flowable<byte[]>, Flowable<String>>() {
++                @Override
++                public Flowable<String> apply(Flowable<byte[]> g) {
++                    return // 
++                    // 
++                    // 
++                    // 
++                    // 
++                    // 
++                    // 
++                    g.firstOrError().toFlowable().doOnNext(Consumers.set(result)).map(new Function<byte[], String>() {
+                         @Override
+-                        public Flowable<String> apply(Flowable<byte[]> g) {
+-                            return g //
+-                                    .firstOrError() //
+-                                    .toFlowable() //
+-                                    .doOnNext(Consumers.set(result)) //
+-                                    .map(new Function<byte[], String>() {
+-                                        @Override
+-                                        public String apply(byte[] bytes) {
+-                                            return new String(bytes, UTF_8);
+-                                        }
+-                                    }) //
+-                                    .doOnNext(new Consumer<String>() {
+-                                        @Override
+-                                        public void accept(String s) {
+-                                            System.out.println(Thread.currentThread().getName() + ": " + s);
+-                                        }
+-                                    }) //
+-                                    .onErrorResumeNext(Flowable.<String>empty()) //
+-                                    .subscribeOn(scheduler);
++                        public String apply(byte[] bytes) {
++                            return new String(bytes, UTF_8);
+                         }
+-                    }).subscribeOn(scheduler) //
+-                    .subscribe(ts);
++                    }).doOnNext(new Consumer<String>() {
++                        @Override
++                        public void accept(String s) {
++                            System.out.println(Thread.currentThread().getName() + ": " + s);
++                        }
++                    }).onErrorResumeNext(Flowable.<String>empty()).subscribeOn(scheduler);
++                }
++            }).subscribeOn(scheduler).subscribe(ts);
+             Thread.sleep(300);
+-            @SuppressWarnings("resource")
+-            Socket socket = new Socket(LOCALHOST, port.get());
+             OutputStream out = socket.getOutputStream();
+             out.write("hell".getBytes(UTF_8));
+             out.flush();
+@@ -257,14 +250,6 @@ public final class FlowableServerSocketTest {
+             ts.assertNotTerminated();
+             out.write("will-fail".getBytes(UTF_8));
+             out.flush();
+-        } finally {
+-            // will close server socket
+-            try {
+-                ts.dispose();
+-                Thread.sleep(300);
+-            } finally {
+-                RxJavaPlugins.reset();
+-            }
+         }
+     }
+ 
+@@ -432,28 +417,24 @@ public final class FlowableServerSocketTest {
+     public void testAcceptSocketRejectsAlways() throws UnknownHostException, IOException, InterruptedException {
+         reset();
+         TestSubscriber<Object> ts = TestSubscriber.create();
+-        try {
++        try (Socket socket = new Socket(LOCALHOST, port.get())) {
+             int bufferSize = 4;
+             AtomicInteger port = new AtomicInteger();
+-            IO.serverSocketAutoAllocatePort(Consumers.set(port)) //
+-                    .readTimeoutMs(10000) //
+-                    .acceptTimeoutMs(200) //
+-                    .bufferSize(bufferSize) //
+-                    .acceptSocketIf(Functions.alwaysFalse()) //
+-                    .create() //
+-                    .subscribeOn(scheduler) //
+-                    .subscribe(ts);
++            // 
++            // 
++            // 
++            // 
++            // 
++            // 
++            // 
++            IO.serverSocketAutoAllocatePort(Consumers.set(port)).readTimeoutMs(10000).acceptTimeoutMs(200).bufferSize(bufferSize).acceptSocketIf(Functions.alwaysFalse()).create().subscribeOn(scheduler).subscribe(ts);
+             Thread.sleep(300);
+-            Socket socket = new Socket(LOCALHOST, port.get());
+             OutputStream out = socket.getOutputStream();
+             out.write("12345678901234567890".getBytes());
+             out.close();
+             socket.close();
+             Thread.sleep(1000);
+             ts.assertNoValues();
+-        } finally {
+-            // will close server socket
+-            ts.dispose();
+         }
+     }
+ 

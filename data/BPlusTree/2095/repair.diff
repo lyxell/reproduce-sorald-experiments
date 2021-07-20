@@ -1,0 +1,52 @@
+diff --git a/src/main/java/ds/bplus/util/Utilities.java b/src/main/java/ds/bplus/util/Utilities.java
+index 2d1c1c0..1bdea91 100644
+--- a/src/main/java/ds/bplus/util/Utilities.java
++++ b/src/main/java/ds/bplus/util/Utilities.java
+@@ -1,4 +1,9 @@
+ package ds.bplus.util;
++import java.io.ObjectInputStream;
++import java.io.IOException;
++import java.io.ObjectOutputStream;
++import java.io.FileOutputStream;
++import java.io.FileInputStream;
+ 
+ import ds.bplus.bptree.BPlusTree;
+ 
+@@ -126,11 +131,12 @@ public class Utilities {
+     public static void writeObjectToFile(LinkedList<Long> obj,
+                                          String filename) throws IOException {
+         System.out.println("Writing object to: " + filename);
+-        FileOutputStream fout = new FileOutputStream(filename);
+-        ObjectOutputStream foutStream = new ObjectOutputStream(fout);
+-        foutStream.writeObject(obj);
+-        foutStream.close();
+-        System.out.println("Writing complete to file: " + filename);
++        try (FileOutputStream fout = new FileOutputStream(filename)) {
++            ObjectOutputStream foutStream = new ObjectOutputStream(fout);
++            foutStream.writeObject(obj);
++            foutStream.close();
++            System.out.println("Writing complete to file: " + filename);
++        }
+     }
+ 
+     /**
+@@ -144,12 +150,13 @@ public class Utilities {
+     private static LinkedList<Long> loadListFromFile(String filename)
+             throws IOException, ClassNotFoundException {
+         System.out.println("Loading LinkedList<Long> object from file: " + filename);
+-        FileInputStream fin = new FileInputStream(filename);
+-        ObjectInputStream finStream = new ObjectInputStream(fin);
+-        @SuppressWarnings("unchecked")
+-        LinkedList<Long> l = (LinkedList<Long>)finStream.readObject();
+-        finStream.close();
+-        return l;
++        try (FileInputStream fin = new FileInputStream(filename)) {
++            ObjectInputStream finStream = new ObjectInputStream(fin);
++            @SuppressWarnings("unchecked")
++            LinkedList<Long> l = ((LinkedList<Long>) (finStream.readObject()));
++            finStream.close();
++            return l;
++        }
+     }
+ 
+ 

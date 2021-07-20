@@ -1,0 +1,62 @@
+{
+    "repairs": [{
+        "nbPerformedRepairs": 4,
+        "ruleName": "UnclosedResources",
+        "crashedRepairsLocations": [],
+        "nbCrashedRepairs": 0,
+        "ruleKey": "2095",
+        "nbViolationsBefore": 4,
+        "performedRepairsLocations": [
+            {
+                "endLine": 129,
+                "endColumn": 62,
+                "startColumn": 32,
+                "startLine": 129,
+                "filePath": "src/main/java/ds/bplus/util/Utilities.java",
+                "violationSpecifier": "2095:src/main/java/ds/bplus/util/Utilities.java:129:32:129:62"
+            },
+            {
+                "endLine": 130,
+                "endColumn": 68,
+                "startColumn": 40,
+                "startLine": 130,
+                "filePath": "src/main/java/ds/bplus/util/Utilities.java",
+                "violationSpecifier": "2095:src/main/java/ds/bplus/util/Utilities.java:130:40:130:68"
+            },
+            {
+                "endLine": 147,
+                "endColumn": 59,
+                "startColumn": 30,
+                "startLine": 147,
+                "filePath": "src/main/java/ds/bplus/util/Utilities.java",
+                "violationSpecifier": "2095:src/main/java/ds/bplus/util/Utilities.java:147:30:147:59"
+            },
+            {
+                "endLine": 148,
+                "endColumn": 64,
+                "startColumn": 38,
+                "startLine": 148,
+                "filePath": "src/main/java/ds/bplus/util/Utilities.java",
+                "violationSpecifier": "2095:src/main/java/ds/bplus/util/Utilities.java:148:38:148:64"
+            }
+        ],
+        "nbViolationsAfter": 0
+    }],
+    "executionInfo": {
+        "soraldVersion": "commit: 38248282",
+        "javaVersion": "11.0.12-ea",
+        "originalArgs": [
+            "repair",
+            "--file-output-strategy=IN_PLACE",
+            "--original-files-path=./",
+            "--rule-keys=2095",
+            "--stats-output-file=repair.json"
+        ]
+    },
+    "totalTimeMs": 12151,
+    "repairTimeMs": 474,
+    "startTimeMs": 1626803526730,
+    "crashes": [],
+    "endTimeMs": 1626803538881,
+    "parseTimeMs": 2167
+}

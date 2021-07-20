@@ -1,0 +1,3669 @@
+diff --git a/tetrad-gui/src/main/java/edu/cmu/tetradapp/app/LoadSessionAction.java b/tetrad-gui/src/main/java/edu/cmu/tetradapp/app/LoadSessionAction.java
+index a9c8ff07f..2bed60638 100644
+--- a/tetrad-gui/src/main/java/edu/cmu/tetradapp/app/LoadSessionAction.java
++++ b/tetrad-gui/src/main/java/edu/cmu/tetradapp/app/LoadSessionAction.java
+@@ -20,6 +20,17 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetradapp.app;
++import java.io.ObjectInputStream;
++import java.awt.Window;
++import java.io.IOException;
++import java.io.FileNotFoundException;
++import javax.swing.JOptionPane;
++import java.io.File;
++import java.io.ObjectStreamClass;
++import javax.swing.AbstractAction;
++import java.io.FileInputStream;
++import javax.swing.JFileChooser;
++import java.io.InputStream;
+ 
+ import edu.cmu.tetrad.session.Session;
+ import edu.cmu.tetrad.util.JOptionUtils;
+diff --git a/tetrad-gui/src/main/java/edu/cmu/tetradapp/app/TetradLogArea.java b/tetrad-gui/src/main/java/edu/cmu/tetradapp/app/TetradLogArea.java
+index 10de37ddc..4cb399314 100644
+--- a/tetrad-gui/src/main/java/edu/cmu/tetradapp/app/TetradLogArea.java
++++ b/tetrad-gui/src/main/java/edu/cmu/tetradapp/app/TetradLogArea.java
+@@ -20,6 +20,23 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetradapp.app;
++import javax.swing.JLabel;
++import javax.swing.JPanel;
++import javax.swing.JScrollPane;
++import javax.swing.JTextArea;
++import javax.swing.JComboBox;
++import javax.swing.JComponent;
++import javax.swing.JButton;
++import javax.swing.JOptionPane;
++import javax.swing.JTextField;
++import javax.swing.Box;
++import java.awt.Font;
++import java.awt.Color;
++import javax.swing.AbstractButton;
++import java.awt.Dimension;
++import javax.swing.JFileChooser;
++import javax.swing.JCheckBox;
++import java.awt.BorderLayout;
+ 
+ import edu.cmu.tetrad.util.JOptionUtils;
+ import edu.cmu.tetrad.util.TetradLogger;
+@@ -353,8 +370,7 @@ class TetradLogArea extends JPanel {
+      * any exceptions are thrown.
+      */
+     private void writeLogToFile(File file) {
+-        try {
+-            FileWriter writer = new FileWriter(file);
++        try (FileWriter writer = new FileWriter(file)) {
+             writer.write(this.textArea.getText());
+             writer.close();
+         } catch (IOException ex) {
+diff --git a/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/LoadKnowledgeAction.java b/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/LoadKnowledgeAction.java
+index cccc93082..a3c0b10a7 100644
+--- a/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/LoadKnowledgeAction.java
++++ b/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/LoadKnowledgeAction.java
+@@ -20,6 +20,20 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetradapp.editor;
++import javax.swing.JLabel;
++import javax.swing.JPanel;
++import javax.swing.JScrollPane;
++import javax.swing.JTextArea;
++import javax.swing.JComboBox;
++import javax.swing.JOptionPane;
++import javax.swing.Box;
++import java.awt.Font;
++import javax.swing.AbstractAction;
++import java.awt.Component;
++import javax.swing.JSplitPane;
++import java.awt.Dimension;
++import javax.swing.JFileChooser;
++import java.awt.BorderLayout;
+ 
+ import edu.cmu.tetrad.data.DataReader;
+ import edu.cmu.tetrad.data.IKnowledge;
+@@ -246,30 +260,22 @@ final class KnowledgeLoaderWizard extends JPanel {
+     private static void setText(File file, JTextArea textArea) {
+         int numLines = 40;
+         int numCols = 100;
+-
+-        try {
+-            BufferedReader in = new BufferedReader(new FileReader(file));
+-            String line;
+-            int lineNumber = 0;
+-
+-            while ((line = in.readLine()) != null && (++lineNumber < numLines))
+-            {
+-                if (line.length() < numCols) {
+-                    textArea.append(line.substring(0, line.length()) + "\n");
+-                }
+-                else {
+-                    textArea.append(line.substring(0, numCols) + "...\n");
+-                }
++            try (BufferedReader in = new BufferedReader(new FileReader(file))) {
++                String line;
++                int lineNumber = 0;
++                while ((line = in.readLine()) != null && ++lineNumber < numLines) {
++                    if (line.length() < numCols) {
++                        textArea.append(line.substring(0, line.length()) + "\n");
++                    } else {
++                        textArea.append(line.substring(0, numCols) + "...\n");
++                    }
++                } 
++                textArea.append("...");
++                textArea.setCaretPosition(0);
++                in.close();
++            } catch (IOException e) {
++                e.printStackTrace();
+             }
+-
+-            textArea.append("...");
+-            textArea.setCaretPosition(0);
+-
+-            in.close();
+-        }
+-        catch (IOException e) {
+-            e.printStackTrace();
+-        }
+     }
+ 
+     public String getCommentIndicator() {
+diff --git a/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/LoadTimeSeriesDataAction.java b/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/LoadTimeSeriesDataAction.java
+index ae2fb2de8..34e75e285 100644
+--- a/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/LoadTimeSeriesDataAction.java
++++ b/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/LoadTimeSeriesDataAction.java
+@@ -20,6 +20,8 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetradapp.editor;
++import javax.swing.AbstractAction;
++import javax.swing.JFileChooser;
+ 
+ import edu.cmu.tetrad.data.*;
+ import edu.cmu.tetrad.graph.Node;
+@@ -73,50 +75,35 @@ class LoadTimeSeriesDataAction extends AbstractAction {
+         // get the file
+         File file = chooser.getSelectedFile();
+         Preferences.userRoot().put("fileSaveLocation", file.getParent());
+-
+-        try {
+-            BufferedReader in = new BufferedReader(new FileReader(file));
++        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+             String line;
+             StringTokenizer st;
+-
+             // read in variable name and set up DataSet.
+             List<Node> variables = new LinkedList<>();
+-
+             st = new StringTokenizer(in.readLine());
+-
+             while (st.hasMoreTokens()) {
+                 String name = st.nextToken();
+                 ContinuousVariable var = new ContinuousVariable(name);
+                 variables.add(var);
+-            }
+-
++            } 
+             DataSet dataSet = new BoxDataSet(new VerticalDoubleDataBox(0, variables.size()), variables);
+-
+             int row = -1;
+-
+             while ((line = in.readLine()) != null) {
+                 int col = -1;
+-
+                 st = new StringTokenizer(line);
+-
+                 while (st.hasMoreTokens()) {
+                     String literal = st.nextToken();
+                     if (literal.length() == 0) {
+                         continue;
+                     }
+-
+                     dataSet.setObject(row, ++col, literal);
+-                }
+-            }
+-
+-            TimeSeriesData dataSet3 = new TimeSeriesData(
+-                    dataSet.getDoubleData(), dataSet.getVariableNames());
+-
++                } 
++            } 
++            TimeSeriesData dataSet3 = new TimeSeriesData(dataSet.getDoubleData(), dataSet.getVariableNames());
+             editor.getDataWrapper().setDataModel(dataSet3);
+             firePropertyChange("modelChanged", null, null);
+             editor.reset();
+-        }
+-        catch (Exception e) {
++        } catch (Exception e) {
+             e.printStackTrace();
+         }
+     }
+diff --git a/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/SaveGraph.java b/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/SaveGraph.java
+index 5d71baed6..c500883a3 100644
+--- a/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/SaveGraph.java
++++ b/tetrad-gui/src/main/java/edu/cmu/tetradapp/editor/SaveGraph.java
+@@ -20,6 +20,9 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetradapp.editor;
++import javax.swing.JOptionPane;
++import javax.swing.AbstractAction;
++import java.awt.Component;
+ 
+ import edu.cmu.tetrad.graph.Graph;
+ import edu.cmu.tetrad.graph.GraphUtils;
+@@ -59,7 +62,7 @@ public class SaveGraph extends AbstractAction {
+      */
+     private Type type = Type.xml;
+     
+-    public enum Type{text, xml, json, r, dot}
++    public enum Type{text, xml, json, r, dot;}
+ 
+     public SaveGraph(GraphEditable graphEditable, String title, Type type) {
+         super(title);
+@@ -96,58 +99,49 @@ public class SaveGraph extends AbstractAction {
+         }
+         else if (type == Type.r) {
+             File file = EditorUtils.getSaveFile("graph", "r.txt", parent, false, title);
+-            try {
+-                String text = GraphUtils.graphRMatrixTxt(graph);
+-
+-                PrintWriter out = new PrintWriter(file);
+-                out.println(text);
+-                Preferences.userRoot().put("fileSaveLocation", file.getParent());
+-                out.close();
+-            } catch (FileNotFoundException e1) {
+-                e1.printStackTrace();
+-                throw new RuntimeException("Not a directed graph.", e1);
+-            } catch (IllegalArgumentException e1) {
+-
+-                // Probably not a directed graph.
+-                JOptionPane.showMessageDialog(getGraphEditable().getWorkbench(), e1.getMessage());
+-            }
++                    try (PrintWriter out = new PrintWriter(file)) {
++                        String text = GraphUtils.graphRMatrixTxt(graph);
++                        out.println(text);
++                        Preferences.userRoot().put("fileSaveLocation", file.getParent());
++                        out.close();
++                    } catch (FileNotFoundException e1) {
++                        e1.printStackTrace();
++                        throw new RuntimeException("Not a directed graph.", e1);
++                    } catch (IllegalArgumentException e1) {
++                        // Probably not a directed graph.
++                        JOptionPane.showMessageDialog(getGraphEditable().getWorkbench(), e1.getMessage());
++                    }
+         }
+         else if (type == Type.json) {
+             File file = EditorUtils.getSaveFile("graph", "json", parent, false, title);
+-            try {
+-            	Gson gson = new GsonBuilder().setPrettyPrinting().create();
+-                String text = gson.toJson(graph);
+-
+-                PrintWriter out = new PrintWriter(file);
+-                out.println(text);
+-                Preferences.userRoot().put("fileSaveLocation", file.getParent());
+-                out.close();
+-            } catch (FileNotFoundException e1) {
+-                e1.printStackTrace();
+-                throw new RuntimeException("Not a directed graph.", e1);
+-            } catch (IllegalArgumentException e1) {
+-
+-                // Probably not a directed graph.
+-                JOptionPane.showMessageDialog(getGraphEditable().getWorkbench(), e1.getMessage());
+-            }
++                        try (PrintWriter out = new PrintWriter(file)) {
++                            Gson gson = new GsonBuilder().setPrettyPrinting().create();
++                            String text = gson.toJson(graph);
++                            out.println(text);
++                            Preferences.userRoot().put("fileSaveLocation", file.getParent());
++                            out.close();
++                        } catch (FileNotFoundException e1) {
++                            e1.printStackTrace();
++                            throw new RuntimeException("Not a directed graph.", e1);
++                        } catch (IllegalArgumentException e1) {
++                            // Probably not a directed graph.
++                            JOptionPane.showMessageDialog(getGraphEditable().getWorkbench(), e1.getMessage());
++                        }
+         }
+         else if (type == Type.dot) {
+             File file = EditorUtils.getSaveFile("graph", "dot", parent, false, title);
+-            try {
+-                String text = GraphUtils.graphToDot(graph);
+-
+-                PrintWriter out = new PrintWriter(file);
+-                out.println(text);
+-                Preferences.userRoot().put("fileSaveLocation", file.getParent());
+-                out.close();
+-            } catch (FileNotFoundException e1) {
+-                e1.printStackTrace();
+-                throw new RuntimeException("Not a directed graph.", e1);
+-            } catch (IllegalArgumentException e1) {
+-
+-                // Probably not a directed graph.
+-                JOptionPane.showMessageDialog(getGraphEditable().getWorkbench(), e1.getMessage());
+-            }
++                            try (PrintWriter out = new PrintWriter(file)) {
++                                String text = GraphUtils.graphToDot(graph);
++                                out.println(text);
++                                Preferences.userRoot().put("fileSaveLocation", file.getParent());
++                                out.close();
++                            } catch (FileNotFoundException e1) {
++                                e1.printStackTrace();
++                                throw new RuntimeException("Not a directed graph.", e1);
++                            } catch (IllegalArgumentException e1) {
++                                // Probably not a directed graph.
++                                JOptionPane.showMessageDialog(getGraphEditable().getWorkbench(), e1.getMessage());
++                            }
+         }
+     }
+ 
+diff --git a/tetrad-gui/src/main/java/edu/cmu/tetradapp/knowledge_editor/KnowledgeBoxEditor.java b/tetrad-gui/src/main/java/edu/cmu/tetradapp/knowledge_editor/KnowledgeBoxEditor.java
+index 57a6816b0..aad6616eb 100644
+--- a/tetrad-gui/src/main/java/edu/cmu/tetradapp/knowledge_editor/KnowledgeBoxEditor.java
++++ b/tetrad-gui/src/main/java/edu/cmu/tetradapp/knowledge_editor/KnowledgeBoxEditor.java
+@@ -19,6 +19,27 @@
+ // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA //
+ ///////////////////////////////////////////////////////////////////////////////
+ package edu.cmu.tetradapp.knowledge_editor;
++import javax.swing.JLabel;
++import javax.swing.JPanel;
++import javax.swing.JScrollPane;
++import javax.swing.JMenuBar;
++import javax.swing.JTextArea;
++import javax.swing.JMenuItem;
++import javax.swing.JComponent;
++import javax.swing.JButton;
++import javax.swing.JOptionPane;
++import javax.swing.SwingConstants;
++import javax.swing.DropMode;
++import javax.swing.DefaultListModel;
++import javax.swing.JSpinner;
++import javax.swing.Box;
++import javax.swing.JList;
++import javax.swing.JMenu;
++import javax.swing.JTabbedPane;
++import javax.swing.JFileChooser;
++import javax.swing.JCheckBox;
++import javax.swing.TransferHandler;
++import javax.swing.SpinnerNumberModel;
+ 
+ import edu.cmu.tetrad.data.*;
+ import edu.cmu.tetrad.graph.Graph;
+@@ -845,24 +866,16 @@ public class KnowledgeBoxEditor extends JPanel {
+         if (fileName == null) {
+             throw new IllegalStateException("No data file was specified.");
+         }
+-
+-        try {
++        try (FileReader fr = new FileReader(knowledgeFile)) {
+             File knowledgeFile = new File(fileName);
+-
+             CharArrayWriter writer = new CharArrayWriter();
+-
+-            FileReader fr = new FileReader(knowledgeFile);
+             int i;
+-
+             while ((i = fr.read()) != -1) {
+-                writer.append((char) i);
+-            }
+-
++                writer.append(((char) (i)));
++            } 
+             DataReader reader = new DataReader();
+             char[] chars = writer.toCharArray();
+-
+             System.out.println(new String(chars));
+-
+             knowledgeBoxModel.setKnowledge(reader.parseKnowledge(chars));
+         } catch (Exception e) {
+             throw new RuntimeException("Couldn't read knowledge.");
+diff --git a/tetrad-gui/src/main/java/edu/cmu/tetradapp/model/YeastPcCcdSearchWrapper.java b/tetrad-gui/src/main/java/edu/cmu/tetradapp/model/YeastPcCcdSearchWrapper.java
+index 342d7efdf..a5a7c6330 100644
+--- a/tetrad-gui/src/main/java/edu/cmu/tetradapp/model/YeastPcCcdSearchWrapper.java
++++ b/tetrad-gui/src/main/java/edu/cmu/tetradapp/model/YeastPcCcdSearchWrapper.java
+@@ -20,6 +20,11 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetradapp.model;
++import java.io.IOException;
++import java.io.DataOutputStream;
++import java.io.FileOutputStream;
++import java.io.File;
++import java.io.OutputStream;
+ 
+ //package
+ 
+@@ -90,168 +95,120 @@ public class YeastPcCcdSearchWrapper {
+             System.out.println("Cannot open file file " + outverbosefile);
+             System.exit(0);
+         }
+-
+-        DataOutputStream d1 = new DataOutputStream(s1);
+-
+-        try {
+-            s2 = new FileOutputStream(outsummaryfile);
+-        }
+-        catch (IOException e) {
+-            System.out.println("Cannot open file file " + outsummaryfile);
+-            System.exit(0);
+-        }
+-
+-        DataOutputStream d2 = new DataOutputStream(s2);
+-
+-        try {
+-
+-            //if(!verbose) {
+-            d2.writeBytes(
+-                    "File\tPC05 FP\tPC05 FN\tPC10 FP\tPC10 FN\tPC15 FP\t");
+-            d2.writeBytes("PC15 FN\tPC20 FP\tPC20 FN\tPC30 FP\tPC30 FN\t");
+-            d2.writeBytes(
+-                    "CCD05 FP\tCCD05 FN\tCCD10 FP\tCCD10 FN\tCCD 15 FP\t");
+-            d2.writeBytes(
+-                    "CCD15 FN\tCCD20 FP\tCCD20 FN\tCCD30 FP\tCCD 30 FN\n");
+-            //}
+-
+-            // read in variable name and set up DataSet.
+-//            RectangularDataSet dataSet = DataLoaders.loadContinuousData(
+-//                    new File(args[0]), DelimiterType.WHITESPACE,
+-//                    "//"
+-//            );
+-
+-            //int ngenes = 6;
+-            int ngenes = Integer.valueOf(args[2]);
+-            IKnowledge bk = new Knowledge2();
+-            bk.addToTiersByVarNames(listOfNames);
+-
+-            //if(verbose) {
+-            d1.writeBytes("\n \n**Results for data in file yeastTRN**\n \n");
+-            d1.writeBytes("  Acutal adj matrix: \n");
+-            printAdjMatrix(yeastReg, listOfNames, d1);
+-            //}
+-
+-
+-            int[] PC05Accuracy;
+-            PC05Accuracy = PCAccuracy(0.05, ngenes, cds, bk, yeastReg,
+-                    listOfNames, d1, verbose);
+-
+-            int[] PC10Accuracy;
+-            PC10Accuracy = PCAccuracy(0.10, ngenes, cds, bk, yeastReg,
+-                    listOfNames, d1, verbose);
+-
+-            int[] PC15Accuracy;
+-            PC15Accuracy = PCAccuracy(0.15, ngenes, cds, bk, yeastReg,
+-                    listOfNames, d1, verbose);
+-
+-            int[] PC20Accuracy;
+-            PC20Accuracy = PCAccuracy(0.20, ngenes, cds, bk, yeastReg,
+-                    listOfNames, d1, verbose);
+-
+-            int[] PC30Accuracy;
+-            PC30Accuracy = PCAccuracy(0.30, ngenes, cds, bk, yeastReg,
+-                    listOfNames, d1, verbose);
+-
+-            int[] CCD05Accuracy;
+-            CCD05Accuracy = CcdAccuracy(0.05, ngenes, cds, bk, yeastReg,
+-                    listOfNames, d1, verbose);
+-
+-            int[] CCD10Accuracy;
+-            CCD10Accuracy = CcdAccuracy(0.10, ngenes, cds, bk, yeastReg,
+-                    listOfNames, d1, verbose);
+-
+-            int[] CCD15Accuracy;
+-            CCD15Accuracy = CcdAccuracy(0.15, ngenes, cds, bk, yeastReg,
+-                    listOfNames, d1, verbose);
+-
+-            int[] CCD20Accuracy;
+-            CCD20Accuracy = CcdAccuracy(0.20, ngenes, cds, bk, yeastReg,
+-                    listOfNames, d1, verbose);
+-
+-            int[] CCD30Accuracy;
+-            CCD30Accuracy = CcdAccuracy(0.30, ngenes, cds, bk, yeastReg,
+-                    listOfNames, d1, verbose);
+-
+-            /*
+-            int[] FCI05Accuracy;
+-            FCI05Accuracy =
+-              FCIAccuracy(0.05, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
+-
+-            int[] FCI10Accuracy;
+-            FCI10Accuracy =
+-              FCIAccuracy(0.10, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
+-
+-            int[] FCI15Accuracy;
+-            FCI15Accuracy =
+-              FCIAccuracy(0.15, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
+-
+-            int[] FCI20Accuracy;
+-            FCI20Accuracy =
+-              FCIAccuracy(0.20, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
+-
+-            int[] FCI30Accuracy;
+-            FCI30Accuracy =
+-              FCIAccuracy(0.30, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
+-
+-
+-            */
+-
+-            //if(!verbose) {
+-            d2.writeBytes("yeastTRN \t");
+-            d2.writeBytes(PC05Accuracy[0] + "\t");
+-            d2.writeBytes(PC05Accuracy[1] + "\t");
+-            //}
+-
+-            //if(!verbose) {
+-            d2.writeBytes(PC10Accuracy[0] + "\t");
+-            d2.writeBytes(PC10Accuracy[1] + "\t");
+-            //}
+-
+-            //if(!verbose) {
+-            d2.writeBytes(PC15Accuracy[0] + "\t");
+-            d2.writeBytes(PC15Accuracy[1] + "\t");
+-            //}
+-
+-            //if(!verbose) {
+-            d2.writeBytes(PC20Accuracy[0] + "\t");
+-            d2.writeBytes(PC20Accuracy[1] + "\t");
+-            //}
+-
+-            //if(!verbose) {
+-            d2.writeBytes(PC30Accuracy[0] + "\t");
+-            d2.writeBytes(PC30Accuracy[1] + "\t");
+-            //}
+-
+-            //if(!verbose) {
+-            d2.writeBytes(CCD05Accuracy[0] + "\t");
+-            d2.writeBytes(CCD05Accuracy[1] + "\t");
+-            //}
+-
+-            //if(!verbose) {
+-            d2.writeBytes(CCD10Accuracy[0] + "\t");
+-            d2.writeBytes(CCD10Accuracy[1] + "\t");
+-            //}
+-
+-            //if(!verbose) {
+-            d2.writeBytes(CCD15Accuracy[0] + "\t");
+-            d2.writeBytes(CCD15Accuracy[1] + "\t");
+-            //}
+-
+-            //if(!verbose) {
+-            d2.writeBytes(CCD20Accuracy[0] + "\t");
+-            d2.writeBytes(CCD20Accuracy[1] + "\t");
+-            //}
+-
+-            //if(!verbose) {
+-            d2.writeBytes(CCD30Accuracy[0] + "\t");
+-            d2.writeBytes(CCD30Accuracy[1] + "\n");
+-            //}
+-
+-        }
+-        catch (Exception e) {
+-            e.printStackTrace();
+-        }
++    try (DataOutputStream d1 = new DataOutputStream(s1)) {
++      try {
++        s2 = new FileOutputStream(outsummaryfile);
++      } catch (IOException e) {
++        System.out.println("Cannot open file file " + outsummaryfile);
++        System.exit(0);
++      }
++      DataOutputStream d2 = new DataOutputStream(s2);
++      try {
++        // if(!verbose) {
++        d2.writeBytes("File\tPC05 FP\tPC05 FN\tPC10 FP\tPC10 FN\tPC15 FP\t");
++        d2.writeBytes("PC15 FN\tPC20 FP\tPC20 FN\tPC30 FP\tPC30 FN\t");
++        d2.writeBytes("CCD05 FP\tCCD05 FN\tCCD10 FP\tCCD10 FN\tCCD 15 FP\t");
++        d2.writeBytes("CCD15 FN\tCCD20 FP\tCCD20 FN\tCCD30 FP\tCCD 30 FN\n");
++        // }
++        // read in variable name and set up DataSet.
++        // RectangularDataSet dataSet = DataLoaders.loadContinuousData(
++        // new File(args[0]), DelimiterType.WHITESPACE,
++        // /"
++        // );
++        // int ngenes = 6;
++        int ngenes = Integer.valueOf(args[2]);
++        IKnowledge bk = new Knowledge2();
++        bk.addToTiersByVarNames(listOfNames);
++        // if(verbose) {
++        d1.writeBytes("\n \n**Results for data in file yeastTRN**\n \n");
++        d1.writeBytes("  Acutal adj matrix: \n");
++        printAdjMatrix(yeastReg, listOfNames, d1);
++        // }
++        int[] PC05Accuracy;
++        PC05Accuracy = PCAccuracy(0.05, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++        int[] PC10Accuracy;
++        PC10Accuracy = PCAccuracy(0.1, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++        int[] PC15Accuracy;
++        PC15Accuracy = PCAccuracy(0.15, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++        int[] PC20Accuracy;
++        PC20Accuracy = PCAccuracy(0.2, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++        int[] PC30Accuracy;
++        PC30Accuracy = PCAccuracy(0.3, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++        int[] CCD05Accuracy;
++        CCD05Accuracy = CcdAccuracy(0.05, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++        int[] CCD10Accuracy;
++        CCD10Accuracy = CcdAccuracy(0.1, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++        int[] CCD15Accuracy;
++        CCD15Accuracy = CcdAccuracy(0.15, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++        int[] CCD20Accuracy;
++        CCD20Accuracy = CcdAccuracy(0.2, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++        int[] CCD30Accuracy;
++        CCD30Accuracy = CcdAccuracy(0.3, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++        /* int[] FCI05Accuracy;
++        FCI05Accuracy =
++        FCIAccuracy(0.05, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++
++        int[] FCI10Accuracy;
++        FCI10Accuracy =
++        FCIAccuracy(0.10, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++
++        int[] FCI15Accuracy;
++        FCI15Accuracy =
++        FCIAccuracy(0.15, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++
++        int[] FCI20Accuracy;
++        FCI20Accuracy =
++        FCIAccuracy(0.20, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++
++        int[] FCI30Accuracy;
++        FCI30Accuracy =
++        FCIAccuracy(0.30, ngenes, cds, bk, yeastReg, listOfNames, d1, verbose);
++         */
++        // if(!verbose) {
++        d2.writeBytes("yeastTRN \t");
++        d2.writeBytes(PC05Accuracy[0] + "\t");
++        d2.writeBytes(PC05Accuracy[1] + "\t");
++        // }
++        // if(!verbose) {
++        d2.writeBytes(PC10Accuracy[0] + "\t");
++        d2.writeBytes(PC10Accuracy[1] + "\t");
++        // }
++        // if(!verbose) {
++        d2.writeBytes(PC15Accuracy[0] + "\t");
++        d2.writeBytes(PC15Accuracy[1] + "\t");
++        // }
++        // if(!verbose) {
++        d2.writeBytes(PC20Accuracy[0] + "\t");
++        d2.writeBytes(PC20Accuracy[1] + "\t");
++        // }
++        // if(!verbose) {
++        d2.writeBytes(PC30Accuracy[0] + "\t");
++        d2.writeBytes(PC30Accuracy[1] + "\t");
++        // }
++        // if(!verbose) {
++        d2.writeBytes(CCD05Accuracy[0] + "\t");
++        d2.writeBytes(CCD05Accuracy[1] + "\t");
++        // }
++        // if(!verbose) {
++        d2.writeBytes(CCD10Accuracy[0] + "\t");
++        d2.writeBytes(CCD10Accuracy[1] + "\t");
++        // }
++        // if(!verbose) {
++        d2.writeBytes(CCD15Accuracy[0] + "\t");
++        d2.writeBytes(CCD15Accuracy[1] + "\t");
++        // }
++        // if(!verbose) {
++        d2.writeBytes(CCD20Accuracy[0] + "\t");
++        d2.writeBytes(CCD20Accuracy[1] + "\t");
++        // }
++        // if(!verbose) {
++        d2.writeBytes(CCD30Accuracy[0] + "\t");
++        d2.writeBytes(CCD30Accuracy[1] + "\n");
++        // }
++      } catch (Exception e) {
++        e.printStackTrace();
++      }
++    }
+ 
+     }
+ 
+diff --git a/tetrad-gui/src/main/java/edu/cmu/tetradapp/util/BrainSpecial.java b/tetrad-gui/src/main/java/edu/cmu/tetradapp/util/BrainSpecial.java
+index 03faf97d5..510c6ada5 100644
+--- a/tetrad-gui/src/main/java/edu/cmu/tetradapp/util/BrainSpecial.java
++++ b/tetrad-gui/src/main/java/edu/cmu/tetradapp/util/BrainSpecial.java
+@@ -96,28 +96,20 @@ final class BrainSpecial {
+ 
+     private Map<String, Coord> loadMap() {
+         Map<String, Coord> map = new HashMap<>();
+-
+-        try {
++        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+             File file = new File("/Users/josephramsey/Documents/proj/tetrad2/docs/notes/extended_power_labels_283.txt");
+-
+-            BufferedReader in = new BufferedReader(new FileReader(file));
+-
+             String line;
+-
+             while ((line = in.readLine()) != null) {
+-//                System.out.println(line);
+-
++                // System.out.println(line);
+                 String[] tokens = line.split("\t");
+-
+                 String var = "X" + tokens[0];
+                 int index = Integer.parseInt(tokens[0]);
+                 int x = Integer.parseInt(tokens[1]);
+                 int y = Integer.parseInt(tokens[2]);
+                 int z = Integer.parseInt(tokens[3]);
+                 String area = tokens[4];
+-
+                 map.put(var, new Coord(index, x, y, z, area));
+-            }
++            } 
+         } catch (Exception e) {
+             e.printStackTrace();
+             throw new RuntimeException(e);
+diff --git a/tetrad-gui/src/main/java/edu/cmu/tetradapp/util/FileLoadingUtils.java b/tetrad-gui/src/main/java/edu/cmu/tetradapp/util/FileLoadingUtils.java
+index 7a3d4fff4..e7447f0c9 100644
+--- a/tetrad-gui/src/main/java/edu/cmu/tetradapp/util/FileLoadingUtils.java
++++ b/tetrad-gui/src/main/java/edu/cmu/tetradapp/util/FileLoadingUtils.java
+@@ -20,6 +20,13 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetradapp.util;
++import java.io.Reader;
++import java.io.IOException;
++import java.io.File;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.InputStream;
+ 
+ import edu.cmu.tetrad.util.Version;
+ 
+@@ -37,17 +44,15 @@ public class FileLoadingUtils {
+     // Converts the contents of a file into a CharSequence
+     // suitable for use by the regex package.
+     public static String fromFile(File file) throws IOException {
+-        FileInputStream fis = new FileInputStream(file);
+-        FileChannel fc = fis.getChannel();
+-
+-        // Create a read-only CharBuffer on the file
+-        ByteBuffer bbuf =
+-                fc.map(FileChannel.MapMode.READ_ONLY, 0, (int) fc.size());
+-        CharBuffer cbuf = Charset.forName("8859_1").newDecoder().decode(bbuf);
+-
+-        String s = cbuf.toString();
+-        fis.close();
+-        return s;
++        try (FileInputStream fis = new FileInputStream(file)) {
++            FileChannel fc = fis.getChannel();
++            // Create a read-only CharBuffer on the file
++            ByteBuffer bbuf = fc.map(FileChannel.MapMode.READ_ONLY, 0, ((int) (fc.size())));
++            CharBuffer cbuf = Charset.forName("8859_1").newDecoder().decode(bbuf);
++            String s = cbuf.toString();
++            fis.close();
++            return s;
++        }
+     }
+ 
+     public static String fromResources(String path) {
+diff --git a/tetrad-gui/src/test/java/edu/cmu/tetradapp/test/AdjustCopyrights.java b/tetrad-gui/src/test/java/edu/cmu/tetradapp/test/AdjustCopyrights.java
+index 2831f3413..cd53101cb 100644
+--- a/tetrad-gui/src/test/java/edu/cmu/tetradapp/test/AdjustCopyrights.java
++++ b/tetrad-gui/src/test/java/edu/cmu/tetradapp/test/AdjustCopyrights.java
+@@ -51,31 +51,23 @@ public class AdjustCopyrights {
+         List<File> javaFiles = getJavaFiles(directory);
+ 
+         for (File file : javaFiles) {
+-            try {
++            try (PrintStream outStream = new PrintStream(out)) {
+                 String inContents = FileLoadingUtils.fromFile(file);
+-
+                 if (inContents.startsWith(copyrightNotice)) {
+                     continue;
+                 }
+-
+                 Pattern pattern = Pattern.compile("package");
+                 Matcher matcher = pattern.matcher(inContents);
+                 if (!matcher.find()) {
+                     System.out.println("No package statement: " + file);
+                 }
+-
+                 System.out.println("Modifying: " + file);
+-
+                 FileOutputStream out = new FileOutputStream(file);
+-                PrintStream outStream = new PrintStream(out);
+                 outStream.println(copyrightNotice);
+                 outStream.println();
+-
+                 int from = matcher.start();
+-                outStream.println(
+-                        inContents.substring(from, inContents.length()));
+-            }
+-            catch (IOException e) {
++                outStream.println(inContents.substring(from, inContents.length()));
++            } catch (IOException e) {
+                 e.printStackTrace();
+             }
+         }
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmBNTPc.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmBNTPc.java
+index 402ecd412..285c212df 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmBNTPc.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmBNTPc.java
+@@ -113,11 +113,10 @@ public class ExternalAlgorithmBNTPc extends ExternalAlgorithm {
+         int index = getIndex(dataSet);
+ 
+         File file = new File(path, "/elapsed/" + extDir + "/" + (simIndex + 1) + "/graph." + index + ".txt");
++        try (BufferedReader r = new BufferedReader(new FileReader(file))) {
++            String l = r.readLine();// Skip the first line.
+ 
+-        try {
+-            BufferedReader r = new BufferedReader(new FileReader(file));
+-            String l = r.readLine(); // Skip the first line.
+-            return (long) Double.parseDouble(l);
++            return ((long) (Double.parseDouble(l)));
+         } catch (IOException e) {
+             return -99;
+         }
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmBnlearnMmhc.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmBnlearnMmhc.java
+index eb4abbf3f..da826d940 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmBnlearnMmhc.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmBnlearnMmhc.java
+@@ -68,42 +68,34 @@ public class ExternalAlgorithmBnlearnMmhc extends ExternalAlgorithm {
+         File file = new File(path, "/results/" + extDir + "/" + (simIndex + 1) + "/graph." + index + ".txt");
+ 
+         System.out.println(file.getAbsolutePath());
++        try (BufferedReader r = new BufferedReader(new FileReader(file))) {
++            r.readLine();// Skip the first line.
+ 
+-        try {
+-            BufferedReader r = new BufferedReader(new FileReader(file));
+-
+-            r.readLine(); // Skip the first line.
+             String line;
+-
+             Graph graph = new EdgeListGraph();
+-
+             while ((line = r.readLine()) != null) {
+-                if (line.isEmpty()) continue;
+-                String[] tokens = line.split("\t");
+-                String name1 = tokens[0].replace(" ", "").replace("\"","");
+-                String name2 = tokens[1].replace(" ", "").replace("\"","");
++                if (line.isEmpty())
++                    continue;
+ 
++                String[] tokens = line.split("\t");
++                String name1 = tokens[0].replace(" ", "").replace("\"", "");
++                String name2 = tokens[1].replace(" ", "").replace("\"", "");
+                 if (graph.getNode(name1) == null) {
+                     graph.addNode(new GraphNode(name1));
+                 }
+-
+                 if (graph.getNode(name2) == null) {
+                     graph.addNode(new GraphNode(name2));
+                 }
+-
+                 Node node1 = graph.getNode(name1);
+                 Node node2 = graph.getNode(name2);
+-
+                 if (!graph.isAdjacentTo(node1, node2)) {
+                     graph.addDirectedEdge(node1, node2);
+                 } else {
+                     graph.removeEdge(node1, node2);
+                     graph.addUndirectedEdge(node1, node2);
+                 }
+-            }
+-
++            } 
+             GraphUtils.circleLayout(graph, 225, 200, 150);
+-
+             return graph;
+         } catch (IOException e) {
+             throw new RuntimeException("Couldn't parse graph.");
+@@ -136,12 +128,9 @@ public class ExternalAlgorithmBnlearnMmhc extends ExternalAlgorithm {
+         int index = getIndex(dataSet);
+ 
+         File file = new File(path, "/elapsed/" + extDir + "/" + (simIndex + 1) + "/graph." + index + ".txt");
++        try (BufferedReader r = new BufferedReader(new FileReader(file))) {
++            String l = r.readLine();// Skip the first line.
+ 
+-//        System.out.println(file.getAbsolutePath());
+-
+-        try {
+-            BufferedReader r = new BufferedReader(new FileReader(file));
+-            String l = r.readLine(); // Skip the first line.
+             return Long.parseLong(l);
+         } catch (IOException e) {
+             return -99;
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmPcalgGes.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmPcalgGes.java
+index f105d2c66..9155ea2eb 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmPcalgGes.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmPcalgGes.java
+@@ -71,37 +71,31 @@ public class ExternalAlgorithmPcalgGes extends ExternalAlgorithm {
+         System.out.println(nodes.getAbsolutePath());
+ 
+         List<Node> vars = new ArrayList<>();
+-
+-        try {
+-            BufferedReader r = new BufferedReader(new FileReader(nodes));
++        try (BufferedReader r = new BufferedReader(new FileReader(nodes))) {
+             String name;
+-
+             while ((name = r.readLine()) != null) {
+                 GraphNode node = new GraphNode(name.trim());
+                 vars.add(node);
+-            }
++            } 
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+ 
+         File inEdges = new File(path, "/results/" + extDir + "/" + (simIndex + 1) + "/in.edges." + index + ".txt");
+-
+-        try {
+-            BufferedReader r = new BufferedReader(new FileReader(inEdges));
++        try (BufferedReader r = new BufferedReader(new FileReader(inEdges))) {
+             String line;
+             Graph graph = new EdgeListGraph(vars);
+-
+             for (int i = 0; i < vars.size(); i++) {
+                 line = r.readLine();
+                 String[] tokens = line.split(",");
+-
+                 for (String token : tokens) {
+                     String trim = token.trim();
+-                    if (trim.isEmpty()) continue;
++                    if (trim.isEmpty())
++                        continue;
++
+                     int j = Integer.parseInt(trim) - 1;
+                     Node v1 = vars.get(i);
+                     Node v2 = vars.get(j);
+-
+                     if (!graph.isAdjacentTo(v2, v1)) {
+                         graph.addDirectedEdge(v2, v1);
+                     } else {
+@@ -110,7 +104,6 @@ public class ExternalAlgorithmPcalgGes extends ExternalAlgorithm {
+                     }
+                 }
+             }
+-
+             return graph;
+         } catch (Exception e) {
+             e.printStackTrace();
+@@ -144,10 +137,9 @@ public class ExternalAlgorithmPcalgGes extends ExternalAlgorithm {
+         int index = getIndex(dataSet);
+ 
+         File file = new File(path, "/elapsed/" + extDir + "/" + (simIndex + 1) + "/graph." + index + ".txt");
++        try (BufferedReader r = new BufferedReader(new FileReader(file))) {
++            String l = r.readLine();// Skip the first line.
+ 
+-        try {
+-            BufferedReader r = new BufferedReader(new FileReader(file));
+-            String l = r.readLine(); // Skip the first line.
+             return Long.parseLong(l);
+         } catch (IOException e) {
+             return -99;
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmPcalgPc.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmPcalgPc.java
+index 0bc87b383..69163c529 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmPcalgPc.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmPcalgPc.java
+@@ -111,10 +111,9 @@ public class ExternalAlgorithmPcalgPc extends ExternalAlgorithm {
+         int index = getIndex(dataSet);
+ 
+         File file = new File(path, "/elapsed/" + extDir + "/" + (simIndex + 1) + "/graph." + index + ".txt");
++        try (BufferedReader r = new BufferedReader(new FileReader(file))) {
++            String l = r.readLine();// Skip the first line.
+ 
+-        try {
+-            BufferedReader r = new BufferedReader(new FileReader(file));
+-            String l = r.readLine(); // Skip the first line.
+             return Long.parseLong(l);
+         } catch (IOException e) {
+             return -99;
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmTetrad.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmTetrad.java
+index 58ff8051d..65bb48497 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmTetrad.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/algcomparison/algorithm/external/ExternalAlgorithmTetrad.java
+@@ -99,10 +99,9 @@ public class ExternalAlgorithmTetrad extends ExternalAlgorithm  {
+         File file = new File(path, "/elapsed/" + extDir + "/" + (simIndex +  1) + "/graph." + index + ".txt");
+ 
+         System.out.println(file.getAbsolutePath());
++        try (BufferedReader r = new BufferedReader(new FileReader(file))) {
++            String l = r.readLine();// Skip the first line.
+ 
+-        try {
+-            BufferedReader r = new BufferedReader(new FileReader(file));
+-            String l = r.readLine(); // Skip the first line.
+             return Long.parseLong(l);
+         } catch (IOException e) {
+             throw new IllegalArgumentException();
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadContinuousDataAndGraphs.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadContinuousDataAndGraphs.java
+index 159a18fb9..01fe6bae9 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadContinuousDataAndGraphs.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadContinuousDataAndGraphs.java
+@@ -1,4 +1,6 @@
+ package edu.cmu.tetrad.data.simulation;
++import java.util.List;
++import java.util.ArrayList;
+ 
+ import edu.cmu.tetrad.algcomparison.simulation.Simulation;
+ import edu.cmu.tetrad.data.DataModel;
+@@ -37,50 +39,40 @@ public class LoadContinuousDataAndGraphs implements Simulation {
+ 
+         if (new File(path + "/data").exists()) {
+             int numDataSets = new File(path + "/data").listFiles().length;
+-
+-            try {
++            try (BufferedReader r = new BufferedReader(new FileReader(paramFile))) {
+                 for (int i = 0; i < numDataSets; i++) {
+                     File file2 = new File(path + "/graph/graph." + (i + 1) + ".txt");
+                     System.out.println("Loading graph from " + file2.getAbsolutePath());
+                     this.graphs.add(GraphUtils.loadGraphTxt(file2));
+-
+                     edu.cmu.tetrad.graph.GraphUtils.circleLayout(this.graphs.get(i), 225, 200, 150);
+-
+                     File file1 = new File(path + "/data/data." + (i + 1) + ".txt");
+-
+                     System.out.println("Loading data from " + file1.getAbsolutePath());
+                     DataReader reader = new DataReader();
+                     reader.setVariablesSupplied(true);
+                     dataSets.add(reader.parseTabular(file1));
+                 }
+-
+                 File paramFile = new File(path, "parameters.txt");
+                 System.out.println("Loading parameters from " + paramFile.getAbsolutePath());
+-                BufferedReader r = new BufferedReader(new FileReader(paramFile));
+-
+                 String line;
+-
+                 while ((line = r.readLine()) != null) {
+                     if (line.contains(" = ")) {
+                         String[] tokens = line.split(" = ");
+                         String key = tokens[0];
+                         String value = tokens[1];
+-
+                         usedParameters.add(key);
+                         try {
+                             double _value = Double.parseDouble(value);
+                             parameters.set(key, _value);
+                         } catch (NumberFormatException e) {
+-                        	if(value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")){
++                            if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
+                                 parameters.set(key, Boolean.valueOf(value));
+-                        	}else{
++                            } else {
+                                 parameters.set(key, value);
+-                        	}
++                            }
+                         }
+                         System.out.println(key + " : " + value);
+                     }
+-                }
+-
++                } 
+                 parameters.set(Params.NUM_RUNS, numDataSets);
+             } catch (IOException e) {
+                 e.printStackTrace();
+@@ -100,19 +92,17 @@ public class LoadContinuousDataAndGraphs implements Simulation {
+ 
+     @Override
+     public String getDescription() {
+-        try {
++        try (BufferedReader r = new BufferedReader(new FileReader(file))) {
+             File file = new File(path, "parameters.txt");
+-            BufferedReader r = new BufferedReader(new FileReader(file));
+-
+             StringBuilder b = new StringBuilder();
+             b.append("Load data sets and graphs from a directory.").append("\n\n");
+             String line;
+-
+             while ((line = r.readLine()) != null) {
+-                if (line.trim().isEmpty()) continue;
+-                b.append(line).append("\n");
+-            }
++                if (line.trim().isEmpty())
++                    continue;
+ 
++                b.append(line).append("\n");
++            } 
+             return b.toString();
+         } catch (Exception e) {
+             throw new RuntimeException(e);
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadDataAndGraphs.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadDataAndGraphs.java
+index ecab6eee2..c8f1b2baf 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadDataAndGraphs.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadDataAndGraphs.java
+@@ -47,8 +47,7 @@ public class LoadDataAndGraphs implements Simulation {
+ 
+         if (path.exists()) {
+             int numDataSets = Objects.requireNonNull(new File(path, "/data").listFiles()).length;
+-
+-            try {
++            try (BufferedReader r = new BufferedReader(new FileReader(file))) {
+                 for (int i = 0; i < numDataSets; i++) {
+                     try {
+                         File file2 = new File(path + "/graph/graph." + (i + 1) + ".txt");
+@@ -57,54 +56,39 @@ public class LoadDataAndGraphs implements Simulation {
+                     } catch (Exception e) {
+                         this.graphs.add(null);
+                     }
+-
+                     GraphUtils.circleLayout(this.graphs.get(i), 225, 200, 150);
+-
+                     File file1 = new File(path + "/data/data." + (i + 1) + ".txt");
+-
+                     stdout.println("Loading data from " + file1.getAbsolutePath());
+-
+                     DataReader dataReader = new DataReader();
+                     dataReader.setVariablesSupplied(true);
+                     dataReader.setDelimiter(DelimiterType.TAB);
+                     dataReader.setMaxIntegralDiscrete(parameters.getInt("maxDistinctValuesDiscrete"));
+-
+                     // Header in first row or not
+                     // Set comment marker
+                     dataReader.setCommentMarker("//");
+-
+                     dataReader.setMissingValueMarker("*");
+-
+                     DataSet ds = dataReader.parseTabular(file1);
+-
+-//                    DataReader reader = new DataReader();
+-//                    reader.setVariablesSupplied(true);
+-//                    reader.setMaxIntegralDiscrete(parameters.getInt("maxDistinctValuesDiscrete"));
+-//                    ContinuousTabularDataset dataset = (ContinuousTabularDataset) dataReader.readInData();
+-//                    DoubleDataBox box = new DoubleDataBox(dataset.getData());
+-//                    List<Node> variables = new ArrayList<>();
+-//                    for (String s : dataset.getVariables()) variables.add(new ContinuousVariable(s));
+-//                    BoxDataSet _dataSet = new BoxDataSet(box, variables);
++                    // DataReader reader = new DataReader();
++                    // reader.setVariablesSupplied(true);
++                    // reader.setMaxIntegralDiscrete(parameters.getInt("maxDistinctValuesDiscrete"));
++                    // ContinuousTabularDataset dataset = (ContinuousTabularDataset) dataReader.readInData();
++                    // DoubleDataBox box = new DoubleDataBox(dataset.getData());
++                    // List<Node> variables = new ArrayList<>();
++                    // for (String s : dataset.getVariables()) variables.add(new ContinuousVariable(s));
++                    // BoxDataSet _dataSet = new BoxDataSet(box, variables);
+                     dataSets.add(ds);
+                 }
+-
+                 File file = new File(path, "parameters.txt");
+-                BufferedReader r = new BufferedReader(new FileReader(file));
+-
+                 String line;
+-
+                 line = r.readLine();
+-
+                 if (line != null) {
+                     this.description = line;
+                 }
+-
+                 while ((line = r.readLine()) != null) {
+                     if (line.contains(" = ")) {
+                         String[] tokens = line.split(" = ");
+                         String key = tokens[0];
+                         String value = tokens[1].trim();
+-
+                         usedParameters.add(key);
+                         try {
+                             double _value = Double.parseDouble(value);
+@@ -117,8 +101,7 @@ public class LoadDataAndGraphs implements Simulation {
+                             }
+                         }
+                     }
+-                }
+-
++                } 
+                 parameters.set(Params.NUM_RUNS, numDataSets);
+             } catch (IOException e) {
+                 e.printStackTrace();
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestBoolSearch.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestBoolSearch.java
+index e00b26d80..f04b76b7b 100755
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestBoolSearch.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestBoolSearch.java
+@@ -20,6 +20,11 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.gene.tetrad.gene.algorithm.akutsu;
++import java.io.IOException;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.InputStream;
+ 
+ import java.io.*;
+ import java.util.StringTokenizer;
+@@ -51,34 +56,29 @@ public class LTestBoolSearch {
+             System.out.println("Cannot open file " + fileName);
+             return;
+         }
+-
+-        BufferedReader in = new BufferedReader(new InputStreamReader(s));
+-        for (int k = 0; k < ntimes; k++) {
+-            try {
+-                st = new StringTokenizer(in.readLine());
+-                for (int j = 0; j < ngenes; j++) {
+-                    cases[k][j] = Integer.parseInt(st.nextToken(" "));
++        try (BufferedReader in = new BufferedReader(new InputStreamReader(s))) {
++            for (int k = 0; k < ntimes; k++) {
++                try {
++                    st = new StringTokenizer(in.readLine());
++                    for (int j = 0; j < ngenes; j++) {
++                        cases[k][j] = Integer.parseInt(st.nextToken(" "));
++                    }
++                } catch (IOException e) {
++                    System.out.println("Read error in " + fileName);
++                    return;
+                 }
+             }
+-            catch (IOException e) {
+-                System.out.println("Read error in " + fileName);
+-                return;
+-            }
+-        }
+-
+-        for (int k = 0; k < ntimes; k++) {
+-            for (int j = 0; j < ngenes; j++) {
+-                if (cases[k][j] == -1) {
+-                    cases[k][j] = 0;
++            for (int k = 0; k < ntimes; k++) {
++                for (int j = 0; j < ngenes; j++) {
++                    if (cases[k][j] == -1) {
++                        cases[k][j] = 0;
++                    }
+                 }
+             }
++            String[] names = new String[]{ "Gene 0", "Gene 1", "Gene 2", "Gene 3", "Gene 4" };
++            BoolSearch bs = new BoolSearch(cases, names);
++            bs.bool2(3);
+         }
+-
+-        String[] names = {"Gene 0", "Gene 1", "Gene 2", "Gene 3", "Gene 4"};
+-
+-        BoolSearch bs = new BoolSearch(cases, names);
+-
+-        bs.bool2(3);
+     }
+ 
+ }
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestQnet3.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestQnet3.java
+index 44c631125..c2c76bd94 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestQnet3.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestQnet3.java
+@@ -20,6 +20,11 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.gene.tetrad.gene.algorithm.akutsu;
++import java.io.IOException;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.InputStream;
+ 
+ import edu.cmu.tetrad.util.ChoiceGenerator;
+ import edu.cmu.tetrad.util.NumberFormatUtil;
+@@ -55,113 +60,89 @@ public class LTestQnet3 {
+             System.out.println("Cannot open file " + fileName);
+             return;
+         }
+-
+-        //DataInputStream in = new DataInputStream(s);
+-        BufferedReader in = new BufferedReader(new InputStreamReader(s));
+-        for (int k = 0; k < nrecords; k++) {
+-            try {
+-                st = new StringTokenizer(in.readLine());
+-                if (k == 0) {
+-                    continue;
+-                }
+-                //                int idish = Integer.parseInt(st.nextToken("\t"));
+-                //                int ichip = Integer.parseInt(st.nextToken("\t"));
+-                for (int j = 0; j < ntimes * ngenes; j++) {
+-                    cases[k - 1][j] = Double.parseDouble(st.nextToken("\t"));
++        try (// DataInputStream in = new DataInputStream(s);
++        BufferedReader in = new BufferedReader(new InputStreamReader(s))) {
++            for (int k = 0; k < nrecords; k++) {
++                try {
++                    st = new StringTokenizer(in.readLine());
++                    if (k == 0) {
++                        continue;
++                    }
++                    // int idish = Integer.parseInt(st.nextToken("\t"));
++                    // int ichip = Integer.parseInt(st.nextToken("\t"));
++                    for (int j = 0; j < ntimes * ngenes; j++) {
++                        cases[k - 1][j] = Double.parseDouble(st.nextToken("\t"));
++                    }
++                } catch (IOException e) {
++                    System.out.println("Read error in " + fileName);
++                    return;
+                 }
+             }
+-            catch (IOException e) {
+-                System.out.println("Read error in " + fileName);
+-                return;
+-            }
+-        }
+-        //System.out.println("Read " + cases[0][0] + " " + cases[1][0] + " " +
+-        //                  cases[2][0] + " " + cases[3][0]);
+-
+-        double[][] gene = new double[ntimes][ngenes];
+-        double[][] deriv = new double[ntimes][ngenes];
+-        double[] sum = new double[ngenes];
+-        //double[] prevSum = new double [ngenes];
+-
+-        for (int j = 0; j < ntimes; j++) {
+-            for (int g = 0; g < ngenes; g++) {
+-                int icol = j * ngenes + g;
+-
+-                sum[g] = 0.0;
+-
+-                for (int c = 0; c < nchips; c++)
+-                //sum[g] += cases[c][icol]*cases[c][icol];
+-                {
+-                    sum[g] += cases[c][icol];
+-                }
+-
+-                gene[j][g] = sum[g];
+-                //if(sum[g] > 0.0) gene[j][g] = +1;
+-                //if(sum[g] > chisq[nchips - 1]) gene[j][g] = +1;
+-                //  else gene[j][g] = -1;
+-
+-                //System.out.print(gene[j][g] + " ");
+-
+-
+-                if (j != 0) {
+-
+-                    deriv[j][g] = (gene[j][g] - gene[j - 1][g]) / 10.0;
++            // System.out.println("Read " + cases[0][0] + " " + cases[1][0] + " " +
++            // cases[2][0] + " " + cases[3][0]);
++            double[][] gene = new double[ntimes][ngenes];
++            double[][] deriv = new double[ntimes][ngenes];
++            double[] sum = new double[ngenes];
++            // double[] prevSum = new double [ngenes];
++            for (int j = 0; j < ntimes; j++) {
++                for (int g = 0; g < ngenes; g++) {
++                    int icol = j * ngenes + g;
++                    sum[g] = 0.0;
++                    // sum[g] += cases[c][icol]*cases[c][icol];
++                    for (int c = 0; c < nchips; c++) {
++                        sum[g] += cases[c][icol];
++                    }
++                    gene[j][g] = sum[g];
++                    // if(sum[g] > 0.0) gene[j][g] = +1;
++                    // if(sum[g] > chisq[nchips - 1]) gene[j][g] = +1;
++                    // else gene[j][g] = -1;
++                    // System.out.print(gene[j][g] + " ");
++                    if (j != 0) {
++                        deriv[j][g] = (gene[j][g] - gene[j - 1][g]) / 10.0;
++                    }
+                 }
+-
+-            }
+-            /*
+-            if(j != 0) {
+-              System.out.println();
+-              for(int k = 0; k < ngenes; k++)
++                /* if(j != 0) {
++                System.out.println();
++                for(int k = 0; k < ngenes; k++)
+                 System.out.print(deriv[j][k] + " ");
+-              System.out.println();
++                System.out.println();
++                }
++                 */
+             }
+-            */
+-        }
+-
+-        NumberFormat nf = NumberFormatUtil.getInstance().getNumberFormat();
+-
+-        for (int g = 0; g < ngenes; g++) {
+-            System.out.println("For gene " + g);
+-            int k = 5;
+-            ChoiceGenerator cg = new ChoiceGenerator(ngenes, k);
+-            int[] regs = new int[k];
+-
+-            while ((regs = cg.next()) != null) {
+-                System.out.println("Sets of " + k + " regulators are:");
+-                System.out.println(regs[0] + " " + regs[1] + " " + regs[2] +
+-                        " " + regs[3] + " " + regs[4]);
+-
+-                for (int t = 1; t < ntimes; t++) {
+-                    String g0 = nf.format(gene[t][regs[0]]);
+-                    String g1 = nf.format(gene[t][regs[1]]);
+-                    String g2 = nf.format(gene[t][regs[2]]);
+-                    String g3 = nf.format(gene[t][regs[3]]);
+-                    String g4 = nf.format(gene[t][regs[4]]);
+-
+-                    if (deriv[t][g] > 0.3) {
+-
+-                        System.out.println(g0 + "a0+" + g1 + "a1+" + g2 +
+-                                "a2+" + g3 + "a3+" + g4 + "a4+b > 0");
+-                    }
+-                    else if (deriv[t][g] < -0.3) {
+-                        System.out.println(g0 + "a0+" + g1 + "a1+" + g2 +
+-                                "a2+" + g3 + "a3+" + g4 + "a4+b< 0");
++            NumberFormat nf = NumberFormatUtil.getInstance().getNumberFormat();
++            for (int g = 0; g < ngenes; g++) {
++                System.out.println("For gene " + g);
++                int k = 5;
++                ChoiceGenerator cg = new ChoiceGenerator(ngenes, k);
++                int[] regs = new int[k];
++                while ((regs = cg.next()) != null) {
++                    System.out.println("Sets of " + k + " regulators are:");
++                    System.out.println(regs[0] + " " + regs[1] + " " + regs[2] + " " + regs[3] + " " + regs[4]);
++                    for (int t = 1; t < ntimes; t++) {
++                        String g0 = nf.format(gene[t][regs[0]]);
++                        String g1 = nf.format(gene[t][regs[1]]);
++                        String g2 = nf.format(gene[t][regs[2]]);
++                        String g3 = nf.format(gene[t][regs[3]]);
++                        String g4 = nf.format(gene[t][regs[4]]);
++                        if (deriv[t][g] > 0.3) {
++                            System.out.println(g0 + "a0+" + g1 + "a1+" + g2 + "a2+" + g3 + "a3+" + g4 + "a4+b > 0");
++                        } else {
++                            if (deriv[t][g] < -0.3) {
++                                System.out.println(g0 + "a0+" + g1 + "a1+" + g2 + "a2+" + g3 + "a3+" + g4 + "a4+b< 0");
++                            }
++                        }
+                     }
+-                }
+-
++                } 
+             }
+-        }
+-
+-        /*
+-        double[] p = new double[ngenes];
+-        for(int g = 0; g < ngenes; g++) {
+-          for(int j = 0; j < ntimes; j++)
++            /* double[] p = new double[ngenes];
++            for(int g = 0; g < ngenes; g++) {
++            for(int j = 0; j < ntimes; j++)
+             if(gene[j][g] > 0) p[g]++;
+-          p[g] /= ntimes;
+-          //System.out.println(" gene " + g + " p = " + p[g]);
++            p[g] /= ntimes;
++            //System.out.println(" gene " + g + " p = " + p[g]);
++            }
++             */
+         }
+-        */
+     }
+ 
+ }
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestSsys1.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestSsys1.java
+index 5eabb0583..853a65fe5 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestSsys1.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/akutsu/LTestSsys1.java
+@@ -20,6 +20,11 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.gene.tetrad.gene.algorithm.akutsu;
++import java.io.IOException;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.InputStream;
+ 
+ import edu.cmu.tetrad.util.ChoiceGenerator;
+ import edu.cmu.tetrad.util.NumberFormatUtil;
+@@ -50,119 +55,89 @@ public class LTestSsys1 {
+             System.out.println("Cannot open file " + fileName);
+             return;
+         }
+-
+-        //DataInputStream in = new DataInputStream(s);
+-        BufferedReader in = new BufferedReader(new InputStreamReader(s));
+-        for (int k = 0; k < nrecords; k++) {
+-            try {
+-                st = new StringTokenizer(in.readLine());
+-                if (k == 0) {
+-                    continue;
+-                }
+-                //                int idish = Integer.parseInt(st.nextToken("\t"));
+-                //                int ichip = Integer.parseInt(st.nextToken("\t"));
+-                for (int j = 0; j < ntimes * ngenes; j++) {
+-                    cases[k - 1][j] = Double.parseDouble(st.nextToken("\t"));
++        try (// DataInputStream in = new DataInputStream(s);
++        BufferedReader in = new BufferedReader(new InputStreamReader(s))) {
++            for (int k = 0; k < nrecords; k++) {
++                try {
++                    st = new StringTokenizer(in.readLine());
++                    if (k == 0) {
++                        continue;
++                    }
++                    // int idish = Integer.parseInt(st.nextToken("\t"));
++                    // int ichip = Integer.parseInt(st.nextToken("\t"));
++                    for (int j = 0; j < ntimes * ngenes; j++) {
++                        cases[k - 1][j] = Double.parseDouble(st.nextToken("\t"));
++                    }
++                } catch (IOException e) {
++                    System.out.println("Read error in " + fileName);
++                    return;
+                 }
+             }
+-            catch (IOException e) {
+-                System.out.println("Read error in " + fileName);
+-                return;
+-            }
+-        }
+-
+-        double[][] gene = new double[ntimes][ngenes];
+-        double[][] deriv = new double[ntimes][ngenes];
+-        double[] sum = new double[ngenes];
+-        double baseLevel = 15.0;
+-
+-        NumberFormat nf = NumberFormatUtil.getInstance().getNumberFormat();
+-
+-        double min = 1000.0;
+-
+-        for (int j = 0; j < ntimes; j++) {
+-            for (int g = 0; g < ngenes; g++) {
+-                int icol = j * ngenes + g;
+-
+-                sum[g] = 0.0;
+-
+-                for (int c = 0; c < nchips; c++)
+-                //sum[g] += cases[c][icol]*cases[c][icol];
+-                {
+-                    sum[g] += cases[c][icol];
+-                }
+-
+-                gene[j][g] = sum[g];
+-                if (gene[j][g] < min) {
+-                    min = gene[j][g];
++            double[][] gene = new double[ntimes][ngenes];
++            double[][] deriv = new double[ntimes][ngenes];
++            double[] sum = new double[ngenes];
++            double baseLevel = 15.0;
++            NumberFormat nf = NumberFormatUtil.getInstance().getNumberFormat();
++            double min = 1000.0;
++            for (int j = 0; j < ntimes; j++) {
++                for (int g = 0; g < ngenes; g++) {
++                    int icol = j * ngenes + g;
++                    sum[g] = 0.0;
++                    // sum[g] += cases[c][icol]*cases[c][icol];
++                    for (int c = 0; c < nchips; c++) {
++                        sum[g] += cases[c][icol];
++                    }
++                    gene[j][g] = sum[g];
++                    if (gene[j][g] < min) {
++                        min = gene[j][g];
++                    }
++                    if (j != 0) {
++                        deriv[j][g] = (gene[j][g] - gene[j - 1][g]) / 10.0;
++                    }
+                 }
+-
+-                if (j != 0) {
+-
+-                    deriv[j][g] = (gene[j][g] - gene[j - 1][g]) / 10.0;
++                /* DEBUG Prints
++                System.out.println("At time " + j);
++                for(int g = 0; g < ngenes; g++) {
++                String expression = nf.format(gene[j][g]);
++                System.out.print(expression + " ");
+                 }
+-
+-            }
+-
+-            /*  DEBUG Prints
+-            System.out.println("At time " + j);
+-            for(int g = 0; g < ngenes; g++) {
+-              String expression = nf.format(gene[j][g]);
+-              System.out.print(expression + " ");
++                System.out.println();
++                 */
+             }
+-            System.out.println();
+-            */
+-        }
+-        System.out.println("minimum value = " + min);
+-
+-        for (int g = 0; g < ngenes; g++) {
+-            System.out.println("For gene " + g);
+-            int k = 5;
+-            ChoiceGenerator cg = new ChoiceGenerator(ngenes, k);
+-            int[] regs = new int[k];
+-
+-            while ((regs = cg.next()) != null) {
+-                System.out.println("Sets of " + k + " regulators are:");
+-                System.out.println(regs[0] + " " + regs[1] + " " + regs[2] +
+-                        " " + regs[3] + " " + regs[4]);
+-
+-                for (int t = 1; t < ntimes; t++) {
+-                    String g0 =
+-                            nf.format(Math.log(gene[t][regs[0]] + baseLevel));
+-                    String g1 =
+-                            nf.format(Math.log(gene[t][regs[1]] + baseLevel));
+-                    String g2 =
+-                            nf.format(Math.log(gene[t][regs[2]] + baseLevel));
+-                    String g3 =
+-                            nf.format(Math.log(gene[t][regs[3]] + baseLevel));
+-                    String g4 =
+-                            nf.format(Math.log(gene[t][regs[4]] + baseLevel));
+-
+-                    if (deriv[t][g] > 0.35) {
+-
+-                        System.out.println("lnamlnb+" + g0 + "gmh0+" + g1 +
+-                                "gmh1+" + g2 + "gmh2+" + g3 + "gmh3+" + g4 +
+-                                "gmh4 > 0");
+-                    }
+-                    else if (deriv[t][g] < -0.35) {
+-                        System.out.println("lnamlnb+" + g0 + "gmh0+" + g1 +
+-                                "gmh1+" + g2 + "gmh2+" + g3 + "gmh3+" + g4 +
+-                                "gmh4 < 0");
++            System.out.println("minimum value = " + min);
++            for (int g = 0; g < ngenes; g++) {
++                System.out.println("For gene " + g);
++                int k = 5;
++                ChoiceGenerator cg = new ChoiceGenerator(ngenes, k);
++                int[] regs = new int[k];
++                while ((regs = cg.next()) != null) {
++                    System.out.println("Sets of " + k + " regulators are:");
++                    System.out.println(regs[0] + " " + regs[1] + " " + regs[2] + " " + regs[3] + " " + regs[4]);
++                    for (int t = 1; t < ntimes; t++) {
++                        String g0 = nf.format(Math.log(gene[t][regs[0]] + baseLevel));
++                        String g1 = nf.format(Math.log(gene[t][regs[1]] + baseLevel));
++                        String g2 = nf.format(Math.log(gene[t][regs[2]] + baseLevel));
++                        String g3 = nf.format(Math.log(gene[t][regs[3]] + baseLevel));
++                        String g4 = nf.format(Math.log(gene[t][regs[4]] + baseLevel));
++                        if (deriv[t][g] > 0.35) {
++                            System.out.println("lnamlnb+" + g0 + "gmh0+" + g1 + "gmh1+" + g2 + "gmh2+" + g3 + "gmh3+" + g4 + "gmh4 > 0");
++                        } else {
++                            if (deriv[t][g] < -0.35) {
++                                System.out.println("lnamlnb+" + g0 + "gmh0+" + g1 + "gmh1+" + g2 + "gmh2+" + g3 + "gmh3+" + g4 + "gmh4 < 0");
++                            }
++                        }
+                     }
+-                }
+-
++                } 
+             }
+-        }
+-
+-        /*
+-        double[] p = new double[ngenes];
+-        for(int g = 0; g < ngenes; g++) {
+-          for(int j = 0; j < ntimes; j++)
++            /* double[] p = new double[ngenes];
++            for(int g = 0; g < ngenes; g++) {
++            for(int j = 0; j < ntimes; j++)
+             if(gene[j][g] > 0) p[g]++;
+-          p[g] /= ntimes;
+-          //System.out.println(" gene " + g + " p = " + p[g]);
++            p[g] /= ntimes;
++            //System.out.println(" gene " + g + " p = " + p[g]);
++            }
++             */
+         }
+-        */
+     }
+ 
+ }
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/ideker/ReadControl.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/ideker/ReadControl.java
+index f6d6d00ef..c266c02d1 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/ideker/ReadControl.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/ideker/ReadControl.java
+@@ -20,6 +20,11 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.gene.tetrad.gene.algorithm.ideker;
++import java.io.IOException;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.InputStream;
+ 
+ import edu.cmu.tetrad.util.NumberFormatUtil;
+ 
+@@ -58,98 +63,89 @@ public class ReadControl {
+             System.out.println("Cannot open file " + fileName);
+             return;
+         }
+-
+-        BufferedReader in = new BufferedReader(new InputStreamReader(s));
+-        for (int k = 0; k < nrecords; k++) {
+-            for (int j = 0; j < 10; j++) {  //Lines per record
+-                try {
+-                    st = new StringTokenizer(in.readLine());
+-                    if (j == 0) {
+-                        //                        String lbl = st.nextToken(" ");
+-                        //System.out.println("label = " + lbl);
+-                        continue;
+-                    }
+-                    if (k == 0) {
+-                        //int id = Integer.parseInt(st.nextToken(" "));
+-                        code[j - 1] = st.nextToken(" ");
+-                        //System.out.println("code = " + code[j-1]);
+-                        name[j - 1] = st.nextToken(" ");
+-                        for (int i = 0; i < nvaluesRecord[k]; i++) {
+-                            rawData[j - 1][i + offSet[k]] =
+-                                    Integer.parseInt(st.nextToken(" "));
++        try (BufferedReader in = new BufferedReader(new InputStreamReader(s))) {
++            for (int k = 0; k < nrecords; k++) {
++                for (int j = 0; j < 10; j++) {
++                    // Lines per record
++                    try {
++                        st = new StringTokenizer(in.readLine());
++                        if (j == 0) {
++                            // String lbl = st.nextToken(" ");
++                            // System.out.println("label = " + lbl);
++                            continue;
++                        }
++                        if (k == 0) {
++                            // int id = Integer.parseInt(st.nextToken(" "));
++                            code[j - 1] = st.nextToken(" ");
++                            // System.out.println("code = " + code[j-1]);
++                            name[j - 1] = st.nextToken(" ");
++                            for (int i = 0; i < nvaluesRecord[k]; i++) {
++                                rawData[j - 1][i + offSet[k]] = Integer.parseInt(st.nextToken(" "));
++                            }
++                        } else {
++                            // int id = Integer.parseInt(st.nextToken(" "));
++                            for (int i = 0; i < nvaluesRecord[k]; i++) {
++                                rawData[j - 1][i + offSet[k]] = Integer.parseInt(st.nextToken(" "));
++                            }
++                            // System.out.println("first raw data = " + rawData[j-1][0]);
+                         }
++                    } catch (IOException e) {
++                        System.out.println("Read error in " + fileName);
++                        return;
+                     }
+-                    else {
+-                        //int id = Integer.parseInt(st.nextToken(" "));
+-                        for (int i = 0; i < nvaluesRecord[k]; i++) {
+-                            rawData[j - 1][i + offSet[k]] =
+-                                    Integer.parseInt(st.nextToken(" "));
++                }
++            }
++            // for(int i = 0; i < nperturbations; i++) {
++            // for(int i = 0; i < 10; i++) {  //Galactose
++            for (int i = 10; i < 20; i++) {
++                // Raffinose
++                for (int j = 0; j < ngenes; j++) {
++                    // System.out.println("i,j " + i + " " + j);
++                    double sum = 0;
++                    int n = 0;
++                    for (int k = 0; k < readingsPerPerturbation; k++) {
++                        if (rawData[j][i * readingsPerPerturbation + k] > -900) {
++                            n++;
++                            // if(i ==0 && j ==0)
++                            // System.out.println(k + " " + rawData[j][i*readingsPerPerturbation+k]);
++                            sum += rawData[j][i * readingsPerPerturbation + k];
+                         }
+-                        //System.out.println("first raw data = " + rawData[j-1][0]);
+                     }
++                    expressions[i][j] = sum / n;
+                 }
+-                catch (IOException e) {
+-                    System.out.println("Read error in " + fileName);
+-                    return;
++            }
++            NumberFormat nf = NumberFormatUtil.getInstance().getNumberFormat();
++            // for(int p = 0; p < nperturbations; p++) {
++            // for(int p = 0; p < 10; p++) {  //Galactose
++            for (int p = 10; p < 20; p++) {
++                // Raffinose
++                for (int g = 0; g < 5; g++) {
++                    String exp = nf.format(expressions[p][g]);
++                    System.out.print(exp + "  ");
+                 }
+-
++                System.out.println();
+             }
+-
+-        }
+-
+-        //for(int i = 0; i < nperturbations; i++) {
+-        //for(int i = 0; i < 10; i++) {  //Galactose
+-        for (int i = 10; i < 20; i++) {  //Raffinose
+-            for (int j = 0; j < ngenes; j++) {
+-                //System.out.println("i,j " + i + " " + j);
+-                double sum = 0;
++            for (int g = 0; g < ngenes; g++) {
++                double sum = 0.0;
+                 int n = 0;
+-                for (int k = 0; k < readingsPerPerturbation; k++) {
+-                    if (rawData[j][i * readingsPerPerturbation + k] > -900) {
+-                        n++;
+-                        //if(i ==0 && j ==0)
+-                        //System.out.println(k + " " + rawData[j][i*readingsPerPerturbation+k]);
+-                        sum += rawData[j][i * readingsPerPerturbation + k];
+-                    }
++                // for(int p = 0; p < nperturbations; p++) {
++                // for(int p = 0; p < 10; p++) {  //Galactose
++                for (int p = 10; p < 20; p++) {
++                    // Raffinose
++                    // if(p-1 == g) continue;
++                    sum += expressions[p][g];
++                    n++;
+                 }
+-
+-                expressions[i][j] = sum / n;
+-
++                meanExpression[g] = sum / n;
+             }
+-        }
+-
+-        NumberFormat nf = NumberFormatUtil.getInstance().getNumberFormat();
+-
+-        //for(int p = 0; p < nperturbations; p++) {
+-        //for(int p = 0; p < 10; p++) {  //Galactose
+-        for (int p = 10; p < 20; p++) {  //Raffinose
+-            for (int g = 0; g < 5; g++) {
+-                String exp = nf.format(expressions[p][g]);
+-                System.out.print(exp + "  ");
++            System.out.println("Mean expression for each gene");
++            for (int g = 0; g < ngenes; g++) {
++                String mean = nf.format(meanExpression[g]);
++                System.out.print(mean + " ");
+             }
+             System.out.println();
+         }
+ 
+-        for (int g = 0; g < ngenes; g++) {
+-            double sum = 0.0;
+-            int n = 0;
+-            //for(int p = 0; p < nperturbations; p++) {
+-            //for(int p = 0; p < 10; p++) {  //Galactose
+-            for (int p = 10; p < 20; p++) {  //Raffinose
+-                //if(p-1 == g) continue;
+-                sum += expressions[p][g];
+-                n++;
+-            }
+-            meanExpression[g] = sum / n;
+-        }
+-
+-        System.out.println("Mean expression for each gene");
+-        for (int g = 0; g < ngenes; g++) {
+-            String mean = nf.format(meanExpression[g]);
+-            System.out.print(mean + " ");
+-        }
+-        System.out.println();
+-
+     }
+ }
+ 
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/ideker/ReadIdeker.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/ideker/ReadIdeker.java
+index 4395732f0..ee88dcd40 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/ideker/ReadIdeker.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/ideker/ReadIdeker.java
+@@ -20,6 +20,11 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.gene.tetrad.gene.algorithm.ideker;
++import java.io.IOException;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.InputStream;
+ 
+ import edu.cmu.tetrad.util.NumberFormatUtil;
+ 
+@@ -65,123 +70,108 @@ public class ReadIdeker {
+             System.out.println("Cannot open file " + fileName);
+             return;
+         }
+-
+-        BufferedReader in = new BufferedReader(new InputStreamReader(s));
+-        for (int k = 0; k < nrecords; k++) {
+-            for (int j = 0; j < 10; j++) {  //Lines per record
+-                try {
+-                    st = new StringTokenizer(in.readLine());
+-                    if (j == 0) {
+-                        //                        String lbl = st.nextToken(" ");
+-                        //System.out.println("label = " + lbl);
+-                        continue;
+-                    }
+-                    if (k == 0) {
+-                        //int id = Integer.parseInt(st.nextToken(" "));
+-                        code[j - 1] = st.nextToken(" ");
+-                        //System.out.println("code = " + code[j-1]);
+-                        name[j - 1] = st.nextToken(" ");
+-                        for (int i = 0; i < nvaluesRecord[k]; i++) {
+-                            rawData[j - 1][i + offSet[k]] =
+-                                    Integer.parseInt(st.nextToken(" "));
++        try (BufferedReader in = new BufferedReader(new InputStreamReader(s))) {
++            for (int k = 0; k < nrecords; k++) {
++                for (int j = 0; j < 10; j++) {
++                    // Lines per record
++                    try {
++                        st = new StringTokenizer(in.readLine());
++                        if (j == 0) {
++                            // String lbl = st.nextToken(" ");
++                            // System.out.println("label = " + lbl);
++                            continue;
+                         }
+-                    }
+-                    else {
+-                        //int id = Integer.parseInt(st.nextToken(" "));
+-                        for (int i = 0; i < nvaluesRecord[k]; i++) {
+-                            rawData[j - 1][i + offSet[k]] =
+-                                    Integer.parseInt(st.nextToken(" "));
++                        if (k == 0) {
++                            // int id = Integer.parseInt(st.nextToken(" "));
++                            code[j - 1] = st.nextToken(" ");
++                            // System.out.println("code = " + code[j-1]);
++                            name[j - 1] = st.nextToken(" ");
++                            for (int i = 0; i < nvaluesRecord[k]; i++) {
++                                rawData[j - 1][i + offSet[k]] = Integer.parseInt(st.nextToken(" "));
++                            }
++                        } else {
++                            // int id = Integer.parseInt(st.nextToken(" "));
++                            for (int i = 0; i < nvaluesRecord[k]; i++) {
++                                rawData[j - 1][i + offSet[k]] = Integer.parseInt(st.nextToken(" "));
++                            }
++                            // System.out.println("first raw data = " + rawData[j-1][0]);
+                         }
+-                        //System.out.println("first raw data = " + rawData[j-1][0]);
++                    } catch (IOException e) {
++                        System.out.println("Read error in " + fileName);
++                        return;
+                     }
+                 }
+-                catch (IOException e) {
+-                    System.out.println("Read error in " + fileName);
+-                    return;
+-                }
+-
+             }
+-
+-        }
+-
+-        for (int i = 0; i < nperturbations; i++) {
+-            for (int j = 0; j < ngenes; j++) {
+-                //System.out.println("i,j " + i + " " + j);
+-                double sum = 0;
+-                int n = 0;
+-                for (int k = 0; k < readingsPerPerturbation; k++) {
+-                    if (rawData[j][i * readingsPerPerturbation + k] > -900) {
+-                        n++;
+-                        //if(i ==0 && j ==0)
+-                        //System.out.println(k + " " + rawData[j][i*readingsPerPerturbation+k]);
+-                        sum += rawData[j][i * readingsPerPerturbation + k];
++            for (int i = 0; i < nperturbations; i++) {
++                for (int j = 0; j < ngenes; j++) {
++                    // System.out.println("i,j " + i + " " + j);
++                    double sum = 0;
++                    int n = 0;
++                    for (int k = 0; k < readingsPerPerturbation; k++) {
++                        if (rawData[j][i * readingsPerPerturbation + k] > -900) {
++                            n++;
++                            // if(i ==0 && j ==0)
++                            // System.out.println(k + " " + rawData[j][i*readingsPerPerturbation+k]);
++                            sum += rawData[j][i * readingsPerPerturbation + k];
++                        }
+                     }
++                    expressions[i][j] = sum / n;
+                 }
+-
+-                expressions[i][j] = sum / n;
+-
+             }
+-        }
+-
+-        NumberFormat nf = NumberFormatUtil.getInstance().getNumberFormat();
+-
+-        for (int p = 0; p < nperturbations; p++) {
+-            for (int g = 0; g < 5; g++) {
+-                String exp = nf.format(expressions[p][g]);
+-                System.out.print(exp + "  ");
++            NumberFormat nf = NumberFormatUtil.getInstance().getNumberFormat();
++            for (int p = 0; p < nperturbations; p++) {
++                for (int g = 0; g < 5; g++) {
++                    String exp = nf.format(expressions[p][g]);
++                    System.out.print(exp + "  ");
++                }
++                System.out.println();
+             }
+-            System.out.println();
+-        }
+-
+-        /*  Compute the means from the experimental data
+-        for(int g = 0; g < ngenes; g++) {
+-          double sum = 0.0;
+-          int n = 0;
+-          for(int p = 0; p < nperturbations; p++) {
++            /* Compute the means from the experimental data
++            for(int g = 0; g < ngenes; g++) {
++            double sum = 0.0;
++            int n = 0;
++            for(int p = 0; p < nperturbations; p++) {
+             if(p-1 == g) continue;
+             sum += expressions[p][g];
+             n++;
+-          }
+-          meanExpression[g] = sum/n;
+-        }
+-        */
+-
+-        System.out.println("Mean expression for each gene");
+-        for (int g = 0; g < ngenes; g++) {
+-            String mean = nf.format(meanExpression[g]);
+-            System.out.print(mean + " ");
+-        }
+-        System.out.println();
+-
+-        for (int g = 0; g < ngenes; g++) {
+-            for (int p = 0; p < 10; p++) {   //Galactose
+-                //for(int p = 10; p < 20; p++) {  //Raffinose
+-                int pp = p;  //Galactose
+-                //int pp = p - 10;  //Raffinose
+-                if (pp - 1 == g) {
+-                    binaryExpression[pp][g] = -1;
+-                }
+-                else if (expressions[p][g] > meanExpression[g]) {
+-                    binaryExpression[pp][g] = 1;
+-                }
+-                else {
+-                    binaryExpression[pp][g] = 0;
+-                }
+             }
+-        }
+-
+-        for (int p = 0; p < 10; p++) {
++            meanExpression[g] = sum/n;
++            }
++             */
++            System.out.println("Mean expression for each gene");
+             for (int g = 0; g < ngenes; g++) {
+-                System.out.print(binaryExpression[p][g] + "\t");
++                String mean = nf.format(meanExpression[g]);
++                System.out.print(mean + " ");
+             }
+             System.out.println();
+-        }
+-
+-        ItkPredictorSearch ips =
+-                new ItkPredictorSearch(ngenes, binaryExpression, name);
+-
+-        for (int gene = 0; gene < ngenes; gene++) {
+-            ips.predictor(gene);
++            for (int g = 0; g < ngenes; g++) {
++                for (int p = 0; p < 10; p++) {
++                    // Galactose
++                    // for(int p = 10; p < 20; p++) {  //Raffinose
++                    int pp = p;// Galactose
++
++                    // int pp = p - 10;  //Raffinose
++                    if (pp - 1 == g) {
++                        binaryExpression[pp][g] = -1;
++                    } else {
++                        if (expressions[p][g] > meanExpression[g]) {
++                            binaryExpression[pp][g] = 1;
++                        } else {
++                            binaryExpression[pp][g] = 0;
++                        }
++                    }
++                }
++            }
++            for (int p = 0; p < 10; p++) {
++                for (int g = 0; g < ngenes; g++) {
++                    System.out.print(binaryExpression[p][g] + "\t");
++                }
++                System.out.println();
++            }
++            ItkPredictorSearch ips = new ItkPredictorSearch(ngenes, binaryExpression, name);
++            for (int gene = 0; gene < ngenes; gene++) {
++                ips.predictor(gene);
++            }
+         }
+ 
+     }
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/reveal/LTestRevealSearch.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/reveal/LTestRevealSearch.java
+index ab143a93b..55f27e989 100755
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/reveal/LTestRevealSearch.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/reveal/LTestRevealSearch.java
+@@ -20,6 +20,11 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.gene.tetrad.gene.algorithm.reveal;
++import java.io.IOException;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.InputStream;
+ 
+ import java.io.*;
+ import java.util.StringTokenizer;
+@@ -51,39 +56,33 @@ public class LTestRevealSearch {
+             System.out.println("Cannot open file " + fileName);
+             return;
+         }
+-
+-        BufferedReader in = new BufferedReader(new InputStreamReader(s));
+-        for (int k = 0; k < ntimes; k++) {
+-            try {
+-                st = new StringTokenizer(in.readLine());
+-                for (int j = 0; j < ngenes; j++) {
+-                    cases[k][j] = Integer.parseInt(st.nextToken(" "));
++        try (BufferedReader in = new BufferedReader(new InputStreamReader(s))) {
++            for (int k = 0; k < ntimes; k++) {
++                try {
++                    st = new StringTokenizer(in.readLine());
++                    for (int j = 0; j < ngenes; j++) {
++                        cases[k][j] = Integer.parseInt(st.nextToken(" "));
++                    }
++                } catch (IOException e) {
++                    System.out.println("Read error in " + fileName);
++                    return;
+                 }
+             }
+-            catch (IOException e) {
+-                System.out.println("Read error in " + fileName);
+-                return;
+-            }
+-        }
+-
+-        //System.out.println("case 0 " + cases[0][0] + " " + cases[0][1] + " " +
+-        //                               cases[0][2] + " " + cases[0][3] + " " +
+-        //                               cases[0][4]);
+-
+-        for (int k = 0; k < ntimes; k++) {
+-            for (int j = 0; j < ngenes; j++) {
+-                if (cases[k][j] == -1) {
+-                    cases[k][j] = 0;
++            // System.out.println("case 0 " + cases[0][0] + " " + cases[0][1] + " " +
++            // cases[0][2] + " " + cases[0][3] + " " +
++            // cases[0][4]);
++            for (int k = 0; k < ntimes; k++) {
++                for (int j = 0; j < ngenes; j++) {
++                    if (cases[k][j] == -1) {
++                        cases[k][j] = 0;
++                    }
+                 }
+             }
++            String[] names = new String[]{ "Gene 0", "Gene 1", "Gene 2", "Gene 3", "Gene 4" };
++            RevealSearch rs = new RevealSearch(cases, names);
++            int lag = 1;
++            rs.exhaustiveSearch(lag);
+         }
+-
+-        String[] names = {"Gene 0", "Gene 1", "Gene 2", "Gene 3", "Gene 4"};
+-
+-        RevealSearch rs = new RevealSearch(cases, names);
+-
+-        int lag = 1;
+-        rs.exhaustiveSearch(lag);
+     }
+ 
+ }
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestBoolSearch.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestBoolSearch.java
+index a733e9407..ad1ddd040 100755
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestBoolSearch.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestBoolSearch.java
+@@ -20,6 +20,11 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.gene.tetrad.gene.algorithm.urchin;
++import java.io.IOException;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.InputStream;
+ 
+ import java.io.*;
+ import java.util.StringTokenizer;
+@@ -51,34 +56,29 @@ public class LTestBoolSearch {
+             System.out.println("Cannot open file " + fileName);
+             return;
+         }
+-
+-        BufferedReader in = new BufferedReader(new InputStreamReader(s));
+-        for (int k = 0; k < ntimes; k++) {
+-            try {
+-                st = new StringTokenizer(in.readLine());
+-                for (int j = 0; j < ngenes; j++) {
+-                    cases[k][j] = Integer.parseInt(st.nextToken("\t"));
++        try (BufferedReader in = new BufferedReader(new InputStreamReader(s))) {
++            for (int k = 0; k < ntimes; k++) {
++                try {
++                    st = new StringTokenizer(in.readLine());
++                    for (int j = 0; j < ngenes; j++) {
++                        cases[k][j] = Integer.parseInt(st.nextToken("\t"));
++                    }
++                } catch (IOException e) {
++                    System.out.println("Read error in " + fileName);
++                    return;
+                 }
+             }
+-            catch (IOException e) {
+-                System.out.println("Read error in " + fileName);
+-                return;
+-            }
+-        }
+-
+-        for (int k = 0; k < ntimes; k++) {
+-            for (int j = 0; j < ngenes; j++) {
+-                if (cases[k][j] == -1) {
+-                    cases[k][j] = 0;
++            for (int k = 0; k < ntimes; k++) {
++                for (int j = 0; j < ngenes; j++) {
++                    if (cases[k][j] == -1) {
++                        cases[k][j] = 0;
++                    }
+                 }
+             }
++            String[] names = new String[]{ "Wnt8", "Krl", "SoxB1", "Krox", "Otx", "Eve" };
++            BoolSearch bs = new BoolSearch(cases, names);
++            bs.bool2(3);
+         }
+-
+-        String[] names = {"Wnt8", "Krl", "SoxB1", "Krox", "Otx", "Eve"};
+-
+-        BoolSearch bs = new BoolSearch(cases, names);
+-
+-        bs.bool2(3);
+     }
+ 
+ }
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestReveal.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestReveal.java
+index 5a06a0d97..ba09c8ff8 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestReveal.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestReveal.java
+@@ -20,6 +20,11 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.gene.tetrad.gene.algorithm.urchin;
++import java.io.IOException;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.InputStream;
+ 
+ import java.io.*;
+ import java.util.StringTokenizer;
+@@ -44,74 +49,64 @@ public class LTestReveal {
+             System.out.println("Cannot open file " + fileName);
+             return;
+         }
+-
+-        BufferedReader in = new BufferedReader(new InputStreamReader(s));
+-        for (int k = 0; k < ntimes; k++) {
+-            try {
+-                st = new StringTokenizer(in.readLine());
+-                for (int j = 0; j < ngenes; j++) {
+-                    cases[k][j] = Integer.parseInt(st.nextToken("\t"));
++        try (BufferedReader in = new BufferedReader(new InputStreamReader(s))) {
++            for (int k = 0; k < ntimes; k++) {
++                try {
++                    st = new StringTokenizer(in.readLine());
++                    for (int j = 0; j < ngenes; j++) {
++                        cases[k][j] = Integer.parseInt(st.nextToken("\t"));
++                    }
++                } catch (IOException e) {
++                    System.out.println("Read error in " + fileName);
++                    return;
+                 }
+             }
+-            catch (IOException e) {
+-                System.out.println("Read error in " + fileName);
+-                return;
+-            }
+-        }
+-
+-        System.out.println("case 0 " + cases[0][0] + " " + cases[0][1] + " " +
+-                cases[0][2] + " " + cases[0][3] + " " + cases[0][4]);
+-        for (int k = 0; k < ntimes; k++) {
+-            for (int j = 0; j < ngenes; j++) {
+-                if (cases[k][j] == -1) {
+-                    cases[k][j] = 0;
++            System.out.println("case 0 " + cases[0][0] + " " + cases[0][1] + " " + cases[0][2] + " " + cases[0][3] + " " + cases[0][4]);
++            for (int k = 0; k < ntimes; k++) {
++                for (int j = 0; j < ngenes; j++) {
++                    if (cases[k][j] == -1) {
++                        cases[k][j] = 0;
++                    }
+                 }
+             }
+-        }
+-
+-        int lag = 1;
+-        //One parent cases
+-        int[] p = new int[1];
+-        for (int child = 0; child < ngenes; child++) {
+-            System.out.println("For gene " + child);
+-            for (int i = 0; i < ngenes; i++) {
+-                //if(i == child) continue;
+-                p[0] = i;
+-                double m = mutualInformation(child, p, lag);
+-                System.out.println("for parent = " + i + " m = " + m);
++            int lag = 1;
++            // One parent cases
++            int[] p = new int[1];
++            for (int child = 0; child < ngenes; child++) {
++                System.out.println("For gene " + child);
++                for (int i = 0; i < ngenes; i++) {
++                    // if(i == child) continue;
++                    p[0] = i;
++                    double m = mutualInformation(child, p, lag);
++                    System.out.println("for parent = " + i + " m = " + m);
++                }
+             }
+-        }
+-
+-        //Two parent cases
+-        int[] pp = new int[2];
+-        for (int child = 0; child < ngenes; child++) {
+-            System.out.println("For gene " + child);
+-            for (int p1 = 0; p1 < ngenes; p1++) {
+-                for (int p2 = 0; p2 < ngenes && p1 != p2; p2++) {
+-                    pp[0] = p1;
+-                    pp[1] = p2;
+-
+-                    double mm = mutualInformation(child, pp, lag);
+-                    System.out.println(
+-                            "for parents = " + p1 + "," + p2 + " m = " + mm);
++            // Two parent cases
++            int[] pp = new int[2];
++            for (int child = 0; child < ngenes; child++) {
++                System.out.println("For gene " + child);
++                for (int p1 = 0; p1 < ngenes; p1++) {
++                    for (int p2 = 0; p2 < ngenes && p1 != p2; p2++) {
++                        pp[0] = p1;
++                        pp[1] = p2;
++                        double mm = mutualInformation(child, pp, lag);
++                        System.out.println("for parents = " + p1 + "," + p2 + " m = " + mm);
++                    }
+                 }
+             }
+-        }
+-
+-        //Three parent cases
+-        int[] ppp = new int[3];
+-        for (int child = 0; child < ngenes; child++) {
+-            System.out.println("For gene " + child);
+-            for (int p1 = 0; p1 < ngenes; p1++) {
+-                for (int p2 = 0; p2 < ngenes && p2 != p1; p2++) {
+-                    for (int p3 = 0; p3 < ngenes && p3 != p2 && p3 != p1; p3++)
+-                    {
+-                        ppp[0] = p1;
+-                        ppp[1] = p2;
+-                        ppp[2] = p3;
+-                        double mmm = mutualInformation(child, ppp, lag);
+-                        System.out.println("for parents = " + p1 + "," + p2 +
+-                                "," + p3 + " m = " + mmm);
++            // Three parent cases
++            int[] ppp = new int[3];
++            for (int child = 0; child < ngenes; child++) {
++                System.out.println("For gene " + child);
++                for (int p1 = 0; p1 < ngenes; p1++) {
++                    for (int p2 = 0; p2 < ngenes && p2 != p1; p2++) {
++                        for (int p3 = 0; p3 < ngenes && p3 != p2 && p3 != p1; p3++) {
++                            ppp[0] = p1;
++                            ppp[1] = p2;
++                            ppp[2] = p3;
++                            double mmm = mutualInformation(child, ppp, lag);
++                            System.out.println("for parents = " + p1 + "," + p2 + "," + p3 + " m = " + mmm);
++                        }
+                     }
+                 }
+             }
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestRevealSearch.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestRevealSearch.java
+index 26cc580ee..edad54764 100755
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestRevealSearch.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/algorithm/urchin/LTestRevealSearch.java
+@@ -20,6 +20,11 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.gene.tetrad.gene.algorithm.urchin;
++import java.io.IOException;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.InputStream;
+ 
+ import java.io.*;
+ import java.util.StringTokenizer;
+@@ -51,41 +56,35 @@ public class LTestRevealSearch {
+             System.out.println("Cannot open file " + fileName);
+             return;
+         }
+-
+-        BufferedReader in = new BufferedReader(new InputStreamReader(s));
+-        for (int k = 0; k < ntimes; k++) {
+-            try {
+-                st = new StringTokenizer(in.readLine());
+-                for (int j = 0; j < ngenes; j++) {
+-                    cases[k][j] = Integer.parseInt(st.nextToken("\t"));
++        try (BufferedReader in = new BufferedReader(new InputStreamReader(s))) {
++            for (int k = 0; k < ntimes; k++) {
++                try {
++                    st = new StringTokenizer(in.readLine());
++                    for (int j = 0; j < ngenes; j++) {
++                        cases[k][j] = Integer.parseInt(st.nextToken("\t"));
++                    }
++                } catch (IOException e) {
++                    System.out.println("Read error in " + fileName);
++                    return;
+                 }
+             }
+-            catch (IOException e) {
+-                System.out.println("Read error in " + fileName);
+-                return;
+-            }
+-        }
+-
+-        for (int k = 0; k < ntimes; k++) {
+-            for (int j = 0; j < ngenes; j++) {
+-                if (cases[k][j] == -1) {
+-                    cases[k][j] = 0;
++            for (int k = 0; k < ntimes; k++) {
++                for (int j = 0; j < ngenes; j++) {
++                    if (cases[k][j] == -1) {
++                        cases[k][j] = 0;
++                    }
+                 }
+             }
++            String[] names = new String[]{ "Gene 0", "Gene 1", "Gene 2", "Gene 3", "Gene 4" };
++            RevealSearch rs = new RevealSearch(cases, names);
++            int lag = 1;
++            rs.exhaustiveSearch(lag);
++            System.out.println("Result for multiple lag search");
++            int lag1 = 1;
++            int lag2 = 2;
++            rs.exhaustiveSearch(lag1, lag2);
+         }
+ 
+-        String[] names = {"Gene 0", "Gene 1", "Gene 2", "Gene 3", "Gene 4"};
+-
+-        RevealSearch rs = new RevealSearch(cases, names);
+-
+-        int lag = 1;
+-        rs.exhaustiveSearch(lag);
+-
+-        System.out.println("Result for multiple lag search");
+-        int lag1 = 1;
+-        int lag2 = 2;
+-        rs.exhaustiveSearch(lag1, lag2);
+-
+     }
+ 
+ }
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/util/HandleyConvert.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/util/HandleyConvert.java
+index 060ab9a1a..1fc0f5a54 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/util/HandleyConvert.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/util/HandleyConvert.java
+@@ -20,6 +20,12 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.gene.tetrad.gene.util;
++import java.io.IOException;
++import java.io.FileReader;
++import java.io.FileOutputStream;
++import java.io.File;
++import java.io.BufferedReader;
++import java.io.PrintStream;
+ 
+ import edu.cmu.tetrad.gene.tetrad.gene.history.BasicLagGraph;
+ import edu.cmu.tetrad.gene.tetrad.gene.history.LagGraph;
+@@ -100,17 +106,13 @@ public class HandleyConvert {
+             throw new IllegalArgumentException("Expecting exactly one " +
+                     "argument, the filename " + "of the file to translate.");
+         }
+-
+-        try {
++        try (BufferedReader in = new BufferedReader(new FileReader(inFile))) {
+             File inFile = new File(args[0]);
+             File outFile = new File(inFile.getName() + ".out");
+-            BufferedReader in = new BufferedReader(new FileReader(inFile));
+             PrintStream out = new PrintStream(new FileOutputStream(outFile));
+-
+             new HandleyConvert().convert(in, out);
+             out.close();
+-        }
+-        catch (IOException e) {
++        } catch (IOException e) {
+             e.printStackTrace();
+         }
+     }
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/graph/GraphUtils.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/graph/GraphUtils.java
+index 3cd6b2f6b..04a147b79 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/graph/GraphUtils.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/graph/GraphUtils.java
+@@ -2251,8 +2251,7 @@ public final class GraphUtils {
+     }
+ 
+     public static void graphToDot(Graph graph, File file) {
+-        try {
+-            Writer writer = new FileWriter(file);
++        try (Writer writer = new FileWriter(file)) {
+             writer.write(graphToDot(graph));
+             writer.close();
+         } catch (IOException e) {
+@@ -4080,39 +4079,33 @@ public final class GraphUtils {
+         if (graph.isPag()) {
+             addPagColoring(graph);
+         }
+-
+-        Formatter fmt = new Formatter();
+-        fmt.format("%s%n%n", graphNodesToText(graph, "Graph Nodes:", ';'));
+-        fmt.format("%s%n", graphEdgesToText(graph, "Graph Edges:"));
+-
+-        // Graph Attributes
+-        String graphAttributes = graphAttributesToText(graph, "Graph Attributes:");
+-        if (graphAttributes != null) {
+-            fmt.format("%s%n", graphAttributes);
+-        }
+-
+-        // Nodes Attributes
+-        String graphNodeAttributes = graphNodeAttributesToText(graph, "Graph Node Attributes:", ';');
+-        if (graphNodeAttributes != null) {
+-            fmt.format("%s%n", graphNodeAttributes);
+-        }
+-
+-        Set<Triple> ambiguousTriples = graph.getAmbiguousTriples();
+-        if (!ambiguousTriples.isEmpty()) {
+-            fmt.format("%n%n%s", triplesToText(ambiguousTriples, "Ambiguous triples (i.e. list of triples for which there is ambiguous data about whether they are colliders or not):"));
+-        }
+-
+-        Set<Triple> underLineTriples = graph.getUnderLines();
+-        if (!underLineTriples.isEmpty()) {
+-            fmt.format("%n%n%s", triplesToText(underLineTriples, "Underline triples:"));
+-        }
+-
+-        Set<Triple> dottedUnderLineTriples = graph.getDottedUnderlines();
+-        if (!dottedUnderLineTriples.isEmpty()) {
+-            fmt.format("%n%n%s", triplesToText(dottedUnderLineTriples, "Dotted underline triples:"));
+-        }
+-
+-        return fmt.toString();
++            try (Formatter fmt = new Formatter()) {
++                fmt.format("%s%n%n", graphNodesToText(graph, "Graph Nodes:", ';'));
++                fmt.format("%s%n", graphEdgesToText(graph, "Graph Edges:"));
++                // Graph Attributes
++                String graphAttributes = graphAttributesToText(graph, "Graph Attributes:");
++                if (graphAttributes != null) {
++                    fmt.format("%s%n", graphAttributes);
++                }
++                // Nodes Attributes
++                String graphNodeAttributes = graphNodeAttributesToText(graph, "Graph Node Attributes:", ';');
++                if (graphNodeAttributes != null) {
++                    fmt.format("%s%n", graphNodeAttributes);
++                }
++                Set<Triple> ambiguousTriples = graph.getAmbiguousTriples();
++                if (!ambiguousTriples.isEmpty()) {
++                    fmt.format("%n%n%s", triplesToText(ambiguousTriples, "Ambiguous triples (i.e. list of triples for which there is ambiguous data about whether they are colliders or not):"));
++                }
++                Set<Triple> underLineTriples = graph.getUnderLines();
++                if (!underLineTriples.isEmpty()) {
++                    fmt.format("%n%n%s", triplesToText(underLineTriples, "Underline triples:"));
++                }
++                Set<Triple> dottedUnderLineTriples = graph.getDottedUnderlines();
++                if (!dottedUnderLineTriples.isEmpty()) {
++                    fmt.format("%n%n%s", triplesToText(dottedUnderLineTriples, "Dotted underline triples:"));
++                }
++                return fmt.toString();
++            }
+     }
+ 
+     public static String graphNodeAttributesToText(Graph graph, String title, char delimiter) {
+@@ -4212,84 +4205,73 @@ public final class GraphUtils {
+     }
+ 
+     public static String graphEdgesToText(Graph graph, String title) {
+-        Formatter fmt = new Formatter();
+-
+-        if (title != null && title.length() > 0) {
+-            fmt.format("%s%n", title);
+-        }
+-
+-        List<Edge> edges = new ArrayList<>(graph.getEdges());
+-        Edges.sortEdges(edges);
+-
+-        int size = edges.size();
+-        int count = 0;
+-
+-        for (Edge edge : edges) {
+-            count++;
+-
+-            // We will print edge's properties in the edge (via toString() function) level.
+-            //List<Edge.Property> properties = edge.getProperties();
+-            if (count < size) {
+-                String f = "%d. %s";
+-
+-                //for (int i = 0; i < properties.size(); i++) {
+-                //    f += " %s";
+-                //}
+-                Object[] o = new Object[2 /*+ properties.size()*/];
+-
+-                o[0] = count;
+-                o[1] = edge; // <- here we include its properties (nl dd pl pd)
+-
+-                //for (int i = 0; i < properties.size(); i++) {
+-                //    o[2 + i] = properties.get(i);
+-                //}
+-                fmt.format(f, o);
+-
+-                fmt.format("\n");
+-            } else {
+-                String f = "%d. %s";
+-
+-                //for (int i = 0; i < properties.size(); i++) {
+-                //    f += " %s";
+-                //}
+-                Object[] o = new Object[2 /*+ properties.size()*/];
+-
+-                o[0] = count;
+-                o[1] = edge; // <- here we include its properties (nl dd pl pd)
+-
+-                //for (int i = 0; i < properties.size(); i++) {
+-                //    o[2 + i] = properties.get(i);
+-                //}
+-                fmt.format(f, o);
+-
+-                fmt.format("\n");
++            try (Formatter fmt = new Formatter()) {
++                if (title != null && title.length() > 0) {
++                    fmt.format("%s%n", title);
++                }
++                List<Edge> edges = new ArrayList<>(graph.getEdges());
++                Edges.sortEdges(edges);
++                int size = edges.size();
++                int count = 0;
++                for (Edge edge : edges) {
++                    count++;
++                    // We will print edge's properties in the edge (via toString() function) level.
++                    // List<Edge.Property> properties = edge.getProperties();
++                    if (count < size) {
++                        String f = "%d. %s";
++                        // for (int i = 0; i < properties.size(); i++) {
++                        // f += " %s";
++                        // }
++                        Object[] o = /* + properties.size() */
++                        new Object[2];
++                        o[0] = count;
++                        o[1] = edge;// <- here we include its properties (nl dd pl pd)
++
++                        // for (int i = 0; i < properties.size(); i++) {
++                        // o[2 + i] = properties.get(i);
++                        // }
++                        fmt.format(f, o);
++                        fmt.format("\n");
++                    } else {
++                        String f = "%d. %s";
++                        // for (int i = 0; i < properties.size(); i++) {
++                        // f += " %s";
++                        // }
++                        Object[] o = /* + properties.size() */
++                        new Object[2];
++                        o[0] = count;
++                        o[1] = edge;// <- here we include its properties (nl dd pl pd)
++
++                        // for (int i = 0; i < properties.size(); i++) {
++                        // o[2 + i] = properties.get(i);
++                        // }
++                        fmt.format(f, o);
++                        fmt.format("\n");
++                    }
++                }
++                return fmt.toString();
+             }
+-        }
+-
+-        return fmt.toString();
+     }
+ 
+     public static String triplesToText(Set<Triple> triples, String title) {
+-        Formatter fmt = new Formatter();
+-
+-        if (title != null && title.length() > 0) {
+-            fmt.format("%s%n", title);
+-        }
+-
+-        int size = (triples == null) ? 0 : triples.size();
+-        if (size > 0) {
+-            int count = 0;
+-            for (Triple triple : triples) {
+-                count++;
+-                if (count < size) {
+-                    fmt.format("%s%n", triple);
+-                } else {
+-                    fmt.format("%s", triple);
++            try (Formatter fmt = new Formatter()) {
++                if (title != null && title.length() > 0) {
++                    fmt.format("%s%n", title);
+                 }
++                int size = (triples == null) ? 0 : triples.size();
++                if (size > 0) {
++                    int count = 0;
++                    for (Triple triple : triples) {
++                        count++;
++                        if (count < size) {
++                            fmt.format("%s%n", triple);
++                        } else {
++                            fmt.format("%s", triple);
++                        }
++                    }
++                }
++                return fmt.toString();
+             }
+-        }
+-
+-        return fmt.toString();
+     }
+ 
+     public static class GraphComparison {
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/performance/PerformanceTests.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/performance/PerformanceTests.java
+index c811601ad..f7794b706 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/performance/PerformanceTests.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/performance/PerformanceTests.java
+@@ -20,6 +20,18 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.performance;
++import java.util.HashMap;
++import java.util.HashSet;
++import java.io.FileNotFoundException;
++import java.io.FileOutputStream;
++import java.util.Map;
++import java.util.Set;
++import java.util.Date;
++import java.io.File;
++import java.util.List;
++import java.util.ArrayList;
++import java.util.TreeMap;
++import java.io.PrintStream;
+ 
+ import edu.cmu.tetrad.bayes.BayesPm;
+ import edu.cmu.tetrad.bayes.MlBayesIm;
+@@ -136,47 +148,28 @@ public class PerformanceTests {
+     }
+ 
+     public void printStuffForKlea() {
+-
+-        try {
++        try (PrintStream out2 = new PrintStream(new FileOutputStream(_graph))) {
+             File _data = new File("data.txt");
+             File _graph = new File("graph.txt");
+-
+-            PrintStream out1 = new PrintStream(new FileOutputStream(_data));
+-            PrintStream out2 = new PrintStream(new FileOutputStream(_graph));
+-
+-
+             int numVars = 50000;
+-
+             List<Node> vars = new ArrayList<>();
+-
+             for (int i = 0; i < numVars; i++) {
+                 vars.add(new ContinuousVariable("X" + (i + 1)));
+             }
+-
+             double edgeFactor = 1.0;
+             int numCases = 1000;
+-
+-            Graph graph = GraphUtils.randomGraphRandomForwardEdges(vars, 0, (int) (numVars * edgeFactor),
+-                    30, 15, 15, false, true);
+-
++            Graph graph = GraphUtils.randomGraphRandomForwardEdges(vars, 0, ((int) (numVars * edgeFactor)), 30, 15, 15, false, true);
+             out2.println(graph);
+-
+             System.out.println("Graph done");
+-
+             out.println("Graph done");
+-
+             System.out.println("Starting simulation");
+             LargeScaleSimulation simulator = new LargeScaleSimulation(graph);
+             simulator.setOut(out);
+-
+             DataSet data = simulator.simulateDataFisher(numCases);
+-
+             out1.println(data);
+-
+             out1.close();
+             out2.close();
+         } catch (Exception e) {
+-
+         }
+ 
+ 
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/search/DMSearch.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/search/DMSearch.java
+index 4a4ed70d6..391083b34 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/search/DMSearch.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/search/DMSearch.java
+@@ -1,4 +1,13 @@
+ package edu.cmu.tetrad.search;
++import java.util.HashSet;
++import java.util.Map;
++import java.util.Set;
++import java.util.List;
++import java.util.ArrayList;
++import java.util.TreeMap;
++import java.util.TreeSet;
++import java.util.Comparator;
++import java.util.SortedSet;
+ 
+ import edu.cmu.tetrad.data.*;
+ import edu.cmu.tetrad.graph.*;
+@@ -643,15 +652,13 @@ public class DMSearch {
+ 
+         //Saves GES output in case is needed.
+         File file = new File("src/edu/cmu/tetradproj/amurrayw/ges_output_" + penalty + "_.txt");
+-        try {
++        try (PrintStream outStream = new PrintStream(out)) {
+             FileOutputStream out = new FileOutputStream(file);
+-            PrintStream outStream = new PrintStream(out);
+             outStream.println(pattern);
+         } catch (java.io.FileNotFoundException e) {
+             if (verbose) {
+                 System.out.println("Can't write to file.");
+             }
+-
+         }
+ 
+         if (penalty > minPenalty) {
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/GdistanceApply.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/GdistanceApply.java
+index ca5edcd93..940ed7bf9 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/GdistanceApply.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/GdistanceApply.java
+@@ -53,20 +53,16 @@ public class GdistanceApply {
+         Path mapPath = Paths.get("coords.txt");
+         System.out.println(mapPath);
+         ContinuousTabularDatasetFileReader dataReaderMap = new ContinuousTabularDatasetFileReader(mapPath, Delimiter.COMMA);
+-        try {
+-            DataSet locationMap = (DataSet) DataConvertUtils.toDataModel(dataReaderMap.readInData());
++        try (PrintWriter writer = new PrintWriter("Gdistances.txt", "UTF-8")) {
++            DataSet locationMap = ((DataSet) (DataConvertUtils.toDataModel(dataReaderMap.readInData())));
+             long timegraph3 = System.nanoTime();
+             System.out.println("Done loading location map. Elapsed time: " + (timegraph3 - timegraph2) / 1000000000 + "s");
+-
+             System.out.println("Running Gdistance");
+-
+             Gdistance gdist = new Gdistance(locationMap, xdist, ydist, zdist);
+             List<Double> distance = gdist.distances(graph1, graph2);
+             System.out.println(distance);
+             System.out.println("Done running Distance. Elapsed time: " + (System.nanoTime() - timegraph3) / 1000000000 + "s");
+             System.out.println("Total elapsed time: " + (System.nanoTime() - timestart) / 1000000000 + "s");
+-
+-            PrintWriter writer = new PrintWriter("Gdistances.txt", "UTF-8");
+             writer.println(distance);
+             writer.close();
+         } catch (Exception IOException) {
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/GdistanceTest.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/GdistanceTest.java
+index e8a89e69c..4c0152039 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/GdistanceTest.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/GdistanceTest.java
+@@ -37,19 +37,16 @@ public class GdistanceTest {
+         Path mapPath = Paths.get("locationMap.txt");
+         System.out.println(mapPath);
+         ContinuousTabularDatasetFileReader dataReaderMap = new ContinuousTabularDatasetFileReader(mapPath, Delimiter.COMMA);
+-        try {
+-            DataSet locationMap = (DataSet) DataConvertUtils.toDataModel(dataReaderMap.readInData());
++        try (PrintWriter writer = new PrintWriter("Gdistances.txt", "UTF-8")) {
++            DataSet locationMap = ((DataSet) (DataConvertUtils.toDataModel(dataReaderMap.readInData())));
+             // System.out.println(locationMap);
+-            //then compare their distance
++            // then compare their distance
+             double xdist = 2.4;
+             double ydist = 2.4;
+             double zdist = 2;
+             Gdistance gdist = new Gdistance(locationMap, xdist, ydist, zdist);
+             List<Double> output = gdist.distances(testdag1, testdag2);
+-
+             System.out.println(output);
+-
+-            PrintWriter writer = new PrintWriter("Gdistances.txt", "UTF-8");
+             writer.println(output);
+             writer.close();
+         } catch (Exception IOException) {
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimCompareRepeat.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimCompareRepeat.java
+index 79ebc016f..9da76e2f7 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimCompareRepeat.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimCompareRepeat.java
+@@ -17,16 +17,31 @@ public class HsimCompareRepeat {
+ 
+         int resimSize = 3;
+         int repeat = 10;
+-
+-        double gAdjRecallTotal =0, gAdjPrecisionTotal =0, gOrRecallTotal =0, gOrPrecisionTotal =0;
+-        double fAdjRecallTotal =0, fAdjPrecisionTotal =0, fOrRecallTotal =0, fOrPrecisionTotal =0;
+-        double hAdjRecallTotal =0, hAdjPrecisionTotal =0, hOrRecallTotal =0, hOrPrecisionTotal =0;
+-        double fSE_ART = 0, fSE_APT = 0, fSE_ORT = 0, fSE_OPT = 0;
+-        double hSE_ART = 0, hSE_APT = 0, hSE_ORT = 0, hSE_OPT = 0;
+-
+-        //ints used to correct the counts, since NaN can sometimes occur and needs to be ignored
+-        int fOrPrecCountCorrection = 0, gOrPrecCountCorrection = 0;
+-        int fSE_OPT_CountCorrection = 0, hSE_OPT_CountCorrection = 0;
++        double gAdjRecallTotal = 0;
++        double gAdjPrecisionTotal = 0;
++        double gOrRecallTotal = 0;
++        double gOrPrecisionTotal = 0;
++        double fAdjRecallTotal = 0;
++        double fAdjPrecisionTotal = 0;
++        double fOrRecallTotal = 0;
++        double fOrPrecisionTotal = 0;
++        double hAdjRecallTotal = 0;
++        double hAdjPrecisionTotal = 0;
++        double hOrRecallTotal = 0;
++        double hOrPrecisionTotal = 0;
++        double fSE_ART = 0;
++        double fSE_APT = 0;
++        double fSE_ORT = 0;
++        double fSE_OPT = 0;
++        double hSE_ART = 0;
++        double hSE_APT = 0;
++        double hSE_ORT = 0;
++        double hSE_OPT = 0;
++        // ints used to correct the counts, since NaN can sometimes occur and needs to be ignored
++        int fOrPrecCountCorrection = 0;
++        int gOrPrecCountCorrection = 0;
++        int fSE_OPT_CountCorrection = 0;
++        int hSE_OPT_CountCorrection = 0;
+ 
+         for (int i=0; i<count; i++) {
+             List<double[]> allErrors = HsimRobustCompare.run(numVars,edgesPerNode,numCases,penaltyDiscount,resimSize,
+@@ -80,12 +95,18 @@ public class HsimCompareRepeat {
+             }
+ 
+         }
+-        double gAdjRecall = gAdjRecallTotal/count, gAdjPrecision = gAdjPrecisionTotal/count;
+-        double gOrRecall = gOrRecallTotal/count, gOrPrecision = gOrPrecisionTotal/(count - gOrPrecCountCorrection);
+-        double fAdjRecall = fAdjRecallTotal/count, fAdjPrecision = fAdjPrecisionTotal/count;
+-        double fOrRecall = fOrRecallTotal/count, fOrPrecision = fOrPrecisionTotal/(count - fOrPrecCountCorrection);
+-        double hAdjRecall = hAdjRecallTotal/count, hAdjPrecision = hAdjPrecisionTotal/count;
+-        double hOrRecall = hOrRecallTotal/count, hOrPrecision = hOrPrecisionTotal/count;
++        double gAdjRecall = gAdjRecallTotal / count;
++        double gAdjPrecision = gAdjPrecisionTotal / count;
++        double gOrRecall = gOrRecallTotal / count;
++        double gOrPrecision = gOrPrecisionTotal / (count - gOrPrecCountCorrection);
++        double fAdjRecall = fAdjRecallTotal / count;
++        double fAdjPrecision = fAdjPrecisionTotal / count;
++        double fOrRecall = fOrRecallTotal / count;
++        double fOrPrecision = fOrPrecisionTotal / (count - fOrPrecCountCorrection);
++        double hAdjRecall = hAdjRecallTotal / count;
++        double hAdjPrecision = hAdjPrecisionTotal / count;
++        double hOrRecall = hOrRecallTotal / count;
++        double hOrPrecision = hOrPrecisionTotal / count;
+ 
+         System.out.println(" ");
+         String GE = "G errors: AR="+gAdjRecall+" AP="+gAdjPrecision+" OR="+gOrRecall+" OP="+gOrPrecision;
+@@ -95,28 +116,36 @@ public class HsimCompareRepeat {
+         System.out.println(FE);
+         System.out.println(HE);
+         System.out.println(" ");
+-
+-        double fgDifAR = fAdjRecall-gAdjRecall, fgDifAP = fAdjPrecision-gAdjPrecision;
+-        double fgDifOR = fOrRecall-gOrRecall, fgDifOP = fOrPrecision-gOrPrecision;
+-
+-        double hgDifAR = hAdjRecall-gAdjRecall, hgDifAP = hAdjPrecision-gAdjPrecision;
+-        double hgDifOR = hOrRecall-gOrRecall, hgDifOP = hOrPrecision-gOrPrecision;
++        double fgDifAR = fAdjRecall - gAdjRecall;
++        double fgDifAP = fAdjPrecision - gAdjPrecision;
++        double fgDifOR = fOrRecall - gOrRecall;
++        double fgDifOP = fOrPrecision - gOrPrecision;
++        double hgDifAR = hAdjRecall - gAdjRecall;
++        double hgDifAP = hAdjPrecision - gAdjPrecision;
++        double hgDifOR = hOrRecall - gOrRecall;
++        double hgDifOP = hOrPrecision - gOrPrecision;
+ 
+         String FD = "FG differences: AR="+fgDifAR+" AP="+fgDifAP+" OR="+fgDifOR+" OP="+fgDifOP;
+         String HD = "HG differences: AR="+hgDifAR+" AP="+hgDifAP+" OR="+hgDifOR+" OP="+hgDifOP;
+         System.out.println(FD);
+         System.out.println(HD);
+         System.out.println(" ");
+-
+-        double hfDifDifAR = Math.abs(fgDifAR)-Math.abs(hgDifAR), hfDifDifAP = Math.abs(fgDifAP)-Math.abs(hgDifAP);
+-        double hfDifDifOR = Math.abs(fgDifOR)-Math.abs(hgDifOR), hfDifDifOP = Math.abs(fgDifOP)-Math.abs(hgDifOP);
++        double hfDifDifAR = Math.abs(fgDifAR) - Math.abs(hgDifAR);
++        double hfDifDifAP = Math.abs(fgDifAP) - Math.abs(hgDifAP);
++        double hfDifDifOR = Math.abs(fgDifOR) - Math.abs(hgDifOR);
++        double hfDifDifOP = Math.abs(fgDifOP) - Math.abs(hgDifOP);
+ 
+         String AFH = "Absolute F-H: AR="+hfDifDifAR+" AP="+hfDifDifAP+" OR="+hfDifDifOR+" OP="+hfDifDifOP;
+         System.out.println(AFH);
+         System.out.println(" ");
+-
+-        double fMSE_AR=fSE_ART/count, fMSE_AP=fSE_APT/count, fMSE_OR=fSE_ORT/count, fMSE_OP=fSE_OPT/(count-fSE_OPT_CountCorrection);
+-        double hMSE_AR=hSE_ART/count, hMSE_AP=hSE_APT/count, hMSE_OR=hSE_ORT/count, hMSE_OP=hSE_OPT/(count-hSE_OPT_CountCorrection);
++        double fMSE_AR = fSE_ART / count;
++        double fMSE_AP = fSE_APT / count;
++        double fMSE_OR = fSE_ORT / count;
++        double fMSE_OP = fSE_OPT / (count - fSE_OPT_CountCorrection);
++        double hMSE_AR = hSE_ART / count;
++        double hMSE_AP = hSE_APT / count;
++        double hMSE_OR = hSE_ORT / count;
++        double hMSE_OP = hSE_OPT / (count - hSE_OPT_CountCorrection);
+ 
+         String FMSE = "F-MSE: AR="+fMSE_AR+" AP="+fMSE_AP+" OR="+fMSE_OR+" OP="+fMSE_OP;
+         String HMSE = "H-MSE: AR="+hMSE_AR+" AP="+hMSE_AP+" OR="+hMSE_OR+" OP="+hMSE_OP;
+@@ -126,13 +155,10 @@ public class HsimCompareRepeat {
+         String nl = System.getProperty("line.separator");
+         String resultsLog = GE+nl+FE+nl+HE+nl+nl+FD+nl+HD+nl+AFH+nl+nl+FMSE+nl+HMSE;
+         String paramsLog = "count = "+count+", numVars = "+numVars+", edgesPerNode = "+edgesPerNode+", numCases = "+numCases+", resimSize = "+resimSize+", repeat = "+repeat;
+-
+-        try {
+-            PrintWriter writer = new PrintWriter("HsimCR-c"+count+"-v"+numVars+"-s"+numCases+"-rs"+resimSize+"-r"+repeat+".txt", "UTF-8");
+-            writer.println(paramsLog+nl+nl+resultsLog);
++        try (PrintWriter writer = new PrintWriter("HsimCR-c" + count + "-v" + numVars + "-s" + numCases + "-rs" + resimSize + "-r" + repeat + ".txt", "UTF-8")) {
++            writer.println(paramsLog + nl + nl + resultsLog);
+             writer.close();
+-        }
+-        catch(Exception IOException){
++        } catch (Exception IOException) {
+             IOException.printStackTrace();
+         }
+ 
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimEvalFromData.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimEvalFromData.java
+index 33dd41042..be4982522 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimEvalFromData.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimEvalFromData.java
+@@ -1,4 +1,9 @@
+ package edu.cmu.tetrad.simulation;
++import java.util.HashSet;
++import java.util.Set;
++import java.util.List;
++import java.util.ArrayList;
++import java.util.Arrays;
+ 
+ import edu.cmu.tetrad.data.CovarianceMatrix;
+ import edu.cmu.tetrad.data.DataSet;
+@@ -55,54 +60,46 @@ public class HsimEvalFromData {
+             hsimErrsByPars[0][whichHrepeat] = new ArrayList<PRAOerrors>();
+             whichHrepeat++;
+         }
+-
+-        //!(*%(@!*^!($%!^ START ITERATING HERE !#$%(*$#@!^(*!$*%(!$#
+-        try {
++        try (PrintWriter writer2 = new PrintWriter("HvsF-SimulationEvaluation.txt", "UTF-8")) {
+             for (int iterate = 0; iterate < iterations; iterate++) {
+                 System.out.println("iteration " + iterate);
+-                //@#$%@$%^@$^@$^@%$%@$#^ LOADING THE DATA AND GRAPH @$#%%*#^##*^$#@%$
++                // @#$%@$%^@$^@$^@%$%@$#^ LOADING THE DATA AND GRAPH @$#%%*#^##*^$#@%$
+                 DataSet data1;
+                 Graph graph1 = GraphUtils.loadGraphTxt(new File("graph/graph.1.txt"));
+                 Dag odag = new Dag(graph1);
+-
+                 Set<String> eVars = new HashSet<String>();
+                 eVars.add("MULT");
+                 Path dataFile = Paths.get("data/data.1.txt");
+-
+                 ContinuousTabularDatasetFileReader dataReader = new ContinuousTabularDatasetFileReader(dataFile, Delimiter.TAB);
+-
+-                data1 = (DataSet) DataConvertUtils.toDataModel(dataReader.readInData(eVars));
++                data1 = ((DataSet) (DataConvertUtils.toDataModel(dataReader.readInData(eVars))));
+                 vars = data1.getNumColumns();
+                 cases = data1.getNumRows();
+                 edgeratio = 3;
+-
+-                //!#@^$@&%^!#$!&@^ CALCULATING TARGET ERRORS $%$#@^@!%!#^$!%$#%
++                // !#@^$@&%^!#$!&@^ CALCULATING TARGET ERRORS $%$#@^@!%!#^$!%$#%
+                 ICovarianceMatrix newcov = new CovarianceMatrix(data1);
+                 SemBicScore oscore = new SemBicScore(newcov);
+                 Fges ofgs = new Fges(oscore);
+                 ofgs.setVerbose(false);
+-                Graph oFGSGraph = ofgs.search();//***********This is the original FGS output on the data
+-                PRAOerrors oErrors = new PRAOerrors(HsimUtils.errorEval(oFGSGraph, odag), "target errors");
++                Graph oFGSGraph = ofgs.search();// ***********This is the original FGS output on the data
+ 
+-                //**then step 1: full resim. iterate through the combinations of estimator parameters (just repeat num)
++                PRAOerrors oErrors = new PRAOerrors(HsimUtils.errorEval(oFGSGraph, odag), "target errors");
++                // **then step 1: full resim. iterate through the combinations of estimator parameters (just repeat num)
+                 for (whichFrepeat = 0; whichFrepeat < fsimRepeat.size(); whichFrepeat++) {
+                     ArrayList<PRAOerrors> errorsList = new ArrayList<PRAOerrors>();
+                     for (int r = 0; r < fsimRepeat.get(whichFrepeat); r++) {
+                         PatternToDag pickdag = new PatternToDag(oFGSGraph);
+                         Graph fgsDag = pickdag.patternToDagMeek();
+                         Dag fgsdag2 = new Dag(fgsDag);
+-                        //then fit an IM to this dag and the data. GeneralizedSemEstimator seems to bug out
+-                        //GeneralizedSemPm simSemPm = new GeneralizedSemPm(fgsdag2);
+-                        //GeneralizedSemEstimator gsemEstimator = new GeneralizedSemEstimator();
+-                        //GeneralizedSemIm fittedIM = gsemEstimator.estimate(simSemPm, oData);
+-
++                        // then fit an IM to this dag and the data. GeneralizedSemEstimator seems to bug out
++                        // GeneralizedSemPm simSemPm = new GeneralizedSemPm(fgsdag2);
++                        // GeneralizedSemEstimator gsemEstimator = new GeneralizedSemEstimator();
++                        // GeneralizedSemIm fittedIM = gsemEstimator.estimate(simSemPm, oData);
+                         SemPm simSemPm = new SemPm(fgsdag2);
+-                        //BayesPm simBayesPm = new BayesPm(fgsdag2, bayesPm);
++                        // BayesPm simBayesPm = new BayesPm(fgsdag2, bayesPm);
+                         SemEstimator simSemEstimator = new SemEstimator(data1, simSemPm);
+                         SemIm fittedIM = simSemEstimator.estimate();
+-
+                         DataSet simData = fittedIM.simulateData(data1.getNumRows(), false);
+-                        //after making the full resim data (simData), run FGS on that
++                        // after making the full resim data (simData), run FGS on that
+                         ICovarianceMatrix simcov = new CovarianceMatrix(simData);
+                         SemBicScore simscore = new SemBicScore(simcov);
+                         Fges simfgs = new Fges(simscore);
+@@ -112,72 +109,53 @@ public class HsimEvalFromData {
+                         errorsList.add(simErrors);
+                     }
+                     PRAOerrors avErrors = new PRAOerrors(errorsList, "Average errors for Fsim at repeat=" + fsimRepeat.get(whichFrepeat));
+-                    //if (verbosity>3) System.out.println(avErrors.allToString());
+-                    //****calculate the squared errors of prediction, store all these errors in a list
+-                    double FsimAR2 = (avErrors.getAdjRecall() - oErrors.getAdjRecall())
+-                            * (avErrors.getAdjRecall() - oErrors.getAdjRecall());
+-                    double FsimAP2 = (avErrors.getAdjPrecision() - oErrors.getAdjPrecision())
+-                            * (avErrors.getAdjPrecision() - oErrors.getAdjPrecision());
+-                    double FsimOR2 = (avErrors.getOrientRecall() - oErrors.getOrientRecall())
+-                            * (avErrors.getOrientRecall() - oErrors.getOrientRecall());
+-                    double FsimOP2 = (avErrors.getOrientPrecision() - oErrors.getOrientPrecision())
+-                            * (avErrors.getOrientPrecision() - oErrors.getOrientPrecision());
+-                    PRAOerrors Fsim2 = new PRAOerrors(new double[]{FsimAR2, FsimAP2, FsimOR2, FsimOP2},
+-                            "squared errors for Fsim at repeat=" + fsimRepeat.get(whichFrepeat));
+-                    //add the fsim squared errors to the appropriate list
++                    // if (verbosity>3) System.out.println(avErrors.allToString());
++                    // ****calculate the squared errors of prediction, store all these errors in a list
++                    double FsimAR2 = (avErrors.getAdjRecall() - oErrors.getAdjRecall()) * (avErrors.getAdjRecall() - oErrors.getAdjRecall());
++                    double FsimAP2 = (avErrors.getAdjPrecision() - oErrors.getAdjPrecision()) * (avErrors.getAdjPrecision() - oErrors.getAdjPrecision());
++                    double FsimOR2 = (avErrors.getOrientRecall() - oErrors.getOrientRecall()) * (avErrors.getOrientRecall() - oErrors.getOrientRecall());
++                    double FsimOP2 = (avErrors.getOrientPrecision() - oErrors.getOrientPrecision()) * (avErrors.getOrientPrecision() - oErrors.getOrientPrecision());
++                    PRAOerrors Fsim2 = new PRAOerrors(new double[]{ FsimAR2, FsimAP2, FsimOR2, FsimOP2 }, "squared errors for Fsim at repeat=" + fsimRepeat.get(whichFrepeat));
++                    // add the fsim squared errors to the appropriate list
+                     fsimErrsByPars[whichFrepeat].add(Fsim2);
+                 }
+-                //**then step 2: hybrid sim. iterate through combos of params (repeat num, resimsize)
++                // **then step 2: hybrid sim. iterate through combos of params (repeat num, resimsize)
+                 for (whichHrepeat = 0; whichHrepeat < hsimRepeat.size(); whichHrepeat++) {
+                     HsimRepeatAC study = new HsimRepeatAC(data1);
+-                    PRAOerrors HsimErrors = new PRAOerrors(study.run(1, hsimRepeat.get(whichHrepeat)), "Hsim errors"
+-                            + "at rsize=" + 1 + " repeat=" + hsimRepeat.get(whichHrepeat));
+-                    //****calculate the squared errors of prediction
+-                    double HsimAR2 = (HsimErrors.getAdjRecall() - oErrors.getAdjRecall())
+-                            * (HsimErrors.getAdjRecall() - oErrors.getAdjRecall());
+-                    double HsimAP2 = (HsimErrors.getAdjPrecision() - oErrors.getAdjPrecision())
+-                            * (HsimErrors.getAdjPrecision() - oErrors.getAdjPrecision());
+-                    double HsimOR2 = (HsimErrors.getOrientRecall() - oErrors.getOrientRecall())
+-                            * (HsimErrors.getOrientRecall() - oErrors.getOrientRecall());
+-                    double HsimOP2 = (HsimErrors.getOrientPrecision() - oErrors.getOrientPrecision())
+-                            * (HsimErrors.getOrientPrecision() - oErrors.getOrientPrecision());
+-                    PRAOerrors Hsim2 = new PRAOerrors(new double[]{HsimAR2, HsimAP2, HsimOR2, HsimOP2},
+-                            "squared errors for Hsim, rsize=" + 1 + " repeat=" + hsimRepeat.get(whichHrepeat));
++                    PRAOerrors HsimErrors = new PRAOerrors(study.run(1, hsimRepeat.get(whichHrepeat)), "Hsim errors" + "at rsize=" + 1 + " repeat=" + hsimRepeat.get(whichHrepeat));
++                    // ****calculate the squared errors of prediction
++                    double HsimAR2 = (HsimErrors.getAdjRecall() - oErrors.getAdjRecall()) * (HsimErrors.getAdjRecall() - oErrors.getAdjRecall());
++                    double HsimAP2 = (HsimErrors.getAdjPrecision() - oErrors.getAdjPrecision()) * (HsimErrors.getAdjPrecision() - oErrors.getAdjPrecision());
++                    double HsimOR2 = (HsimErrors.getOrientRecall() - oErrors.getOrientRecall()) * (HsimErrors.getOrientRecall() - oErrors.getOrientRecall());
++                    double HsimOP2 = (HsimErrors.getOrientPrecision() - oErrors.getOrientPrecision()) * (HsimErrors.getOrientPrecision() - oErrors.getOrientPrecision());
++                    PRAOerrors Hsim2 = new PRAOerrors(new double[]{ HsimAR2, HsimAP2, HsimOR2, HsimOP2 }, "squared errors for Hsim, rsize=" + 1 + " repeat=" + hsimRepeat.get(whichHrepeat));
+                     hsimErrsByPars[0][whichHrepeat].add(Hsim2);
+                 }
+             }
+-
+-            //Average the squared errors for each set of fsim/hsim params across all iterations
++            // Average the squared errors for each set of fsim/hsim params across all iterations
+             PRAOerrors[] fMSE = new PRAOerrors[fsimRepeat.size()];
+             PRAOerrors[][] hMSE = new PRAOerrors[1][hsimRepeat.size()];
+             String[][] latexTableArray = new String[1 * hsimRepeat.size() + fsimRepeat.size()][5];
+             for (int j = 0; j < fMSE.length; j++) {
+-                fMSE[j] = new PRAOerrors(fsimErrsByPars[j], "MSE for Fsim at vars=" + vars + " edgeratio=" + edgeratio
+-                        + " cases=" + cases + " frepeat=" + fsimRepeat.get(j) + " iterations=" + iterations);
+-                //if(verbosity>0){System.out.println(fMSE[j].allToString());}
++                fMSE[j] = new PRAOerrors(fsimErrsByPars[j], "MSE for Fsim at vars=" + vars + " edgeratio=" + edgeratio + " cases=" + cases + " frepeat=" + fsimRepeat.get(j) + " iterations=" + iterations);
++                // if(verbosity>0){System.out.println(fMSE[j].allToString());}
+                 output = output + fMSE[j].allToString() + nl;
+                 latexTableArray[j] = prelimToPRAOtable(fMSE[j]);
+             }
+             for (int j = 0; j < hMSE.length; j++) {
+                 for (int k = 0; k < hMSE[j].length; k++) {
+-                    hMSE[j][k] = new PRAOerrors(hsimErrsByPars[j][k], "MSE for Hsim at vars=" + vars + " edgeratio=" + edgeratio
+-                            + " cases=" + cases + " rsize=" + 1 + " repeat=" + hsimRepeat.get(k) + " iterations=" + iterations);
+-                    //if(verbosity>0){System.out.println(hMSE[j][k].allToString());}
++                    hMSE[j][k] = new PRAOerrors(hsimErrsByPars[j][k], "MSE for Hsim at vars=" + vars + " edgeratio=" + edgeratio + " cases=" + cases + " rsize=" + 1 + " repeat=" + hsimRepeat.get(k) + " iterations=" + iterations);
++                    // if(verbosity>0){System.out.println(hMSE[j][k].allToString());}
+                     output = output + hMSE[j][k].allToString() + nl;
+                     latexTableArray[fsimRepeat.size() + j * hMSE[j].length + k] = prelimToPRAOtable(hMSE[j][k]);
+                 }
+             }
+-            //record all the params, the base error values, and the fsim/hsim mean squared errors
++            // record all the params, the base error values, and the fsim/hsim mean squared errors
+             String latexTable = HsimUtils.makeLatexTable(latexTableArray);
+-
+-            PrintWriter writer = new PrintWriter("latexTable.txt", "UTF-8");
+             writer.println(latexTable);
+             writer.close();
+-
+-            PrintWriter writer2 = new PrintWriter("HvsF-SimulationEvaluation.txt", "UTF-8");
+             writer2.println(output);
+             writer2.close();
+-
+             long timestop = System.nanoTime();
+             System.out.println("Evaluation Concluded. Duration: " + (timestop - timestart) / 1000000000 + "s");
+         } catch (Exception IOException) {
+diff --git a/tetrad-lib/src/main/java/edu/cmu/tetrad/util/TetradSerializableUtils.java b/tetrad-lib/src/main/java/edu/cmu/tetrad/util/TetradSerializableUtils.java
+index 7a74b24a7..2688ed3e9 100644
+--- a/tetrad-lib/src/main/java/edu/cmu/tetrad/util/TetradSerializableUtils.java
++++ b/tetrad-lib/src/main/java/edu/cmu/tetrad/util/TetradSerializableUtils.java
+@@ -20,6 +20,21 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.util;
++import java.io.ObjectInputStream;
++import java.io.IOException;
++import java.util.LinkedList;
++import java.io.ObjectOutputStream;
++import java.io.FileOutputStream;
++import java.util.Map;
++import java.io.File;
++import java.util.List;
++import java.io.ObjectStreamClass;
++import java.io.ObjectStreamField;
++import java.util.ArrayList;
++import java.util.TreeMap;
++import java.io.FileInputStream;
++import java.io.InputStream;
++import java.util.Arrays;
+ 
+ import cern.colt.matrix.DoubleMatrix1D;
+ import cern.colt.matrix.DoubleMatrix2D;
+@@ -280,11 +295,8 @@ public class TetradSerializableUtils {
+ 
+             serializeClass(clazz, classFields);
+         }
+-
+-        try {
++        try (ObjectOutputStream objOut = new ObjectOutputStream(out)) {
+             File file = new File(getCurrentDirectory(), "class_fields.ser");
+-            FileOutputStream out = new FileOutputStream(file);
+-            ObjectOutputStream objOut = new ObjectOutputStream(out);
+             objOut.writeObject(classFields);
+             out.close();
+         } catch (IOException e) {
+@@ -409,9 +421,10 @@ public class TetradSerializableUtils {
+                 boolean created = file.createNewFile();
+ 
+                 FileOutputStream out = new FileOutputStream(file);
+-                ObjectOutputStream objOut = new ObjectOutputStream(out);
+-                objOut.writeObject(object);
+-                out.close();
++                try (ObjectOutputStream objOut = new ObjectOutputStream(out)) {
++                    objOut.writeObject(object);
++                    out.close();
++                }
+             }
+ 
+             // Make entry in list of class fields.
+@@ -491,21 +504,14 @@ public class TetradSerializableUtils {
+      *                          originally thrown exception as root cause.
+      */
+     private void deserializeClass(File file) throws RuntimeException {
+-        try {
++        try (ObjectInputStream objIn = new ObjectInputStream(in)) {
+             FileInputStream in = new FileInputStream(file);
+-            ObjectInputStream objIn = new ObjectInputStream(in);
+             Object o = objIn.readObject();
+             in.close();
+         } catch (ClassNotFoundException e) {
+-            throw new RuntimeException("There is no class in the model API " +
+-                    "to deserialize the object in " + file + ". Perhaps the " +
+-                    "class was renamed, moved to another package, or removed. " +
+-                    "In any case, please put it back where it was.", e);
++            throw new RuntimeException("There is no class in the model API " + "to deserialize the object in " + file + ". Perhaps the " + "class was renamed, moved to another package, or removed. " + "In any case, please put it back where it was.", e);
+         } catch (IOException e) {
+-            throw new RuntimeException(
+-                    "There was an I/O error associated with " +
+-                            "the process of deserializing the file " + file +
+-                            ".", e);
++            throw new RuntimeException("There was an I/O error associated with " + "the process of deserializing the file " + file + ".", e);
+         }
+     }
+ 
+@@ -678,11 +684,10 @@ public class TetradSerializableUtils {
+                     if (!zipEntry.getName().endsWith(".ser")) {
+                         continue;
+                     }
+-
+-                    ObjectInputStream objectIn =
+-                            new ObjectInputStream(zipinputstream);
+-                    objectIn.readObject();
+-                    zipinputstream.closeEntry();
++                    try (ObjectInputStream objectIn = new ObjectInputStream(zipinputstream)) {
++                        objectIn.readObject();
++                        zipinputstream.closeEntry();
++                    }
+                 }
+ 
+                 zipinputstream.close();
+diff --git a/tetrad-lib/src/main/java/jgpml/CSVtoMatrix.java b/tetrad-lib/src/main/java/jgpml/CSVtoMatrix.java
+index 26eaddd29..cd66b1a19 100644
+--- a/tetrad-lib/src/main/java/jgpml/CSVtoMatrix.java
++++ b/tetrad-lib/src/main/java/jgpml/CSVtoMatrix.java
+@@ -53,13 +53,11 @@ public class CSVtoMatrix {
+ 
+         ArrayList<double[]> inputsList = new ArrayList<>();
+         ArrayList<double[]> outputsList = new ArrayList<>();
+-        BufferedReader br = null;
+-
+-        try {
+-            br = new BufferedReader(new FileReader(filename));
++        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+         } catch (FileNotFoundException e) {
+             System.out.println("error: file " + filename + " not found.");
+-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
++            e.printStackTrace();// To change body of catch statement use File | Settings | File Templates.
++
+         }
+ 
+         boolean eof;
+diff --git a/tetrad-lib/src/test/java/edu/cmu/tetrad/test/ExploreAutisticsNeurotypicals.java b/tetrad-lib/src/test/java/edu/cmu/tetrad/test/ExploreAutisticsNeurotypicals.java
+index 9ef994f21..c0f5b67f4 100644
+--- a/tetrad-lib/src/test/java/edu/cmu/tetrad/test/ExploreAutisticsNeurotypicals.java
++++ b/tetrad-lib/src/test/java/edu/cmu/tetrad/test/ExploreAutisticsNeurotypicals.java
+@@ -20,6 +20,11 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.test;
++import java.io.IOException;
++import java.io.FileNotFoundException;
++import java.io.FileOutputStream;
++import java.io.File;
++import java.io.PrintStream;
+ 
+ import edu.cmu.tetrad.data.*;
+ import edu.cmu.tetrad.graph.Edge;
+@@ -518,35 +523,25 @@ public final class ExploreAutisticsNeurotypicals {
+     }
+ 
+     public void makeDataSpecial() {
+-        try {
++        try (PrintStream out = new PrintStream(new FileOutputStream(file2))) {
+             String path = "/Users/jdramsey/Documents/LAB_NOTEBOOK.2012.04.20/data/USM_Datasets";
+             File file = new File(path, "concat_usm_dataset_madelyn.txt");
+             DataReader reader = new DataReader();
+             reader.setDelimiter(DelimiterType.TAB);
+             reader.setMaxIntegralDiscrete(0);
+             DataSet data = reader.parseTabular(file);
+-
+             ContinuousVariable avg = new ContinuousVariable("Avg");
+             data.addVariable(avg);
+-
+             for (int i = 0; i < data.getNumRows(); i++) {
+                 double sum = 0.0;
+-
+                 for (int j = 0; j < data.getNumColumns() - 2; j++) {
+                     sum += data.getDouble(i, j);
+                 }
+-
+-                sum = data.getDouble(i, data.getNumColumns() - 2) == 1 ? 10 + RandomUtil.getInstance().nextUniform(-1, 1)
+-                        : -10 + RandomUtil.getInstance().nextUniform(-1, 1);
+-
++                sum = (data.getDouble(i, data.getNumColumns() - 2) == 1) ? 10 + RandomUtil.getInstance().nextUniform(-1, 1) : -10 + RandomUtil.getInstance().nextUniform(-1, 1);
+                 double _avg = sum / data.getNumColumns() - 2;
+-
+                 data.setDouble(i, data.getNumColumns() - 1, _avg);
+             }
+-
+             File file2 = new File(path, "concat_usm_dataset_madelynB.txt");
+-
+-            PrintStream out = new PrintStream(new FileOutputStream(file2));
+             out.println(data);
+             out.close();
+         } catch (Exception e) {
+diff --git a/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestAutisticClassification.java b/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestAutisticClassification.java
+index 061c06d94..7a3886e82 100644
+--- a/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestAutisticClassification.java
++++ b/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestAutisticClassification.java
+@@ -20,6 +20,12 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ package edu.cmu.tetrad.test;
++import java.util.HashMap;
++import java.util.HashSet;
++import java.util.Map;
++import java.util.Set;
++import java.util.List;
++import java.util.ArrayList;
+ 
+ import edu.cmu.tetrad.data.CovarianceMatrix;
+ import edu.cmu.tetrad.data.DataSet;
+@@ -45,7 +51,7 @@ import java.util.*;
+  * @author jdramsey
+  */
+ public class TestAutisticClassification {
+-    enum Type {LEAVE_ONE_OUT, TRAIN_TEST}
++    enum Type {LEAVE_ONE_OUT, TRAIN_TEST;}
+ 
+     // Parameters.
+     private double penaltyDiscount = 2;
+@@ -340,39 +346,30 @@ public class TestAutisticClassification {
+     }
+ 
+     private void printFiles(List<Graph> _graphs, List<Boolean> types, int i, List<List<Edge>> ret) {
+-        try {
+-            List<Edge> sublist = ret.get(4);
+-
+-            File dir2 = new File("/Users/jdramsey/Downloads/alldata");
+-            dir2.mkdirs();
+-            PrintStream out = new PrintStream(new File(dir2, "data" + (i + 1) + ".txt"));
+-
+-            for (int j = 0; j < sublist.size(); j++) {
+-                out.print("X" + (j + 1) + "\t");
+-            }
+-
+-            out.println("T");
+-
+-            for (int k = 0; k < _graphs.size(); k++) {
+-                for (Edge edge : sublist) {
+-                    out.print(_graphs.get(k).containsEdge(edge) ? "1\t" : "0\t");
+-                }
+-
+-                out.println(types.get(k) ? "1" : "0");
+-            }
+-
+-            out.close();
+-
+-            File dir3 = new File("/Users/jdramsey/Downloads/allkeys");
+-            dir3.mkdirs();
+-            PrintStream keyOut = new PrintStream(new File(dir3, "key" + (i + 1) + ".txt"));
+-
+-            for (int j = 0; j < sublist.size(); j++) {
+-                keyOut.println("X" + (j + 1) + ". " + sublist.get(j));
+-            }
+-        } catch (FileNotFoundException e) {
+-            e.printStackTrace();
++    try (PrintStream keyOut = new PrintStream(new File(dir3, "key" + (i + 1) + ".txt"))) {
++      List<Edge> sublist = ret.get(4);
++      File dir2 = new File("/Users/jdramsey/Downloads/alldata");
++      dir2.mkdirs();
++      PrintStream out = new PrintStream(new File(dir2, "data" + (i + 1) + ".txt"));
++      for (int j = 0; j < sublist.size(); j++) {
++        out.print("X" + (j + 1) + "\t");
++      }
++      out.println("T");
++      for (int k = 0; k < _graphs.size(); k++) {
++        for (Edge edge : sublist) {
++          out.print(_graphs.get(k).containsEdge(edge) ? "1\t" : "0\t");
+         }
++        out.println(types.get(k) ? "1" : "0");
++      }
++      out.close();
++      File dir3 = new File("/Users/jdramsey/Downloads/allkeys");
++      dir3.mkdirs();
++      for (int j = 0; j < sublist.size(); j++) {
++        keyOut.println("X" + (j + 1) + ". " + sublist.get(j));
++      }
++    } catch (FileNotFoundException e) {
++      e.printStackTrace();
++    }
+     }
+ 
+     private double[] getTruth(List<Graph> trainingGraphs, List<Boolean> types) {
+diff --git a/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestDM.java b/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestDM.java
+index fed7fb9fa..0d3db21e6 100644
+--- a/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestDM.java
++++ b/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestDM.java
+@@ -478,14 +478,12 @@ public class TestDM {
+                         new int[]{0, 1}, new int[]{2, 3}, true, new int[]{0, 1});
+ 
+         File file = new File("src/edu/cmu/tetradproj/amurrayw/output_test7.txt");
+-        try {
++        try (PrintStream outStream = new PrintStream(out)) {
+             FileOutputStream out = new FileOutputStream(file);
+-            PrintStream outStream = new PrintStream(out);
+             outStream.println(result.getDmStructure().latentStructToEdgeListGraph(result.getDmStructure()));
+             outStream.println();
+         } catch (java.io.FileNotFoundException e) {
+             print("Can't write to file.");
+-
+         }
+ 
+         print("DONE");
+@@ -576,25 +574,21 @@ public class TestDM {
+         print("Finished search, now writing output to file.");
+ 
+         File file = new File("src/edu/cmu/tetradproj/amurrayw/final_output_" + initialDiscount + "_.txt");
+-        try {
++        try (PrintStream outStream = new PrintStream(out)) {
+             FileOutputStream out = new FileOutputStream(file);
+-            PrintStream outStream = new PrintStream(out);
+             outStream.println(result.getDmStructure().latentStructToEdgeListGraph(result.getDmStructure()));
+-            //outStream.println();
++            // outStream.println();
+         } catch (java.io.FileNotFoundException e) {
+             print("Can't write to file.");
+-
+         }
+ 
+         File file2 = new File("src/edu/cmu/tetradproj/amurrayw/unconverted_output" + initialDiscount + "_.txt");
+-        try {
++        try (PrintStream outStream = new PrintStream(out)) {
+             FileOutputStream out = new FileOutputStream(file2);
+-            PrintStream outStream = new PrintStream(out);
+             outStream.println(result.getDmStructure());
+-            //outStream.println();
++            // outStream.println();
+         } catch (java.io.FileNotFoundException e) {
+             print("Can't write to file.");
+-
+         }
+ //            initialDiscount--;
+ //        }
+@@ -881,14 +875,12 @@ public class TestDM {
+                         new int[]{0, 1}, new int[]{2, 3}, false, new int[]{0, 1});
+ 
+         File file = new File("src/edu/cmu/tetradproj/amurrayw/output_test7_fixed.txt");
+-        try {
++        try (PrintStream outStream = new PrintStream(out)) {
+             FileOutputStream out = new FileOutputStream(file);
+-            PrintStream outStream = new PrintStream(out);
+             outStream.println(result.getDmStructure().latentStructToEdgeListGraph(result.getDmStructure()));
+             outStream.println();
+         } catch (java.io.FileNotFoundException e) {
+             print("Can't write to file.");
+-
+         }
+ 
+         System.out.println(result.getDmStructure().latentStructToEdgeListGraph(result.getDmStructure()));
+@@ -943,25 +935,21 @@ public class TestDM {
+         print("Finished search, now writing output to file.");
+ 
+         File file = new File("src/edu/cmu/tetradproj/amurrayw/final_output_" + initialDiscount + "_.txt");
+-        try {
++        try (PrintStream outStream = new PrintStream(out)) {
+             FileOutputStream out = new FileOutputStream(file);
+-            PrintStream outStream = new PrintStream(out);
+             outStream.println(result.getDmStructure().latentStructToEdgeListGraph(result.getDmStructure()));
+-            //outStream.println();
++            // outStream.println();
+         } catch (java.io.FileNotFoundException e) {
+             print("Can't write to file.");
+-
+         }
+ 
+         File file2 = new File("src/edu/cmu/tetradproj/amurrayw/unconverted_output" + initialDiscount + "_.txt");
+-        try {
++        try (PrintStream outStream = new PrintStream(out)) {
+             FileOutputStream out = new FileOutputStream(file2);
+-            PrintStream outStream = new PrintStream(out);
+             outStream.println(result.getDmStructure());
+-            //outStream.println();
++            // outStream.println();
+         } catch (java.io.FileNotFoundException e) {
+             print("Can't write to file.");
+-
+         }
+ //            initialDiscount--;
+ //        }
+@@ -1020,86 +1008,66 @@ public class TestDM {
+ 
+     public void finishRenaming(int penalty) {
+         String currentLine;
+-
+-        try {
++        try (BufferedReader br = new BufferedReader(file)) {
+             FileReader file = new FileReader("src/edu/cmu/tetradproj/amurrayw/final_run/renamed_graph_penalty" + penalty + ".r.txt");
+-            BufferedReader br = new BufferedReader(file);
+-
+             String[] varNames = null;
+-
+             int nVar = 0;
+             int lineNumber = 0;
+-
+             Graph graph = new EdgeListGraph();
+-
+             while ((currentLine = br.readLine()) != null) {
+-
+-                //finds/gets variable names and adds to graph. Note that it assumes no whitespace in variable names.
++                // finds/gets variable names and adds to graph. Note that it assumes no whitespace in variable names.
+                 if (lineNumber == 0) {
+                     varNames = currentLine.split("\\s+");
+-
+                     nVar = varNames.length;
+-
+                     for (String nodeName : varNames) {
+                         graph.addNode(new ContinuousVariable(nodeName));
+-
+                     }
+                 } else {
+-
+-                    //splits line to single
++                    // splits line to single
+                     String[] adjInfoString = currentLine.split("\\s+");
+-
+                     for (int i = 0; i < nVar; i++) {
+-                        ;
+                         if (Integer.parseInt(adjInfoString[i]) > 1) {
+                             print(adjInfoString[i]);
+-                        } else if (Integer.parseInt(adjInfoString[i]) < 0) {
+-                            print(adjInfoString[i]);
+-                        }
++                        } else
++                            if (Integer.parseInt(adjInfoString[i]) < 0) {
++                                print(adjInfoString[i]);
++                            }
+ 
+-//                        System.out.println(adjInfoString[i]);
++                        // System.out.println(adjInfoString[i]);
+                         if (Integer.parseInt(adjInfoString[i]) == 1) {
+-
+-//                            System.out.println("i");
+-//                            System.out.println(i);
+-//
+-//                            System.out.println("varNames[i]");
+-//                            System.out.println(varNames[i]);
+-//
+-//
+-//                            System.out.println("lineNumber");
+-//                            System.out.println(lineNumber);
+-//
+-//                            System.out.println("varNames.length");
+-//                            System.out.println(varNames.length);
+-//
+-//
+-//                            System.out.println("varNames[lineNumber]");
+-//                            System.out.println(varNames[lineNumber]);
++                            // System.out.println("i");
++                            // System.out.println(i);
++                            // 
++                            // System.out.println("varNames[i]");
++                            // System.out.println(varNames[i]);
++                            // 
++                            // 
++                            // System.out.println("lineNumber");
++                            // System.out.println(lineNumber);
++                            // 
++                            // System.out.println("varNames.length");
++                            // System.out.println(varNames.length);
++                            // 
++                            // 
++                            // System.out.println("varNames[lineNumber]");
++                            // System.out.println(varNames[lineNumber]);
+                             graph.addDirectedEdge(graph.getNode(varNames[lineNumber - 1]), graph.getNode(varNames[i]));
+-
+-//                            graph.addDirectedEdge(graph.getNode(varNames[i]), graph.getNode(varNames[lineNumber]));
++                            // graph.addDirectedEdge(graph.getNode(varNames[i]), graph.getNode(varNames[lineNumber]));
+                         }
+-
+                     }
+-
+                 }
+                 lineNumber++;
+-//                System.out.println(currentLine);
+-            }
+-
++                // System.out.println(currentLine);
++            } 
+             File outfile = new File("src/edu/cmu/tetradproj/amurrayw/final_run/renamed_final_output_" + penalty + "_.txt");
+-            try {
++            try (PrintStream outStream = new PrintStream(out)) {
+                 FileOutputStream out = new FileOutputStream(outfile);
+-                PrintStream outStream = new PrintStream(out);
+                 outStream.println(graph);
+-                //outStream.println();
++                // outStream.println();
+             } catch (java.io.FileNotFoundException e) {
+                 String x = "Can't write to file.";
+                 print(x);
+-
+             }
+-
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+diff --git a/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestDataReader.java b/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestDataReader.java
+index 961a30ed3..40e74c022 100644
+--- a/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestDataReader.java
++++ b/tetrad-lib/src/test/java/edu/cmu/tetrad/test/TestDataReader.java
+@@ -92,18 +92,14 @@ public final class TestDataReader {
+     }
+ 
+     private char[] fileToCharArray(File file) {
+-        try {
+-            FileReader reader = new FileReader(file);
++        try (FileReader reader = new FileReader(file)) {
+             CharArrayWriter writer = new CharArrayWriter();
+             int c;
+-
+             while ((c = reader.read()) != -1) {
+                 writer.write(c);
+-            }
+-
++            } 
+             return writer.toCharArray();
+-        }
+-        catch (IOException e) {
++        } catch (IOException e) {
+             throw new RuntimeException(e);
+         }
+     }

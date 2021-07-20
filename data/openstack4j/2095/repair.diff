@@ -1,0 +1,34 @@
+diff --git a/core/src/main/java/org/openstack4j/openstack/image/v2/internal/ImageServiceImpl.java b/core/src/main/java/org/openstack4j/openstack/image/v2/internal/ImageServiceImpl.java
+index 988f372a..19961888 100644
+--- a/core/src/main/java/org/openstack4j/openstack/image/v2/internal/ImageServiceImpl.java
++++ b/core/src/main/java/org/openstack4j/openstack/image/v2/internal/ImageServiceImpl.java
+@@ -1,4 +1,5 @@
+ package org.openstack4j.openstack.image.v2.internal;
++import org.openstack4j.openstack.internal.BaseOpenStackService.Invocation;
+ 
+ import com.fasterxml.jackson.databind.JsonNode;
+ import com.fasterxml.jackson.databind.ObjectMapper;
+@@ -177,19 +178,17 @@ public class ImageServiceImpl extends BaseImageServices implements ImageService
+         HttpResponse response = get(Void.class, uri("/images/%s/file", imageId)).header(HEADER_ACCEPT, CONTENT_TYPE_OCTECT_STREAM).executeWithResponse();
+         if (response.getStatus() < 400) {
+             InputStream inputStream = response.getInputStream();
+-            OutputStream outputStream;
+-            try {
+-                outputStream = new FileOutputStream(filename);
++            try (OutputStream outputStream = new FileOutputStream(filename)) {
+                 byte[] buffer = new byte[1024];
+                 int bytesRead;
+-                while((bytesRead = inputStream.read(buffer)) !=-1){
++                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                     outputStream.write(buffer, 0, bytesRead);
+-                }
++                } 
+                 inputStream.close();
+                 outputStream.flush();
+                 outputStream.close();
+                 return ActionResponse.actionSuccess();
+-            }catch (Exception e) {
++            } catch (Exception e) {
+                 e.printStackTrace();
+                 return ActionResponse.actionFailed("Failed to write to file " + e.getMessage(), 400);
+             }

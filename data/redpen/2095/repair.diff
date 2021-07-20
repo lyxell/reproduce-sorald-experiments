@@ -1,0 +1,20 @@
+diff --git a/redpen-core/src/test/java/cc/redpen/AsciiDocParserTest.java b/redpen-core/src/test/java/cc/redpen/AsciiDocParserTest.java
+index beb15573..60e44280 100644
+--- a/redpen-core/src/test/java/cc/redpen/AsciiDocParserTest.java
++++ b/redpen-core/src/test/java/cc/redpen/AsciiDocParserTest.java
+@@ -599,13 +599,9 @@ class AsciiDocParserTest {
+         DocumentParser parser = DocumentParser.ASCIIDOC;
+ 
+         Document doc = null;
+-        try {
+-            InputStream in = new FileInputStream(this.getClass().getClassLoader().getResource("asciidoc/" + filename).getFile());
++        try (InputStream in = new FileInputStream(this.getClass().getClassLoader().getResource("asciidoc/" + filename).getFile())) {
+             Configuration configuration = Configuration.builder().setLanguage(lang).build();
+-            doc = parser.parse(
+-                in,
+-                new SentenceExtractor(configuration.getSymbolTable()),
+-                configuration.getTokenizer());
++            doc = parser.parse(in, new SentenceExtractor(configuration.getSymbolTable()), configuration.getTokenizer());
+         } catch (Exception e) {
+             e.printStackTrace();
+             fail("exception is not expected.");

@@ -1,0 +1,152 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Tetrad Project                                                     [pom]
+[INFO] data-reader                                                        [jar]
+[INFO] tetrad-lib                                                         [jar]
+[INFO] tetrad-gui                                                         [jar]
+[INFO] 
+[INFO] ---------------------------< edu.cmu:tetrad >---------------------------
+[INFO] Building Tetrad Project 6.9.0-SNAPSHOT                             [1/4]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] ---------------------< edu.pitt.dbmi:data-reader >----------------------
+[INFO] Building data-reader 6.9.0-SNAPSHOT                                [2/4]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ data-reader ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/tetrad/data-reader/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ data-reader ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] -------------------------< edu.cmu:tetrad-lib >-------------------------
+[INFO] Building tetrad-lib 6.9.0-SNAPSHOT                                 [3/4]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ tetrad-lib ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ tetrad-lib ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1014 source files to /home/user/projects/tetrad/tetrad-lib/target/classes
+[INFO] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadContinuousDataAndGraphs.java: Some input files use or override a deprecated API.
+[INFO] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadContinuousDataAndGraphs.java: Recompile with -Xlint:deprecation for details.
+[INFO] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/graph/OrderedPair.java: Some input files use unchecked or unsafe operations.
+[INFO] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/graph/OrderedPair.java: Recompile with -Xlint:unchecked for details.
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimEvalFromData.java:[155,13] cannot find symbol
+  symbol:   variable writer
+  location: class edu.cmu.tetrad.simulation.HsimEvalFromData
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimEvalFromData.java:[156,13] cannot find symbol
+  symbol:   variable writer
+  location: class edu.cmu.tetrad.simulation.HsimEvalFromData
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadContinuousDataAndGraphs.java:[42,71] cannot find symbol
+  symbol:   variable paramFile
+  location: class edu.cmu.tetrad.data.simulation.LoadContinuousDataAndGraphs
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadContinuousDataAndGraphs.java:[95,67] cannot find symbol
+  symbol:   variable file
+  location: class edu.cmu.tetrad.data.simulation.LoadContinuousDataAndGraphs
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/performance/PerformanceTests.java:[151,70] cannot find symbol
+  symbol:   variable _graph
+  location: class edu.cmu.tetrad.performance.PerformanceTests
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/performance/PerformanceTests.java:[169,13] cannot find symbol
+  symbol:   variable out1
+  location: class edu.cmu.tetrad.performance.PerformanceTests
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/performance/PerformanceTests.java:[170,13] cannot find symbol
+  symbol:   variable out1
+  location: class edu.cmu.tetrad.performance.PerformanceTests
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/util/TetradSerializableUtils.java:[298,65] cannot find symbol
+  symbol:   variable out
+  location: class edu.cmu.tetrad.util.TetradSerializableUtils
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/util/TetradSerializableUtils.java:[301,13] cannot find symbol
+  symbol:   variable out
+  location: class edu.cmu.tetrad.util.TetradSerializableUtils
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/util/TetradSerializableUtils.java:[507,62] cannot find symbol
+  symbol:   variable in
+  location: class edu.cmu.tetrad.util.TetradSerializableUtils
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/util/HandleyConvert.java:[109,68] cannot find symbol
+  symbol:   variable inFile
+  location: class edu.cmu.tetrad.gene.tetrad.gene.util.HandleyConvert
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadDataAndGraphs.java:[50,71] cannot find symbol
+  symbol:   variable file
+  location: class edu.cmu.tetrad.data.simulation.LoadDataAndGraphs
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/search/DMSearch.java:[655,54] cannot find symbol
+  symbol:   variable out
+  location: class edu.cmu.tetrad.search.DMSearch
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/jgpml/CSVtoMatrix.java:[72,28] cannot find symbol
+  symbol:   variable br
+  location: class jgpml.CSVtoMatrix
+[INFO] 14 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Tetrad Project 6.9.0-SNAPSHOT:
+[INFO] 
+[INFO] Tetrad Project ..................................... SUCCESS [  0.007 s]
+[INFO] data-reader ........................................ SUCCESS [  1.445 s]
+[INFO] tetrad-lib ......................................... FAILURE [ 18.941 s]
+[INFO] tetrad-gui ......................................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.861 s
+[INFO] Finished at: 2021-07-20T13:27:08Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project tetrad-lib: Compilation failure: Compilation failure: 
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimEvalFromData.java:[155,13] cannot find symbol
+[ERROR]   symbol:   variable writer
+[ERROR]   location: class edu.cmu.tetrad.simulation.HsimEvalFromData
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/simulation/HsimEvalFromData.java:[156,13] cannot find symbol
+[ERROR]   symbol:   variable writer
+[ERROR]   location: class edu.cmu.tetrad.simulation.HsimEvalFromData
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadContinuousDataAndGraphs.java:[42,71] cannot find symbol
+[ERROR]   symbol:   variable paramFile
+[ERROR]   location: class edu.cmu.tetrad.data.simulation.LoadContinuousDataAndGraphs
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadContinuousDataAndGraphs.java:[95,67] cannot find symbol
+[ERROR]   symbol:   variable file
+[ERROR]   location: class edu.cmu.tetrad.data.simulation.LoadContinuousDataAndGraphs
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/performance/PerformanceTests.java:[151,70] cannot find symbol
+[ERROR]   symbol:   variable _graph
+[ERROR]   location: class edu.cmu.tetrad.performance.PerformanceTests
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/performance/PerformanceTests.java:[169,13] cannot find symbol
+[ERROR]   symbol:   variable out1
+[ERROR]   location: class edu.cmu.tetrad.performance.PerformanceTests
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/performance/PerformanceTests.java:[170,13] cannot find symbol
+[ERROR]   symbol:   variable out1
+[ERROR]   location: class edu.cmu.tetrad.performance.PerformanceTests
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/util/TetradSerializableUtils.java:[298,65] cannot find symbol
+[ERROR]   symbol:   variable out
+[ERROR]   location: class edu.cmu.tetrad.util.TetradSerializableUtils
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/util/TetradSerializableUtils.java:[301,13] cannot find symbol
+[ERROR]   symbol:   variable out
+[ERROR]   location: class edu.cmu.tetrad.util.TetradSerializableUtils
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/util/TetradSerializableUtils.java:[507,62] cannot find symbol
+[ERROR]   symbol:   variable in
+[ERROR]   location: class edu.cmu.tetrad.util.TetradSerializableUtils
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/gene/tetrad/gene/util/HandleyConvert.java:[109,68] cannot find symbol
+[ERROR]   symbol:   variable inFile
+[ERROR]   location: class edu.cmu.tetrad.gene.tetrad.gene.util.HandleyConvert
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/data/simulation/LoadDataAndGraphs.java:[50,71] cannot find symbol
+[ERROR]   symbol:   variable file
+[ERROR]   location: class edu.cmu.tetrad.data.simulation.LoadDataAndGraphs
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/edu/cmu/tetrad/search/DMSearch.java:[655,54] cannot find symbol
+[ERROR]   symbol:   variable out
+[ERROR]   location: class edu.cmu.tetrad.search.DMSearch
+[ERROR] /home/user/projects/tetrad/tetrad-lib/src/main/java/jgpml/CSVtoMatrix.java:[72,28] cannot find symbol
+[ERROR]   symbol:   variable br
+[ERROR]   location: class jgpml.CSVtoMatrix
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :tetrad-lib

@@ -1,0 +1,33 @@
+diff --git a/src/main/java/ru/org/linux/util/FileUtils.java b/src/main/java/ru/org/linux/util/FileUtils.java
+index ab280cbba..9647033ee 100644
+--- a/src/main/java/ru/org/linux/util/FileUtils.java
++++ b/src/main/java/ru/org/linux/util/FileUtils.java
+@@ -26,18 +26,16 @@ public final class FileUtils {
+ 
+   public static String readfile(String filename) throws IOException {
+     StringBuilder out = new StringBuilder();
+-    BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "KOI8-R"));
+-
+-    char[] buf = new char[8192];
+-
+-    int i;
+-    while ((i = in.read(buf, 0, buf.length)) > -1) {
+-      if (i > 0) {
+-        out.append(buf, 0, i);
+-      }
++    try (BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(filename), "KOI8-R"))) {
++      char[] buf = new char[8192];
++      int i;
++      while ((i = in.read(buf, 0, buf.length)) > -1) {
++        if (i > 0) {
++          out.append(buf, 0, i);
++        }
++      } 
++      in.close();
++      return out.toString();
+     }
+-
+-    in.close();
+-    return out.toString();
+   }
+ }

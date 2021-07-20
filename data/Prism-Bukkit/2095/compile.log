@@ -1,0 +1,110 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< me.botsko:prism >---------------------------
+[INFO] Building Prism 2.1.8-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from jitpack.io: https://jitpack.io/org/kitteh/paste-gg-api/1.0.0-SNAPSHOT/maven-metadata.xml
+[WARNING] Could not transfer metadata org.kitteh:paste-gg-api:1.0.0-SNAPSHOT/maven-metadata.xml from/to jitpack.io (https://jitpack.io): Authentication failed for https://jitpack.io/org/kitteh/paste-gg-api/1.0.0-SNAPSHOT/maven-metadata.xml 401 Unauthorized
+[WARNING] Failure to transfer org.kitteh:paste-gg-api:1.0.0-SNAPSHOT/maven-metadata.xml from https://jitpack.io was cached in the local repository, resolution will not be reattempted until the update interval of jitpack.io has elapsed or updates are forced. Original error: Could not transfer metadata org.kitteh:paste-gg-api:1.0.0-SNAPSHOT/maven-metadata.xml from/to jitpack.io (https://jitpack.io): Authentication failed for https://jitpack.io/org/kitteh/paste-gg-api/1.0.0-SNAPSHOT/maven-metadata.xml 401 Unauthorized
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/net/md-5/bungeecord-chat/1.16-R0.3/bungeecord-chat-1.16-R0.3.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/net/kyori/adventure-text-serializer-legacy/4.8.1/adventure-text-serializer-legacy-4.8.1.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/net/kyori/examination-string/1.0.0/examination-string-1.0.0.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/net/kyori/examination-api/1.0.0/examination-api-1.0.0.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/net/kyori/adventure-api/4.1.1/adventure-api-4.1.1.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/net/kyori/adventure-nbt/4.8.1/adventure-nbt-4.8.1.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/net/kyori/adventure-text-serializer-gson/4.8.1/adventure-text-serializer-gson-4.8.1.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/net/kyori/adventure-text-serializer-plain/4.0.0/adventure-text-serializer-plain-4.0.0.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/io/dropwizard/metrics/metrics-core/4.1.2/metrics-core-4.1.2.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/io/dropwizard/metrics/metrics-healthchecks/4.1.2/metrics-healthchecks-4.1.2.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/org/mozilla/rhino/1.7.11/rhino-1.7.11.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/it/unimi/dsi/fastutil/8.2.1/fastutil-8.2.1.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/org/antlr/antlr4-runtime/4.7.2/antlr4-runtime-4.7.2.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/org/apache/logging/log4j/log4j-slf4j-impl/2.8.1/log4j-slf4j-impl-2.8.1.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/org/apache/logging/log4j/log4j-api/2.8.1/log4j-api-2.8.1.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/org/jetbrains/annotations/19.0.0/annotations-19.0.0.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/com/zaxxer/HikariCP/3.4.3/HikariCP-3.4.3.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/com/destroystokyo/paper/paper-api/1.16.2-R0.1-SNAPSHOT/paper-api-1.16.2-R0.1-20200910.231437-24.jar
+[INFO] Downloading from sk89q-repo: https://maven.sk89q.com/repo/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar
+[INFO] Downloaded from sk89q-repo: https://maven.sk89q.com/repo/com/destroystokyo/paper/paper-api/1.16.2-R0.1-SNAPSHOT/paper-api-1.16.2-R0.1-20200910.231437-24.jar (1.4 MB at 324 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/net/md-5/bungeecord-chat/1.16-R0.3/bungeecord-chat-1.16-R0.3.jar
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/adventure-api/4.1.1/adventure-api-4.1.1.jar
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/examination-api/1.0.0/examination-api-1.0.0.jar
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/examination-string/1.0.0/examination-string-1.0.0.jar
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/adventure-text-serializer-legacy/4.8.1/adventure-text-serializer-legacy-4.8.1.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/net/md-5/bungeecord-chat/1.16-R0.3/bungeecord-chat-1.16-R0.3.jar (149 kB at 447 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/adventure-nbt/4.8.1/adventure-nbt-4.8.1.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/examination-api/1.0.0/examination-api-1.0.0.jar (22 kB at 55 kB/s)
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/adventure-text-serializer-legacy/4.8.1/adventure-text-serializer-legacy-4.8.1.jar (24 kB at 63 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/adventure-text-serializer-plain/4.0.0/adventure-text-serializer-plain-4.0.0.jar
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/adventure-text-serializer-gson/4.8.1/adventure-text-serializer-gson-4.8.1.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/adventure-text-serializer-gson/4.8.1/adventure-text-serializer-gson-4.8.1.jar (33 kB at 68 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/io/dropwizard/metrics/metrics-core/4.1.2/metrics-core-4.1.2.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/adventure-nbt/4.8.1/adventure-nbt-4.8.1.jar (93 kB at 190 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/io/dropwizard/metrics/metrics-healthchecks/4.1.2/metrics-healthchecks-4.1.2.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/examination-string/1.0.0/examination-string-1.0.0.jar (5.9 kB at 10 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/org/mozilla/rhino/1.7.11/rhino-1.7.11.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/adventure-api/4.1.1/adventure-api-4.1.1.jar (213 kB at 343 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/it/unimi/dsi/fastutil/8.2.1/fastutil-8.2.1.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/io/dropwizard/metrics/metrics-healthchecks/4.1.2/metrics-healthchecks-4.1.2.jar (23 kB at 30 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/org/antlr/antlr4-runtime/4.7.2/antlr4-runtime-4.7.2.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/io/dropwizard/metrics/metrics-core/4.1.2/metrics-core-4.1.2.jar (105 kB at 135 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/org/apache/logging/log4j/log4j-slf4j-impl/2.8.1/log4j-slf4j-impl-2.8.1.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/org/antlr/antlr4-runtime/4.7.2/antlr4-runtime-4.7.2.jar (0 B at 0 B/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/org/apache/logging/log4j/log4j-api/2.8.1/log4j-api-2.8.1.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/net/kyori/adventure-text-serializer-plain/4.0.0/adventure-text-serializer-plain-4.0.0.jar (3.0 kB at 3.1 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/org/apache/logging/log4j/log4j-slf4j-impl/2.8.1/log4j-slf4j-impl-2.8.1.jar (23 kB at 24 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/org/jetbrains/annotations/19.0.0/annotations-19.0.0.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/org/mozilla/rhino/1.7.11/rhino-1.7.11.jar (1.3 MB at 1.3 MB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/com/zaxxer/HikariCP/3.4.3/HikariCP-3.4.3.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/org/apache/logging/log4j/log4j-api/2.8.1/log4j-api-2.8.1.jar (229 kB at 194 kB/s)
+[INFO] Downloading from paper-repo: https://papermc.io/repo/repository/maven-public/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/org/jetbrains/annotations/19.0.0/annotations-19.0.0.jar (25 kB at 21 kB/s)
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar (232 kB at 172 kB/s)
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/com/zaxxer/HikariCP/3.4.3/HikariCP-3.4.3.jar (155 kB at 107 kB/s)
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar (24 kB at 16 kB/s)
+[INFO] Downloaded from paper-repo: https://papermc.io/repo/repository/maven-public/it/unimi/dsi/fastutil/8.2.1/fastutil-8.2.1.jar (19 MB at 5.2 MB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ prism ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources to .
+[INFO] Copying 6 resources
+[INFO] Copying 5 resources to ../testServer/
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ prism ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 193 source files to /home/user/projects/Prism-Bukkit/target/classes
+[INFO] /home/user/projects/Prism-Bukkit/src/main/java/me/botsko/prism/bridge/PrismWorldEditLogger.java: /home/user/projects/Prism-Bukkit/src/main/java/me/botsko/prism/bridge/PrismWorldEditLogger.java uses unchecked or unsafe operations.
+[INFO] /home/user/projects/Prism-Bukkit/src/main/java/me/botsko/prism/bridge/PrismWorldEditLogger.java: Recompile with -Xlint:unchecked for details.
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] bootstrap class path not set in conjunction with -source 8
+[INFO] 1 warning
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/Prism-Bukkit/src/main/java/me/botsko/prism/database/mysql/MySqlPrismDataSource.java:[2,1] cannot find symbol
+  symbol:   static database
+  location: class me.botsko.prism.database.sql.SqlPrismDataSource
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  28.751 s
+[INFO] Finished at: 2021-07-20T19:43:02Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile (default-compile) on project prism: Compilation failure
+[ERROR] /home/user/projects/Prism-Bukkit/src/main/java/me/botsko/prism/database/mysql/MySqlPrismDataSource.java:[2,1] cannot find symbol
+[ERROR]   symbol:   static database
+[ERROR]   location: class me.botsko.prism.database.sql.SqlPrismDataSource
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

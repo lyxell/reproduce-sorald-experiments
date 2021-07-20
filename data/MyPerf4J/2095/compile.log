@@ -1,0 +1,91 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] MyPerf4J                                                           [pom]
+[INFO] MyPerf4J-Base                                                      [jar]
+[INFO] MyPerf4J-Core                                                      [jar]
+[INFO] MyPerf4J-ASM                                                       [jar]
+[INFO] MyPerf4J-Benchmark                                                 [jar]
+[INFO] 
+[INFO] -------------------------< MyPerf4J:MyPerf4J >--------------------------
+[INFO] Building MyPerf4J 3.1.0-SNAPSHOT                                   [1/5]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.1.0:check (check-style) @ MyPerf4J ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] -----------------------< MyPerf4J:MyPerf4J-Base >-----------------------
+[INFO] Building MyPerf4J-Base 3.1.0-SNAPSHOT                              [2/5]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.1.0:check (check-style) @ MyPerf4J-Base ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ MyPerf4J-Base ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/MyPerf4J/MyPerf4J-Base/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ MyPerf4J-Base ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] -----------------------< MyPerf4J:MyPerf4J-Core >-----------------------
+[INFO] Building MyPerf4J-Core 3.1.0-SNAPSHOT                              [3/5]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.1.0:check (check-style) @ MyPerf4J-Core ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ MyPerf4J-Core ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/MyPerf4J/MyPerf4J-Core/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ MyPerf4J-Core ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] -----------------------< MyPerf4J:MyPerf4J-ASM >------------------------
+[INFO] Building MyPerf4J-ASM 3.1.0-SNAPSHOT                               [4/5]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.1.0:check (check-style) @ MyPerf4J-ASM ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ MyPerf4J-ASM ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/MyPerf4J/MyPerf4J-ASM/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ MyPerf4J-ASM ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --------------------< MyPerf4J:MyPerf4J-Benchmark >---------------------
+[INFO] Building MyPerf4J-Benchmark 3.1.0-SNAPSHOT                         [5/5]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-checkstyle-plugin:3.1.0:check (check-style) @ MyPerf4J-Benchmark ---
+[INFO] Starting audit...
+Audit done.
+[INFO] 
+[INFO] --- maven-resources-plugin:3.0.2:resources (default-resources) @ MyPerf4J-Benchmark ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/MyPerf4J/MyPerf4J-Benchmark/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ MyPerf4J-Benchmark ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for MyPerf4J 3.1.0-SNAPSHOT:
+[INFO] 
+[INFO] MyPerf4J ........................................... SUCCESS [  1.789 s]
+[INFO] MyPerf4J-Base ...................................... SUCCESS [  0.734 s]
+[INFO] MyPerf4J-Core ...................................... SUCCESS [  0.137 s]
+[INFO] MyPerf4J-ASM ....................................... SUCCESS [  0.136 s]
+[INFO] MyPerf4J-Benchmark ................................. SUCCESS [  0.264 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.240 s
+[INFO] Finished at: 2021-07-20T18:34:35Z
+[INFO] ------------------------------------------------------------------------

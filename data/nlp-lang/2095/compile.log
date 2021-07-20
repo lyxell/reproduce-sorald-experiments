@@ -1,0 +1,54 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.nlpcn:nlp-lang:jar:1.7.8
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-source-plugin is missing. @ line 103, column 12
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] -------------------------< org.nlpcn:nlp-lang >-------------------------
+[INFO] Building nlp-lang 1.7.8
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-api/2.5/log4j-api-2.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-api/2.5/log4j-api-2.5.pom (8.1 kB at 11 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j/2.5/log4j-2.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j/2.5/log4j-2.5.pom (50 kB at 464 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-api/2.5/log4j-api-2.5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-api/2.5/log4j-api-2.5.jar (147 kB at 1.3 MB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ nlp-lang ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 10 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.3:compile (default-compile) @ nlp-lang ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 100 source files to /home/user/projects/nlp-lang/target/classes
+[INFO] /home/user/projects/nlp-lang/src/main/java/org/nlpcn/commons/lang/dat/DoubleArrayTire.java: Some input files use or override a deprecated API.
+[INFO] /home/user/projects/nlp-lang/src/main/java/org/nlpcn/commons/lang/dat/DoubleArrayTire.java: Recompile with -Xlint:deprecation for details.
+[INFO] /home/user/projects/nlp-lang/src/main/java/org/nlpcn/commons/lang/index/MemoryIndex.java: Some input files use unchecked or unsafe operations.
+[INFO] /home/user/projects/nlp-lang/src/main/java/org/nlpcn/commons/lang/index/MemoryIndex.java: Recompile with -Xlint:unchecked for details.
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/nlp-lang/src/main/java/org/nlpcn/commons/lang/util/IOUtil.java:[60,29] unreported exception java.io.IOException; must be caught or declared to be thrown
+  exception thrown from implicit call to close() on resource variable 'is'
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  11.079 s
+[INFO] Finished at: 2021-07-20T19:59:45Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.3:compile (default-compile) on project nlp-lang: Compilation failure
+[ERROR] /home/user/projects/nlp-lang/src/main/java/org/nlpcn/commons/lang/util/IOUtil.java:[60,29] unreported exception java.io.IOException; must be caught or declared to be thrown
+[ERROR]   exception thrown from implicit call to close() on resource variable 'is'
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

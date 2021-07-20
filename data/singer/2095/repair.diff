@@ -1,0 +1,135 @@
+diff --git a/singer/src/main/java/com/pinterest/singer/config/DirectorySingerConfigurator.java b/singer/src/main/java/com/pinterest/singer/config/DirectorySingerConfigurator.java
+index 2e569ed..5b78d07 100644
+--- a/singer/src/main/java/com/pinterest/singer/config/DirectorySingerConfigurator.java
++++ b/singer/src/main/java/com/pinterest/singer/config/DirectorySingerConfigurator.java
+@@ -130,20 +130,17 @@ public class DirectorySingerConfigurator implements SingerConfigurator {
+     AmazonS3Client s3Client = new AmazonS3Client();
+     S3Object configObj = s3Client.getObject(DATAPIPELINES_CONFIG_S3_BUCKET,
+         DATAPIPELINES_CONFIG_S3_KEY);
+-
+-    // write object to String
+-    BufferedReader reader = new BufferedReader(new InputStreamReader(configObj.getObjectContent()));
+-    String line;
+-    try {
+-      while ((line = reader.readLine()) != null) {
+-        config.append(String.format("%s\n", line));
++    try (// write object to String
++    BufferedReader reader = new BufferedReader(new InputStreamReader(configObj.getObjectContent()))) {
++      String line;
++      try {
++        while ((line = reader.readLine()) != null) {
++          config.append(String.format("%s\n", line));
++        } 
++      } catch (IOException e) {
++        LOG.error("Failed to read config ({}) S3Object to String, exception: {}.", String.format("%s/%s", DATAPIPELINES_CONFIG_S3_BUCKET, DATAPIPELINES_CONFIG_S3_KEY), ExceptionUtils.getFullStackTrace(e));
+       }
+-    } catch (IOException e) {
+-      LOG.error("Failed to read config ({}) S3Object to String, exception: {}.",
+-          String.format("%s/%s", DATAPIPELINES_CONFIG_S3_BUCKET, DATAPIPELINES_CONFIG_S3_KEY),
+-          ExceptionUtils.getFullStackTrace(e));
++      return config.toString();
+     }
+-
+-    return config.toString();
+   }
+ }
+diff --git a/singer/src/main/java/com/pinterest/singer/reader/mapped/MappedFileTBinaryProtocol.java b/singer/src/main/java/com/pinterest/singer/reader/mapped/MappedFileTBinaryProtocol.java
+index 945279c..134ca43 100644
+--- a/singer/src/main/java/com/pinterest/singer/reader/mapped/MappedFileTBinaryProtocol.java
++++ b/singer/src/main/java/com/pinterest/singer/reader/mapped/MappedFileTBinaryProtocol.java
+@@ -121,10 +121,11 @@ public class MappedFileTBinaryProtocol extends TProtocol {
+    * @throws IOException
+    */
+   protected ByteBuffer mapFile(File file) throws FileNotFoundException, IOException {
+-    RandomAccessFile raf = new RandomAccessFile(file, "r");
+-    MappedByteBuffer map = raf.getChannel().map(MapMode.READ_ONLY, 0, file.length());
+-    raf.close();
+-    return map;
++    try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
++      MappedByteBuffer map = raf.getChannel().map(MapMode.READ_ONLY, 0, file.length());
++      raf.close();
++      return map;
++    }
+   }
+ 
+   /**
+diff --git a/singer/src/main/java/com/pinterest/singer/tools/ThriftLogDumper.java b/singer/src/main/java/com/pinterest/singer/tools/ThriftLogDumper.java
+index edb8baa..22fef7d 100644
+--- a/singer/src/main/java/com/pinterest/singer/tools/ThriftLogDumper.java
++++ b/singer/src/main/java/com/pinterest/singer/tools/ThriftLogDumper.java
+@@ -176,10 +176,9 @@ public class ThriftLogDumper {
+       default:
+         dumper = new TextDumper();
+     }
+-    PrintStream outputPrintStream = System.out;
+ 
+     if (output != null && !output.isEmpty()) {
+-      outputPrintStream = new PrintStream(output);
++        try (PrintStream outputPrintStream = new PrintStream(output)) 
+     }
+ 
+     try (ThriftReader<LogMessage> thriftReader = new ThriftReader<LogMessage>(input,
+@@ -206,7 +205,7 @@ public class ThriftLogDumper {
+ 
+   private enum DumperType {
+     TEXT,
+-    JSON,
++    JSON;
+   }
+ 
+   // Factory that create LogMessage thrift objects.
+diff --git a/singer/src/main/java/com/pinterest/singer/utils/WatermarkUtils.java b/singer/src/main/java/com/pinterest/singer/utils/WatermarkUtils.java
+index 0bcf5c6..c00a533 100644
+--- a/singer/src/main/java/com/pinterest/singer/utils/WatermarkUtils.java
++++ b/singer/src/main/java/com/pinterest/singer/utils/WatermarkUtils.java
+@@ -107,26 +107,11 @@ public final class WatermarkUtils {
+   @SuppressWarnings("resource")
+   static void debugCorruptedFile(String srcFileName) {
+     String dstFileName = srcFileName + ".debug";
+-    FileChannel dstChannel = null;
+-    FileChannel srcChannel = null;
+-    try {
+-      srcChannel = new FileInputStream(srcFileName).getChannel();
+-      dstChannel = new FileOutputStream(dstFileName).getChannel();
++    try (FileChannel dstChannel = new FileOutputStream(dstFileName).getChannel()) {
+       dstChannel.transferFrom(srcChannel, 0, srcChannel.size());
+       LOG.info("Debug watermark error: suspicious file copied to " + dstFileName);
+     } catch (Exception e) {
+       LOG.error("Debug watermark error: cannot copy the src file " + srcFileName, e);
+-    } finally {
+-      try {
+-        if (srcChannel != null) {
+-          srcChannel.close();
+-        }
+-        if (dstChannel != null) {
+-          dstChannel.close();
+-        }
+-      } catch (IOException ex) {
+-        LOG.error("Debug watermark error: Error when close the debug file channels", ex);
+-      }
+     }
+   }
+ }
+diff --git a/singer/src/test/java/com/pinterest/singer/SingerTestBase.java b/singer/src/test/java/com/pinterest/singer/SingerTestBase.java
+index ddec2d6..18b1b90 100644
+--- a/singer/src/test/java/com/pinterest/singer/SingerTestBase.java
++++ b/singer/src/test/java/com/pinterest/singer/SingerTestBase.java
+@@ -220,12 +220,13 @@ public class SingerTestBase extends TestCase {
+   protected File createPropertyFile(String fullPath, Map<String, String> keyValues) throws
+                                                                                     IOException {
+     File properties = new File(fullPath);
+-    BufferedWriter out = new BufferedWriter(new FileWriter(properties));
+-    for (String key : keyValues.keySet()) {
+-      out.write(String.format("%s = %s\n", key, keyValues.get(key)));
++    try (BufferedWriter out = new BufferedWriter(new FileWriter(properties))) {
++      for (String key : keyValues.keySet()) {
++        out.write(String.format("%s = %s\n", key, keyValues.get(key)));
++      }
++      out.close();
++      return properties;
+     }
+-    out.close();
+-    return properties;
+   }
+ 
+   protected Map<String, String> makeCommonLogConfigProperties() {

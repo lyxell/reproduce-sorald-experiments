@@ -1,0 +1,106 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] jolokia-parent                                                     [pom]
+[INFO] jolokia-test-util                                                  [jar]
+[INFO] jolokia-agent-parent                                               [pom]
+[INFO] jolokia-core                                                       [jar]
+[INFO] jolokia-jsr160                                                     [jar]
+[INFO] jolokia-war                                                        [war]
+[INFO] jolokia-war-unsecured                                              [war]
+[INFO] jolokia-osgi                                                    [bundle]
+[INFO] jolokia-osgi-bundle                                             [bundle]
+[INFO] jolokia-jmx                                                     [bundle]
+[INFO] jolokia-jvm                                                        [jar]
+[INFO] jolokia-spring                                                     [jar]
+[INFO] jolokia-mule                                                       [jar]
+[INFO] jolokia-it-parent                                                  [pom]
+[INFO] jolokia-it-core                                                 [bundle]
+[INFO] jolokia-it-war                                                     [war]
+[INFO] jolokia-client-parent                                              [pom]
+[INFO] jolokia-client-java                                             [bundle]
+[INFO] jolokia-client-javascript                                   [javascript]
+[INFO] jolokia-jmx-adapter                                             [bundle]
+[INFO] jolokia-kubernetes                                              [bundle]
+[INFO] 
+[INFO] ------------------------< org.jolokia:jolokia >-------------------------
+[INFO] Building jolokia-parent 1.6.3-SNAPSHOT                            [1/21]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] -------------------< org.jolokia:jolokia-test-util >--------------------
+[INFO] Building jolokia-test-util 1.6.3-SNAPSHOT                         [2/21]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.7:resources (default-resources) @ jolokia-test-util ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/jolokia/tools/test-util/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.2:compile (default-compile) @ jolokia-test-util ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] ------------------< org.jolokia:jolokia-agent-parent >------------------
+[INFO] Building jolokia-agent-parent 1.6.3-SNAPSHOT                      [3/21]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] ----------------------< org.jolokia:jolokia-core >----------------------
+[INFO] Building jolokia-core 1.6.3-SNAPSHOT                              [4/21]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.7:resources (default-resources) @ jolokia-core ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.2:compile (default-compile) @ jolokia-core ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 139 source files to /home/user/projects/jolokia/agent/core/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/jolokia/agent/core/src/main/java/org/jolokia/discovery/MulticastUtil.java:[50,13] try-with-resources is not supported in -source 6
+  (use -source 7 or higher to enable try-with-resources)
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for jolokia-parent 1.6.3-SNAPSHOT:
+[INFO] 
+[INFO] jolokia-parent ..................................... SUCCESS [  0.005 s]
+[INFO] jolokia-test-util .................................. SUCCESS [  0.494 s]
+[INFO] jolokia-agent-parent ............................... SUCCESS [  0.001 s]
+[INFO] jolokia-core ....................................... FAILURE [  0.830 s]
+[INFO] jolokia-jsr160 ..................................... SKIPPED
+[INFO] jolokia-war ........................................ SKIPPED
+[INFO] jolokia-war-unsecured .............................. SKIPPED
+[INFO] jolokia-osgi ....................................... SKIPPED
+[INFO] jolokia-osgi-bundle ................................ SKIPPED
+[INFO] jolokia-jmx ........................................ SKIPPED
+[INFO] jolokia-jvm ........................................ SKIPPED
+[INFO] jolokia-spring ..................................... SKIPPED
+[INFO] jolokia-mule ....................................... SKIPPED
+[INFO] jolokia-it-parent .................................. SKIPPED
+[INFO] jolokia-it-core .................................... SKIPPED
+[INFO] jolokia-it-war ..................................... SKIPPED
+[INFO] jolokia-client-parent .............................. SKIPPED
+[INFO] jolokia-client-java ................................ SKIPPED
+[INFO] jolokia-client-javascript .......................... SKIPPED
+[INFO] jolokia-jmx-adapter ................................ SKIPPED
+[INFO] jolokia-kubernetes ................................. SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.650 s
+[INFO] Finished at: 2021-07-20T13:58:42Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.2:compile (default-compile) on project jolokia-core: Compilation failure
+[ERROR] /home/user/projects/jolokia/agent/core/src/main/java/org/jolokia/discovery/MulticastUtil.java:[50,13] try-with-resources is not supported in -source 6
+[ERROR]   (use -source 7 or higher to enable try-with-resources)
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :jolokia-core

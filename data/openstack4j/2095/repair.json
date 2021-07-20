@@ -1,0 +1,40 @@
+{
+    "repairs": [{
+        "nbPerformedRepairs": 1,
+        "ruleName": "UnclosedResources",
+        "crashedRepairsLocations": [],
+        "nbCrashedRepairs": 0,
+        "ruleKey": "2095",
+        "performedRepairsLocations": [{
+            "endLine": 182,
+            "endColumn": 61,
+            "startColumn": 31,
+            "startLine": 182,
+            "filePath": "core/src/main/java/org/openstack4j/openstack/image/v2/internal/ImageServiceImpl.java",
+            "violationSpecifier": "2095:core/src/main/java/org/openstack4j/openstack/image/v2/internal/ImageServiceImpl.java:182:31:182:61"
+        }],
+        "nbViolationsBefore": 1,
+        "nbViolationsAfter": 0
+    }],
+    "executionInfo": {
+        "soraldVersion": "commit: 38248282",
+        "javaVersion": "11.0.12-ea",
+        "originalArgs": [
+            "repair",
+            "--file-output-strategy",
+            "IN_PLACE",
+            "--original-files-path",
+            "./",
+            "--rule-keys",
+            "2095",
+            "--stats-output-file",
+            "repair.json"
+        ]
+    },
+    "totalTimeMs": 47137,
+    "repairTimeMs": 1187,
+    "startTimeMs": 1626789969492,
+    "crashes": [],
+    "endTimeMs": 1626790016629,
+    "parseTimeMs": 16724
+}

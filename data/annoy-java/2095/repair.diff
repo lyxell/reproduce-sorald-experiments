@@ -1,0 +1,74 @@
+diff --git a/src/test/java/com/spotify/annoy/ANNIndexTest.java b/src/test/java/com/spotify/annoy/ANNIndexTest.java
+index cbfe87c..8d47a8c 100644
+--- a/src/test/java/com/spotify/annoy/ANNIndexTest.java
++++ b/src/test/java/com/spotify/annoy/ANNIndexTest.java
+@@ -23,40 +23,35 @@ public class ANNIndexTest {
+     String ts = type.toString().toLowerCase();
+     ANNIndex index = new ANNIndex(8,
+             String.format("%s/points.%s.annoy", DIR, ts), type, blockSize);
+-    BufferedReader reader = new BufferedReader(new FileReader(
+-            String.format("%s/points.%s.ann.txt", DIR, ts)));
+-
+-    while (true) {
+-
+-      // read in expected results from file (precomputed from c++ version)
+-      String line = reader.readLine();
+-      if (line == null)
+-        break;
+-      String[] _l = line.split("\t");
+-      Integer queryItemIndex = Integer.parseInt(_l[0]);
+-      List<Integer> expectedResults = new LinkedList<>();
+-      for (String _i : _l[1].split(","))
+-        expectedResults.add(Integer.parseInt(_i));
+-
+-      // do the query
+-      float[] itemVector = index.getItemVector(queryItemIndex);
+-      List<Integer> retrievedResults = index.getNearest(itemVector, 10);
+-
+-      if (verbose) {
+-        System.out.println(String.format("query: %d", queryItemIndex));
+-        for (int i = 0; i < 10; i++)
+-          System.out.println(String.format("expected %6d retrieved %6d",
+-                  expectedResults.get(i),
+-                  retrievedResults.get(i)));
+-        System.out.println();
+-      }
+-
+-      // results will not match exactly, but at least 5/10 should overlap
+-      Set<Integer> totRes = new TreeSet<>();
+-      totRes.addAll(expectedResults);
+-      totRes.retainAll(retrievedResults);
+-      assert (totRes.size() >= 5);
+-
++    try (BufferedReader reader = new BufferedReader(new FileReader(String.format("%s/points.%s.ann.txt", DIR, ts)))) {
++      while (true) {
++        // read in expected results from file (precomputed from c++ version)
++        String line = reader.readLine();
++        if (line == null) {
++          break;
++        }
++        String[] _l = line.split("\t");
++        Integer queryItemIndex = Integer.parseInt(_l[0]);
++        List<Integer> expectedResults = new LinkedList<>();
++        for (String _i : _l[1].split(",")) {
++          expectedResults.add(Integer.parseInt(_i));
++        }
++        // do the query
++        float[] itemVector = index.getItemVector(queryItemIndex);
++        List<Integer> retrievedResults = index.getNearest(itemVector, 10);
++        if (verbose) {
++          System.out.println(String.format("query: %d", queryItemIndex));
++          for (int i = 0; i < 10; i++) {
++            System.out.println(String.format("expected %6d retrieved %6d", expectedResults.get(i), retrievedResults.get(i)));
++          }
++          System.out.println();
++        }
++        // results will not match exactly, but at least 5/10 should overlap
++        Set<Integer> totRes = new TreeSet<>();
++        totRes.addAll(expectedResults);
++        totRes.retainAll(retrievedResults);
++        assert totRes.size() >= 5;
++      } 
+     }
+   }
+ 

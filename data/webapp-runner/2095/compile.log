@@ -1,0 +1,297 @@
+[INFO] Scanning for projects...
+[INFO] Inspecting build with total of 5 modules...
+[INFO] Installing Nexus Staging features:
+[INFO]   ... total of 5 executions of maven-deploy-plugin replaced with nexus-staging-maven-plugin
+[WARNING] The project com.heroku:webapp-runner-parent:pom:8.5.57.1-SNAPSHOT uses prerequisites which is only intended for maven-plugin projects but not for non maven-plugin projects. For such purposes you should use the maven-enforcer-plugin. See https://maven.apache.org/enforcer/enforcer-rules/requireMavenVersion.html
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] webapp-runner-parent                                               [pom]
+[INFO] webapp-runner-main                                                 [jar]
+[INFO] webapp-runner-memcached                                            [jar]
+[INFO] webapp-runner-redis                                                [jar]
+[INFO] webapp-runner                                                      [jar]
+[INFO] 
+[INFO] ------------------< com.heroku:webapp-runner-parent >-------------------
+[INFO] Building webapp-runner-parent 8.5.57.1-SNAPSHOT                    [1/5]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] -------------------< com.heroku:webapp-runner-main >--------------------
+[INFO] Building webapp-runner-main 8.5.57.1-SNAPSHOT                      [2/5]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-core/8.5.57/tomcat-embed-core-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-core/8.5.57/tomcat-embed-core-8.5.57.pom (1.8 kB at 2.2 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-annotations-api/8.5.57/tomcat-annotations-api-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-annotations-api/8.5.57/tomcat-annotations-api-8.5.57.pom (1.5 kB at 7.3 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-logging-juli/8.5.2/tomcat-embed-logging-juli-8.5.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-logging-juli/8.5.2/tomcat-embed-logging-juli-8.5.2.pom (1.4 kB at 5.1 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-jasper/8.5.57/tomcat-embed-jasper-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-jasper/8.5.57/tomcat-embed-jasper-8.5.57.pom (2.1 kB at 9.1 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-el/8.5.57/tomcat-embed-el-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-el/8.5.57/tomcat-embed-el-8.5.57.pom (1.5 kB at 6.5 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/eclipse/jdt/ecj/3.12.3/ecj-3.12.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/eclipse/jdt/ecj/3.12.3/ecj-3.12.3.pom (1.7 kB at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jasper/8.5.57/tomcat-jasper-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jasper/8.5.57/tomcat-jasper-8.5.57.pom (3.0 kB at 10 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-servlet-api/8.5.57/tomcat-servlet-api-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-servlet-api/8.5.57/tomcat-servlet-api-8.5.57.pom (2.4 kB at 77 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-juli/8.5.57/tomcat-juli-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-juli/8.5.57/tomcat-juli-8.5.57.pom (1.5 kB at 6.6 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jsp-api/8.5.57/tomcat-jsp-api-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jsp-api/8.5.57/tomcat-jsp-api-8.5.57.pom (1.9 kB at 7.2 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-el-api/8.5.57/tomcat-el-api-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-el-api/8.5.57/tomcat-el-api-8.5.57.pom (1.5 kB at 7.2 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jasper-el/8.5.57/tomcat-jasper-el-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jasper-el/8.5.57/tomcat-jasper-el-8.5.57.pom (1.8 kB at 7.2 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-api/8.5.57/tomcat-api-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-api/8.5.57/tomcat-api-8.5.57.pom (1.8 kB at 21 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-util-scan/8.5.57/tomcat-util-scan-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-util-scan/8.5.57/tomcat-util-scan-8.5.57.pom (2.2 kB at 9.0 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-util/8.5.57/tomcat-util-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-util/8.5.57/tomcat-util-8.5.57.pom (1.8 kB at 6.9 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.57/tomcat-embed-websocket-8.5.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.57/tomcat-embed-websocket-8.5.57.pom (1.8 kB at 7.3 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/beust/jcommander/1.78/jcommander-1.78.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/beust/jcommander/1.78/jcommander-1.78.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/testng/testng/6.14.3/testng-6.14.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/testng/testng/6.14.3/testng-6.14.3.pom (2.9 kB at 38 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-core/8.5.57/tomcat-embed-core-8.5.57.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-logging-juli/8.5.2/tomcat-embed-logging-juli-8.5.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-annotations-api/8.5.57/tomcat-annotations-api-8.5.57.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-jasper/8.5.57/tomcat-embed-jasper-8.5.57.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-el/8.5.57/tomcat-embed-el-8.5.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-annotations-api/8.5.57/tomcat-annotations-api-8.5.57.jar (12 kB at 32 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/eclipse/jdt/ecj/3.12.3/ecj-3.12.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-logging-juli/8.5.2/tomcat-embed-logging-juli-8.5.2.jar (41 kB at 96 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jasper/8.5.57/tomcat-jasper-8.5.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-el/8.5.57/tomcat-embed-el-8.5.57.jar (252 kB at 368 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-servlet-api/8.5.57/tomcat-servlet-api-8.5.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-jasper/8.5.57/tomcat-embed-jasper-8.5.57.jar (657 kB at 559 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-juli/8.5.57/tomcat-juli-8.5.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-servlet-api/8.5.57/tomcat-servlet-api-8.5.57.jar (244 kB at 190 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-el-api/8.5.57/tomcat-el-api-8.5.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jasper/8.5.57/tomcat-jasper-8.5.57.jar (599 kB at 431 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-api/8.5.57/tomcat-api-8.5.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-juli/8.5.57/tomcat-juli-8.5.57.jar (51 kB at 35 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-util-scan/8.5.57/tomcat-util-scan-8.5.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-el-api/8.5.57/tomcat-el-api-8.5.57.jar (90 kB at 55 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-util/8.5.57/tomcat-util-8.5.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-api/8.5.57/tomcat-api-8.5.57.jar (11 kB at 6.4 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jasper-el/8.5.57/tomcat-jasper-el-8.5.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-util-scan/8.5.57/tomcat-util-scan-8.5.57.jar (215 kB at 112 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jsp-api/8.5.57/tomcat-jsp-api-8.5.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-util/8.5.57/tomcat-util-8.5.57.jar (169 kB at 84 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.57/tomcat-embed-websocket-8.5.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jasper-el/8.5.57/tomcat-jasper-el-8.5.57.jar (168 kB at 82 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/beust/jcommander/1.78/jcommander-1.78.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/beust/jcommander/1.78/jcommander-1.78.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/testng/testng/6.14.3/testng-6.14.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-jsp-api/8.5.57/tomcat-jsp-api-8.5.57.jar (62 kB at 28 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/eclipse/jdt/ecj/3.12.3/ecj-3.12.3.jar (2.5 MB at 1.0 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-websocket/8.5.57/tomcat-embed-websocket-8.5.57.jar (260 kB at 104 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/testng/testng/6.14.3/testng-6.14.3.jar (840 kB at 306 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-core/8.5.57/tomcat-embed-core-8.5.57.jar (3.3 MB at 1.0 MB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ webapp-runner-main ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/webapp-runner/main/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ webapp-runner-main ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 4 source files to /home/user/projects/webapp-runner/main/target/classes
+[INFO] /home/user/projects/webapp-runner/main/src/main/java/webapp/runner/launch/SessionStore.java: Some input files use or override a deprecated API.
+[INFO] /home/user/projects/webapp-runner/main/src/main/java/webapp/runner/launch/SessionStore.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ webapp-runner-main ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/webapp-runner/main/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ webapp-runner-main ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /home/user/projects/webapp-runner/main/target/test-classes
+[INFO] 
+[INFO] -----------------< com.heroku:webapp-runner-memcached >-----------------
+[INFO] Building webapp-runner-memcached 8.5.57.1-SNAPSHOT                 [3/5]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/de/javakaffee/msm/memcached-session-manager-tc8/2.3.0/memcached-session-manager-tc8-2.3.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/de/javakaffee/msm/memcached-session-manager-tc8/2.3.0/memcached-session-manager-tc8-2.3.0.pom (3.3 kB at 15 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/de/javakaffee/msm/memcached-session-manager-project/2.3.0/memcached-session-manager-project-2.3.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/de/javakaffee/msm/memcached-session-manager-project/2.3.0/memcached-session-manager-project-2.3.0.pom (13 kB at 66 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/de/javakaffee/msm/memcached-session-manager/2.3.0/memcached-session-manager-2.3.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/de/javakaffee/msm/memcached-session-manager/2.3.0/memcached-session-manager-2.3.0.pom (4.0 kB at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/spy/spymemcached/2.12.0/spymemcached-2.12.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/spy/spymemcached/2.12.0/spymemcached-2.12.0.pom (1.9 kB at 7.3 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.pom (491 B at 9.4 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/de/javakaffee/msm/memcached-session-manager-tc8/2.3.0/memcached-session-manager-tc8-2.3.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/de/javakaffee/msm/memcached-session-manager/2.3.0/memcached-session-manager-2.3.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/spy/spymemcached/2.12.0/spymemcached-2.12.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.jar (2.3 kB at 42 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/de/javakaffee/msm/memcached-session-manager-tc8/2.3.0/memcached-session-manager-tc8-2.3.0.jar (11 kB at 30 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/de/javakaffee/msm/memcached-session-manager/2.3.0/memcached-session-manager-2.3.0.jar (167 kB at 409 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/spy/spymemcached/2.12.0/spymemcached-2.12.0.jar (472 kB at 820 kB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ webapp-runner-memcached ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/webapp-runner/memcached/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ webapp-runner-memcached ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /home/user/projects/webapp-runner/memcached/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ webapp-runner-memcached ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/webapp-runner/memcached/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ webapp-runner-memcached ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] -------------------< com.heroku:webapp-runner-redis >-------------------
+[INFO] Building webapp-runner-redis 8.5.57.1-SNAPSHOT                     [4/5]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/redisson/redisson/3.11.4/redisson-3.11.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/redisson/redisson/3.11.4/redisson-3.11.4.pom (18 kB at 130 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/redisson/redisson-parent/3.11.4/redisson-parent-3.11.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/redisson/redisson-parent/3.11.4/redisson-parent-3.11.4.pom (11 kB at 44 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-bom/4.1.41.Final/netty-bom-4.1.41.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-bom/4.1.41.Final/netty-bom-4.1.41.Final.pom (7.9 kB at 49 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.41.Final/netty-common-4.1.41.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.41.Final/netty-common-4.1.41.Final.pom (10 kB at 70 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.1.41.Final/netty-parent-4.1.41.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.1.41.Final/netty-parent-4.1.41.Final.pom (59 kB at 318 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.41.Final/netty-codec-4.1.41.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.41.Final/netty-codec-4.1.41.Final.pom (3.6 kB at 29 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.41.Final/netty-buffer-4.1.41.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.41.Final/netty-buffer-4.1.41.Final.pom (1.6 kB at 13 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.41.Final/netty-transport-4.1.41.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.41.Final/netty-transport-4.1.41.Final.pom (1.9 kB at 15 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.41.Final/netty-resolver-4.1.41.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.41.Final/netty-resolver-4.1.41.Final.pom (1.6 kB at 13 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns/4.1.41.Final/netty-resolver-dns-4.1.41.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns/4.1.41.Final/netty-resolver-dns-4.1.41.Final.pom (3.0 kB at 13 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-dns/4.1.41.Final/netty-codec-dns-4.1.41.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-dns/4.1.41.Final/netty-codec-dns-4.1.41.Final.pom (2.1 kB at 8.7 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.41.Final/netty-handler-4.1.41.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.41.Final/netty-handler-4.1.41.Final.pom (3.4 kB at 27 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/javax/cache/cache-api/1.0.0/cache-api-1.0.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/javax/cache/cache-api/1.0.0/cache-api-1.0.0.pom (11 kB at 496 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/projectreactor/reactor-core/3.2.6.RELEASE/reactor-core-3.2.6.RELEASE.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/projectreactor/reactor-core/3.2.6.RELEASE/reactor-core-3.2.6.RELEASE.pom (3.1 kB at 42 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava2/rxjava/2.2.7/rxjava-2.2.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava2/rxjava/2.2.7/rxjava-2.2.7.pom (2.4 kB at 107 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/de/ruedigermoeller/fst/2.57/fst-2.57.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/de/ruedigermoeller/fst/2.57/fst-2.57.pom (7.6 kB at 166 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.8.8/jackson-core-2.8.8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.8.8/jackson-core-2.8.8.pom (5.4 kB at 85 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.9.10/jackson-dataformat-yaml-2.9.10.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.9.10/jackson-dataformat-yaml-2.9.10.pom (2.1 kB at 61 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformats-text/2.9.10/jackson-dataformats-text-2.9.10.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformats-text/2.9.10/jackson-dataformats-text-2.9.10.pom (3.0 kB at 111 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.23/snakeyaml-1.23.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.23/snakeyaml-1.23.pom (38 kB at 582 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.9.10/jackson-databind-2.9.10.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.9.10/jackson-databind-2.9.10.pom (6.4 kB at 107 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.9.16/byte-buddy-1.9.16.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.9.16/byte-buddy-1.9.16.pom (10 kB at 543 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-parent/1.9.16/byte-buddy-parent-1.9.16.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-parent/1.9.16/byte-buddy-parent-1.9.16.pom (38 kB at 615 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jodd/jodd-bean/5.0.13/jodd-bean-5.0.13.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jodd/jodd-bean/5.0.13/jodd-bean-5.0.13.pom (1.5 kB at 20 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jodd/jodd-core/5.0.13/jodd-core-5.0.13.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jodd/jodd-core/5.0.13/jodd-core-5.0.13.pom (1.3 kB at 39 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/redisson/redisson-tomcat-8/3.11.4/redisson-tomcat-8-3.11.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/redisson/redisson-tomcat-8/3.11.4/redisson-tomcat-8-3.11.4.pom (2.8 kB at 12 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/redisson/redisson-tomcat/3.11.4/redisson-tomcat-3.11.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/redisson/redisson-tomcat/3.11.4/redisson-tomcat-3.11.4.pom (1.7 kB at 6.8 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/redisson/redisson/3.11.4/redisson-3.11.4.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.41.Final/netty-common-4.1.41.Final.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.41.Final/netty-codec-4.1.41.Final.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.41.Final/netty-buffer-4.1.41.Final.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.41.Final/netty-transport-4.1.41.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.41.Final/netty-buffer-4.1.41.Final.jar (277 kB at 596 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.41.Final/netty-resolver-4.1.41.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.41.Final/netty-codec-4.1.41.Final.jar (318 kB at 536 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns/4.1.41.Final/netty-resolver-dns-4.1.41.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.41.Final/netty-resolver-4.1.41.Final.jar (33 kB at 51 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-dns/4.1.41.Final/netty-codec-dns-4.1.41.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.41.Final/netty-common-4.1.41.Final.jar (605 kB at 826 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.41.Final/netty-handler-4.1.41.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.41.Final/netty-transport-4.1.41.Final.jar (473 kB at 539 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/javax/cache/cache-api/1.0.0/cache-api-1.0.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec-dns/4.1.41.Final/netty-codec-dns-4.1.41.Final.jar (61 kB at 63 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/projectreactor/reactor-core/3.2.6.RELEASE/reactor-core-3.2.6.RELEASE.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver-dns/4.1.41.Final/netty-resolver-dns-4.1.41.Final.jar (147 kB at 142 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/javax/cache/cache-api/1.0.0/cache-api-1.0.0.jar (50 kB at 48 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava2/rxjava/2.2.7/rxjava-2.2.7.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/reactivestreams/reactive-streams/1.0.2/reactive-streams-1.0.2.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/de/ruedigermoeller/fst/2.57/fst-2.57.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.41.Final/netty-handler-4.1.41.Final.jar (438 kB at 331 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.9.10/jackson-dataformat-yaml-2.9.10.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.9.10/jackson-dataformat-yaml-2.9.10.jar (42 kB at 30 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.23/snakeyaml-1.23.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.23/snakeyaml-1.23.jar (301 kB at 157 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.9.10/jackson-databind-2.9.10.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/de/ruedigermoeller/fst/2.57/fst-2.57.jar (397 kB at 207 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.9.16/byte-buddy-1.9.16.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/projectreactor/reactor-core/3.2.6.RELEASE/reactor-core-3.2.6.RELEASE.jar (1.5 MB at 602 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jodd/jodd-bean/5.0.13/jodd-bean-5.0.13.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/redisson/redisson/3.11.4/redisson-3.11.4.jar (1.9 MB at 782 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jodd/jodd-core/5.0.13/jodd-core-5.0.13.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jodd/jodd-bean/5.0.13/jodd-bean-5.0.13.jar (125 kB at 49 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/redisson/redisson-tomcat-8/3.11.4/redisson-tomcat-8-3.11.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jodd/jodd-core/5.0.13/jodd-core-5.0.13.jar (403 kB at 149 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.9.10/jackson-databind-2.9.10.jar (1.3 MB at 487 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/redisson/redisson-tomcat-8/3.11.4/redisson-tomcat-8-3.11.4.jar (27 kB at 9.5 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava2/rxjava/2.2.7/rxjava-2.2.7.jar (2.3 MB at 785 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.9.16/byte-buddy-1.9.16.jar (3.3 MB at 992 kB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ webapp-runner-redis ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/webapp-runner/redis/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ webapp-runner-redis ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /home/user/projects/webapp-runner/redis/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ webapp-runner-redis ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/webapp-runner/redis/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ webapp-runner-redis ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] ----------------------< com.heroku:webapp-runner >----------------------
+[INFO] Building webapp-runner 8.5.57.1-SNAPSHOT                           [5/5]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ webapp-runner ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/webapp-runner/assembly/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ webapp-runner ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ webapp-runner ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/webapp-runner/assembly/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:testCompile (default-testCompile) @ webapp-runner ---
+[INFO] No sources to compile
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for webapp-runner-parent 8.5.57.1-SNAPSHOT:
+[INFO] 
+[INFO] webapp-runner-parent ............................... SUCCESS [  0.005 s]
+[INFO] webapp-runner-main ................................. SUCCESS [ 10.358 s]
+[INFO] webapp-runner-memcached ............................ SUCCESS [  1.815 s]
+[INFO] webapp-runner-redis ................................ SUCCESS [  7.040 s]
+[INFO] webapp-runner ...................................... SUCCESS [  0.074 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  20.644 s
+[INFO] Finished at: 2021-07-20T21:28:12Z
+[INFO] ------------------------------------------------------------------------

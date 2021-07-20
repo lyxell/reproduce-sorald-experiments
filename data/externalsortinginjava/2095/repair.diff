@@ -1,0 +1,248 @@
+diff --git a/src/main/java/com/google/code/externalsorting/ExternalSort.java b/src/main/java/com/google/code/externalsorting/ExternalSort.java
+index f0a8f10..0b50076 100644
+--- a/src/main/java/com/google/code/externalsorting/ExternalSort.java
++++ b/src/main/java/com/google/code/externalsorting/ExternalSort.java
+@@ -396,20 +396,16 @@ public class ExternalSort {
+                 ArrayList<IOStringStack> bfbs = new ArrayList<>();
+                 for (File f : files) {
+                         final int BUFFERSIZE = 2048;
+-                        InputStream in = new FileInputStream(f);
+-                        BufferedReader br;
+-                        if (usegzip) {
+-                                br = new BufferedReader(
+-                                        new InputStreamReader(
+-                                                new GZIPInputStream(in,
+-                                                        BUFFERSIZE), cs));
+-                        } else {
+-                                br = new BufferedReader(new InputStreamReader(
+-                                        in, cs));
+-                        }
+-
+-                        BinaryFileBuffer bfb = new BinaryFileBuffer(br);
+-                        bfbs.add(bfb);
++            try (InputStream in = new FileInputStream(f)) {
++                BufferedReader br;
++                if (usegzip) {
++                    br = new BufferedReader(new InputStreamReader(new GZIPInputStream(in, BUFFERSIZE), cs));
++                } else {
++                    br = new BufferedReader(new InputStreamReader(in, cs));
++                }
++                BinaryFileBuffer bfb = new BinaryFileBuffer(br);
++                bfbs.add(bfb);
++            }
+                 }
+                 BufferedWriter fbw = new BufferedWriter(new OutputStreamWriter(
+                         new FileOutputStream(outputfile, append), cs));
+@@ -445,20 +441,16 @@ public class ExternalSort {
+                         if (f.length() == 0) {
+                                 continue;
+                         }
+-                        InputStream in = new FileInputStream(f);
+-                        BufferedReader br;
+-                        if (usegzip) {
+-                                br = new BufferedReader(
+-                                        new InputStreamReader(
+-                                                new GZIPInputStream(in,
+-                                                        BUFFERSIZE), cs));
+-                        } else {
+-                                br = new BufferedReader(new InputStreamReader(
+-                                        in, cs));
+-                        }
+-
+-                        BinaryFileBuffer bfb = new BinaryFileBuffer(br);
+-                        bfbs.add(bfb);
++            try (InputStream in = new FileInputStream(f)) {
++                BufferedReader br;
++                if (usegzip) {
++                    br = new BufferedReader(new InputStreamReader(new GZIPInputStream(in, BUFFERSIZE), cs));
++                } else {
++                    br = new BufferedReader(new InputStreamReader(in, cs));
++                }
++                BinaryFileBuffer bfb = new BinaryFileBuffer(br);
++                bfbs.add(bfb);
++            }
+                 }
+                 long rowcounter = mergeSortedFiles(fbw, cmp, distinct, bfbs);
+                 for (File f : files) {
+@@ -545,42 +537,42 @@ public class ExternalSort {
+                 File newtmpfile = File.createTempFile("sortInBatch",
+                         "flatfile", tmpdirectory);
+                 newtmpfile.deleteOnExit();
+-                OutputStream out = new FileOutputStream(newtmpfile);
+-                int ZIPBUFFERSIZE = 2048;
+-                if (usegzip) {
+-                        out = new GZIPOutputStream(out, ZIPBUFFERSIZE) {
+-                                {
+-                                        this.def.setLevel(Deflater.BEST_SPEED);
+-                                }
+-                        };
+-                }
+-                try (BufferedWriter fbw = new BufferedWriter(new OutputStreamWriter(
+-                        out, cs))) {
+-                        if (!distinct) {
+-                            for (String r : tmplist) {
+-                                        fbw.write(r);
+-                                        fbw.newLine();
+-                            }
+-                        } else {
+-                        String lastLine = null;
+-                        Iterator<String> i = tmplist.iterator();
+-                        if(i.hasNext()) {
+-                          lastLine = i.next();
+-                          fbw.write(lastLine);
+-                          fbw.newLine();
+-                        }
+-                        while (i.hasNext()) {
+-                          String r = i.next();
+-                          // Skip duplicate lines
+-                          if (cmp.compare(r, lastLine) != 0) {
++        try (OutputStream out = new FileOutputStream(newtmpfile)) {
++            int ZIPBUFFERSIZE = 2048;
++            if (usegzip) {
++                out = new GZIPOutputStream(out, ZIPBUFFERSIZE) {
++                    {
++                        this.def.setLevel(Deflater.BEST_SPEED);
++                    }
++                };
++            }
++            try (final BufferedWriter fbw = new BufferedWriter(new OutputStreamWriter(out, cs))) {
++                if (!distinct) {
++                    for (String r : tmplist) {
++                        fbw.write(r);
++                        fbw.newLine();
++                    }
++                } else {
++                    String lastLine = null;
++                    Iterator<String> i = tmplist.iterator();
++                    if (i.hasNext()) {
++                        lastLine = i.next();
++                        fbw.write(lastLine);
++                        fbw.newLine();
++                    }
++                    while (i.hasNext()) {
++                        String r = i.next();
++                        // Skip duplicate lines
++                        if (cmp.compare(r, lastLine) != 0) {
+                             fbw.write(r);
+                             fbw.newLine();
+                             lastLine = r;
+-                          }
+-                        }
+                         }
++                    } 
+                 }
+-                return newtmpfile;
++            }
++            return newtmpfile;
++        }
+         }
+ 
+         /**
+diff --git a/src/main/java/com/google/code/externalsorting/csv/CsvExternalSort.java b/src/main/java/com/google/code/externalsorting/csv/CsvExternalSort.java
+index a8afaff..fb7b9a0 100755
+--- a/src/main/java/com/google/code/externalsorting/csv/CsvExternalSort.java
++++ b/src/main/java/com/google/code/externalsorting/csv/CsvExternalSort.java
+@@ -121,11 +121,12 @@ public class CsvExternalSort {
+ 
+ 		List<CSVRecordBuffer> bfbs = new ArrayList<CSVRecordBuffer>();
+ 		for (File f : files) {
+-			InputStream in = new FileInputStream(f);
+-			BufferedReader fbr = new BufferedReader(new InputStreamReader(in, sortOptions.getCharset()));
+-			CSVParser parser = new CSVParser(fbr, sortOptions.getFormat());
+-			CSVRecordBuffer bfb = new CSVRecordBuffer(parser);
+-			bfbs.add(bfb);
++			try (InputStream in = new FileInputStream(f)) {
++				BufferedReader fbr = new BufferedReader(new InputStreamReader(in, sortOptions.getCharset()));
++				CSVParser parser = new CSVParser(fbr, sortOptions.getFormat());
++				CSVRecordBuffer bfb = new CSVRecordBuffer(parser);
++				bfbs.add(bfb);
++			}
+ 		}
+ 
+ 		BufferedWriter fbw = new BufferedWriter(
+diff --git a/src/test/java/com/google/code/externalsorting/ExternalSortTest.java b/src/test/java/com/google/code/externalsorting/ExternalSortTest.java
+index 97a210a..00fcf6a 100755
+--- a/src/test/java/com/google/code/externalsorting/ExternalSortTest.java
++++ b/src/test/java/com/google/code/externalsorting/ExternalSortTest.java
+@@ -1,4 +1,27 @@
+ package com.google.code.externalsorting;
++import java.util.Random;
++import java.io.IOException;
++import MemoryMeter;
++import java.util.Scanner;
++import java.io.FileReader;
++import java.io.FileWriter;
++import java.io.FileOutputStream;
++import java.util.Set;
++import java.io.File;
++import java.util.List;
++import java.util.UUID;
++import java.io.ByteArrayInputStream;
++import java.io.OutputStreamWriter;
++import java.util.ArrayList;
++import java.util.TreeSet;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.util.Comparator;
++import java.io.BufferedWriter;
++import java.util.Iterator;
++import java.io.InputStream;
++import java.util.Arrays;
+ 
+ import static org.junit.Assert.assertArrayEquals;
+ import static org.junit.Assert.assertEquals;
+@@ -296,8 +319,6 @@ public class ExternalSortTest {
+     public void testSortAndSave_Distinct() throws Exception {
+         File f;
+         String line;
+-
+-        BufferedReader bf;
+         List<String> sample = Arrays.asList(SAMPLE);
+         Comparator<String> cmp = new Comparator<String>() {
+             @Override
+@@ -311,15 +332,14 @@ public class ExternalSortTest {
+         assertNotNull(f);
+         assertTrue(f.exists());
+         assertTrue(f.length() > 0);
+-        bf = new BufferedReader(new FileReader(f));
+-
+-        List<String> result = new ArrayList<>();
+-        while ((line = bf.readLine()) != null) {
+-            result.add(line);
++        try (BufferedReader bf = new BufferedReader(new FileReader(f))) {
++            List<String> result = new ArrayList<>();
++            while ((line = bf.readLine()) != null) {
++                result.add(line);
++            } 
++            bf.close();
++            assertArrayEquals(Arrays.toString(result.toArray()), EXPECTED_DISTINCT_RESULTS, result.toArray());
+         }
+-        bf.close();
+-        assertArrayEquals(Arrays.toString(result.toArray()),
+-                          EXPECTED_DISTINCT_RESULTS, result.toArray());
+     }
+ 
+     @Test
+diff --git a/src/test/java/com/google/code/externalsorting/csv/CsvExternalSortTest.java b/src/test/java/com/google/code/externalsorting/csv/CsvExternalSortTest.java
+index f48e648..7edb1f6 100755
+--- a/src/test/java/com/google/code/externalsorting/csv/CsvExternalSortTest.java
++++ b/src/test/java/com/google/code/externalsorting/csv/CsvExternalSortTest.java
+@@ -61,12 +61,11 @@ public class CsvExternalSortTest {
+ 		int mergeSortedFiles = CsvExternalSort.mergeSortedFiles(sortInBatch, outputfile, sortOptions, true, header);
+ 		
+ 		assertEquals(4, mergeSortedFiles);
+-		
+-		BufferedReader reader = new BufferedReader(new FileReader(outputfile));
+-		String readLine = reader.readLine();
+-
+-		assertEquals("6,this wont work in other systems,3", readLine);
+-		reader.close();
++		try (BufferedReader reader = new BufferedReader(new FileReader(outputfile))) {
++			String readLine = reader.readLine();
++			assertEquals("6,this wont work in other systems,3", readLine);
++			reader.close();
++		}
+ 	}
+ 
+ 	@Test

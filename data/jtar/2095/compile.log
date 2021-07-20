@@ -1,0 +1,90 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.kamranzafar:jtar:jar:2.4-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 53, column 12
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-source-plugin is missing. @ line 60, column 12
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-javadoc-plugin is missing. @ line 72, column 12
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------------< org.kamranzafar:jtar >------------------------
+[INFO] Building JTar 2.4-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0-beta-1:enforce (enforce-maven) @ jtar ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ jtar ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/jtar/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ jtar ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 8 source files to /home/user/projects/jtar/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ jtar ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ jtar ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 3 source files to /home/user/projects/jtar/target/test-classes
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+[INFO] 1 warning
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[168,37] incompatible types: byte[] cannot be converted to byte
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[182,58] incompatible types: byte cannot be converted to byte[]
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[183,52] incompatible types: byte cannot be converted to byte[]
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[193,38] incompatible types: java.lang.String[] cannot be converted to java.lang.String
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[197,33] incompatible types: java.lang.String[] cannot be converted to java.lang.String
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[198,30] array required, but java.lang.String found
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[203,42] cannot find symbol
+  symbol:   variable length
+  location: variable files of type java.lang.String
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[204,62] array required, but java.lang.String found
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[206,37] incompatible types: byte[] cannot be converted to byte
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[209,55] array required, but java.lang.String found
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[217,89] array required, but java.lang.String found
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[225,81] array required, but java.lang.String found
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[228,61] incompatible types: byte cannot be converted to byte[]
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[229,51] incompatible types: byte cannot be converted to byte[]
+[INFO] 14 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.203 s
+[INFO] Finished at: 2021-07-20T20:55:19Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:testCompile (default-testCompile) on project jtar: Compilation failure: Compilation failure: 
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[168,37] incompatible types: byte[] cannot be converted to byte
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[182,58] incompatible types: byte cannot be converted to byte[]
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[183,52] incompatible types: byte cannot be converted to byte[]
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[193,38] incompatible types: java.lang.String[] cannot be converted to java.lang.String
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[197,33] incompatible types: java.lang.String[] cannot be converted to java.lang.String
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[198,30] array required, but java.lang.String found
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[203,42] cannot find symbol
+[ERROR]   symbol:   variable length
+[ERROR]   location: variable files of type java.lang.String
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[204,62] array required, but java.lang.String found
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[206,37] incompatible types: byte[] cannot be converted to byte
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[209,55] array required, but java.lang.String found
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[217,89] array required, but java.lang.String found
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[225,81] array required, but java.lang.String found
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[228,61] incompatible types: byte cannot be converted to byte[]
+[ERROR] /home/user/projects/jtar/src/test/java/org/kamranzafar/jtar/JTarTest.java:[229,51] incompatible types: byte cannot be converted to byte[]
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

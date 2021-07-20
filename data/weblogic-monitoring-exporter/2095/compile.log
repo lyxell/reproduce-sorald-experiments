@@ -1,0 +1,224 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] WebLogic Monitoring Exporter                                       [pom]
+[INFO] wls-exporter-core                                                  [jar]
+[INFO] Exporter Build Helper Maven Mojo                          [maven-plugin]
+[INFO] wls-exporter-war                                                   [war]
+[INFO] wls-operator-exporter                                              [war]
+[INFO] 
+[INFO] ------------< com.oracle.wls.exporter:wls-exporter-parent >-------------
+[INFO] Building WebLogic Monitoring Exporter 1.2.0-SNAPSHOT               [1/5]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] -------------< com.oracle.wls.exporter:wls-exporter-core >--------------
+[INFO] Building wls-exporter-core 1.2.0-SNAPSHOT                          [2/5]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.6.1/maven-compiler-plugin-3.6.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.6.1/maven-compiler-plugin-3.6.1.pom (11 kB at 11 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.6.1/maven-compiler-plugin-3.6.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-compiler-plugin/3.6.1/maven-compiler-plugin-3.6.1.jar (59 kB at 1.0 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.12/httpclient-4.5.12.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.12/httpclient-4.5.12.pom (6.6 kB at 236 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.5.12/httpcomponents-client-4.5.12.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.5.12/httpcomponents-client-4.5.12.pom (16 kB at 468 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.7/commons-io-2.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.7/commons-io-2.7.pom (16 kB at 565 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/1.6.4/slf4j-nop-1.6.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/1.6.4/slf4j-nop-1.6.4.pom (1.5 kB at 45 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.6.4/slf4j-parent-1.6.4.pom (12 kB at 284 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.6.4/slf4j-api-1.6.4.pom (2.7 kB at 122 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpmime/4.5.13/httpmime-4.5.13.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpmime/4.5.13/httpmime-4.5.13.pom (5.2 kB at 200 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/httpunit/httpunit/1.7.2/httpunit-1.7.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/httpunit/httpunit/1.7.2/httpunit-1.7.2.pom (8.3 kB at 39 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/rhino/js/1.6R5/js-1.6R5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/rhino/js/1.6R5/js-1.6R5.pom (786 B at 7.1 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/nekohtml/nekohtml/0.9.5/nekohtml-0.9.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/nekohtml/nekohtml/0.9.5/nekohtml-0.9.5.pom (346 B at 12 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xerces/xerces/2.4.0/xerces-2.4.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xerces/xerces/2.4.0/xerces-2.4.0.pom (311 B at 15 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.4.0/xercesImpl-2.4.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.4.0/xercesImpl-2.4.0.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.6.1/xercesImpl-2.6.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.6.1/xercesImpl-2.6.1.pom (150 B at 1.2 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xerces/xmlParserAPIs/2.6.1/xmlParserAPIs-2.6.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xerces/xmlParserAPIs/2.6.1/xmlParserAPIs-2.6.1.pom (153 B at 6.1 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-junit/2.0.0.0/hamcrest-junit-2.0.0.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-junit/2.0.0.0/hamcrest-junit-2.0.0.0.pom (1.5 kB at 40 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/java-hamcrest/2.0.0.0/java-hamcrest-2.0.0.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/java-hamcrest/2.0.0.0/java-hamcrest-2.0.0.0.pom (1.3 kB at 41 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/meterware/simplestub/simplestub/1.2.12/simplestub-1.2.12.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/meterware/simplestub/simplestub/1.2.12/simplestub-1.2.12.pom (15 kB at 68 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/6.1.1/asm-6.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/6.1.1/asm-6.1.1.pom (2.9 kB at 70 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/6.1.1/asm-commons-6.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/6.1.1/asm-commons-6.1.1.pom (3.7 kB at 64 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/6.1.1/asm-tree-6.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/6.1.1/asm-tree-6.1.1.pom (3.1 kB at 196 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/6.1.1/asm-analysis-6.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/6.1.1/asm-analysis-6.1.1.pom (3.2 kB at 211 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.12/httpclient-4.5.12.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.7/commons-io-2.7.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/jayway/jsonpath/json-path/2.4.0/json-path-2.4.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpmime/4.5.13/httpmime-4.5.13.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/1.6.4/slf4j-nop-1.6.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-nop/1.6.4/slf4j-nop-1.6.4.jar (4.8 kB at 27 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/httpunit/httpunit/1.7.2/httpunit-1.7.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpmime/4.5.13/httpmime-4.5.13.jar (42 kB at 198 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/rhino/js/1.6R5/js-1.6R5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/jayway/jsonpath/json-path/2.4.0/json-path-2.4.0.jar (223 kB at 1.1 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/nekohtml/nekohtml/0.9.5/nekohtml-0.9.5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/nekohtml/nekohtml/0.9.5/nekohtml-0.9.5.jar (106 kB at 310 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.6.1/xercesImpl-2.6.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-io/commons-io/2.7/commons-io-2.7.jar (276 kB at 627 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xerces/xmlParserAPIs/2.6.1/xmlParserAPIs-2.6.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.12/httpclient-4.5.12.jar (778 kB at 1.1 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-junit/2.0.0.0/hamcrest-junit-2.0.0.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xerces/xmlParserAPIs/2.6.1/xmlParserAPIs-2.6.1.jar (125 kB at 164 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/java-hamcrest/2.0.0.0/java-hamcrest-2.0.0.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-junit/2.0.0.0/hamcrest-junit-2.0.0.0.jar (14 kB at 18 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/meterware/simplestub/simplestub/1.2.12/simplestub-1.2.12.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/httpunit/httpunit/1.7.2/httpunit-1.7.2.jar (527 kB at 578 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/6.1.1/asm-6.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/java-hamcrest/2.0.0.0/java-hamcrest-2.0.0.0.jar (113 kB at 124 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/6.1.1/asm-commons-6.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/rhino/js/1.6R5/js-1.6R5.jar (709 kB at 766 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/6.1.1/asm-tree-6.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/6.1.1/asm-tree-6.1.1.jar (50 kB at 47 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/6.1.1/asm-commons-6.1.1.jar (78 kB at 72 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/6.1.1/asm-analysis-6.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/6.1.1/asm-6.1.1.jar (108 kB at 100 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/meterware/simplestub/simplestub/1.2.12/simplestub-1.2.12.jar (61 kB at 56 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/6.1.1/asm-analysis-6.1.1.jar (32 kB at 28 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.6.1/xercesImpl-2.6.1.jar (959 kB at 755 kB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ wls-exporter-core ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/user/projects/weblogic-monitoring-exporter/wls-exporter-core/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ wls-exporter-core ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-api/2.8.1/plexus-compiler-api-2.8.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-api/2.8.1/plexus-compiler-api-2.8.1.pom (893 B at 33 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler/2.8.1/plexus-compiler-2.8.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler/2.8.1/plexus-compiler-2.8.1.pom (5.0 kB at 48 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-manager/2.8.1/plexus-compiler-manager-2.8.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-manager/2.8.1/plexus-compiler-manager-2.8.1.pom (713 B at 51 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-javac/2.8.1/plexus-compiler-javac-2.8.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-javac/2.8.1/plexus-compiler-javac-2.8.1.pom (794 B at 33 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compilers/2.8.1/plexus-compilers-2.8.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compilers/2.8.1/plexus-compilers-2.8.1.pom (1.4 kB at 81 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-api/2.8.1/plexus-compiler-api-2.8.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-manager/2.8.1/plexus-compiler-manager-2.8.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-javac/2.8.1/plexus-compiler-javac-2.8.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-api/2.8.1/plexus-compiler-api-2.8.1.jar (26 kB at 712 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-manager/2.8.1/plexus-compiler-manager-2.8.1.jar (4.7 kB at 107 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-compiler-javac/2.8.1/plexus-compiler-javac-2.8.1.jar (20 kB at 350 kB/s)
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 44 source files to /home/user/projects/weblogic-monitoring-exporter/wls-exporter-core/target/classes
+[INFO] /home/user/projects/weblogic-monitoring-exporter/wls-exporter-core/src/main/java/com/oracle/wls/exporter/LiveConfiguration.java: /home/user/projects/weblogic-monitoring-exporter/wls-exporter-core/src/main/java/com/oracle/wls/exporter/LiveConfiguration.java uses or overrides a deprecated API.
+[INFO] /home/user/projects/weblogic-monitoring-exporter/wls-exporter-core/src/main/java/com/oracle/wls/exporter/LiveConfiguration.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ wls-exporter-core ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/user/projects/weblogic-monitoring-exporter/wls-exporter-core/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:testCompile (default-testCompile) @ wls-exporter-core ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 40 source files to /home/user/projects/weblogic-monitoring-exporter/wls-exporter-core/target/test-classes
+[INFO] /home/user/projects/weblogic-monitoring-exporter/wls-exporter-core/src/test/java/com/oracle/wls/exporter/YamlDemo.java: Some input files use or override a deprecated API.
+[INFO] /home/user/projects/weblogic-monitoring-exporter/wls-exporter-core/src/test/java/com/oracle/wls/exporter/YamlDemo.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] -------------< com.oracle.wls.exporter:build-helper-mojo >--------------
+[INFO] Building Exporter Build Helper Maven Mojo 1.2.0-SNAPSHOT           [3/5]
+[INFO] ----------------------------[ maven-plugin ]----------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-annotations/3.6.0/maven-plugin-annotations-3.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-annotations/3.6.0/maven-plugin-annotations-3.6.0.pom (1.6 kB at 81 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-tools/3.6.0/maven-plugin-tools-3.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-tools/3.6.0/maven-plugin-tools-3.6.0.pom (15 kB at 872 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0/maven-plugin-api-2.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-annotations/3.6.0/maven-plugin-annotations-3.6.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.0/maven-plugin-api-2.0.jar (10 kB at 633 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugin-tools/maven-plugin-annotations/3.6.0/maven-plugin-annotations-3.6.0.jar (14 kB at 446 kB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ build-helper-mojo ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/user/projects/weblogic-monitoring-exporter/build-helper-mojo/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ build-helper-mojo ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 3 source files to /home/user/projects/weblogic-monitoring-exporter/build-helper-mojo/target/classes
+[INFO] 
+[INFO] --- maven-plugin-plugin:3.2:descriptor (default-descriptor) @ build-helper-mojo ---
+[WARNING] Using platform encoding (UTF-8 actually) to read mojo metadata, i.e. build is platform dependent!
+[INFO] Applying mojo extractor for language: java
+[INFO] Mojo extractor for language: java found 0 mojo descriptors.
+[INFO] Applying mojo extractor for language: bsh
+[INFO] Mojo extractor for language: bsh found 0 mojo descriptors.
+[INFO] Applying mojo extractor for language: java-annotations
+[INFO] Mojo extractor for language: java-annotations found 1 mojo descriptors.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ build-helper-mojo ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/user/projects/weblogic-monitoring-exporter/build-helper-mojo/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:testCompile (default-testCompile) @ build-helper-mojo ---
+[INFO] Changes detected - recompiling the module!
+[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!
+[INFO] Compiling 2 source files to /home/user/projects/weblogic-monitoring-exporter/build-helper-mojo/target/test-classes
+[INFO] 
+[INFO] --------------< com.oracle.wls.exporter:wls-exporter-war >--------------
+[INFO] Building wls-exporter-war 1.2.0-SNAPSHOT                           [4/5]
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ wls-exporter-war ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/user/projects/weblogic-monitoring-exporter/wls-exporter-war/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ wls-exporter-war ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ wls-exporter-war ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/user/projects/weblogic-monitoring-exporter/wls-exporter-war/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:testCompile (default-testCompile) @ wls-exporter-war ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] -----------< com.oracle.wls.exporter:wls-operator-exporter >------------
+[INFO] Building wls-operator-exporter 1.2.0-SNAPSHOT                      [5/5]
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ wls-operator-exporter ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/user/projects/weblogic-monitoring-exporter/wls-operator-exporter/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:compile (default-compile) @ wls-operator-exporter ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ wls-operator-exporter ---
+[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+[INFO] skip non existing resourceDirectory /home/user/projects/weblogic-monitoring-exporter/wls-operator-exporter/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.6.1:testCompile (default-testCompile) @ wls-operator-exporter ---
+[INFO] No sources to compile
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for WebLogic Monitoring Exporter 1.2.0-SNAPSHOT:
+[INFO] 
+[INFO] WebLogic Monitoring Exporter ....................... SUCCESS [  0.010 s]
+[INFO] wls-exporter-core .................................. SUCCESS [ 18.854 s]
+[INFO] Exporter Build Helper Maven Mojo ................... SUCCESS [  2.855 s]
+[INFO] wls-exporter-war ................................... SUCCESS [  0.083 s]
+[INFO] wls-operator-exporter .............................. SUCCESS [  0.051 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  22.344 s
+[INFO] Finished at: 2021-07-20T21:29:14Z
+[INFO] ------------------------------------------------------------------------

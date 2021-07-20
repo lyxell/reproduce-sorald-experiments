@@ -1,0 +1,82 @@
+diff --git a/src/test/java/org/junit/tests/experimental/max/DescriptionTest.java b/src/test/java/org/junit/tests/experimental/max/DescriptionTest.java
+index 607bb815..84cc39c7 100644
+--- a/src/test/java/org/junit/tests/experimental/max/DescriptionTest.java
++++ b/src/test/java/org/junit/tests/experimental/max/DescriptionTest.java
+@@ -85,32 +85,29 @@ public class DescriptionTest {
+             }
+         }
+         URL classpath = Sweet.class.getProtectionDomain().getCodeSource().getLocation();
+-        URLClassLoader2 loader = new URLClassLoader2(classpath);
+-        Class<?> clazz = loader.findClass(Sweet.class.getName());
+-        assertEquals(loader, clazz.getClassLoader());
+-
+-        Description d = Description.createSuiteDescription(clazz);
+-        assertEquals(clazz, d.getTestClass());
+-        assertNull(d.getMethodName());
+-        assertEquals(1, d.getAnnotations().size());
+-        assertEquals(Ignore.class, d.getAnnotations().iterator().next().annotationType());
+-
+-        d = Description.createTestDescription(clazz, "tessed");
+-        assertEquals(clazz, d.getTestClass());
+-        assertEquals("tessed", d.getMethodName());
+-        assertEquals(0, d.getAnnotations().size());
+-
+-        d = Description.createTestDescription(clazz, "tessed", clazz.getMethod("tessed").getAnnotations());
+-        assertEquals(clazz, d.getTestClass());
+-        assertEquals("tessed", d.getMethodName());
+-        assertEquals(1, d.getAnnotations().size());
+-        assertEquals(Test.class, d.getAnnotations().iterator().next().annotationType());
+-
+-        d = d.childlessCopy();
+-        assertEquals(clazz, d.getTestClass());
+-        assertEquals("tessed", d.getMethodName());
+-        assertEquals(1, d.getAnnotations().size());
+-        assertEquals(Test.class, d.getAnnotations().iterator().next().annotationType());
++            try (URLClassLoader2 loader = new URLClassLoader2(classpath)) {
++                Class<?> clazz = loader.findClass(Sweet.class.getName());
++                assertEquals(loader, clazz.getClassLoader());
++                Description d = Description.createSuiteDescription(clazz);
++                assertEquals(clazz, d.getTestClass());
++                assertNull(d.getMethodName());
++                assertEquals(1, d.getAnnotations().size());
++                assertEquals(Ignore.class, d.getAnnotations().iterator().next().annotationType());
++                d = Description.createTestDescription(clazz, "tessed");
++                assertEquals(clazz, d.getTestClass());
++                assertEquals("tessed", d.getMethodName());
++                assertEquals(0, d.getAnnotations().size());
++                d = Description.createTestDescription(clazz, "tessed", clazz.getMethod("tessed").getAnnotations());
++                assertEquals(clazz, d.getTestClass());
++                assertEquals("tessed", d.getMethodName());
++                assertEquals(1, d.getAnnotations().size());
++                assertEquals(Test.class, d.getAnnotations().iterator().next().annotationType());
++                d = d.childlessCopy();
++                assertEquals(clazz, d.getTestClass());
++                assertEquals("tessed", d.getMethodName());
++                assertEquals(1, d.getAnnotations().size());
++                assertEquals(Test.class, d.getAnnotations().iterator().next().annotationType());
++            }
+     }
+ 
+     @Ignore
+diff --git a/src/test/java/org/junit/tests/running/classes/parent/ParentRunnerClassLoaderTest.java b/src/test/java/org/junit/tests/running/classes/parent/ParentRunnerClassLoaderTest.java
+index bb6ba14e..d3c43f2f 100644
+--- a/src/test/java/org/junit/tests/running/classes/parent/ParentRunnerClassLoaderTest.java
++++ b/src/test/java/org/junit/tests/running/classes/parent/ParentRunnerClassLoaderTest.java
+@@ -74,12 +74,11 @@ public class ParentRunnerClassLoaderTest {
+ 
+     private Class<?> wrapToClassLoader(Class<?> sourceClass) throws ClassNotFoundException {
+         URL classpath = sourceClass.getProtectionDomain().getCodeSource().getLocation();
+-        VisibleClassLoader loader = new VisibleClassLoader(new URL[]{classpath}, this.getClass().getClassLoader());
+-        Class<?> testClassWithOwnClassLoader = loader.findClass(sourceClass.getName());
+-
+-        assert testClassWithOwnClassLoader != sourceClass;
+-
+-        return testClassWithOwnClassLoader;
++        try (VisibleClassLoader loader = new VisibleClassLoader(new URL[]{ classpath }, this.getClass().getClassLoader())) {
++            Class<?> testClassWithOwnClassLoader = loader.findClass(sourceClass.getName());
++            assert testClassWithOwnClassLoader != sourceClass;
++            return testClassWithOwnClassLoader;
++        }
+     }
+ 
+ 

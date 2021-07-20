@@ -1,0 +1,256 @@
+diff --git a/src/main/java/com/esri/core/geometry/OperatorFactoryLocal.java b/src/main/java/com/esri/core/geometry/OperatorFactoryLocal.java
+index 04368b9..dcd6ca8 100644
+--- a/src/main/java/com/esri/core/geometry/OperatorFactoryLocal.java
++++ b/src/main/java/com/esri/core/geometry/OperatorFactoryLocal.java
+@@ -167,10 +167,7 @@ public class OperatorFactoryLocal extends OperatorFactory {
+ 		OperatorExportToJson exporterJSON = (OperatorExportToJson) engine
+ 				.getOperator(Operator.Type.ExportToJson);
+ 		String jsonString = exporterJSON.execute(spatial_ref, geometry);
+-
+-		try {
+-			FileOutputStream outfile = new FileOutputStream(file_name);
+-			PrintStream p = new PrintStream(outfile);
++		try (PrintStream p = new PrintStream(outfile)) {
+ 			p.print(jsonString);
+ 			p.close();
+ 		} catch (Exception ex) {
+@@ -184,27 +181,17 @@ public class OperatorFactoryLocal extends OperatorFactory {
+ 
+ 		String jsonString = null;
+ 		Reader reader = null;
+-		try {
+-			FileInputStream stream = new FileInputStream(file_name);
++		try (FileInputStream stream = new FileInputStream(file_name)) {
+ 			reader = new BufferedReader(new InputStreamReader(stream));
+ 			StringBuilder builder = new StringBuilder();
+ 			char[] buffer = new char[8192];
+ 			int read;
+ 			while ((read = reader.read(buffer, 0, buffer.length)) > 0) {
+ 				builder.append(buffer, 0, read);
+-			}
+-
++			} 
+ 			jsonString = builder.toString();
+ 		} catch (Exception ex) {
+ 		}
+-		finally {
+-			if (reader != null) {
+-				try {
+-					reader.close();
+-				} catch (IOException e) {
+-				}
+-			}
+-		}
+ 
+ 		MapGeometry mapGeom = OperatorImportFromJson.local().execute(Geometry.Type.Unknown, jsonString);
+ 		return mapGeom;
+@@ -269,10 +256,7 @@ public class OperatorFactoryLocal extends OperatorFactory {
+ 		}
+ 
+ 		String jsonString = OperatorExportToWkt.local().execute(0, geometry, null);
+-
+-		try {
+-			FileOutputStream outfile = new FileOutputStream(file_name);
+-			PrintStream p = new PrintStream(outfile);
++		try (PrintStream p = new PrintStream(outfile)) {
+ 			p.print(jsonString);
+ 			p.close();
+ 		} catch (Exception ex) {
+@@ -286,27 +270,17 @@ public class OperatorFactoryLocal extends OperatorFactory {
+ 
+ 		String s = null;
+ 		Reader reader = null;
+-		try {
+-			FileInputStream stream = new FileInputStream(file_name);
++		try (FileInputStream stream = new FileInputStream(file_name)) {
+ 			reader = new BufferedReader(new InputStreamReader(stream));
+ 			StringBuilder builder = new StringBuilder();
+ 			char[] buffer = new char[8192];
+ 			int read;
+ 			while ((read = reader.read(buffer, 0, buffer.length)) > 0) {
+ 				builder.append(buffer, 0, read);
+-			}
+-
++			} 
+ 			s = builder.toString();
+ 		} catch (Exception ex) {
+ 		}
+-		finally {
+-			if (reader != null) {
+-				try {
+-					reader.close();
+-				} catch (IOException e) {
+-				}
+-			}
+-		}
+ 
+ 		return OperatorImportFromWkt.local().execute(0, Geometry.Type.Unknown, s, null);
+ 	}
+diff --git a/src/main/java/com/esri/core/geometry/RasterizedGeometry2DImpl.java b/src/main/java/com/esri/core/geometry/RasterizedGeometry2DImpl.java
+index c7def2d..5efad7b 100644
+--- a/src/main/java/com/esri/core/geometry/RasterizedGeometry2DImpl.java
++++ b/src/main/java/com/esri/core/geometry/RasterizedGeometry2DImpl.java
+@@ -500,73 +500,66 @@ final class RasterizedGeometry2DImpl extends RasterizedGeometry2D {
+ 
+ 	@Override
+ 	public boolean dbgSaveToBitmap(String fileName) {
+-		try {
+-			FileOutputStream outfile = new FileOutputStream(fileName);
+-
+-			int height = m_width;
+-			int width = m_width;
+-			int sz = 14 + 40 + 4 * m_width * height;
+-			// Write the BITMAPFILEHEADER
+-			ByteBuffer byteBuffer = ByteBuffer.allocate(sz);
+-			byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+-			// byteBuffer.put((byte) 'M');
+-			byteBuffer.put((byte) 66);
+-			byteBuffer.put((byte) 77);
+-			// fwrite("BM", 1, 2, f); //bfType
+-			byteBuffer.putInt(sz);
+-			// fwrite(&sz, 1, 4, f);//bfSize
+-			short zero16 = 0;
+-			byteBuffer.putShort(zero16);
+-			// fwrite(&zero16, 1, 2, f);//bfReserved1
+-			byteBuffer.putShort(zero16);
+-			// fwrite(&zero16, 1, 2, f);//bfReserved2
+-			int offset = 14 + 40;
+-			byteBuffer.putInt(offset);
+-			// fwrite(&offset, 1, 4, f);//bfOffBits
+-
+-			// Write the BITMAPINFOHEADER
+-			int biSize = 40;
+-			int biWidth = width;
+-			int biHeight = -height;
+-			short biPlanes = 1;
+-			short biBitCount = 32;
+-			int biCompression = 0;
+-			int biSizeImage = 4 * width * height;
+-			int biXPelsPerMeter = 0;
+-			int biYPelsPerMeter = 0;
+-			int biClrUsed = 0;
+-			int biClrImportant = 0;
+-			byteBuffer.putInt(biSize);
+-			byteBuffer.putInt(biWidth);
+-			byteBuffer.putInt(biHeight);
+-			byteBuffer.putShort(biPlanes);
+-			byteBuffer.putShort(biBitCount);
+-			byteBuffer.putInt(biCompression);
+-			byteBuffer.putInt(biSizeImage);
+-			byteBuffer.putInt(biXPelsPerMeter);
+-			byteBuffer.putInt(biYPelsPerMeter);
+-			byteBuffer.putInt(biClrUsed);
+-			byteBuffer.putInt(biClrImportant);
+-
+-			int colors[] = { 0xFFFFFFFF, 0xFF000000, 0xFFFF0000, 0xFF00FF00 };
+-			// int32_t* rgb4 = (int32_t*)malloc(biSizeImage);
+-			for (int y = 0; y < height; y++) {
+-				int scanlineIn = y * ((width * 2 + 31) / 32);
+-
+-				for (int x = 0; x < width; x++) {
+-					int res = (m_bitmap[scanlineIn + (x >> 4)] >> ((x & 15) * 2)) & 3;
+-					byteBuffer.putInt(colors[res]);
++			try (FileOutputStream outfile = new FileOutputStream(fileName)) {
++				int height = m_width;
++				int width = m_width;
++				int sz = 14 + 40 + 4 * m_width * height;
++				// Write the BITMAPFILEHEADER
++				ByteBuffer byteBuffer = ByteBuffer.allocate(sz);
++				byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
++				// byteBuffer.put((byte) 'M');
++				byteBuffer.put(((byte) (66)));
++				byteBuffer.put(((byte) (77)));
++				// fwrite("BM", 1, 2, f); //bfType
++				byteBuffer.putInt(sz);
++				// fwrite(&sz, 1, 4, f);//bfSize
++				short zero16 = 0;
++				byteBuffer.putShort(zero16);
++				// fwrite(&zero16, 1, 2, f);//bfReserved1
++				byteBuffer.putShort(zero16);
++				// fwrite(&zero16, 1, 2, f);//bfReserved2
++				int offset = 14 + 40;
++				byteBuffer.putInt(offset);
++				// fwrite(&offset, 1, 4, f);//bfOffBits
++				// Write the BITMAPINFOHEADER
++				int biSize = 40;
++				int biWidth = width;
++				int biHeight = -height;
++				short biPlanes = 1;
++				short biBitCount = 32;
++				int biCompression = 0;
++				int biSizeImage = 4 * width * height;
++				int biXPelsPerMeter = 0;
++				int biYPelsPerMeter = 0;
++				int biClrUsed = 0;
++				int biClrImportant = 0;
++				byteBuffer.putInt(biSize);
++				byteBuffer.putInt(biWidth);
++				byteBuffer.putInt(biHeight);
++				byteBuffer.putShort(biPlanes);
++				byteBuffer.putShort(biBitCount);
++				byteBuffer.putInt(biCompression);
++				byteBuffer.putInt(biSizeImage);
++				byteBuffer.putInt(biXPelsPerMeter);
++				byteBuffer.putInt(biYPelsPerMeter);
++				byteBuffer.putInt(biClrUsed);
++				byteBuffer.putInt(biClrImportant);
++				int[] colors = new int[]{ 0xffffffff, 0xff000000, 0xffff0000, 0xff00ff00 };
++				// int32_t* rgb4 = (int32_t*)malloc(biSizeImage);
++				for (int y = 0; y < height; y++) {
++					int scanlineIn = y * ((width * 2 + 31) / 32);
++					for (int x = 0; x < width; x++) {
++						int res = m_bitmap[scanlineIn + (x >> 4)] >> (x & 15) * 2 & 3;
++						byteBuffer.putInt(colors[res]);
++					}
+ 				}
++				byte[] b = byteBuffer.array();
++				outfile.write(b);
++				outfile.close();
++				return true;
++			} catch (IOException ex) {
++				return false;
+ 			}
+-
+-			byte[] b = byteBuffer.array();
+-			outfile.write(b);
+-			outfile.close();
+-			return true;
+-		} catch (IOException ex) {
+-			return false;
+-
+-		}
+ 	}
+ 
+ 	@Override
+diff --git a/src/test/java/com/esri/core/geometry/TestCommonMethods.java b/src/test/java/com/esri/core/geometry/TestCommonMethods.java
+index 9b937d4..10a3bb9 100644
+--- a/src/test/java/com/esri/core/geometry/TestCommonMethods.java
++++ b/src/test/java/com/esri/core/geometry/TestCommonMethods.java
+@@ -229,12 +229,9 @@ public class TestCommonMethods extends TestCase {
+ 	}
+ 
+ 	public static boolean writeObjectToFile(String fileName, Object obj) {
+-		try {
++		try (ObjectOutputStream oo = new ObjectOutputStream(fout)) {
+ 			File f = new File(fileName);
+ 			f.setWritable(true);
+-
+-			FileOutputStream fout = new FileOutputStream(f);
+-			ObjectOutputStream oo = new ObjectOutputStream(fout);
+ 			oo.writeObject(obj);
+ 			fout.close();
+ 			return true;
+@@ -244,12 +241,9 @@ public class TestCommonMethods extends TestCase {
+ 	}
+ 
+ 	public static Object readObjectFromFile(String fileName) {
+-		try {
++		try (ObjectInputStream ii = new ObjectInputStream(streamIn)) {
+ 			File f = new File(fileName);
+ 			f.setReadable(true);
+-
+-			FileInputStream streamIn = new FileInputStream(f);
+-			ObjectInputStream ii = new ObjectInputStream(streamIn);
+ 			Object obj = ii.readObject();
+ 			streamIn.close();
+ 			return obj;

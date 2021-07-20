@@ -1,0 +1,18 @@
+diff --git a/src/main/java/jpass/util/Configuration.java b/src/main/java/jpass/util/Configuration.java
+index 8cbaaa1..eecb413 100644
+--- a/src/main/java/jpass/util/Configuration.java
++++ b/src/main/java/jpass/util/Configuration.java
+@@ -50,9 +50,10 @@ public final class Configuration {
+         try {
+             File filePath = new File("jpass.properties");
+             if (filePath.exists() && filePath.isFile()) {
+-                InputStream is = new FileInputStream(filePath);
+-                properties.load(is);
+-                is.close();
++                try (InputStream is = new FileInputStream(filePath)) {
++                    properties.load(is);
++                    is.close();
++                }
+             }
+         } catch (Exception e) {
+             LOG.log(Level.WARNING, "An error occurred during loading configuration.", e);

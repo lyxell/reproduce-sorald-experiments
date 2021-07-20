@@ -1,0 +1,342 @@
+diff --git a/aesh/src/main/java/org/aesh/command/export/ExportManager.java b/aesh/src/main/java/org/aesh/command/export/ExportManager.java
+index fbc16efa..88084f8e 100644
+--- a/aesh/src/main/java/org/aesh/command/export/ExportManager.java
++++ b/aesh/src/main/java/org/aesh/command/export/ExportManager.java
+@@ -258,12 +258,13 @@ public class ExportManager {
+             }
+ 
+             if(keepGoing) {
+-                FileWriter fw = new FileWriter(exportFile);
+-                for(String key : variables.keySet()) {
+-                    fw.write(EXPORT + " " + key + "=" + variables.get(key) + Config.getLineSeparator());
++                try (FileWriter fw = new FileWriter(exportFile)) {
++                    for (String key : variables.keySet()) {
++                        fw.write(EXPORT + " " + key + "=" + variables.get(key) + Config.getLineSeparator());
++                    }
++                    fw.flush();
++                    fw.close();
+                 }
+-                fw.flush();
+-                fw.close();
+             }
+         }
+         catch (IOException e) {
+diff --git a/aesh/src/test/java/org/aesh/command/AeshScriptTest.java b/aesh/src/test/java/org/aesh/command/AeshScriptTest.java
+index 68adaec4..ba8f614b 100644
+--- a/aesh/src/test/java/org/aesh/command/AeshScriptTest.java
++++ b/aesh/src/test/java/org/aesh/command/AeshScriptTest.java
+@@ -113,15 +113,16 @@ public class AeshScriptTest {
+ 
+     private List<String> readScriptFile() throws IOException {
+         List<String> lines = new ArrayList<>();
+-        BufferedReader br = new BufferedReader(new FileReader("src/test/resources/script1"));
+-        String line = br.readLine();
+-        while (line != null) {
+-            if (line.trim().length() > 0 && !line.trim().startsWith("#"))
+-                lines.add(line);
+-            line = br.readLine();
++        try (BufferedReader br = new BufferedReader(new FileReader("src/test/resources/script1"))) {
++            String line = br.readLine();
++            while (line != null) {
++                if (line.trim().length() > 0 && !line.trim().startsWith("#")) {
++                    lines.add(line);
++                }
++                line = br.readLine();
++            } 
++            return lines;
+         }
+-
+-        return lines;
+     }
+ 
+     @CommandDefinition(name = "run", description = "")
+diff --git a/aesh/src/test/java/org/aesh/command/operator/AeshCommandPipelineTest.java b/aesh/src/test/java/org/aesh/command/operator/AeshCommandPipelineTest.java
+index 9a98bcfb..804cabf4 100644
+--- a/aesh/src/test/java/org/aesh/command/operator/AeshCommandPipelineTest.java
++++ b/aesh/src/test/java/org/aesh/command/operator/AeshCommandPipelineTest.java
+@@ -134,17 +134,15 @@ public class AeshCommandPipelineTest {
+ 
+         @Override
+         public CommandResult execute(CommandInvocation commandInvocation) throws CommandException, InterruptedException {
+-            try {
+-                if (commandInvocation.getConfiguration().getPipedData().available() > 0) {
+-                    counter++;
++                try (BufferedReader reader = new BufferedReader(new InputStreamReader(commandInvocation.getConfiguration().getPipedData()))) {
++                    if (commandInvocation.getConfiguration().getPipedData().available() > 0) {
++                        counter++;
++                    }
++                    assertEquals("hello", reader.readLine());
++                    assertEquals("aesh", reader.readLine());
++                } catch (IOException ex) {
++                    throw new CommandException(ex);
+                 }
+-                BufferedReader reader = new BufferedReader(new InputStreamReader(commandInvocation.getConfiguration().getPipedData()));
+-
+-                assertEquals("hello", reader.readLine());
+-                assertEquals("aesh", reader.readLine());
+-            } catch (IOException ex) {
+-                throw new CommandException(ex);
+-            }
+             return CommandResult.SUCCESS;
+         }
+ 
+@@ -161,13 +159,11 @@ public class AeshCommandPipelineTest {
+ 
+         @Override
+         public CommandResult execute(CommandInvocation commandInvocation) throws CommandException, InterruptedException {
+-            try {
+-                BufferedReader reader = new BufferedReader(new InputStreamReader(arg.read()));
+-                commandInvocation.println(reader.readLine() + " " + reader.readLine());
+-            }
+-            catch (IOException e) {
+-                e.printStackTrace();
+-            }
++                try (BufferedReader reader = new BufferedReader(new InputStreamReader(arg.read()))) {
++                    commandInvocation.println(reader.readLine() + " " + reader.readLine());
++                } catch (IOException e) {
++                    e.printStackTrace();
++                }
+ 
+             return CommandResult.SUCCESS;
+         }
+diff --git a/aesh/src/test/java/org/aesh/command/operator/ConsoleRedirectionTest.java b/aesh/src/test/java/org/aesh/command/operator/ConsoleRedirectionTest.java
+index 01016aa2..2a80481b 100644
+--- a/aesh/src/test/java/org/aesh/command/operator/ConsoleRedirectionTest.java
++++ b/aesh/src/test/java/org/aesh/command/operator/ConsoleRedirectionTest.java
+@@ -18,6 +18,7 @@
+  * limitations under the License.
+  */
+ package org.aesh.command.operator;
++import java.util.function.Consumer;
+ 
+ 
+ import org.aesh.command.Command;
+@@ -426,15 +427,12 @@ import static org.junit.Assert.assertEquals;
+         @Override
+         public CommandResult execute(CommandInvocation commandInvocation) throws CommandException, InterruptedException {
+             if(arg != null) {
+-                try {
+-                    String result = new BufferedReader(new InputStreamReader(arg.read()))
+-                            .lines().collect(Collectors.joining("\n"));
+-
+-                    commandInvocation.println(result);
+-                    return CommandResult.SUCCESS;
+-                } catch (FileNotFoundException e) {
+-                    e.printStackTrace();
+-                }
++                            try (String result = new BufferedReader(new InputStreamReader(arg.read())).lines().collect(Collectors.joining("\n"))) {
++                                commandInvocation.println(result);
++                                return CommandResult.SUCCESS;
++                            } catch (FileNotFoundException e) {
++                                e.printStackTrace();
++                            }
+             }
+             return CommandResult.FAILURE;
+         }
+@@ -449,15 +447,12 @@ import static org.junit.Assert.assertEquals;
+         @Override
+         public CommandResult execute(CommandInvocation commandInvocation) throws CommandException, InterruptedException {
+             if(arg != null) {
+-                try {
+-                    String result = new BufferedReader(new InputStreamReader(arg.read()))
+-                            .lines().collect(Collectors.joining("\n"));
+-
+-                    commandInvocation.println(result);
+-                    return CommandResult.SUCCESS;
+-                } catch (FileNotFoundException e) {
+-                    e.printStackTrace();
+-                }
++                            try (String result = new BufferedReader(new InputStreamReader(arg.read())).lines().collect(Collectors.joining("\n"))) {
++                                commandInvocation.println(result);
++                                return CommandResult.SUCCESS;
++                            } catch (FileNotFoundException e) {
++                                e.printStackTrace();
++                            }
+             }
+             return CommandResult.FAILURE;
+         }
+@@ -468,9 +463,10 @@ import static org.junit.Assert.assertEquals;
+ 
+          @Override
+          public CommandResult execute(CommandInvocation commandInvocation) throws CommandException, InterruptedException {
+-             BufferedReader reader = new BufferedReader(new InputStreamReader(commandInvocation.getConfiguration().getPipedData()));
+-             reader.lines().forEach(commandInvocation::print);
+-             return CommandResult.SUCCESS;
++                        try (BufferedReader reader = new BufferedReader(new InputStreamReader(commandInvocation.getConfiguration().getPipedData()))) {
++                            reader.lines().forEach(commandInvocation::print);
++                            return CommandResult.SUCCESS;
++                        }
+          }
+      }
+ 
+diff --git a/aesh/src/test/java/org/aesh/io/filter/DirectoryResourceFilterTest.java b/aesh/src/test/java/org/aesh/io/filter/DirectoryResourceFilterTest.java
+index 5554b785..367b3f9c 100644
+--- a/aesh/src/test/java/org/aesh/io/filter/DirectoryResourceFilterTest.java
++++ b/aesh/src/test/java/org/aesh/io/filter/DirectoryResourceFilterTest.java
+@@ -42,16 +42,12 @@ public class DirectoryResourceFilterTest {
+ 
+     @Before
+     public void setUp() throws IOException {
+-        PipedOutputStream pos = new PipedOutputStream();
+-        PipedInputStream pis = new PipedInputStream(pos);
+-        Settings settings = SettingsBuilder.builder()
+-                .inputStream(pis)
+-                .outputStream(new PrintStream(new ByteArrayOutputStream()))
+-                .logging(true)
+-                .build();
+-
+-        AeshContext aeshContext = settings.aeshContext();
+-        resource = aeshContext.getCurrentWorkingDirectory().newInstance(".");
++        try (PipedOutputStream pos = new PipedOutputStream()) {
++            PipedInputStream pis = new PipedInputStream(pos);
++            Settings settings = SettingsBuilder.builder().inputStream(pis).outputStream(new PrintStream(new ByteArrayOutputStream())).logging(true).build();
++            AeshContext aeshContext = settings.aeshContext();
++            resource = aeshContext.getCurrentWorkingDirectory().newInstance(".");
++        }
+     }
+ 
+     @Test
+diff --git a/aesh/src/test/java/org/aesh/io/filter/LeafResourceFilterTest.java b/aesh/src/test/java/org/aesh/io/filter/LeafResourceFilterTest.java
+index 39c1060f..61d5fbe9 100644
+--- a/aesh/src/test/java/org/aesh/io/filter/LeafResourceFilterTest.java
++++ b/aesh/src/test/java/org/aesh/io/filter/LeafResourceFilterTest.java
+@@ -42,16 +42,12 @@ public class LeafResourceFilterTest {
+ 
+     @Before
+     public void setUp() throws IOException {
+-        PipedOutputStream pos = new PipedOutputStream();
+-        PipedInputStream pis = new PipedInputStream(pos);
+-        Settings settings = SettingsBuilder.builder()
+-                .inputStream(pis)
+-                .outputStream(new PrintStream(new ByteArrayOutputStream()))
+-                .logging(true)
+-                .build();
+-
+-        AeshContext aeshContext = settings.aeshContext();
+-        resource = aeshContext.getCurrentWorkingDirectory().newInstance(".");
++        try (PipedOutputStream pos = new PipedOutputStream()) {
++            PipedInputStream pis = new PipedInputStream(pos);
++            Settings settings = SettingsBuilder.builder().inputStream(pis).outputStream(new PrintStream(new ByteArrayOutputStream())).logging(true).build();
++            AeshContext aeshContext = settings.aeshContext();
++            resource = aeshContext.getCurrentWorkingDirectory().newInstance(".");
++        }
+     }
+ 
+     @Test
+diff --git a/aesh/src/test/java/org/aesh/io/filter/NoDotNamesFilterTest.java b/aesh/src/test/java/org/aesh/io/filter/NoDotNamesFilterTest.java
+index 247739ed..dc44ac3c 100644
+--- a/aesh/src/test/java/org/aesh/io/filter/NoDotNamesFilterTest.java
++++ b/aesh/src/test/java/org/aesh/io/filter/NoDotNamesFilterTest.java
+@@ -42,16 +42,12 @@ public class NoDotNamesFilterTest {
+ 
+     @Before
+     public void setUp() throws IOException {
+-        PipedOutputStream pos = new PipedOutputStream();
+-        PipedInputStream pis = new PipedInputStream(pos);
+-        Settings settings = SettingsBuilder.builder()
+-                .inputStream(pis)
+-                .outputStream(new PrintStream(new ByteArrayOutputStream()))
+-                .logging(true)
+-                .build();
+-
+-        AeshContext aeshContext = settings.aeshContext();
+-        resource = aeshContext.getCurrentWorkingDirectory().newInstance(".");
++        try (PipedOutputStream pos = new PipedOutputStream()) {
++            PipedInputStream pis = new PipedInputStream(pos);
++            Settings settings = SettingsBuilder.builder().inputStream(pis).outputStream(new PrintStream(new ByteArrayOutputStream())).logging(true).build();
++            AeshContext aeshContext = settings.aeshContext();
++            resource = aeshContext.getCurrentWorkingDirectory().newInstance(".");
++        }
+     }
+ 
+     @Test
+diff --git a/aesh/src/test/java/org/aesh/util/FileUtilsTest.java b/aesh/src/test/java/org/aesh/util/FileUtilsTest.java
+index aa20d5da..f4d6b487 100644
+--- a/aesh/src/test/java/org/aesh/util/FileUtilsTest.java
++++ b/aesh/src/test/java/org/aesh/util/FileUtilsTest.java
+@@ -46,15 +46,11 @@ public class FileUtilsTest {
+ 
+     @Before
+     public void setUp() throws IOException {
+-        PipedOutputStream pos = new PipedOutputStream();
+-        PipedInputStream pis = new PipedInputStream(pos);
+-        Settings settings = SettingsBuilder.builder()
+-                .inputStream(pis)
+-                .outputStream(new PrintStream(new ByteArrayOutputStream()))
+-                .logging(true)
+-                .build();
+-
+-        aeshContext = settings.aeshContext();
++        try (PipedOutputStream pos = new PipedOutputStream()) {
++            PipedInputStream pis = new PipedInputStream(pos);
++            Settings settings = SettingsBuilder.builder().inputStream(pis).outputStream(new PrintStream(new ByteArrayOutputStream())).logging(true).build();
++            aeshContext = settings.aeshContext();
++        }
+     }
+ 
+     @Test(expected = IOException.class)
+diff --git a/aesh/src/test/java/org/aesh/util/graal/GraalReflectionFileGeneratorTest.java b/aesh/src/test/java/org/aesh/util/graal/GraalReflectionFileGeneratorTest.java
+index 3c27435a..98bb630b 100644
+--- a/aesh/src/test/java/org/aesh/util/graal/GraalReflectionFileGeneratorTest.java
++++ b/aesh/src/test/java/org/aesh/util/graal/GraalReflectionFileGeneratorTest.java
+@@ -14,6 +14,7 @@
+  * limitations under the License.
+  */
+ package org.aesh.util.graal;
++import java.util.function.Consumer;
+ 
+ import org.aesh.command.Command;
+ import org.aesh.command.CommandDefinition;
+@@ -78,13 +79,15 @@ public class GraalReflectionFileGeneratorTest {
+ 
+     private String readFile(String path) throws IOException {
+         StringBuilder builder = new StringBuilder();
+-        BufferedReader br = new BufferedReader(new FileReader(path));
+-        br.lines().forEach(line -> {
+-            if(builder.length() > 0)
+-                builder.append(getLineSeparator());
+-            builder.append(line);
+-        });
+-        return builder.toString();
++        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
++            br.lines().forEach(( line) -> {
++                if (builder.length() > 0) {
++                    builder.append(getLineSeparator());
++                }
++                builder.append(line);
++            });
++            return builder.toString();
++        }
+     }
+ 
+     private CommandLineParser<CommandInvocation> getParser(Class<? extends Command> clazz) {
+diff --git a/examples/src/main/java/examples/Example.java b/examples/src/main/java/examples/Example.java
+index 561bb04f..b907ef67 100644
+--- a/examples/src/main/java/examples/Example.java
++++ b/examples/src/main/java/examples/Example.java
+@@ -198,15 +198,16 @@ public class Example {
+ 
+         private List<String> readScriptFile(Resource resource) throws IOException {
+             List<String> lines = new ArrayList<>();
+-            BufferedReader br = new BufferedReader(new InputStreamReader(resource.read()));
+-            String line = br.readLine();
+-            while (line != null) {
+-                if (line.trim().length() > 0 && !line.trim().startsWith("#"))
+-                    lines.add(line);
+-                line = br.readLine();
+-            }
+-
+-            return lines;
++                        try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.read()))) {
++                            String line = br.readLine();
++                            while (line != null) {
++                                if (line.trim().length() > 0 && !line.trim().startsWith("#")) {
++                                    lines.add(line);
++                                }
++                                line = br.readLine();
++                            } 
++                            return lines;
++                        }
+         }
+     }
+ 

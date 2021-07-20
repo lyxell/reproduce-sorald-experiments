@@ -1,0 +1,156 @@
+diff --git a/core/src/main/java/uk/ac/bbsrc/tgac/miso/core/util/TransmissionUtils.java b/core/src/main/java/uk/ac/bbsrc/tgac/miso/core/util/TransmissionUtils.java
+index a850df04d..6c75949cc 100644
+--- a/core/src/main/java/uk/ac/bbsrc/tgac/miso/core/util/TransmissionUtils.java
++++ b/core/src/main/java/uk/ac/bbsrc/tgac/miso/core/util/TransmissionUtils.java
+@@ -180,12 +180,11 @@ public class TransmissionUtils {
+     FileInputStream fis = null;
+ 
+     log.info("ftpPutListen has been called for file:" + file.getName());
+-    try {
++    try (OutputStream ops = new BufferedOutputStream(ftp.storeFileStream(file.getName()), ftp.getBufferSize())) {
+       if (ftp == null || !ftp.isConnected()) {
+         error = true;
+         throw new IOException("FTP client isn't connected. Please supply a client that has connected to the host.");
+       }
+-
+       if (path != null) {
+         if (autoMkdir) {
+           if (!ftp.makeDirectory(path)) {
+@@ -199,40 +198,18 @@ public class TransmissionUtils {
+           throw new IOException("Desired path does not exist on the server");
+         }
+       }
+-
+       fis = new FileInputStream(file);
+-
+-      OutputStream ops = new BufferedOutputStream(ftp.storeFileStream(file.getName()), ftp.getBufferSize());
+-
+       log.info("TransmissionUtils putListen: FTP server responded: " + ftp.getReplyString());
+-
+       copyStream(fis, ops, ftp.getBufferSize(), file.length(), listener);
+-
+       ops.close();
+       fis.close();
+       log.info("TransmissionUtils putListen: FTP server responded: " + ftp.getReplyString());
+-
+       if (autoLogout) {
+         ftp.logout();
+       }
+     } catch (IOException e) {
+       error = true;
+       log.error("ftp put listen", e);
+-    } finally {
+-      try {
+-        log.info("TransmissionUtils putListen:finally: " + ftp.getReplyString());
+-        if (fis != null) {
+-          fis.close();
+-        }
+-
+-        if (autoLogout) {
+-          if (ftp != null && ftp.isConnected()) {
+-            ftp.disconnect();
+-          }
+-        }
+-      } catch (IOException ioe) {
+-        log.error("ftp put listen close", ioe);
+-      }
+     }
+ 
+     // return inverse error boolean, just to make downstream conditionals easier
+diff --git a/integration-tools/src/main/java/uk/ac/bbsrc/tgac/miso/integration/util/IntegrationUtils.java b/integration-tools/src/main/java/uk/ac/bbsrc/tgac/miso/integration/util/IntegrationUtils.java
+index e3c0e8b88..b1f581aa1 100644
+--- a/integration-tools/src/main/java/uk/ac/bbsrc/tgac/miso/integration/util/IntegrationUtils.java
++++ b/integration-tools/src/main/java/uk/ac/bbsrc/tgac/miso/integration/util/IntegrationUtils.java
+@@ -178,21 +178,23 @@ public class IntegrationUtils {
+   public static byte[] compress(byte[] content) throws IOException {
+     ByteArrayOutputStream baos = new ByteArrayOutputStream();
+     Base64OutputStream b64os = new Base64OutputStream(baos);
+-    GZIPOutputStream gzip = new GZIPOutputStream(b64os);
+-    gzip.write(content);
+-    gzip.close();
+-    return baos.toByteArray();
++    try (GZIPOutputStream gzip = new GZIPOutputStream(b64os)) {
++      gzip.write(content);
++      gzip.close();
++      return baos.toByteArray();
++    }
+   }
+ 
+   public static byte[] decompress(byte[] contentBytes) throws IOException {
+     ByteArrayOutputStream out = new ByteArrayOutputStream();
+-    GZIPInputStream bis = new GZIPInputStream(new Base64InputStream(new ByteArrayInputStream(contentBytes)));
+-    byte[] buffer = new byte[1024 * 4];
+-    int n = 0;
+-    while (-1 != (n = bis.read(buffer))) {
+-      out.write(buffer, 0, n);
++    try (GZIPInputStream bis = new GZIPInputStream(new Base64InputStream(new ByteArrayInputStream(contentBytes)))) {
++      byte[] buffer = new byte[1024 * 4];
++      int n = 0;
++      while (-1 != (n = bis.read(buffer))) {
++        out.write(buffer, 0, n);
++      } 
++      bis.close();
++      return out.toByteArray();
+     }
+-    bis.close();
+-    return out.toByteArray();
+   }
+ }
+diff --git a/miso-web/src/main/java/uk/ac/bbsrc/tgac/miso/webapp/controller/view/DownloadController.java b/miso-web/src/main/java/uk/ac/bbsrc/tgac/miso/webapp/controller/view/DownloadController.java
+index f027111fd..e5d455b18 100644
+--- a/miso-web/src/main/java/uk/ac/bbsrc/tgac/miso/webapp/controller/view/DownloadController.java
++++ b/miso-web/src/main/java/uk/ac/bbsrc/tgac/miso/webapp/controller/view/DownloadController.java
+@@ -129,15 +129,16 @@ public class DownloadController {
+     // retrieval
+     if (filename != null) {
+       File file = filesManager.getFile(cl, id, filename);
+-      FileInputStream fis = new FileInputStream(file);
+-      int read = 0;
+-      byte[] bytes = new byte[1024];
+-      while ((read = fis.read(bytes)) != -1) {
+-        responseStream.write(bytes, 0, read);
++      try (FileInputStream fis = new FileInputStream(file)) {
++        int read = 0;
++        byte[] bytes = new byte[1024];
++        while ((read = fis.read(bytes)) != -1) {
++          responseStream.write(bytes, 0, read);
++        } 
++        responseStream.flush();
++        responseStream.close();
++        fis.close();
+       }
+-      responseStream.flush();
+-      responseStream.close();
+-      fis.close();
+     } else {
+       throw new IOException("Cannot open file. Please check that it exists and is readable.");
+     }
+diff --git a/miso-web/src/main/java/uk/ac/bbsrc/tgac/miso/webapp/util/MisoPropertyExporter.java b/miso-web/src/main/java/uk/ac/bbsrc/tgac/miso/webapp/util/MisoPropertyExporter.java
+index 734c8ad52..20e48aeee 100644
+--- a/miso-web/src/main/java/uk/ac/bbsrc/tgac/miso/webapp/util/MisoPropertyExporter.java
++++ b/miso-web/src/main/java/uk/ac/bbsrc/tgac/miso/webapp/util/MisoPropertyExporter.java
+@@ -85,21 +85,17 @@ public class MisoPropertyExporter extends PropertyPlaceholderConfigurer {
+       for (String propPath : propertiesList) {
+         log.debug("Attempting to load " + baseStoragePath + propPath);
+         Properties tempProps;
+-
+-        try {
+-          InputStream in = new FileInputStream(new File(baseStoragePath, propPath));
++        try (InputStream in = new FileInputStream(new File(baseStoragePath, propPath))) {
+           tempProps = new Properties();
+           try {
+             tempProps.load(in);
+             log.debug("Loaded " + tempProps.keySet() + " from " + propPath);
+             CollectionUtils.mergePropertiesIntoMap(tempProps, misoProps);
+           } catch (IOException e) {
+-            throw new InvalidPropertyException(MisoPropertyExporter.class, "All",
+-                "Cannot load " + baseStoragePath + propPath + " properties. Cannot read file!");
++            throw new InvalidPropertyException(uk.ac.bbsrc.tgac.miso.webapp.util.MisoPropertyExporter.class, "All", "Cannot load " + baseStoragePath + propPath + " properties. Cannot read file!");
+           }
+         } catch (FileNotFoundException e) {
+-          throw new InvalidPropertyException(MisoPropertyExporter.class, "All",
+-              "Cannot load " + baseStoragePath + propPath + " properties. File does not exist!");
++          throw new InvalidPropertyException(uk.ac.bbsrc.tgac.miso.webapp.util.MisoPropertyExporter.class, "All", "Cannot load " + baseStoragePath + propPath + " properties. File does not exist!");
+         }
+       }
+ 

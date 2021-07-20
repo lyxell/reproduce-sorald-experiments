@@ -1,0 +1,36 @@
+{
+    "repairs": [{
+        "nbPerformedRepairs": 1,
+        "ruleName": "UnclosedResources",
+        "crashedRepairsLocations": [],
+        "nbCrashedRepairs": 0,
+        "ruleKey": "2095",
+        "nbViolationsBefore": 1,
+        "performedRepairsLocations": [{
+            "endLine": 72,
+            "endColumn": 64,
+            "startColumn": 39,
+            "startLine": 72,
+            "filePath": "viewer/src/main/java/org/movsim/viewer/ui/ViewProperties.java",
+            "violationSpecifier": "2095:viewer/src/main/java/org/movsim/viewer/ui/ViewProperties.java:72:39:72:64"
+        }],
+        "nbViolationsAfter": 0
+    }],
+    "executionInfo": {
+        "soraldVersion": "commit: 38248282",
+        "javaVersion": "11.0.12-ea",
+        "originalArgs": [
+            "repair",
+            "--file-output-strategy=IN_PLACE",
+            "--original-files-path=./",
+            "--rule-keys=2095",
+            "--stats-output-file=repair.json"
+        ]
+    },
+    "totalTimeMs": 98595,
+    "repairTimeMs": 1331,
+    "startTimeMs": 1626811059173,
+    "crashes": [],
+    "endTimeMs": 1626811157768,
+    "parseTimeMs": 24217
+}

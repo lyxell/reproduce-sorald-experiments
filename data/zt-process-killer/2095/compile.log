@@ -1,0 +1,125 @@
+[INFO] Scanning for projects...
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/wagon/wagon-webdav-jackrabbit/2.10/wagon-webdav-jackrabbit-2.10.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/wagon/wagon-webdav-jackrabbit/2.10/wagon-webdav-jackrabbit-2.10.pom (5.1 kB at 6.3 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/wagon/wagon-providers/2.10/wagon-providers-2.10.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/wagon/wagon-providers/2.10/wagon-providers-2.10.pom (2.7 kB at 80 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/wagon/wagon-http-shared/2.10/wagon-http-shared-2.10.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/wagon/wagon-http-shared/2.10/wagon-http-shared-2.10.pom (1.9 kB at 40 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jsoup/jsoup/1.7.2/jsoup-1.7.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jsoup/jsoup/1.7.2/jsoup-1.7.2.pom (5.5 kB at 97 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/jackrabbit/jackrabbit-webdav/2.5.2/jackrabbit-webdav-2.5.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/jackrabbit/jackrabbit-webdav/2.5.2/jackrabbit-webdav-2.5.2.pom (4.9 kB at 78 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/jackrabbit/jackrabbit-parent/2.5.2/jackrabbit-parent-2.5.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/jackrabbit/jackrabbit-parent/2.5.2/jackrabbit-parent-2.5.2.pom (30 kB at 307 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/wagon/wagon-webdav-jackrabbit/2.10/wagon-webdav-jackrabbit-2.10.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/jackrabbit/jackrabbit-webdav/2.5.2/jackrabbit-webdav-2.5.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jsoup/jsoup/1.7.2/jsoup-1.7.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/wagon/wagon-http-shared/2.10/wagon-http-shared-2.10.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/wagon/wagon-webdav-jackrabbit/2.10/wagon-webdav-jackrabbit-2.10.jar (36 kB at 235 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/wagon/wagon-http-shared/2.10/wagon-http-shared-2.10.jar (12 kB at 33 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jsoup/jsoup/1.7.2/jsoup-1.7.2.jar (294 kB at 699 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/jackrabbit/jackrabbit-webdav/2.5.2/jackrabbit-webdav-2.5.2.jar (326 kB at 795 kB/s)
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.zeroturnaround:zt-process-killer:jar:1.11-SNAPSHOT
+[WARNING] The expression ${version} is deprecated. Please use ${project.version} instead.
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ----------------< org.zeroturnaround:zt-process-killer >----------------
+[INFO] Building ZT Process Killer 1.11-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/bnd-maven-plugin/5.1.2/bnd-maven-plugin-5.1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/bnd-maven-plugin/5.1.2/bnd-maven-plugin-5.1.2.pom (3.4 kB at 117 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/bnd-maven-plugin/5.1.2/bnd-maven-plugin-5.1.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/bnd-maven-plugin/5.1.2/bnd-maven-plugin-5.1.2.jar (23 kB at 695 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/zeroturnaround/zt-exec/1.7/zt-exec-1.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/zeroturnaround/zt-exec/1.7/zt-exec-1.7.pom (6.6 kB at 182 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/zeroturnaround/zt-exec/1.7/zt-exec-1.7.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.6.3/slf4j-api-1.6.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/zeroturnaround/zt-exec/1.7/zt-exec-1.7.jar (38 kB at 997 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.6.3/slf4j-api-1.6.3.jar (26 kB at 352 kB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ zt-process-killer ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/zt-process-killer/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.5.1:compile (default-compile) @ zt-process-killer ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 22 source files to /home/user/projects/zt-process-killer/target/classes
+[INFO] /home/user/projects/zt-process-killer/src/main/java/org/zeroturnaround/process/PidUtil.java: Some input files use unchecked or unsafe operations.
+[INFO] /home/user/projects/zt-process-killer/src/main/java/org/zeroturnaround/process/PidUtil.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- bnd-maven-plugin:5.1.2:bnd-process (default) @ zt-process-killer ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-mapping/3.0.0/maven-mapping-3.0.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-mapping/3.0.0/maven-mapping-3.0.0.pom (4.1 kB at 112 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bnd.maven/5.1.2/biz.aQute.bnd.maven-5.1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bnd.maven/5.1.2/biz.aQute.bnd.maven-5.1.2.pom (4.3 kB at 114 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bndlib/5.1.2/biz.aQute.bndlib-5.1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bndlib/5.1.2/biz.aQute.bndlib-5.1.2.pom (4.1 kB at 159 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.resolve/5.1.2/biz.aQute.resolve-5.1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.resolve/5.1.2/biz.aQute.resolve-5.1.2.pom (4.5 kB at 118 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.repository/5.1.2/biz.aQute.repository-5.1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.repository/5.1.2/biz.aQute.repository-5.1.2.pom (3.9 kB at 197 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/3.5.3/maven-core-3.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/3.5.3/maven-core-3.5.3.pom (8.5 kB at 427 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven/3.5.3/maven-3.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven/3.5.3/maven-3.5.3.pom (23 kB at 807 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/3.5.3/maven-model-3.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/3.5.3/maven-model-3.5.3.pom (4.0 kB at 183 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/3.5.3/maven-settings-3.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/3.5.3/maven-settings-3.5.3.pom (1.8 kB at 102 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings-builder/3.5.3/maven-settings-builder-3.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings-builder/3.5.3/maven-settings-builder-3.5.3.pom (2.6 kB at 175 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-builder-support/3.5.3/maven-builder-support-3.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-builder-support/3.5.3/maven-builder-support-3.5.3.pom (1.5 kB at 64 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/3.5.3/maven-repository-metadata-3.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/3.5.3/maven-repository-metadata-3.5.3.pom (1.9 kB at 111 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/3.5.3/maven-artifact-3.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/3.5.3/maven-artifact-3.5.3.pom (2.1 kB at 101 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/3.5.3/maven-plugin-api-3.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/3.5.3/maven-plugin-api-3.5.3.pom (2.9 kB at 134 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model-builder/3.5.3/maven-model-builder-3.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model-builder/3.5.3/maven-model-builder-3.5.3.pom (3.1 kB at 101 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-resolver-provider/3.5.3/maven-resolver-provider-3.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-resolver-provider/3.5.3/maven-resolver-provider-3.5.3.pom (4.1 kB at 226 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-api/1.1.1/maven-resolver-api-1.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-api/1.1.1/maven-resolver-api-1.1.1.pom (1.9 kB at 118 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver/1.1.1/maven-resolver-1.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver/1.1.1/maven-resolver-1.1.1.pom (16 kB at 684 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-spi/1.1.1/maven-resolver-spi-1.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-spi/1.1.1/maven-resolver-spi-1.1.1.pom (2.1 kB at 98 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-util/1.1.1/maven-resolver-util-1.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-util/1.1.1/maven-resolver-util-1.1.1.pom (2.2 kB at 89 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-impl/1.1.1/maven-resolver-impl-1.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/resolver/maven-resolver-impl/1.1.1/maven-resolver-impl-1.1.1.pom (3.5 kB at 266 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-mapping/3.0.0/maven-mapping-3.0.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bnd.maven/5.1.2/biz.aQute.bnd.maven-5.1.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/shared/maven-mapping/3.0.0/maven-mapping-3.0.0.jar (11 kB at 322 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.resolve/5.1.2/biz.aQute.resolve-5.1.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.repository/5.1.2/biz.aQute.repository-5.1.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/3.5.3/maven-plugin-api-3.5.3.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/3.5.3/maven-settings-3.5.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bnd.maven/5.1.2/biz.aQute.bnd.maven-5.1.2.jar (142 kB at 570 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bndlib/5.1.2/biz.aQute.bndlib-5.1.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/3.5.3/maven-plugin-api-3.5.3.jar (48 kB at 190 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/3.5.3/maven-settings-3.5.3.jar (45 kB at 148 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.resolve/5.1.2/biz.aQute.resolve-5.1.2.jar (633 kB at 1.0 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.repository/5.1.2/biz.aQute.repository-5.1.2.jar (1.1 MB at 1.2 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bndlib/5.1.2/biz.aQute.bndlib-5.1.2.jar (3.7 MB at 2.1 MB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ zt-process-killer ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.5.1:testCompile (default-testCompile) @ zt-process-killer ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 13 source files to /home/user/projects/zt-process-killer/target/test-classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.447 s
+[INFO] Finished at: 2021-07-20T21:31:37Z
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,41 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -----------------------< org.xerial:sqlite-jdbc >-----------------------
+[INFO] Building SQLite JDBC 3.32.3.3-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.2:enforce (enforce-maven) @ sqlite-jdbc ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ sqlite-jdbc ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 13 resources
+[INFO] Copying 1 resource to META-INF/services
+[INFO] Copying 1 resource
+[INFO] Copying 3 resources to META-INF/maven/org.xerial/sqlite-jdbc
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ sqlite-jdbc ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 49 source files to /home/user/projects/sqlite-jdbc/target/classes
+[WARNING] /home/user/projects/sqlite-jdbc/src/main/java/org/sqlite/SQLiteDataSource.java: Some input files use or override a deprecated API.
+[WARNING] /home/user/projects/sqlite-jdbc/src/main/java/org/sqlite/SQLiteDataSource.java: Recompile with -Xlint:deprecation for details.
+[WARNING] /home/user/projects/sqlite-jdbc/src/main/java/org/sqlite/jdbc3/JDBC3Connection.java: /home/user/projects/sqlite-jdbc/src/main/java/org/sqlite/jdbc3/JDBC3Connection.java uses unchecked or unsafe operations.
+[WARNING] /home/user/projects/sqlite-jdbc/src/main/java/org/sqlite/jdbc3/JDBC3Connection.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- maven-bundle-plugin:2.4.0:manifest (default) @ sqlite-jdbc ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ sqlite-jdbc ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] skip non existing resourceDirectory /home/user/projects/sqlite-jdbc/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ sqlite-jdbc ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 29 source files to /home/user/projects/sqlite-jdbc/target/test-classes
+[WARNING] /home/user/projects/sqlite-jdbc/src/test/java/org/sqlite/PrepStmtTest.java: Some input files use or override a deprecated API.
+[WARNING] /home/user/projects/sqlite-jdbc/src/test/java/org/sqlite/PrepStmtTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.542 s
+[INFO] Finished at: 2021-07-20T21:29:36Z
+[INFO] ------------------------------------------------------------------------

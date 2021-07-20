@@ -1,0 +1,42 @@
+diff --git a/src/main/java/com/purbon/kafka/topology/backend/FileBackend.java b/src/main/java/com/purbon/kafka/topology/backend/FileBackend.java
+index 00f54aa..cdb4314 100644
+--- a/src/main/java/com/purbon/kafka/topology/backend/FileBackend.java
++++ b/src/main/java/com/purbon/kafka/topology/backend/FileBackend.java
+@@ -63,21 +63,24 @@ public class FileBackend implements Backend {
+   public Set<TopologyAclBinding> load(URI uri) throws IOException {
+     Path filePath = Paths.get(uri);
+     Set<TopologyAclBinding> bindings = new HashSet<>();
+-    BufferedReader in = new BufferedReader(new FileReader(filePath.toFile()));
+-    String type = in.readLine();
+-    String line = null;
+-    while ((line = in.readLine()) != null) {
+-      TopologyAclBinding binding = null;
+-      if (type.equalsIgnoreCase("acls")) {
+-        binding = buildAclBinding(line);
+-      } else if (type.equalsIgnoreCase("rbac")) {
+-        binding = buildRBACBinding(line);
+-      } else {
+-        throw new IOException("Binding type ( " + type + " )not supported.");
++    try (BufferedReader in = new BufferedReader(new FileReader(filePath.toFile()))) {
++      String type = in.readLine();
++      String line = null;
++      while ((line = in.readLine()) != null) {
++        TopologyAclBinding binding = null;
++        if (type.equalsIgnoreCase("acls")) {
++          binding = buildAclBinding(line);
++        } else {
++          if (type.equalsIgnoreCase("rbac")) {
++            binding = buildRBACBinding(line);
++          } else {
++            throw new IOException("Binding type ( " + type + " )not supported.");
++          }
++        }
++        bindings.add(binding);
+       }
+-      bindings.add(binding);
++      return bindings;
+     }
+-    return bindings;
+   }
+ 
+   private TopologyAclBinding buildRBACBinding(String line) {

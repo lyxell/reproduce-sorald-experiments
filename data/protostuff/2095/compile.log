@@ -1,0 +1,398 @@
+[INFO] Error stacktraces are turned on.
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] protostuff                                                         [pom]
+[INFO] protostuff :: api                                                  [jar]
+[INFO] protostuff :: core                                                 [jar]
+[INFO] protostuff :: collectionschema                                     [jar]
+[INFO] protostuff :: runtime                                              [jar]
+[INFO] protostuff :: runtime-md                                           [jar]
+[INFO] protostuff :: runtime-registry                                     [jar]
+[INFO] protostuff :: runtime-view                                         [jar]
+[INFO] protostuff :: json                                                 [jar]
+[INFO] protostuff :: msgpack                                              [jar]
+[INFO] protostuff :: xml                                                  [jar]
+[INFO] protostuff :: yaml                                                 [jar]
+[INFO] protostuff :: kvp                                                  [jar]
+[INFO] protostuff :: parser                                               [jar]
+[INFO] protostuff :: compiler                                             [jar]
+[INFO] protostuff :: maven-plugin                                [maven-plugin]
+[INFO] protostuff :: uberjar                                              [jar]
+[INFO] protostuff :: it                                                   [jar]
+[INFO] protostuff :: bom                                                  [pom]
+[INFO] protostuff :: benchmarks                                           [jar]
+[INFO] 
+[INFO] ----------------------< io.protostuff:protostuff >----------------------
+[INFO] Building protostuff 1.8.0-SNAPSHOT                                [1/20]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff ---
+[INFO] 
+[INFO] --------------------< io.protostuff:protostuff-api >--------------------
+[INFO] Building protostuff :: api 1.8.0-SNAPSHOT                         [2/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-api ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-api ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-api/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-api ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] -------------------< io.protostuff:protostuff-core >--------------------
+[INFO] Building protostuff :: core 1.8.0-SNAPSHOT                        [3/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-core ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-core ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-core/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-core ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] -------------< io.protostuff:protostuff-collectionschema >--------------
+[INFO] Building protostuff :: collectionschema 1.8.0-SNAPSHOT            [4/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-collectionschema ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-collectionschema ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-collectionschema/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-collectionschema ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] ------------------< io.protostuff:protostuff-runtime >------------------
+[INFO] Building protostuff :: runtime 1.8.0-SNAPSHOT                     [5/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-runtime ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-runtime ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-runtime/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-runtime ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] ----------------< io.protostuff:protostuff-runtime-md >-----------------
+[INFO] Building protostuff :: runtime-md 1.8.0-SNAPSHOT                  [6/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-runtime-md ---
+[INFO] 
+[INFO] --- maven-antrun-plugin:1.3:run (copy-sources) @ protostuff-runtime-md ---
+[INFO] Executing tasks
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- build-helper-maven-plugin:1.9.1:add-source (add-source) @ protostuff-runtime-md ---
+[INFO] Source directory: /home/user/projects/protostuff/protostuff-runtime-md/target/extra-sources added.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-runtime-md ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-runtime-md/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-runtime-md ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] -------------< io.protostuff:protostuff-runtime-registry >--------------
+[INFO] Building protostuff :: runtime-registry 1.8.0-SNAPSHOT            [7/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-runtime-registry ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-runtime-registry ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-runtime-registry/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-runtime-registry ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] ---------------< io.protostuff:protostuff-runtime-view >----------------
+[INFO] Building protostuff :: runtime-view 1.8.0-SNAPSHOT                [8/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-runtime-view ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-runtime-view ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-runtime-view/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-runtime-view ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] -------------------< io.protostuff:protostuff-json >--------------------
+[INFO] Building protostuff :: json 1.8.0-SNAPSHOT                        [9/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-json ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-json ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-json/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-json ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] ------------------< io.protostuff:protostuff-msgpack >------------------
+[INFO] Building protostuff :: msgpack 1.8.0-SNAPSHOT                    [10/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-msgpack ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-msgpack ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-msgpack/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-msgpack ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --------------------< io.protostuff:protostuff-xml >--------------------
+[INFO] Building protostuff :: xml 1.8.0-SNAPSHOT                        [11/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-xml ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-xml ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-xml/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-xml ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] -------------------< io.protostuff:protostuff-yaml >--------------------
+[INFO] Building protostuff :: yaml 1.8.0-SNAPSHOT                       [12/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-yaml ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-yaml ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-yaml/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-yaml ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --------------------< io.protostuff:protostuff-kvp >--------------------
+[INFO] Building protostuff :: kvp 1.8.0-SNAPSHOT                        [13/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-kvp ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-kvp ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-kvp/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-kvp ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] ------------------< io.protostuff:protostuff-parser >-------------------
+[INFO] Building protostuff :: parser 1.8.0-SNAPSHOT                     [14/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-parser ---
+[INFO] 
+[INFO] --- antlr3-maven-plugin:3.5.2:antlr (default) @ protostuff-parser ---
+[INFO] ANTLR: Processing source directory /home/user/projects/protostuff/protostuff-parser/src/main/antlr3
+Grammar /home/user/projects/protostuff/protostuff-parser/src/main/antlr3/io/protostuff/parser/ProtoLexer.g is up to date - build skipped
+Grammar /home/user/projects/protostuff/protostuff-parser/src/main/antlr3/io/protostuff/parser/ProtoParser.g is up to date - build skipped
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-parser ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-parser/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-parser ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] -----------------< io.protostuff:protostuff-compiler >------------------
+[INFO] Building protostuff :: compiler 1.8.0-SNAPSHOT                   [15/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-compiler ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-compiler ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 12 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-compiler ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] ---------------< io.protostuff:protostuff-maven-plugin >----------------
+[INFO] Building protostuff :: maven-plugin 1.8.0-SNAPSHOT               [16/20]
+[INFO] ----------------------------[ maven-plugin ]----------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-maven-plugin ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-maven-plugin ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-maven-plugin/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-maven-plugin ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] ------------------< io.protostuff:protostuff-uberjar >------------------
+[INFO] Building protostuff :: uberjar 1.8.0-SNAPSHOT                    [17/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-uberjar ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-uberjar ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-uberjar/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-uberjar ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --------------------< io.protostuff:protostuff-it >---------------------
+[INFO] Building protostuff :: it 1.8.0-SNAPSHOT                         [18/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-it ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ protostuff-it ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/protostuff/protostuff-it/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ protostuff-it ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --------------------< io.protostuff:protostuff-bom >--------------------
+[INFO] Building protostuff :: bom 1.8.0-SNAPSHOT                        [19/20]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-bom ---
+[INFO] 
+[INFO] ----------------< io.protostuff:protostuff-benchmarks >-----------------
+[INFO] Building protostuff :: benchmarks 1.8.0-SNAPSHOT                 [20/20]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.3.1:enforce (enforce-versions) @ protostuff-benchmarks ---
+[INFO] 
+[INFO] --- protostuff-maven-plugin:1.8.0-SNAPSHOT:compile (generate-sources) @ protostuff-benchmarks ---
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for protostuff 1.8.0-SNAPSHOT:
+[INFO] 
+[INFO] protostuff ......................................... SUCCESS [  0.323 s]
+[INFO] protostuff :: api .................................. SUCCESS [  0.354 s]
+[INFO] protostuff :: core ................................. SUCCESS [  0.023 s]
+[INFO] protostuff :: collectionschema ..................... SUCCESS [  0.031 s]
+[INFO] protostuff :: runtime .............................. SUCCESS [  0.051 s]
+[INFO] protostuff :: runtime-md ........................... SUCCESS [  0.369 s]
+[INFO] protostuff :: runtime-registry ..................... SUCCESS [  0.028 s]
+[INFO] protostuff :: runtime-view ......................... SUCCESS [  0.027 s]
+[INFO] protostuff :: json ................................. SUCCESS [  0.111 s]
+[INFO] protostuff :: msgpack .............................. SUCCESS [  0.069 s]
+[INFO] protostuff :: xml .................................. SUCCESS [  0.019 s]
+[INFO] protostuff :: yaml ................................. SUCCESS [  0.015 s]
+[INFO] protostuff :: kvp .................................. SUCCESS [  0.015 s]
+[INFO] protostuff :: parser ............................... SUCCESS [  0.696 s]
+[INFO] protostuff :: compiler ............................. SUCCESS [  0.037 s]
+[INFO] protostuff :: maven-plugin ......................... SUCCESS [  0.447 s]
+[INFO] protostuff :: uberjar .............................. SUCCESS [  0.195 s]
+[INFO] protostuff :: it ................................... SUCCESS [  0.054 s]
+[INFO] protostuff :: bom .................................. SUCCESS [  0.002 s]
+[INFO] protostuff :: benchmarks ........................... FAILURE [  0.364 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.416 s
+[INFO] Finished at: 2021-07-20T16:28:21Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal io.protostuff:protostuff-maven-plugin:1.8.0-SNAPSHOT:compile (generate-sources) on project protostuff-benchmarks: Stream Closed -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal io.protostuff:protostuff-maven-plugin:1.8.0-SNAPSHOT:compile (generate-sources) on project protostuff-benchmarks: Stream Closed
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:215)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:957)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:289)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:193)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+Caused by: org.apache.maven.plugin.MojoExecutionException: Stream Closed
+    at io.protostuff.mojo.ProtoCompilerMojo.execute (ProtoCompilerMojo.java:190)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:957)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:289)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:193)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+Caused by: java.io.IOException: Stream Closed
+    at java.io.FileOutputStream.writeBytes (Native Method)
+    at java.io.FileOutputStream.write (FileOutputStream.java:354)
+    at sun.nio.cs.StreamEncoder.writeBytes (StreamEncoder.java:233)
+    at sun.nio.cs.StreamEncoder.implClose (StreamEncoder.java:337)
+    at sun.nio.cs.StreamEncoder.close (StreamEncoder.java:161)
+    at java.io.OutputStreamWriter.close (OutputStreamWriter.java:255)
+    at java.io.BufferedWriter.close (BufferedWriter.java:269)
+    at io.protostuff.compiler.ProtoToJavaBeanCompiler.writeMessages (ProtoToJavaBeanCompiler.java:75)
+    at io.protostuff.compiler.ProtoToJavaBeanCompiler.compile (ProtoToJavaBeanCompiler.java:57)
+    at io.protostuff.compiler.STCodeGenerator.compile (STCodeGenerator.java:255)
+    at io.protostuff.compiler.STCodeGenerator.compile (STCodeGenerator.java:223)
+    at io.protostuff.compiler.CompilerMain.compile (CompilerMain.java:334)
+    at io.protostuff.mojo.ProtoCompilerMojo.execute (ProtoCompilerMojo.java:170)
+    at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:137)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:210)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:156)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:148)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:117)
+    at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:81)
+    at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:56)
+    at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:128)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:305)
+    at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:192)
+    at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:105)
+    at org.apache.maven.cli.MavenCli.execute (MavenCli.java:957)
+    at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:289)
+    at org.apache.maven.cli.MavenCli.main (MavenCli.java:193)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0 (Native Method)
+    at jdk.internal.reflect.NativeMethodAccessorImpl.invoke (NativeMethodAccessorImpl.java:62)
+    at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke (DelegatingMethodAccessorImpl.java:43)
+    at java.lang.reflect.Method.invoke (Method.java:566)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:282)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:225)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:406)
+    at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:347)
+[ERROR] 
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :protostuff-benchmarks

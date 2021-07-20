@@ -1,0 +1,109 @@
+diff --git a/license-maven-plugin/src/main/java/com/mycila/maven/plugin/license/util/FileUtils.java b/license-maven-plugin/src/main/java/com/mycila/maven/plugin/license/util/FileUtils.java
+index 4f9abe5..e78bcba 100755
+--- a/license-maven-plugin/src/main/java/com/mycila/maven/plugin/license/util/FileUtils.java
++++ b/license-maven-plugin/src/main/java/com/mycila/maven/plugin/license/util/FileUtils.java
+@@ -14,6 +14,14 @@
+  * limitations under the License.
+  */
+ package com.mycila.maven.plugin.license.util;
++import java.io.Reader;
++import java.io.IOException;
++import java.io.ByteArrayOutputStream;
++import java.io.FileOutputStream;
++import java.io.File;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
+ 
+ import org.codehaus.plexus.util.IOUtil;
+ import org.codehaus.plexus.util.InterpolationFilterReader;
+@@ -36,11 +44,12 @@ public final class FileUtils {
+     }
+ 
+     public static void write(File file, String content, String encoding) throws IOException {
+-        FileChannel channel = new FileOutputStream(file).getChannel();
+-        try {
+-            channel.write(ByteBuffer.wrap(content.getBytes(encoding)));
+-        } finally {
+-            channel.close();
++        try (FileChannel channel = new FileOutputStream(file).getChannel()) {
++            try {
++                channel.write(ByteBuffer.wrap(content.getBytes(encoding)));
++            } finally {
++                channel.close();
++            }
+         }
+     }
+ 
+@@ -76,13 +85,14 @@ public final class FileUtils {
+     }
+ 
+     public static String read(File file, String encoding) throws IOException {
+-        FileChannel in = new FileInputStream(file).getChannel();
+-        try {
+-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+-            in.transferTo(0, in.size(), Channels.newChannel(baos));
+-            return baos.toString(encoding);
+-        } finally {
+-            in.close();
++        try (FileChannel in = new FileInputStream(file).getChannel()) {
++            try {
++                ByteArrayOutputStream baos = new ByteArrayOutputStream();
++                in.transferTo(0, in.size(), Channels.newChannel(baos));
++                return baos.toString(encoding);
++            } finally {
++                in.close();
++            }
+         }
+     }
+ 
+@@ -110,13 +120,18 @@ public final class FileUtils {
+ 
+     public static void copyFileToFolder(File file, File folder) throws IOException {
+         File dest = new File(folder, file.getName());
+-        FileChannel inChannel = new FileInputStream(file).getChannel();
+-        FileChannel outChannel = new FileOutputStream(dest).getChannel();
+-        try {
+-            inChannel.transferTo(0, inChannel.size(), outChannel);
+-        } finally {
+-            if (inChannel != null) inChannel.close();
+-            if (outChannel != null) outChannel.close();
++        try (FileChannel inChannel = new FileInputStream(file).getChannel()) {
++            FileChannel outChannel = new FileOutputStream(dest).getChannel();
++            try {
++                inChannel.transferTo(0, inChannel.size(), outChannel);
++            } finally {
++                if (inChannel != null) {
++                    inChannel.close();
++                }
++                if (outChannel != null) {
++                    outChannel.close();
++                }
++            }
+         }
+ 
+     }
+diff --git a/license-maven-plugin/src/test/java/com/mycila/maven/plugin/license/util/SelectionTest.java b/license-maven-plugin/src/test/java/com/mycila/maven/plugin/license/util/SelectionTest.java
+index ab14411..14f7677 100755
+--- a/license-maven-plugin/src/test/java/com/mycila/maven/plugin/license/util/SelectionTest.java
++++ b/license-maven-plugin/src/test/java/com/mycila/maven/plugin/license/util/SelectionTest.java
+@@ -131,12 +131,13 @@ public final class SelectionTest {
+         if (parentFile != null && !parentFile.isDirectory() && !parentFile.mkdirs()) {
+             fail("Can't create '" + parentFile + "'");
+         }
+-        final FileWriter w = new FileWriter(newFile);
+-        w.write("touched");
+-        w.close();
+-        if (!newFile.exists()) {
+-            fail("Can't create " + newFile);
++        try (final FileWriter w = new FileWriter(newFile)) {
++            w.write("touched");
++            w.close();
++            if (!newFile.exists()) {
++                fail("Can't create " + newFile);
++            }
++            log.debug("Created '" + newFile.getAbsolutePath() + "'");
+         }
+-        log.debug("Created '" + newFile.getAbsolutePath() + "'");
+     }
+ }

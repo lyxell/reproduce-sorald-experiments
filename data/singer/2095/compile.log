@@ -1,0 +1,547 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.pinterest.singer:singer:jar:0.8.0.39
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-surefire-plugin is missing. @ line 287, column 21
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-source-plugin is missing. @ line 275, column 21
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.pinterest.singer:thrift-logger:jar:0.8.0.39
+[WARNING] 'build.plugins.plugin.version' for org.codehaus.mojo:build-helper-maven-plugin is missing. @ line 118, column 15
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-source-plugin is missing. @ line 152, column 15
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.pinterest.singer:singer-commons:jar:0.8.0.39
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-surefire-plugin is missing. @ line 218, column 15
+[WARNING] 'build.plugins.plugin.version' for org.codehaus.mojo:build-helper-maven-plugin is missing. @ line 172, column 15
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-source-plugin is missing. @ line 206, column 15
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Singer Logging Agent                                               [pom]
+[INFO] singer-commons                                                     [jar]
+[INFO] thrift-logger                                                      [jar]
+[INFO] singer                                                             [jar]
+[INFO] 
+[INFO] ----------------< com.pinterest.singer:singer-package >-----------------
+[INFO] Building Singer Logging Agent 0.8.0.39                             [1/4]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] ----------------< com.pinterest.singer:singer-commons >-----------------
+[INFO] Building singer-commons 0.8.0.39                                   [2/4]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/build-helper-maven-plugin/maven-metadata.xml
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/build-helper-maven-plugin/maven-metadata.xml (822 B at 2.1 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/build-helper-maven-plugin/3.2.0/build-helper-maven-plugin-3.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/build-helper-maven-plugin/3.2.0/build-helper-maven-plugin-3.2.0.pom (7.3 kB at 303 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/build-helper-maven-plugin/3.2.0/build-helper-maven-plugin-3.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/build-helper-maven-plugin/3.2.0/build-helper-maven-plugin-3.2.0.jar (69 kB at 1.5 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/scrooge-maven-plugin/4.18.0/scrooge-maven-plugin-4.18.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/scrooge-maven-plugin/4.18.0/scrooge-maven-plugin-4.18.0.pom (9.5 kB at 43 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/scrooge-maven-plugin/4.18.0/scrooge-maven-plugin-4.18.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/scrooge-maven-plugin/4.18.0/scrooge-maven-plugin-4.18.0.jar (24 kB at 111 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/ostrich_2.11/9.27.0/ostrich_2.11-9.27.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/ostrich_2.11/9.27.0/ostrich_2.11-9.27.0.pom (3.4 kB at 31 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.pom (1.4 kB at 110 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-core_2.11/6.43.0/util-core_2.11-6.43.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-core_2.11/6.43.0/util-core_2.11-6.43.0.pom (3.0 kB at 26 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-function_2.11/6.43.0/util-function_2.11-6.43.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-function_2.11/6.43.0/util-function_2.11-6.43.0.pom (2.1 kB at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-reflect/2.11.8/scala-reflect-2.11.8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-reflect/2.11.8/scala-reflect-2.11.8.pom (1.6 kB at 75 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4.pom (2.2 kB at 135 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.6/scala-library-2.11.6.pom (1.4 kB at 75 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-eval_2.11/6.43.0/util-eval_2.11-6.43.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-eval_2.11/6.43.0/util-eval_2.11-6.43.0.pom (2.4 kB at 23 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-compiler/2.11.8/scala-compiler-2.11.8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-compiler/2.11.8/scala-compiler-2.11.8.pom (2.4 kB at 132 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.4/scala-xml_2.11-1.0.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.4/scala-xml_2.11-1.0.4.pom (2.5 kB at 148 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.4/scala-library-2.11.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.4/scala-library-2.11.4.pom (1.4 kB at 110 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-logging_2.11/6.43.0/util-logging_2.11-6.43.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-logging_2.11/6.43.0/util-logging_2.11-6.43.0.pom (2.6 kB at 25 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-app_2.11/6.43.0/util-app_2.11-6.43.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-app_2.11/6.43.0/util-app_2.11-6.43.0.pom (2.6 kB at 22 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-registry_2.11/6.43.0/util-registry_2.11-6.43.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-registry_2.11/6.43.0/util-registry_2.11-6.43.0.pom (2.3 kB at 21 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-stats_2.11/6.43.0/util-stats_2.11-6.43.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-stats_2.11/6.43.0/util-stats_2.11-6.43.0.pom (3.2 kB at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-lint_2.11/6.43.0/util-lint_2.11-6.43.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-lint_2.11/6.43.0/util-lint_2.11-6.43.0.pom (2.1 kB at 20 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/ben-manes/caffeine/caffeine/2.3.4/caffeine-2.3.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/ben-manes/caffeine/caffeine/2.3.4/caffeine-2.3.4.pom (5.4 kB at 159 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-jvm_2.11/6.43.0/util-jvm_2.11-6.43.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-jvm_2.11/6.43.0/util-jvm_2.11-6.43.0.pom (2.6 kB at 23 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.8.4/jackson-annotations-2.8.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.8.4/jackson-annotations-2.8.4.pom (1.8 kB at 132 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.8.4/jackson-databind-2.8.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.8.4/jackson-databind-2.8.4.pom (5.4 kB at 417 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.8.4/jackson-core-2.8.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.8.4/jackson-core-2.8.4.pom (5.4 kB at 271 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.11/2.8.4/jackson-module-scala_2.11-2.8.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.11/2.8.4/jackson-module-scala_2.11-2.8.4.pom (4.1 kB at 36 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.8.4/jackson-module-paranamer-2.8.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.8.4/jackson-module-paranamer-2.8.4.pom (4.0 kB at 32 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-modules-base/2.8.4/jackson-modules-base-2.8.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-modules-base/2.8.4/jackson-modules-base-2.8.4.pom (2.6 kB at 24 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/thoughtworks/paranamer/paranamer-parent/2.8/paranamer-parent-2.8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/thoughtworks/paranamer/paranamer-parent/2.8/paranamer-parent-2.8.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/common/base/0.0.115/base-0.0.115.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/common/base/0.0.115/base-0.0.115.pom (2.2 kB at 11 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/common/quantity/0.0.99/quantity-0.0.99.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/common/quantity/0.0.99/quantity-0.0.99.pom (2.1 kB at 10 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/common/collections/0.0.110/collections-0.0.110.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/common/collections/0.0.110/collections-0.0.110.pom (1.9 kB at 9.6 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/common/util-system-mocks/0.0.104/util-system-mocks-0.0.104.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/common/util-system-mocks/0.0.104/util-system-mocks-0.0.104.pom (2.1 kB at 11 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-configuration/commons-configuration/1.9/commons-configuration-1.9.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-configuration/commons-configuration/1.9/commons-configuration-1.9.pom (21 kB at 900 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/kafka/kafka_2.11/2.1.0/kafka_2.11-2.1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/kafka/kafka_2.11/2.1.0/kafka_2.11-2.1.0.pom (16 kB at 151 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/kafka/kafka-clients/2.1.0/kafka-clients-2.1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/kafka/kafka-clients/2.1.0/kafka-clients-2.1.0.pom (2.3 kB at 144 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.3.5-4/zstd-jni-1.3.5-4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.3.5-4/zstd-jni-1.3.5-4.pom (1.9 kB at 173 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/lz4/lz4-java/1.5.0/lz4-java-1.5.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/lz4/lz4-java/1.5.0/lz4-java-1.5.0.pom (2.0 kB at 157 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.7.2/snappy-java-1.1.7.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.7.2/snappy-java-1.1.7.2.pom (4.0 kB at 285 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.9.7/jackson-databind-2.9.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.9.7/jackson-databind-2.9.7.pom (6.3 kB at 526 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.9.7/jackson-base-2.9.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.9.7/jackson-base-2.9.7.pom (5.4 kB at 537 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.7/jackson-core-2.9.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.7/jackson-core-2.9.7.pom (4.1 kB at 214 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/yammer/metrics/metrics-core/2.2.0/metrics-core-2.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/yammer/metrics/metrics-core/2.2.0/metrics-core-2.2.0.pom (1.3 kB at 104 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/yammer/metrics/metrics-parent/2.2.0/metrics-parent-2.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/yammer/metrics/metrics-parent/2.2.0/metrics-parent-2.2.0.pom (10 kB at 722 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.12/scala-library-2.11.12.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.12/scala-library-2.11.12.pom (1.4 kB at 102 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-reflect/2.11.12/scala-reflect-2.11.12.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-reflect/2.11.12/scala-reflect-2.11.12.pom (1.6 kB at 121 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/typesafe/scala-logging/scala-logging_2.11/3.9.0/scala-logging_2.11-3.9.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/typesafe/scala-logging/scala-logging_2.11/3.9.0/scala-logging_2.11-3.9.0.pom (2.8 kB at 162 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/101tec/zkclient/0.10/zkclient-0.10.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/101tec/zkclient/0.10/zkclient-0.10.pom (3.1 kB at 260 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper/3.4.13/zookeeper-3.4.13.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper/3.4.13/zookeeper-3.4.13.pom (12 kB at 716 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/5.3.1/junit-jupiter-api-5.3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/5.3.1/junit-jupiter-api-5.3.1.pom (2.4 kB at 198 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.pom (1.7 kB at 33 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.3.1/junit-platform-commons-1.3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.3.1/junit-platform-commons-1.3.1.pom (2.0 kB at 168 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.3.1/junit-jupiter-engine-5.3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.3.1/junit-jupiter-engine-5.3.1.pom (2.4 kB at 218 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/1.3.1/junit-platform-engine-1.3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/1.3.1/junit-platform-engine-1.3.1.pom (2.4 kB at 199 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore/4.4.1/httpcore-4.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore/4.4.1/httpcore-4.4.1.pom (4.6 kB at 287 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.4.1/httpcomponents-core-4.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-core/4.4.1/httpcomponents-core-4.4.1.pom (13 kB at 918 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/ostrich_2.11/9.27.0/ostrich_2.11-9.27.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-core_2.11/6.43.0/util-core_2.11-6.43.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-function_2.11/6.43.0/util-function_2.11-6.43.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/ostrich_2.11/9.27.0/ostrich_2.11-9.27.0.jar (493 kB at 2.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-eval_2.11/6.43.0/util-eval_2.11-6.43.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-function_2.11/6.43.0/util-function_2.11-6.43.0.jar (2.2 kB at 9.3 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-compiler/2.11.8/scala-compiler-2.11.8.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-eval_2.11/6.43.0/util-eval_2.11-6.43.0.jar (47 kB at 128 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.4/scala-xml_2.11-1.0.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.11/1.0.4/scala-parser-combinators_2.11-1.0.4.jar (424 kB at 1.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-logging_2.11/6.43.0/util-logging_2.11-6.43.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-logging_2.11/6.43.0/util-logging_2.11-6.43.0.jar (251 kB at 345 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-app_2.11/6.43.0/util-app_2.11-6.43.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/modules/scala-xml_2.11/1.0.4/scala-xml_2.11-1.0.4.jar (648 kB at 838 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-registry_2.11/6.43.0/util-registry_2.11-6.43.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-core_2.11/6.43.0/util-core_2.11-6.43.0.jar (1.5 MB at 1.7 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-stats_2.11/6.43.0/util-stats_2.11-6.43.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-registry_2.11/6.43.0/util-registry_2.11-6.43.0.jar (35 kB at 37 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-lint_2.11/6.43.0/util-lint_2.11-6.43.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-app_2.11/6.43.0/util-app_2.11-6.43.0.jar (171 kB at 178 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/ben-manes/caffeine/caffeine/2.3.4/caffeine-2.3.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-stats_2.11/6.43.0/util-stats_2.11-6.43.0.jar (154 kB at 145 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/util-jvm_2.11/6.43.0/util-jvm_2.11-6.43.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-lint_2.11/6.43.0/util-lint_2.11-6.43.0.jar (17 kB at 15 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.8.4/jackson-annotations-2.8.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.8.4/jackson-annotations-2.8.4.jar (56 kB at 45 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.8.4/jackson-databind-2.8.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/util-jvm_2.11/6.43.0/util-jvm_2.11-6.43.0.jar (182 kB at 135 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.8.4/jackson-core-2.8.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/ben-manes/caffeine/caffeine/2.3.4/caffeine-2.3.4.jar (973 kB at 672 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.11/2.8.4/jackson-module-scala_2.11-2.8.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.8.4/jackson-core-2.8.4.jar (281 kB at 170 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.8.4/jackson-module-paranamer-2.8.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.8.4/jackson-module-paranamer-2.8.4.jar (43 kB at 23 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.11/2.8.4/jackson-module-scala_2.11-2.8.4.jar (511 kB at 265 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/common/base/0.0.115/base-0.0.115.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/common/quantity/0.0.99/quantity-0.0.99.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/common/base/0.0.115/base-0.0.115.jar (57 kB at 25 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/common/quantity/0.0.99/quantity-0.0.99.jar (20 kB at 8.9 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/common/collections/0.0.110/collections-0.0.110.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/common/util-system-mocks/0.0.104/util-system-mocks-0.0.104.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.8.4/jackson-databind-2.8.4.jar (1.2 MB at 542 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-configuration/commons-configuration/1.9/commons-configuration-1.9.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/common/collections/0.0.110/collections-0.0.110.jar (25 kB at 9.8 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/common/util-system-mocks/0.0.104/util-system-mocks-0.0.104.jar (14 kB at 5.4 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/kafka/kafka_2.11/2.1.0/kafka_2.11-2.1.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/yammer/metrics/metrics-core/2.2.0/metrics-core-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.8/scala-library-2.11.8.jar (5.7 MB at 2.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-reflect/2.11.12/scala-reflect-2.11.12.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-configuration/commons-configuration/1.9/commons-configuration-1.9.jar (358 kB at 132 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/typesafe/scala-logging/scala-logging_2.11/3.9.0/scala-logging_2.11-3.9.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/yammer/metrics/metrics-core/2.2.0/metrics-core-2.2.0.jar (82 kB at 30 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/101tec/zkclient/0.10/zkclient-0.10.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/typesafe/scala-logging/scala-logging_2.11/3.9.0/scala-logging_2.11-3.9.0.jar (82 kB at 29 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper/3.4.13/zookeeper-3.4.13.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/101tec/zkclient/0.10/zkclient-0.10.jar (75 kB at 26 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/kafka/kafka-clients/2.1.0/kafka-clients-2.1.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper/3.4.13/zookeeper-3.4.13.jar (907 kB at 261 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.3.5-4/zstd-jni-1.3.5-4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/kafka/kafka-clients/2.1.0/kafka-clients-2.1.0.jar (1.9 MB at 430 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/lz4/lz4-java/1.5.0/lz4-java-1.5.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/lz4/lz4-java/1.5.0/lz4-java-1.5.0.jar (512 kB at 105 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.7.2/snappy-java-1.1.7.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-reflect/2.11.12/scala-reflect-2.11.12.jar (4.6 MB at 866 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/5.3.1/junit-jupiter-api-5.3.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.3.5-4/zstd-jni-1.3.5-4.jar (3.7 MB at 696 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar (7.1 kB at 1.3 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.3.1/junit-platform-commons-1.3.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/5.3.1/junit-jupiter-api-5.3.1.jar (115 kB at 21 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.3.1/junit-jupiter-engine-5.3.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.3.1/junit-platform-commons-1.3.1.jar (78 kB at 14 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/1.3.1/junit-platform-engine-1.3.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.3.1/junit-jupiter-engine-5.3.1.jar (150 kB at 27 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore/4.4.1/httpcore-4.4.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/1.3.1/junit-platform-engine-1.3.1.jar (135 kB at 24 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcore/4.4.1/httpcore-4.4.1.jar (322 kB at 56 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-compiler/2.11.8/scala-compiler-2.11.8.jar (15 MB at 2.6 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/xerial/snappy/snappy-java/1.1.7.2/snappy-java-1.1.7.2.jar (2.0 MB at 340 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/kafka/kafka_2.11/2.1.0/kafka_2.11-2.1.0.jar (7.5 MB at 1.1 MB/s)
+[INFO] 
+[INFO] --- scrooge-maven-plugin:4.18.0:compile (thrift-sources) @ singer-commons ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-jdk14/1.7.25/slf4j-jdk14-1.7.25.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-jdk14/1.7.25/slf4j-jdk14-1.7.25.pom (1.0 kB at 72 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.pom (1.0 kB at 78 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/inject/guice/4.0-beta5/guice-4.0-beta5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/inject/guice/4.0-beta5/guice-4.0-beta5.pom (11 kB at 818 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/inject/guice-parent/4.0-beta5/guice-parent-4.0-beta5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/inject/guice-parent/4.0-beta5/guice-parent-4.0-beta5.pom (14 kB at 837 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-compat/3.0.5/maven-compat-3.0.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-compat/3.0.5/maven-compat-3.0.5.pom (3.7 kB at 231 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.5.4/plexus-utils-1.5.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.5.4/plexus-utils-1.5.4.pom (5.1 kB at 429 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/scrooge-generator_2.10/4.18.0/scrooge-generator_2.10-4.18.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/scrooge-generator_2.10/4.18.0/scrooge-generator_2.10-4.18.0.pom (3.1 kB at 15 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/libthrift/0.5.0-7/libthrift-0.5.0-7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/libthrift/0.5.0-7/libthrift-0.5.0-7.pom (5.0 kB at 25 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/javax/servlet/servlet-api/2.5/servlet-api-2.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/javax/servlet/servlet-api/2.5/servlet-api-2.5.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/scopt/scopt_2.10/3.5.0/scopt_2.10-3.5.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/scopt/scopt_2.10/3.5.0/scopt_2.10-3.5.0.pom (1.7 kB at 84 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/spullara/mustache/java/compiler/0.8.18/compiler-0.8.18.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/spullara/mustache/java/compiler/0.8.18/compiler-0.8.18.pom (4.1 kB at 344 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/spullara/mustache/java/mustache.java/0.8.18/mustache.java-0.8.18.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/spullara/mustache/java/mustache.java/0.8.18/mustache.java-0.8.18.pom (3.9 kB at 327 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-jdk14/1.7.25/slf4j-jdk14-1.7.25.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-compat/3.0.5/maven-compat-3.0.5.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/inject/guice/4.0-beta5/guice-4.0-beta5.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.5.4/plexus-utils-1.5.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-simple/1.7.25/slf4j-simple-1.7.25.jar (15 kB at 636 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/scrooge-generator_2.10/4.18.0/scrooge-generator_2.10-4.18.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-jdk14/1.7.25/slf4j-jdk14-1.7.25.jar (8.5 kB at 132 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twitter/libthrift/0.5.0-7/libthrift-0.5.0-7.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-utils/1.5.4/plexus-utils-1.5.4.jar (250 kB at 2.1 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/scopt/scopt_2.10/3.5.0/scopt_2.10-3.5.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-compat/3.0.5/maven-compat-3.0.5.jar (281 kB at 2.0 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/spullara/mustache/java/compiler/0.8.18/compiler-0.8.18.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/scopt/scopt_2.10/3.5.0/scopt_2.10-3.5.0.jar (143 kB at 659 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/spullara/mustache/java/compiler/0.8.18/compiler-0.8.18.jar (116 kB at 523 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/inject/guice/4.0-beta5/guice-4.0-beta5.jar (643 kB at 2.9 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/libthrift/0.5.0-7/libthrift-0.5.0-7.jar (148 kB at 476 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twitter/scrooge-generator_2.10/4.18.0/scrooge-generator_2.10-4.18.0.jar (1.3 MB at 2.5 MB/s)
+[INFO] finding thrift files in dependencies
+[INFO] finding thrift files in referenced (reactor) projects
+[INFO] compiling thrift files [/home/user/projects/singer/singer-commons/src/main/thrift/config.thrift, /home/user/projects/singer/singer-commons/src/main/thrift/singer_if.thrift, /home/user/projects/singer/singer-commons/src/main/thrift/singer.thrift, /home/user/projects/singer/singer-commons/src/main/thrift/thrift_message.thrift, /home/user/projects/singer/singer-commons/src/main/thrift/text_message.thrift, /home/user/projects/singer/singer-commons/src/main/thrift/common.thrift, /home/user/projects/singer/singer-commons/src/main/thrift/loggingaudit_test.thrift, /home/user/projects/singer/singer-commons/src/main/thrift/loggingaudit_config.thrift, /home/user/projects/singer/singer-commons/src/main/thrift/loggingaudit.thrift] with Scrooge
+[INFO] 
+[INFO] --- build-helper-maven-plugin:3.2.0:add-source (add-source) @ singer-commons ---
+[INFO] Source directory: /home/user/projects/singer/singer-commons/target/generated-sources/thrift/scrooge added.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ singer-commons ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/singer/singer-commons/src/main/resources
+[INFO] Copying 9 resources
+[INFO] skip non existing resourceDirectory /home/user/projects/singer/singer-commons/target/generated-resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ singer-commons ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 61 source files to /home/user/projects/singer/singer-commons/target/classes
+[WARNING] /home/user/projects/singer/singer-commons/target/generated-sources/thrift/scrooge/com/pinterest/singer/thrift/configuration/LogStreamProcessorConfig.java: Some input files use or override a deprecated API.
+[WARNING] /home/user/projects/singer/singer-commons/target/generated-sources/thrift/scrooge/com/pinterest/singer/thrift/configuration/LogStreamProcessorConfig.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- scrooge-maven-plugin:4.18.0:testCompile (thrift-test-sources) @ singer-commons ---
+[INFO] finding thrift files in dependencies
+[INFO] finding thrift files in referenced (reactor) projects
+[INFO] No thrift files to compile.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ singer-commons ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/singer/singer-commons/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ singer-commons ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] -----------------< com.pinterest.singer:thrift-logger >-----------------
+[INFO] Building thrift-logger 0.8.0.39                                    [3/4]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- scrooge-maven-plugin:4.18.0:compile (thrift-sources) @ thrift-logger ---
+[INFO] finding thrift files in dependencies
+[INFO] finding thrift files in referenced (reactor) projects
+[INFO] copying /home/user/projects/singer/singer-commons/target/classes/common.thrift to /home/user/projects/singer/thrift-logger/target/generated-resources/common.thrift
+[INFO] copying /home/user/projects/singer/singer-commons/target/classes/loggingaudit.thrift to /home/user/projects/singer/thrift-logger/target/generated-resources/loggingaudit.thrift
+[INFO] copying /home/user/projects/singer/singer-commons/target/classes/loggingaudit_config.thrift to /home/user/projects/singer/thrift-logger/target/generated-resources/loggingaudit_config.thrift
+[INFO] copying /home/user/projects/singer/singer-commons/target/classes/loggingaudit_test.thrift to /home/user/projects/singer/thrift-logger/target/generated-resources/loggingaudit_test.thrift
+[INFO] copying /home/user/projects/singer/singer-commons/target/classes/singer_if.thrift to /home/user/projects/singer/thrift-logger/target/generated-resources/singer_if.thrift
+[INFO] copying /home/user/projects/singer/singer-commons/target/classes/text_message.thrift to /home/user/projects/singer/thrift-logger/target/generated-resources/text_message.thrift
+[INFO] copying /home/user/projects/singer/singer-commons/target/classes/thrift_message.thrift to /home/user/projects/singer/thrift-logger/target/generated-resources/thrift_message.thrift
+[INFO] copying /home/user/projects/singer/singer-commons/target/classes/config.thrift to /home/user/projects/singer/thrift-logger/target/generated-resources/config.thrift
+[INFO] copying /home/user/projects/singer/singer-commons/target/classes/singer.thrift to /home/user/projects/singer/thrift-logger/target/generated-resources/singer.thrift
+[INFO] compiling thrift files [/home/user/projects/singer/thrift-logger/target/generated-resources/thrift_message.thrift, /home/user/projects/singer/thrift-logger/target/generated-resources/singer.thrift, /home/user/projects/singer/thrift-logger/target/generated-resources/loggingaudit_config.thrift, /home/user/projects/singer/thrift-logger/target/generated-resources/singer_if.thrift, /home/user/projects/singer/thrift-logger/target/generated-resources/common.thrift, /home/user/projects/singer/thrift-logger/target/generated-resources/loggingaudit.thrift, /home/user/projects/singer/thrift-logger/target/generated-resources/text_message.thrift, /home/user/projects/singer/thrift-logger/target/generated-resources/loggingaudit_test.thrift, /home/user/projects/singer/thrift-logger/target/generated-resources/config.thrift] with Scrooge
+[INFO] 
+[INFO] --- build-helper-maven-plugin:3.2.0:add-source (add-source) @ thrift-logger ---
+[INFO] Source directory: /home/user/projects/singer/thrift-logger/target/generated-sources/thrift/scrooge added.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ thrift-logger ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/singer/thrift-logger/src/main/resources
+[INFO] skip non existing resourceDirectory /home/user/projects/singer/thrift-logger/src/main/thrift
+[INFO] Copying 9 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ thrift-logger ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 55 source files to /home/user/projects/singer/thrift-logger/target/classes
+[WARNING] /home/user/projects/singer/thrift-logger/target/generated-sources/thrift/scrooge/com/pinterest/singer/loggingaudit/thrift/AuditDemoLog1Message.java: Some input files use or override a deprecated API.
+[WARNING] /home/user/projects/singer/thrift-logger/target/generated-sources/thrift/scrooge/com/pinterest/singer/loggingaudit/thrift/AuditDemoLog1Message.java: Recompile with -Xlint:deprecation for details.
+[WARNING] /home/user/projects/singer/thrift-logger/src/main/java/com/pinterest/singer/client/BaseThriftLogger.java: Some input files use unchecked or unsafe operations.
+[WARNING] /home/user/projects/singer/thrift-logger/src/main/java/com/pinterest/singer/client/BaseThriftLogger.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- scrooge-maven-plugin:4.18.0:testCompile (thrift-test-sources) @ thrift-logger ---
+[INFO] finding thrift files in dependencies
+[INFO] finding thrift files in referenced (reactor) projects
+[INFO] No thrift files to compile.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ thrift-logger ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/singer/thrift-logger/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ thrift-logger ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 4 source files to /home/user/projects/singer/thrift-logger/target/test-classes
+[WARNING] /home/user/projects/singer/thrift-logger/src/test/java/com/pinterest/singer/client/BaseThriftFactoryTest.java: /home/user/projects/singer/thrift-logger/src/test/java/com/pinterest/singer/client/BaseThriftFactoryTest.java uses or overrides a deprecated API.
+[WARNING] /home/user/projects/singer/thrift-logger/src/test/java/com/pinterest/singer/client/BaseThriftFactoryTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --------------------< com.pinterest.singer:singer >---------------------
+[INFO] Building singer 0.8.0.39                                           [4/4]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.306/aws-java-sdk-core-1.11.306.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.306/aws-java-sdk-core-1.11.306.pom (4.3 kB at 21 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-pom/1.11.306/aws-java-sdk-pom-1.11.306.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-pom/1.11.306/aws-java-sdk-pom-1.11.306.pom (13 kB at 65 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2.pom (8.8 kB at 632 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.6.7.1/jackson-databind-2.6.7.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.6.7.1/jackson-databind-2.6.7.1.pom (6.1 kB at 607 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.6.7/jackson-core-2.6.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.6.7/jackson-core-2.6.7.pom (4.9 kB at 442 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.7/jackson-dataformat-cbor-2.6.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.7/jackson-dataformat-cbor-2.6.7.pom (2.9 kB at 267 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/joda-time/joda-time/2.8.1/joda-time-2.8.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/joda-time/joda-time/2.8.1/joda-time-2.8.1.pom (29 kB at 1.5 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-core/2.11.1/log4j-core-2.11.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-core/2.11.1/log4j-core-2.11.1.pom (23 kB at 1.4 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j/2.11.1/log4j-2.11.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j/2.11.1/log4j-2.11.1.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-api/2.11.1/log4j-api-2.11.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-api/2.11.1/log4j-api-2.11.1.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-all/1.1/hamcrest-all-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-all/1.1/hamcrest-all-1.1.pom (479 B at 32 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/stefanbirkner/system-rules/1.19.0/system-rules-1.19.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/stefanbirkner/system-rules/1.19.0/system-rules-1.19.0.pom (2.3 kB at 208 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/junit/junit-dep/maven-metadata.xml
+[INFO] Downloading from oss-sonatype: https://oss.sonatype.org/content/repositories/snapshots/junit/junit-dep/maven-metadata.xml
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/junit/junit-dep/maven-metadata.xml (563 B at 51 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/junit/junit-dep/4.9/junit-dep-4.9.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/junit/junit-dep/4.9/junit-dep-4.9.pom (2.3 kB at 147 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/junit/junit-dep/4.10/junit-dep-4.10.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/junit/junit-dep/4.10/junit-dep-4.10.pom (2.3 kB at 261 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/junit/junit-dep/4.11-beta-1/junit-dep-4.11-beta-1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/junit/junit-dep/4.11-beta-1/junit-dep-4.11-beta-1.pom (2.0 kB at 136 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/junit/junit/4.11-beta-1/junit-4.11-beta-1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/junit/junit/4.11-beta-1/junit-4.11-beta-1.pom (2.4 kB at 196 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar-client/2.3.2/pulsar-client-2.3.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar-client/2.3.2/pulsar-client-2.3.2.pom (13 kB at 45 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar/2.3.2/pulsar-2.3.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar/2.3.2/pulsar-2.3.2.pom (54 kB at 253 kB/s)
+[INFO] Downloading from oss-sonatype: https://oss.sonatype.org/content/repositories/snapshots/com/amazonaws/aws-java-sdk-bom/1.11.297/aws-java-sdk-bom-1.11.297.pom
+[INFO] Downloading from central: https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bom/1.11.297/aws-java-sdk-bom-1.11.297.pom
+[INFO] Downloaded from central: https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bom/1.11.297/aws-java-sdk-bom-1.11.297.pom (28 kB at 250 kB/s)
+[INFO] Downloading from oss-sonatype: https://oss.sonatype.org/content/repositories/snapshots/com/amazonaws/aws-java-sdk-pom/1.11.297/aws-java-sdk-pom-1.11.297.pom
+[INFO] Downloading from central: https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-pom/1.11.297/aws-java-sdk-pom-1.11.297.pom
+[INFO] Downloaded from central: https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-pom/1.11.297/aws-java-sdk-pom-1.11.297.pom (13 kB at 854 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar-client-api/2.3.2/pulsar-client-api-2.3.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar-client-api/2.3.2/pulsar-client-api-2.3.2.pom (1.6 kB at 8.2 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/protobuf-shaded/2.1.0-incubating/protobuf-shaded-2.1.0-incubating.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/protobuf-shaded/2.1.0-incubating/protobuf-shaded-2.1.0-incubating.pom (1.6 kB at 104 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar/2.1.0-incubating/pulsar-2.1.0-incubating.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar/2.1.0-incubating/pulsar-2.1.0-incubating.pom (46 kB at 2.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.3.7-3/zstd-jni-1.3.7-3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/luben/zstd-jni/1.3.7-3/zstd-jni-1.3.7-3.pom (1.9 kB at 73 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.60/bcpkix-jdk15on-1.60.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.60/bcpkix-jdk15on-1.60.pom (1.5 kB at 133 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk15on/1.60/bcprov-jdk15on-1.60.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk15on/1.60/bcprov-jdk15on-1.60.pom (1.1 kB at 50 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-s3/1.11.35/aws-java-sdk-s3-1.11.35.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-s3/1.11.35/aws-java-sdk-s3-1.11.35.pom (3.7 kB at 36 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-pom/1.11.35/aws-java-sdk-pom-1.11.35.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-pom/1.11.35/aws-java-sdk-pom-1.11.35.pom (9.8 kB at 50 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-kms/1.11.35/aws-java-sdk-kms-1.11.35.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-kms/1.11.35/aws-java-sdk-kms-1.11.35.pom (3.5 kB at 17 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.35/aws-java-sdk-core-1.11.35.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.35/aws-java-sdk-core-1.11.35.pom (3.9 kB at 20 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/software/amazon/ion/ion-java/1.0.0/ion-java-1.0.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/software/amazon/ion/ion-java/1.0.0/ion-java-1.0.0.pom (8.7 kB at 583 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.6.6/jackson-databind-2.6.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.6.6/jackson-databind-2.6.6.pom (6.1 kB at 276 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.6.6/jackson-core-2.6.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.6.6/jackson-core-2.6.6.pom (4.9 kB at 286 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.6/jackson-dataformat-cbor-2.6.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.6/jackson-dataformat-cbor-2.6.6.pom (2.9 kB at 210 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/amazonaws/jmespath-java/1.0/jmespath-java-1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/amazonaws/jmespath-java/1.0/jmespath-java-1.0.pom (3.3 kB at 273 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/salesforce/kafka/test/kafka-junit4/3.2.0/kafka-junit4-3.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/salesforce/kafka/test/kafka-junit4/3.2.0/kafka-junit4-3.2.0.pom (4.9 kB at 42 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/salesforce/kafka/test/kafka-junit/3.2.0/kafka-junit-3.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/salesforce/kafka/test/kafka-junit/3.2.0/kafka-junit-3.2.0.pom (15 kB at 52 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/salesforce/kafka/test/kafka-junit-core/3.2.0/kafka-junit-core-3.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/salesforce/kafka/test/kafka-junit-core/3.2.0/kafka-junit-core-3.2.0.pom (4.2 kB at 21 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/curator/curator-test/2.12.0/curator-test-2.12.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/curator/curator-test/2.12.0/curator-test-2.12.0.pom (4.1 kB at 38 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/curator/apache-curator/2.12.0/apache-curator-2.12.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/curator/apache-curator/2.12.0/apache-curator-2.12.0.pom (32 kB at 1.6 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper/3.4.8/zookeeper-3.4.8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper/3.4.8/zookeeper-3.4.8.pom (4.0 kB at 224 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty/3.7.0.Final/netty-3.7.0.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty/3.7.0.Final/netty-3.7.0.Final.pom (26 kB at 1.5 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-core/4.0.2/metrics-core-4.0.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-core/4.0.2/metrics-core-4.0.2.pom (846 B at 53 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-parent/4.0.2/metrics-parent-4.0.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-parent/4.0.2/metrics-parent-4.0.2.pom (13 kB at 1.1 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.9.7/jackson-databind-2.9.7.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.7/jackson-core-2.9.7.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.12/scala-library-2.11.12.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.306/aws-java-sdk-core-1.11.306.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.9.7/jackson-core-2.9.7.jar (324 kB at 1.0 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.7/jackson-dataformat-cbor-2.6.7.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.6.7/jackson-dataformat-cbor-2.6.7.jar (48 kB at 47 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/software/amazon/ion/ion-java/1.0.2/ion-java-1.0.2.jar (565 kB at 548 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/joda-time/joda-time/2.8.1/joda-time-2.8.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-core/2.11.1/log4j-core-2.11.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-core/1.11.306/aws-java-sdk-core-1.11.306.jar (862 kB at 605 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-api/2.11.1/log4j-api-2.11.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/joda-time/joda-time/2.8.1/joda-time-2.8.1.jar (622 kB at 388 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/jcl-over-slf4j/1.7.25/jcl-over-slf4j-1.7.25.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-api/2.11.1/log4j-api-2.11.1.jar (264 kB at 158 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-all/1.1/hamcrest-all-1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/jcl-over-slf4j/1.7.25/jcl-over-slf4j-1.7.25.jar (17 kB at 9.6 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/stefanbirkner/system-rules/1.19.0/system-rules-1.19.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.9.7/jackson-databind-2.9.7.jar (1.4 MB at 758 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar-client/2.3.2/pulsar-client-2.3.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/stefanbirkner/system-rules/1.19.0/system-rules-1.19.0.jar (39 kB at 21 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar-client-api/2.3.2/pulsar-client-api-2.3.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-all/1.1/hamcrest-all-1.1.jar (542 kB at 276 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/protobuf-shaded/2.1.0-incubating/protobuf-shaded-2.1.0-incubating.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/logging/log4j/log4j-core/2.11.1/log4j-core-2.11.1.jar (1.6 MB at 776 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.60/bcpkix-jdk15on-1.60.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar-client-api/2.3.2/pulsar-client-api-2.3.2.jar (72 kB at 33 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk15on/1.60/bcprov-jdk15on-1.60.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/protobuf-shaded/2.1.0-incubating/protobuf-shaded-2.1.0-incubating.jar (485 kB at 223 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-s3/1.11.35/aws-java-sdk-s3-1.11.35.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk15on/1.60/bcpkix-jdk15on-1.60.jar (797 kB at 261 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-kms/1.11.35/aws-java-sdk-kms-1.11.35.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-s3/1.11.35/aws-java-sdk-s3-1.11.35.jar (653 kB at 207 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/amazonaws/jmespath-java/1.0/jmespath-java-1.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/amazonaws/jmespath-java/1.0/jmespath-java-1.0.jar (27 kB at 7.9 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/salesforce/kafka/test/kafka-junit4/3.2.0/kafka-junit4-3.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/salesforce/kafka/test/kafka-junit4/3.2.0/kafka-junit4-3.2.0.jar (7.5 kB at 2.0 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/salesforce/kafka/test/kafka-junit-core/3.2.0/kafka-junit-core-3.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/amazonaws/aws-java-sdk-kms/1.11.35/aws-java-sdk-kms-1.11.35.jar (432 kB at 110 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/curator/curator-test/2.12.0/curator-test-2.12.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/salesforce/kafka/test/kafka-junit-core/3.2.0/kafka-junit-core-3.2.0.jar (38 kB at 9.1 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-core/4.0.2/metrics-core-4.0.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/dropwizard/metrics/metrics-core/4.0.2/metrics-core-4.0.2.jar (98 kB at 22 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk15on/1.60/bcprov-jdk15on-1.60.jar (4.2 MB at 792 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/scala-lang/scala-library/2.11.12/scala-library-2.11.12.jar (5.7 MB at 1.1 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/curator/curator-test/2.12.0/curator-test-2.12.0.jar (2.4 MB at 435 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/pulsar/pulsar-client/2.3.2/pulsar-client-2.3.2.jar (22 MB at 2.6 MB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ singer ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ singer ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 99 source files to /home/user/projects/singer/singer/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/singer/singer/src/main/java/com/pinterest/singer/tools/ThriftLogDumper.java:[181,70] '{' expected
+[ERROR] /home/user/projects/singer/singer/src/main/java/com/pinterest/singer/tools/ThriftLogDumper.java:[201,3] illegal start of expression
+[INFO] 2 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Singer Logging Agent 0.8.0.39:
+[INFO] 
+[INFO] Singer Logging Agent ............................... SUCCESS [  0.004 s]
+[INFO] singer-commons ..................................... SUCCESS [ 20.624 s]
+[INFO] thrift-logger ...................................... SUCCESS [  2.846 s]
+[INFO] singer ............................................. FAILURE [ 16.273 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  39.949 s
+[INFO] Finished at: 2021-07-20T21:23:37Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project singer: Compilation failure: Compilation failure: 
+[ERROR] /home/user/projects/singer/singer/src/main/java/com/pinterest/singer/tools/ThriftLogDumper.java:[181,70] '{' expected
+[ERROR] /home/user/projects/singer/singer/src/main/java/com/pinterest/singer/tools/ThriftLogDumper.java:[201,3] illegal start of expression
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :singer

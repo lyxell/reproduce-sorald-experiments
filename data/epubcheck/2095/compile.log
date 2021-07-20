@@ -1,0 +1,357 @@
+[INFO] Scanning for projects...
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/felix/maven-bundle-plugin/3.2.0/maven-bundle-plugin-3.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/felix/maven-bundle-plugin/3.2.0/maven-bundle-plugin-3.2.0.pom (8.4 kB at 13 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/felix/felix-parent/4/felix-parent-4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/felix/felix-parent/4/felix-parent-4.pom (24 kB at 510 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/osgi/org.osgi.core/4.3.1/org.osgi.core-4.3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/osgi/org.osgi.core/4.3.1/org.osgi.core-4.3.1.pom (1.4 kB at 47 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bndlib/3.2.0/biz.aQute.bndlib-3.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bndlib/3.2.0/biz.aQute.bndlib-3.2.0.pom (1.3 kB at 44 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/easymock/easymock/3.4/easymock-3.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/easymock/easymock/3.4/easymock-3.4.pom (7.3 kB at 128 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/easymock/easymock-parent/3.4/easymock-parent-3.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/easymock/easymock-parent/3.4/easymock-parent-3.4.pom (17 kB at 462 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis/2.2/objenesis-2.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis/2.2/objenesis-2.2.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis-parent/2.2/objenesis-parent-2.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis-parent/2.2/objenesis-parent-2.2.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/felix/org.apache.felix.utils/1.6.0/org.apache.felix.utils-1.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/felix/org.apache.felix.utils/1.6.0/org.apache.felix.utils-1.6.0.pom (3.3 kB at 193 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/osgi/org.osgi.compendium/4.2.0/org.osgi.compendium-4.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/osgi/org.osgi.compendium/4.2.0/org.osgi.compendium-4.2.0.pom (463 B at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.2.0/maven-core-2.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.2.0/maven-core-2.2.0.pom (11 kB at 467 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.2.0/maven-plugin-parameter-documenter-2.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.2.0/maven-plugin-parameter-documenter-2.2.0.pom (2.0 kB at 98 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.2.0/maven-reporting-api-2.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.2.0/maven-reporting-api-2.2.0.pom (1.9 kB at 54 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting/2.2.0/maven-reporting-2.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting/2.2.0/maven-reporting-2.2.0.pom (1.4 kB at 40 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.2.0/maven-error-diagnostics-2.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.2.0/maven-error-diagnostics-2.2.0.pom (1.7 kB at 95 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.2.0/maven-plugin-api-2.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.2.0/maven-plugin-api-2.2.0.pom (1.5 kB at 52 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.2.0/maven-plugin-descriptor-2.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.2.0/maven-plugin-descriptor-2.2.0.pom (2.1 kB at 115 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.2.0/maven-monitor-2.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.2.0/maven-monitor-2.2.0.pom (1.3 kB at 47 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jdom/jdom/1.1/jdom-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jdom/jdom/1.1/jdom-1.1.pom (2.2 kB at 146 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/felix/maven-bundle-plugin/3.2.0/maven-bundle-plugin-3.2.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/osgi/org.osgi.core/4.3.1/org.osgi.core-4.3.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bndlib/3.2.0/biz.aQute.bndlib-3.2.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/easymock/easymock/3.4/easymock-3.4.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis/2.2/objenesis-2.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis/2.2/objenesis-2.2.jar (53 kB at 216 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/felix/org.apache.felix.utils/1.6.0/org.apache.felix.utils-1.6.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/felix/maven-bundle-plugin/3.2.0/maven-bundle-plugin-3.2.0.jar (223 kB at 643 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/osgi/org.osgi.compendium/4.2.0/org.osgi.compendium-4.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/easymock/easymock/3.4/easymock-3.4.jar (474 kB at 1.3 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.2.0/maven-core-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/felix/org.apache.felix.utils/1.6.0/org.apache.felix.utils-1.6.0.jar (68 kB at 175 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.2.0/maven-settings-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/osgi/org.osgi.core/4.3.1/org.osgi.core-4.3.1.jar (350 kB at 803 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.2.0/maven-plugin-parameter-documenter-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-core/2.2.0/maven-core-2.2.0.jar (175 kB at 388 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.2.0/maven-reporting-api-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-settings/2.2.0/maven-settings-2.2.0.jar (49 kB at 104 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.2.0/maven-profile-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-parameter-documenter/2.2.0/maven-plugin-parameter-documenter-2.2.0.jar (22 kB at 45 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.2.0/maven-model-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/reporting/maven-reporting-api/2.2.0/maven-reporting-api-2.2.0.jar (9.8 kB at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.2.0/maven-artifact-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-profile/2.2.0/maven-profile-2.2.0.jar (35 kB at 68 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.2.0/maven-repository-metadata-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-model/2.2.0/maven-model-2.2.0.jar (87 kB at 153 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.2.0/maven-error-diagnostics-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-repository-metadata/2.2.0/maven-repository-metadata-2.2.0.jar (26 kB at 43 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.2.0/maven-project-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact/2.2.0/maven-artifact-2.2.0.jar (80 kB at 134 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.2.0/maven-plugin-registry-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/osgi/org.osgi.compendium/4.2.0/org.osgi.compendium-4.2.0.jar (614 kB at 1.0 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.2.0/maven-plugin-api-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-error-diagnostics/2.2.0/maven-error-diagnostics-2.2.0.jar (13 kB at 21 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.2.0/maven-plugin-descriptor-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-registry/2.2.0/maven-plugin-registry-2.2.0.jar (30 kB at 44 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.2.0/maven-artifact-manager-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-api/2.2.0/maven-plugin-api-2.2.0.jar (12 kB at 18 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.2.0/maven-monitor-2.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-project/2.2.0/maven-project-2.2.0.jar (156 kB at 227 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jdom/jdom/1.1/jdom-1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-plugin-descriptor/2.2.0/maven-plugin-descriptor-2.2.0.jar (39 kB at 57 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-monitor/2.2.0/maven-monitor-2.2.0.jar (10 kB at 14 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/maven-artifact-manager/2.2.0/maven-artifact-manager-2.2.0.jar (65 kB at 86 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jdom/jdom/1.1/jdom-1.1.jar (153 kB at 190 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/biz/aQute/bnd/biz.aQute.bndlib/3.2.0/biz.aQute.bndlib-3.2.0.jar (2.4 MB at 2.8 MB/s)
+[WARNING] The project org.w3c:epubcheck:jar:4.2.5-SNAPSHOT uses prerequisites which is only intended for maven-plugin projects but not for non maven-plugin projects. For such purposes you should use the maven-enforcer-plugin. See https://maven.apache.org/enforcer/enforcer-rules/requireMavenVersion.html
+[INFO] 
+[INFO] -------------------------< org.w3c:epubcheck >--------------------------
+[INFO] Building EPUBCheck :: Validation Tool for EPUB 4.2.5-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-failsafe-plugin/2.22.1/maven-failsafe-plugin-2.22.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-failsafe-plugin/2.22.1/maven-failsafe-plugin-2.22.1.pom (12 kB at 383 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire/2.22.1/surefire-2.22.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire/2.22.1/surefire-2.22.1.pom (26 kB at 993 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-failsafe-plugin/2.22.1/maven-failsafe-plugin-2.22.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-failsafe-plugin/2.22.1/maven-failsafe-plugin-2.22.1.jar (294 kB at 3.3 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/license-maven-plugin/1.14/license-maven-plugin-1.14.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/license-maven-plugin/1.14/license-maven-plugin-1.14.pom (18 kB at 161 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/license-maven-plugin/1.14/license-maven-plugin-1.14.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/license-maven-plugin/1.14/license-maven-plugin-1.14.jar (299 kB at 1.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/xml-maven-plugin/1.0.1/xml-maven-plugin-1.0.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/xml-maven-plugin/1.0.1/xml-maven-plugin-1.0.1.pom (8.6 kB at 357 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/xml-maven-plugin/1.0.1/xml-maven-plugin-1.0.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/xml-maven-plugin/1.0.1/xml-maven-plugin-1.0.1.jar (54 kB at 2.4 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/9.8.0-8/Saxon-HE-9.8.0-8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/9.8.0-8/Saxon-HE-9.8.0-8.pom (3.4 kB at 17 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/relaxng/jing/20181222/jing-20181222.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/relaxng/jing/20181222/jing-20181222.pom (2.4 kB at 13 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/isorelax/isorelax/20030108/isorelax-20030108.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/isorelax/isorelax/20030108/isorelax-20030108.pom (153 B at 6.7 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/9.6.0-4/Saxon-HE-9.6.0-4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/9.6.0-4/Saxon-HE-9.6.0-4.pom (3.5 kB at 316 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/w3c/css/sac/1.3/sac-1.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/w3c/css/sac/1.3/sac-1.3.pom (1.1 kB at 87 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/24.1.1-android/guava-24.1.1-android.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/24.1.1-android/guava-24.1.1-android.pom (7.8 kB at 389 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/24.1.1-android/guava-parent-24.1.1-android.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/24.1.1-android/guava-parent-24.1.1-android.pom (10 kB at 424 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/checkerframework/checker-compat-qual/2.0.0/checker-compat-qual-2.0.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/checkerframework/checker-compat-qual/2.0.0/checker-compat-qual-2.0.0.pom (4.2 kB at 300 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.1.3/error_prone_annotations-2.1.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.1.3/error_prone_annotations-2.1.3.pom (1.8 kB at 105 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.1.3/error_prone_parent-2.1.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.1.3/error_prone_parent-2.1.3.pom (5.1 kB at 364 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.pom (2.5 kB at 181 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-parent/1.14/animal-sniffer-parent-1.14.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-parent/1.14/animal-sniffer-parent-1.14.pom (4.4 kB at 183 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/mojo-parent/34/mojo-parent-34.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/mojo-parent/34/mojo-parent-34.pom (24 kB at 1.6 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-jpeg/3.4.1/imageio-jpeg-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-jpeg/3.4.1/imageio-jpeg-3.4.1.pom (1.2 kB at 33 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio/3.4.1/imageio-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio/3.4.1/imageio-3.4.1.pom (5.3 kB at 170 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/twelvemonkeys/3.4.1/twelvemonkeys-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/twelvemonkeys/3.4.1/twelvemonkeys-3.4.1.pom (9.0 kB at 393 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-core/3.4.1/imageio-core-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-core/3.4.1/imageio-core-3.4.1.pom (1.0 kB at 84 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-lang/3.4.1/common-lang-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-lang/3.4.1/common-lang-3.4.1.pom (647 B at 34 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common/3.4.1/common-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common/3.4.1/common-3.4.1.pom (1.9 kB at 63 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-io/3.4.1/common-io-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-io/3.4.1/common-io-3.4.1.pom (1.0 kB at 73 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-image/3.4.1/common-image-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-image/3.4.1/common-image-3.4.1.pom (1.2 kB at 66 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-metadata/3.4.1/imageio-metadata-3.4.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-metadata/3.4.1/imageio-metadata-3.4.1.pom (974 B at 37 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.12/jackson-core-asl-1.9.12.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.12/jackson-core-asl-1.9.12.pom (1.3 kB at 128 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.12/jackson-mapper-asl-1.9.12.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.12/jackson-mapper-asl-1.9.12.pom (1.5 kB at 100 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xmlunit/xmlunit/1.3/xmlunit-1.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xmlunit/xmlunit/1.3/xmlunit-1.3.pom (2.7 kB at 81 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-java/4.5.4/cucumber-java-4.5.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-java/4.5.4/cucumber-java-4.5.4.pom (3.2 kB at 16 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-jvm/4.5.4/cucumber-jvm-4.5.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-jvm/4.5.4/cucumber-jvm-4.5.4.pom (19 kB at 92 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-parent/1.0.4/cucumber-parent-1.0.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-parent/1.0.4/cucumber-parent-1.0.4.pom (17 kB at 1.3 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-core/4.5.4/cucumber-core-4.5.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-core/4.5.4/cucumber-core-4.5.4.pom (11 kB at 58 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/gherkin/5.1.0/gherkin-5.1.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/gherkin/5.1.0/gherkin-5.1.0.pom (5.4 kB at 256 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/tag-expressions/1.1.1/tag-expressions-1.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/tag-expressions/1.1.1/tag-expressions-1.1.1.pom (7.5 kB at 534 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-expressions/7.0.2/cucumber-expressions-7.0.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-expressions/7.0.2/cucumber-expressions-7.0.2.pom (1.9 kB at 35 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/datatable/1.1.14/datatable-1.1.14.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/datatable/1.1.14/datatable-1.1.14.pom (1.7 kB at 111 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/datatable-parent/1.1.14/datatable-parent-1.1.14.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/datatable-parent/1.1.14/datatable-parent-1.1.14.pom (3.0 kB at 58 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/datatable-dependencies/1.1.14/datatable-dependencies-1.1.14.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/datatable-dependencies/1.1.14/datatable-dependencies-1.1.14.pom (2.2 kB at 39 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-junit/4.5.4/cucumber-junit-4.5.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-junit/4.5.4/cucumber-junit-4.5.4.pom (1.4 kB at 5.7 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-picocontainer/4.7.1/cucumber-picocontainer-4.7.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-picocontainer/4.7.1/cucumber-picocontainer-4.7.1.pom (2.8 kB at 14 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-jvm/4.7.1/cucumber-jvm-4.7.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-jvm/4.7.1/cucumber-jvm-4.7.1.pom (19 kB at 94 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-java/4.7.1/cucumber-java-4.7.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-java/4.7.1/cucumber-java-4.7.1.pom (3.2 kB at 16 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-core/4.7.1/cucumber-core-4.7.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-core/4.7.1/cucumber-core-4.7.1.pom (11 kB at 46 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/picocontainer/picocontainer/2.15/picocontainer-2.15.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/picocontainer/picocontainer/2.15/picocontainer-2.15.pom (4.0 kB at 39 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/picocontainer/picocontainer-parent/2.15/picocontainer-parent-2.15.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/picocontainer/picocontainer-parent/2.15/picocontainer-parent-2.15.pom (14 kB at 196 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest/2.1/hamcrest-2.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest/2.1/hamcrest-2.1.pom (1.1 kB at 13 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/9.8.0-8/Saxon-HE-9.8.0-8.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/relaxng/jing/20181222/jing-20181222.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/isorelax/isorelax/20030108/isorelax-20030108.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/w3c/css/sac/1.3/sac-1.3.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/24.1.1-android/guava-24.1.1-android.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/w3c/css/sac/1.3/sac-1.3.jar (16 kB at 102 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/checkerframework/checker-compat-qual/2.0.0/checker-compat-qual-2.0.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/isorelax/isorelax/20030108/isorelax-20030108.jar (193 kB at 657 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.1.3/error_prone_annotations-2.1.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/checkerframework/checker-compat-qual/2.0.0/checker-compat-qual-2.0.0.jar (32 kB at 86 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.1.3/error_prone_annotations-2.1.3.jar (14 kB at 28 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-jpeg/3.4.1/imageio-jpeg-3.4.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.14/animal-sniffer-annotations-1.14.jar (3.5 kB at 5.7 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-core/3.4.1/imageio-core-3.4.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-jpeg/3.4.1/imageio-jpeg-3.4.1.jar (91 kB at 120 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-metadata/3.4.1/imageio-metadata-3.4.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-core/3.4.1/imageio-core-3.4.1.jar (73 kB at 86 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-lang/3.4.1/common-lang-3.4.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/imageio/imageio-metadata/3.4.1/imageio-metadata-3.4.1.jar (78 kB at 78 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-io/3.4.1/common-io-3.4.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-lang/3.4.1/common-lang-3.4.1.jar (121 kB at 106 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-image/3.4.1/common-image-3.4.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-io/3.4.1/common-io-3.4.1.jar (91 kB at 76 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.12/jackson-core-asl-1.9.12.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/twelvemonkeys/common/common-image/3.4.1/common-image-3.4.1.jar (86 kB at 65 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.12/jackson-mapper-asl-1.9.12.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/relaxng/jing/20181222/jing-20181222.jar (764 kB at 561 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xmlunit/xmlunit/1.3/xmlunit-1.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/jackson/jackson-core-asl/1.9.12/jackson-core-asl-1.9.12.jar (232 kB at 156 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-java/4.5.4/cucumber-java-4.5.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xmlunit/xmlunit/1.3/xmlunit-1.3.jar (97 kB at 59 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-core/4.5.4/cucumber-core-4.5.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/24.1.1-android/guava-24.1.1-android.jar (2.6 MB at 1.4 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/gherkin/5.1.0/gherkin-5.1.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/jackson/jackson-mapper-asl/1.9.12/jackson-mapper-asl-1.9.12.jar (780 kB at 388 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/tag-expressions/1.1.1/tag-expressions-1.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/tag-expressions/1.1.1/tag-expressions-1.1.1.jar (15 kB at 6.8 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-expressions/7.0.2/cucumber-expressions-7.0.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/gherkin/5.1.0/gherkin-5.1.0.jar (342 kB at 158 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/datatable/1.1.14/datatable-1.1.14.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-expressions/7.0.2/cucumber-expressions-7.0.2.jar (54 kB at 24 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/datatable-dependencies/1.1.14/datatable-dependencies-1.1.14.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-java/4.5.4/cucumber-java-4.5.4.jar (659 kB at 292 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-junit/4.5.4/cucumber-junit-4.5.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/datatable/1.1.14/datatable-1.1.14.jar (62 kB at 27 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-picocontainer/4.7.1/cucumber-picocontainer-4.7.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-junit/4.5.4/cucumber-junit-4.5.4.jar (38 kB at 14 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/picocontainer/picocontainer/2.15/picocontainer-2.15.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-picocontainer/4.7.1/cucumber-picocontainer-4.7.1.jar (4.3 kB at 1.6 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/cucumber-core/4.5.4/cucumber-core-4.5.4.jar (639 kB at 221 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest/2.1/hamcrest-2.1.jar (123 kB at 41 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/picocontainer/picocontainer/2.15/picocontainer-2.15.jar (326 kB at 106 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/cucumber/datatable-dependencies/1.1.14/datatable-dependencies-1.1.14.jar (1.9 MB at 572 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/9.8.0-8/Saxon-HE-9.8.0-8.jar (5.0 MB at 1.3 MB/s)
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.0:enforce (enforce-maven) @ epubcheck ---
+[INFO] 
+[INFO] --- license-maven-plugin:1.14:add-third-party (thirdparty-licenses) @ epubcheck ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-core/1.5/doxia-core-1.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-core/1.5/doxia-core-1.5.pom (4.1 kB at 97 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia/1.5/doxia-1.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia/1.5/doxia-1.5.pom (18 kB at 210 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sink-api/1.5/doxia-sink-api-1.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sink-api/1.5/doxia-sink-api-1.5.pom (1.5 kB at 20 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-logging-api/1.5/doxia-logging-api-1.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-logging-api/1.5/doxia-logging-api-1.5.pom (1.5 kB at 22 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-core/1.5/doxia-core-1.5.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-logging-api/1.5/doxia-logging-api-1.5.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sink-api/1.5/doxia-sink-api-1.5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-logging-api/1.5/doxia-logging-api-1.5.jar (11 kB at 80 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-sink-api/1.5/doxia-sink-api-1.5.jar (11 kB at 84 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/doxia/doxia-core/1.5/doxia-core-1.5.jar (163 kB at 763 kB/s)
+[WARNING] There is 1 dependencies with no license :
+[WARNING]  - isorelax--isorelax--20030108
+[WARNING] There is 1 dependencies with no license :
+[WARNING]  - isorelax--isorelax--20030108
+[INFO] Writing third-party file to /home/user/projects/epubcheck/target/generated-sources/license/THIRD-PARTY.txt
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ epubcheck ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 5 resources to /home/user/projects/epubcheck/target
+[INFO] Copying 333 resources
+[INFO] Copying 1 resource
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- xml-maven-plugin:1.0.1:transform (default) @ epubcheck ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/9.4/Saxon-HE-9.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/9.4/Saxon-HE-9.4.pom (2.6 kB at 26 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xom/xom/1.2.5/xom-1.2.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xom/xom/1.2.5/xom-1.2.5.pom (1.9 kB at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.8.0/xercesImpl-2.8.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xerces/xercesImpl/2.8.0/xercesImpl-2.8.0.pom (1.4 kB at 13 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xalan/xalan/2.7.0/xalan-2.7.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xalan/xalan/2.7.0/xalan-2.7.0.pom (491 B at 3.8 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/dom4j/dom4j/1.6.1/dom4j-1.6.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/dom4j/dom4j/1.6.1/dom4j-1.6.1.pom (6.8 kB at 77 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.pom (1.6 kB at 14 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.6.1/plexus-io-2.6.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.6.1/plexus-io-2.6.1.pom (4.0 kB at 31 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/9.4/Saxon-HE-9.4.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xom/xom/1.2.5/xom-1.2.5.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xalan/xalan/2.7.0/xalan-2.7.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.jar (84 kB at 121 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.6.1/plexus-io-2.6.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xom/xom/1.2.5/xom-1.2.5.jar (309 kB at 369 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar (314 kB at 366 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/codehaus/plexus/plexus-io/2.6.1/plexus-io-2.6.1.jar (85 kB at 85 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/xalan/xalan/2.7.0/xalan-2.7.0.jar (2.7 MB at 1.4 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/sf/saxon/Saxon-HE/9.4/Saxon-HE-9.4.jar (9.8 MB at 2.2 MB/s)
+[INFO] Transforming file: /home/user/projects/epubcheck/src/main/resources/com/adobe/epubcheck/schema/30/package-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/src/main/resources/com/adobe/epubcheck/schema/30/media-overlay-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/src/main/resources/com/adobe/epubcheck/schema/30/ocf-metadata-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/src/main/resources/com/adobe/epubcheck/schema/30/ocf-encryption-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/src/main/resources/com/adobe/epubcheck/schema/30/epub-xhtml-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/src/main/resources/com/adobe/epubcheck/schema/30/epub-svg-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/src/main/resources/com/adobe/epubcheck/schema/30/epub-nav-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/src/main/resources/com/adobe/epubcheck/schema/30/collection-manifest-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/src/main/resources/com/adobe/epubcheck/schema/30/collection-do-30.sch
+[INFO] Transformed 9 file(s).
+[INFO] Transforming file: /home/user/projects/epubcheck/target/generated-resources/intermediate-schema/collection-do-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/target/generated-resources/intermediate-schema/collection-manifest-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/target/generated-resources/intermediate-schema/epub-nav-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/target/generated-resources/intermediate-schema/epub-svg-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/target/generated-resources/intermediate-schema/epub-xhtml-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/target/generated-resources/intermediate-schema/ocf-encryption-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/target/generated-resources/intermediate-schema/ocf-metadata-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/target/generated-resources/intermediate-schema/media-overlay-30.sch
+[INFO] Transforming file: /home/user/projects/epubcheck/target/generated-resources/intermediate-schema/package-30.sch
+[INFO] Transformed 9 file(s).
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.7.0:compile (default-compile) @ epubcheck ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 221 source files to /home/user/projects/epubcheck/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/epubcheck/src/main/java/com/adobe/epubcheck/util/Archive.java:[206,12] cannot find symbol
+  symbol:   variable cis
+  location: class com.adobe.epubcheck.util.Archive
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  33.743 s
+[INFO] Finished at: 2021-07-20T19:45:37Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.7.0:compile (default-compile) on project epubcheck: Compilation failure
+[ERROR] /home/user/projects/epubcheck/src/main/java/com/adobe/epubcheck/util/Archive.java:[206,12] cannot find symbol
+[ERROR]   symbol:   variable cis
+[ERROR]   location: class com.adobe.epubcheck.util.Archive
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

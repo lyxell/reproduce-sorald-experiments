@@ -1,0 +1,84 @@
+[INFO] Scanning for projects...
+[WARNING] The project junit:junit:jar:4.13.2-SNAPSHOT uses prerequisites which is only intended for maven-plugin projects but not for non maven-plugin projects. For such purposes you should use the maven-enforcer-plugin. See https://maven.apache.org/enforcer/enforcer-rules/requireMavenVersion.html
+[INFO] 
+[INFO] ----------------------------< junit:junit >-----------------------------
+[INFO] Building JUnit 4.13.2-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.4:enforce (enforce-versions) @ junit ---
+[INFO] 
+[INFO] --- replacer:1.5.3:replace (default) @ junit ---
+[INFO] Replacement run on 1 file.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.7:resources (default-resources) @ junit ---
+[INFO] Using 'ISO-8859-1' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.3:compile (default-compile) @ junit ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 217 source files to /home/user/projects/junit4/target/classes
+[WARNING] To suppress warnings about obsolete options, use -Xlint:-options.
+/home/user/projects/junit4/src/main/java/junit/extensions/TestDecorator.java:[3,22] [deprecation] Assert in junit.framework has been deprecated
+[WARNING] /home/user/projects/junit4/src/main/java/org/junit/runner/FilterFactories.java:[19,7] no description for @throws
+[WARNING] /home/user/projects/junit4/src/main/java/org/junit/runner/JUnitCore.java:[66,7] no description for @param
+[WARNING] /home/user/projects/junit4/src/main/java/org/junit/runner/notification/SynchronizedRunListener.java:[67,7] no description for @throws
+[WARNING] /home/user/projects/junit4/src/main/java/org/junit/internal/Classes.java:[24,7] no description for @throws
+[WARNING] /home/user/projects/junit4/src/main/java/org/junit/internal/Classes.java:[37,7] no description for @throws
+[WARNING] /home/user/projects/junit4/src/main/java/org/junit/internal/runners/statements/FailOnTimeout.java:[109,11] no description for @param
+[WARNING] /home/user/projects/junit4/src/main/java/org/junit/runners/Parameterized.java:[406,35] [deprecation] newInstance() in Class has been deprecated
+[WARNING]   where T is a type-variable:
+    T extends Object declared in class Class
+/home/user/projects/junit4/src/main/java/org/junit/runners/model/FrameworkMember.java:[33,19] [unchecked] unchecked cast
+[WARNING]   required: T
+  found:    FrameworkMember<T>
+  where T is a type-variable:
+    T extends FrameworkMember<T> declared in class FrameworkMember
+/home/user/projects/junit4/src/main/java/org/junit/validator/AnnotationValidatorFactory.java:[31,59] [deprecation] newInstance() in Class has been deprecated
+[WARNING]   where T is a type-variable:
+    T extends Object declared in class Class
+/home/user/projects/junit4/src/main/java/org/junit/experimental/theories/internal/Assignments.java:[122,18] [deprecation] newInstance() in Class has been deprecated
+[WARNING]   where T is a type-variable:
+    T extends Object declared in class Class
+/home/user/projects/junit4/src/main/java/org/junit/rules/ExpectedException.java:[271,12] [deprecation] <T>assertThat(T,Matcher<? super T>) in Assert has been deprecated
+[WARNING]   where T is a type-variable:
+    T extends Object declared in method <T>assertThat(T,Matcher<? super T>)
+/home/user/projects/junit4/src/main/java/org/junit/rules/ErrorCollector.java:[77,16] [deprecation] <T>assertThat(String,T,Matcher<? super T>) in Assert has been deprecated
+[WARNING]   where T is a type-variable:
+    T extends Object declared in method <T>assertThat(String,T,Matcher<? super T>)
+/home/user/projects/junit4/src/main/java/org/junit/runners/parameterized/BlockJUnit4ClassRunnerWithParameters.java:[69,64] [deprecation] newInstance() in Class has been deprecated
+[INFO] 
+[INFO] --- maven-resources-plugin:2.7:testResources (default-testResources) @ junit ---
+[INFO] Using 'ISO-8859-1' encoding to copy filtered resources.
+[INFO] Copying 7 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.3:testCompile (default-testCompile) @ junit ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 251 source files to /home/user/projects/junit4/target/test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] To suppress warnings about obsolete options, use -Xlint:-options.
+/home/user/projects/junit4/src/test/java/org/junit/tests/running/classes/parent/ParentRunnerClassLoaderTest.java:[77,12] error: try-with-resources is not supported in -source 6
+[ERROR]   (use -source 7 or higher to enable try-with-resources)
+/home/user/projects/junit4/src/test/java/org/junit/tests/experimental/max/DescriptionTest.java:[88,16] error: try-with-resources is not supported in -source 6
+[INFO] 2 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.811 s
+[INFO] Finished at: 2021-07-20T21:01:28Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.3:testCompile (default-testCompile) on project junit: Compilation failure: Compilation failure: 
+[ERROR] To suppress warnings about obsolete options, use -Xlint:-options.
+[ERROR] /home/user/projects/junit4/src/test/java/org/junit/tests/running/classes/parent/ParentRunnerClassLoaderTest.java:[77,12] error: try-with-resources is not supported in -source 6
+[ERROR]   (use -source 7 or higher to enable try-with-resources)
+[ERROR] /home/user/projects/junit4/src/test/java/org/junit/tests/experimental/max/DescriptionTest.java:[88,16] error: try-with-resources is not supported in -source 6
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

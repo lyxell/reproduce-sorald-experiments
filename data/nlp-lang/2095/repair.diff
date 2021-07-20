@@ -1,0 +1,243 @@
+diff --git a/src/main/java/org/nlpcn/commons/lang/dat/DATMaker.java b/src/main/java/org/nlpcn/commons/lang/dat/DATMaker.java
+index 511dab7..3d82196 100644
+--- a/src/main/java/org/nlpcn/commons/lang/dat/DATMaker.java
++++ b/src/main/java/org/nlpcn/commons/lang/dat/DATMaker.java
+@@ -269,9 +269,7 @@ public class DATMaker {
+ 	 * 序列化dat对象
+ 	 */
+ 	public void save(final String path) throws IOException {
+-		ObjectOutput writer = null;
+-		try {
+-			writer = new ObjectOutputStream(new FileOutputStream(path));
++		try (ObjectOutput writer = new ObjectOutputStream(new FileOutputStream(path))) {
+ 			writer.writeInt(datArrLen());
+ 			writer.writeInt(datItemSize());
+ 			for (Item item : dat) {
+@@ -280,11 +278,6 @@ public class DATMaker {
+ 				}
+ 				writer.writeObject(item);
+ 			}
+-		} finally {
+-			if (writer != null) {
+-				writer.flush();
+-				writer.close();
+-			}
+ 		}
+ 	}
+ 
+@@ -294,9 +287,7 @@ public class DATMaker {
+ 	 * @throws IOException
+ 	 */
+ 	public void saveText(final String path) throws IOException {
+-		Writer writer = null;
+-		try {
+-			writer = new FileWriter(new File(path));
++		try (Writer writer = new FileWriter(new File(path))) {
+ 			writer.write(String.valueOf(datArrLen()));
+ 			writer.write('\n');
+ 			for (final Item item : dat) {
+@@ -306,11 +297,6 @@ public class DATMaker {
+ 				}
+ 			}
+ 			writer.flush();
+-		} finally {
+-			if (writer != null) {
+-				writer.flush();
+-				writer.close();
+-			}
+ 		}
+ 	}
+ }
+\ No newline at end of file
+diff --git a/src/main/java/org/nlpcn/commons/lang/occurrence/Occurrence.java b/src/main/java/org/nlpcn/commons/lang/occurrence/Occurrence.java
+index f2adeba..d1c593e 100644
+--- a/src/main/java/org/nlpcn/commons/lang/occurrence/Occurrence.java
++++ b/src/main/java/org/nlpcn/commons/lang/occurrence/Occurrence.java
+@@ -1,4 +1,16 @@
+ package org.nlpcn.commons.lang.occurrence;
++import java.util.HashMap;
++import java.io.ObjectInputStream;
++import java.io.IOException;
++import java.io.ObjectOutput;
++import java.io.ObjectOutputStream;
++import java.io.FileOutputStream;
++import java.util.Map;
++import java.util.List;
++import java.util.Collection;
++import java.util.ArrayList;
++import java.io.FileInputStream;
++import java.io.Serializable;
+ 
+ import org.nlpcn.commons.lang.util.CollectionUtil;
+ import org.nlpcn.commons.lang.util.MapCount;
+@@ -208,10 +220,11 @@ public class Occurrence implements Serializable {
+ 	 * 保存模型
+ 	 */
+ 	public void saveModel(String filePath) throws IOException {
+-		ObjectOutput oot = new ObjectOutputStream(new FileOutputStream(filePath));
+-		oot.writeObject(this);
+-		oot.flush();
+-		oot.close();
++		try (ObjectOutput oot = new ObjectOutputStream(new FileOutputStream(filePath))) {
++			oot.writeObject(this);
++			oot.flush();
++			oot.close();
++		}
+ 	}
+ 
+ 	/**
+diff --git a/src/main/java/org/nlpcn/commons/lang/util/IOUtil.java b/src/main/java/org/nlpcn/commons/lang/util/IOUtil.java
+index 5616d4d..793a8ee 100644
+--- a/src/main/java/org/nlpcn/commons/lang/util/IOUtil.java
++++ b/src/main/java/org/nlpcn/commons/lang/util/IOUtil.java
+@@ -1,4 +1,23 @@
+ package org.nlpcn.commons.lang.util;
++import java.util.HashMap;
++import java.io.Reader;
++import java.io.IOException;
++import java.io.FileNotFoundException;
++import java.io.ObjectOutputStream;
++import java.io.FileOutputStream;
++import java.util.Map;
++import java.io.File;
++import java.util.List;
++import java.io.OutputStream;
++import java.io.UnsupportedEncodingException;
++import java.util.ArrayList;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.Serializable;
++import java.io.BufferedReader;
++import java.util.Iterator;
++import java.io.InputStream;
++import java.io.RandomAccessFile;
+ 
+ import org.nlpcn.commons.lang.util.logging.Log;
+ import org.nlpcn.commons.lang.util.logging.LogFactory;
+@@ -37,9 +56,10 @@ public class IOUtil {
+ 	}
+ 
+ 	public static BufferedReader getReader(File file, String charEncoding) throws FileNotFoundException, UnsupportedEncodingException {
+-		// TODO Auto-generated method stub
+-		InputStream is = new FileInputStream(file);
+-		return new BufferedReader(new InputStreamReader(is, charEncoding));
++		try (// TODO Auto-generated method stub
++		InputStream is = new FileInputStream(file)) {
++			return new BufferedReader(new InputStreamReader(is, charEncoding));
++		}
+ 	}
+ 
+ 	public static RandomAccessFile getRandomAccessFile(String path, String charEncoding) throws FileNotFoundException {
+diff --git a/src/test/java/org/nlpcn/commons/lang/pinyin/MakePinYinDic.java b/src/test/java/org/nlpcn/commons/lang/pinyin/MakePinYinDic.java
+index 9911752..eca955d 100644
+--- a/src/test/java/org/nlpcn/commons/lang/pinyin/MakePinYinDic.java
++++ b/src/test/java/org/nlpcn/commons/lang/pinyin/MakePinYinDic.java
+@@ -1,4 +1,5 @@
+ package org.nlpcn.commons.lang.pinyin;
++import java.util.function.Consumer;
+ 
+ import org.nlpcn.commons.lang.util.IOUtil;
+ import org.nlpcn.commons.lang.util.StringUtil;
+@@ -29,65 +30,48 @@ public class MakePinYinDic {
+ 				map.put(word,split) ;
+ 			}
+ 		});
+-
+-
+-
+-		FileOutputStream fos = new FileOutputStream(new File("../nlp-lang/src/main/resources/polyphone.txt")) ;
+-
+-
+-		IOUtil.readFile2List("../nlp-lang/src/test/resources/polyphone_all.txt", "utf-8").stream().forEach(s->{
+-			String[] split = s.split("=");
+-			String word = split[0] ;
+-			String[] py = split[1].split(" ") ;
+-
+-			int len = word.length() ;
+-
+-			String[] wordPy = new String[len] ;
+-
+-			for (int i = 0; i < len; i++) {
+-				char c = word.charAt(i) ;
+-
+-				wordPy[i] = map.get(String.valueOf(c))[0];
+-			}
+-
+-			boolean flag = true ;
+-			for (int i = 0; i < len; i++) {
+-				String p = py[i] ;
+-				String wp = wordPy[i] ;
+-				if(!p.equals(wp) && !wp.replaceAll("\\d","").equals(p)){
+-					flag = false ;
+-					break ;
++		try (FileOutputStream fos = new FileOutputStream(new File("../nlp-lang/src/main/resources/polyphone.txt"))) {
++			IOUtil.readFile2List("../nlp-lang/src/test/resources/polyphone_all.txt", "utf-8").stream().forEach(( s) -> {
++				String[] split = s.split("=");
++				String word = split[0];
++				String[] py = split[1].split(" ");
++				int len = word.length();
++				String[] wordPy = new String[len];
++				for (int i = 0; i < len; i++) {
++					char c = word.charAt(i);
++					wordPy[i] = map.get(String.valueOf(c))[0];
+ 				}
+-			}
+-
+-
+-
+-			if(!flag){
+-				System.out.println(s);
++				boolean flag = true;
+ 				for (int i = 0; i < len; i++) {
+-					char c = word.charAt(i) ;
+-					String p = py[i] ;
+-					String[] str = map.get(String.valueOf(c));
+-					for (String wp : str) {
+-						if(p.equals(wp) || wp.replaceAll("\\d","").equals(p)){
+-							py[i] = wp ;
+-						}
++					String p = py[i];
++					String wp = wordPy[i];
++					if (!p.equals(wp) && !wp.replaceAll("\\d", "").equals(p)) {
++						flag = false;
++						break;
+ 					}
+ 				}
+-
+-				try {
+-					fos.write((word+"="+ StringUtil.joiner(py," ")+"\n").getBytes("utf-8"));
+-				} catch (IOException e) {
+-					e.printStackTrace();
++				if (!flag) {
++					System.out.println(s);
++					for (int i = 0; i < len; i++) {
++						char c = word.charAt(i);
++						String p = py[i];
++						String[] str = map.get(String.valueOf(c));
++						for (String wp : str) {
++							if (p.equals(wp) || wp.replaceAll("\\d", "").equals(p)) {
++								py[i] = wp;
++							}
++						}
++					}
++					try {
++						fos.write((word + "=" + StringUtil.joiner(py, " ") + "\n").getBytes("utf-8"));
++					} catch (IOException e) {
++						e.printStackTrace();
++					}
+ 				}
+-
+-			}
+-
+-		});
+-
+-
+-		fos.flush();
+-		fos.close();
++			});
++			fos.flush();
++			fos.close();
++		}
+ 
+ 
+ 	}

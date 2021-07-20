@@ -1,0 +1,335 @@
+[INFO] Scanning for projects...
+[INFO] Inspecting build with total of 8 modules...
+[INFO] Installing Nexus Staging features:
+[INFO]   ... total of 8 executions of maven-deploy-plugin replaced with nexus-staging-maven-plugin
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] org.uma.jmetal:jmetal                                              [pom]
+[INFO] org.uma.jmetal:jmetal-core                                         [jar]
+[INFO] org.uma.jmetal:jmetal-problem                                      [jar]
+[INFO] org.uma.jmetal:jmetal-algorithm                                    [jar]
+[INFO] org.uma.jmetal:jmetal-lab                                          [jar]
+[INFO] org.uma.jmetal:jmetal-example                                      [jar]
+[INFO] org.uma.jmetal:jmetal-experimental                                 [jar]
+[INFO] org.uma.jmetal:jmetal-parallel                                     [jar]
+[INFO] 
+[INFO] -----------------------< org.uma.jmetal:jmetal >------------------------
+[INFO] Building org.uma.jmetal:jmetal 5.11-SNAPSHOT                       [1/8]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-site-plugin/3.7.1/maven-site-plugin-3.7.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-site-plugin/3.7.1/maven-site-plugin-3.7.1.pom (19 kB at 49 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-site-plugin/3.7.1/maven-site-plugin-3.7.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-site-plugin/3.7.1/maven-site-plugin-3.7.1.jar (135 kB at 2.6 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/jacoco-maven-plugin/0.8.5/jacoco-maven-plugin-0.8.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/jacoco-maven-plugin/0.8.5/jacoco-maven-plugin-0.8.5.pom (4.4 kB at 256 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.build/0.8.5/org.jacoco.build-0.8.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.build/0.8.5/org.jacoco.build-0.8.5.pom (41 kB at 2.1 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/jacoco-maven-plugin/0.8.5/jacoco-maven-plugin-0.8.5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/jacoco-maven-plugin/0.8.5/jacoco-maven-plugin-0.8.5.jar (53 kB at 2.1 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-failsafe-plugin/2.22.0/maven-failsafe-plugin-2.22.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-failsafe-plugin/2.22.0/maven-failsafe-plugin-2.22.0.pom (12 kB at 258 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire/2.22.0/surefire-2.22.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/surefire/surefire/2.22.0/surefire-2.22.0.pom (27 kB at 2.0 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-failsafe-plugin/2.22.0/maven-failsafe-plugin-2.22.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-failsafe-plugin/2.22.0/maven-failsafe-plugin-2.22.0.jar (294 kB at 5.5 MB/s)
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.5:prepare-agent (default) @ jmetal ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.agent/0.8.5/org.jacoco.agent-0.8.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.agent/0.8.5/org.jacoco.agent-0.8.5.pom (3.5 kB at 269 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.core/0.8.5/org.jacoco.core-0.8.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.core/0.8.5/org.jacoco.core-0.8.5.pom (2.1 kB at 91 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/7.2/asm-7.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/7.2/asm-7.2.pom (2.9 kB at 226 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/7.2/asm-commons-7.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/7.2/asm-commons-7.2.pom (3.7 kB at 306 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/7.2/asm-tree-7.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/7.2/asm-tree-7.2.pom (3.1 kB at 261 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/7.2/asm-analysis-7.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/7.2/asm-analysis-7.2.pom (3.2 kB at 287 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.report/0.8.5/org.jacoco.report-0.8.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.report/0.8.5/org.jacoco.report-0.8.5.pom (1.9 kB at 134 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.core/0.8.5/org.jacoco.core-0.8.5.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/7.2/asm-7.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.agent/0.8.5/org.jacoco.agent-0.8.5-runtime.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/7.2/asm-analysis-7.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/7.2/asm-commons-7.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.core/0.8.5/org.jacoco.core-0.8.5.jar (195 kB at 1.9 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/7.2/asm-tree-7.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/7.2/asm-tree-7.2.jar (50 kB at 340 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.report/0.8.5/org.jacoco.report-0.8.5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/7.2/asm-analysis-7.2.jar (33 kB at 190 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/7.2/asm-commons-7.2.jar (70 kB at 356 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/ow2/asm/asm/7.2/asm-7.2.jar (115 kB at 513 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.report/0.8.5/org.jacoco.report-0.8.5.jar (129 kB at 589 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jacoco/org.jacoco.agent/0.8.5/org.jacoco.agent-0.8.5-runtime.jar (282 kB at 1.2 MB/s)
+[INFO] argLine set to -javaagent:/home/user/.m2/repository/org/jacoco/org.jacoco.agent/0.8.5/org.jacoco.agent-0.8.5-runtime.jar=destfile=/home/user/projects/jMetal/target/jacoco.exec
+[INFO] 
+[INFO] ---------------------< org.uma.jmetal:jmetal-core >---------------------
+[INFO] Building org.uma.jmetal:jmetal-core 5.11-SNAPSHOT                  [2/8]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.6.0/junit-jupiter-engine-5.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-engine/5.6.0/junit-jupiter-engine-5.6.0.pom (3.2 kB at 153 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.6.0/junit-bom-5.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.6.0/junit-bom-5.6.0.pom (4.9 kB at 352 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/1.6.0/junit-platform-engine-1.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-engine/1.6.0/junit-platform-engine-1.6.0.pom (3.2 kB at 160 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.6.0/junit-platform-commons-1.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/platform/junit-platform-commons/1.6.0/junit-platform-commons-1.6.0.pom (2.8 kB at 129 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/5.6.0/junit-jupiter-api-5.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/junit/jupiter/junit-jupiter-api/5.6.0/junit-jupiter-api-5.6.0.pom (3.2 kB at 245 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.pom (28 kB at 1.4 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.pom (24 kB at 1.0 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/mockito/mockito-core/3.2.0/mockito-core-3.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/mockito/mockito-core/3.2.0/mockito-core-3.2.0.pom (22 kB at 1.6 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.10.3/byte-buddy-1.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.10.3/byte-buddy-1.10.3.pom (10 kB at 534 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-parent/1.10.3/byte-buddy-parent-1.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-parent/1.10.3/byte-buddy-parent-1.10.3.pom (39 kB at 1.9 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-agent/1.10.3/byte-buddy-agent-1.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-agent/1.10.3/byte-buddy-agent-1.10.3.pom (9.6 kB at 797 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/spring-test/4.0.7.RELEASE/spring-test-4.0.7.RELEASE.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/spring-test/4.0.7.RELEASE/spring-test-4.0.7.RELEASE.pom (6.7 kB at 350 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/spring-core/4.0.7.RELEASE/spring-core-4.0.7.RELEASE.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/springframework/spring-core/4.0.7.RELEASE/spring-core-4.0.7.RELEASE.pom (2.3 kB at 99 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/knowm/xchart/xchart/3.2.2/xchart-3.2.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/knowm/xchart/xchart/3.2.2/xchart-3.2.2.pom (655 B at 3.3 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/knowm/xchart/xchart-parent/3.2.2/xchart-parent-3.2.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/knowm/xchart/xchart-parent/3.2.2/xchart-parent-3.2.2.pom (5.4 kB at 27 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/de/erichseifert/vectorgraphics2d/VectorGraphics2D/0.11/VectorGraphics2D-0.11.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/de/erichseifert/vectorgraphics2d/VectorGraphics2D/0.11/VectorGraphics2D-0.11.pom (2.4 kB at 9.3 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/weka-stable/3.8.1/weka-stable-3.8.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/weka-stable/3.8.1/weka-stable-3.8.1.pom (11 kB at 55 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/java-cup-11b/2015.03.26/java-cup-11b-2015.03.26.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/java-cup-11b/2015.03.26/java-cup-11b-2015.03.26.pom (1.6 kB at 7.8 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/java-cup-11b-runtime/2015.03.26/java-cup-11b-runtime-2015.03.26.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/java-cup-11b-runtime/2015.03.26/java-cup-11b-runtime-2015.03.26.pom (1.6 kB at 8.1 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/bounce/0.18/bounce-0.18.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/bounce/0.18/bounce-0.18.pom (2.5 kB at 177 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/googlecode/matrix-toolkits-java/mtj/1.0.4/mtj-1.0.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/googlecode/matrix-toolkits-java/mtj/1.0.4/mtj-1.0.4.pom (9.4 kB at 627 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/all/1.1.2/all-1.1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/all/1.1.2/all-1.1.2.pom (4.3 kB at 49 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/parent/1.1/parent-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/parent/1.1/parent-1.1.pom (9.5 kB at 734 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/sourceforge/f2j/arpack_combined_all/0.1/arpack_combined_all-0.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/sourceforge/f2j/arpack_combined_all/0.1/arpack_combined_all-0.1.pom (1.3 kB at 96 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/core/1.1.2/core-1.1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/core/1.1.2/core-1.1.2.pom (5.4 kB at 319 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-osx-x86_64/1.1/netlib-native_ref-osx-x86_64-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-osx-x86_64/1.1/netlib-native_ref-osx-x86_64-1.1.pom (3.6 kB at 362 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_ref/1.1/native_ref-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_ref/1.1/native_ref-1.1.pom (13 kB at 713 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_ref-java/1.1/native_ref-java-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_ref-java/1.1/native_ref-java-1.1.pom (4.0 kB at 361 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/jniloader/1.1/jniloader-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/jniloader/1.1/jniloader-1.1.pom (3.6 kB at 81 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/core/1.1/core-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/core/1.1/core-1.1.pom (5.4 kB at 268 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-x86_64/1.1/netlib-native_ref-linux-x86_64-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-x86_64/1.1/netlib-native_ref-linux-x86_64-1.1.pom (3.3 kB at 150 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_ref-xbuilds/1.1/native_ref-xbuilds-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_ref-xbuilds/1.1/native_ref-xbuilds-1.1.pom (869 B at 20 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-i686/1.1/netlib-native_ref-linux-i686-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-i686/1.1/netlib-native_ref-linux-i686-1.1.pom (3.7 kB at 312 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-win-x86_64/1.1/netlib-native_ref-win-x86_64-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-win-x86_64/1.1/netlib-native_ref-win-x86_64-1.1.pom (4.4 kB at 438 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-win-i686/1.1/netlib-native_ref-win-i686-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-win-i686/1.1/netlib-native_ref-win-i686-1.1.pom (4.5 kB at 319 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-armhf/1.1/netlib-native_ref-linux-armhf-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-armhf/1.1/netlib-native_ref-linux-armhf-1.1.pom (3.9 kB at 195 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-osx-x86_64/1.1/netlib-native_system-osx-x86_64-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-osx-x86_64/1.1/netlib-native_system-osx-x86_64-1.1.pom (3.9 kB at 119 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_system/1.1/native_system-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_system/1.1/native_system-1.1.pom (16 kB at 639 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_system-java/1.1/native_system-java-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_system-java/1.1/native_system-java-1.1.pom (4.0 kB at 160 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-x86_64/1.1/netlib-native_system-linux-x86_64-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-x86_64/1.1/netlib-native_system-linux-x86_64-1.1.pom (3.9 kB at 262 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_system-xbuilds/1.1/native_system-xbuilds-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_system-xbuilds/1.1/native_system-xbuilds-1.1.pom (875 B at 62 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-i686/1.1/netlib-native_system-linux-i686-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-i686/1.1/netlib-native_system-linux-i686-1.1.pom (4.9 kB at 375 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-armhf/1.1/netlib-native_system-linux-armhf-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-armhf/1.1/netlib-native_system-linux-armhf-1.1.pom (4.8 kB at 398 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-win-x86_64/1.1/netlib-native_system-win-x86_64-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-win-x86_64/1.1/netlib-native_system-win-x86_64-1.1.pom (5.1 kB at 171 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-win-i686/1.1/netlib-native_system-win-i686-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-win-i686/1.1/netlib-native_system-win-i686-1.1.pom (5.3 kB at 329 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/googlecode/netlib-java/netlib-java/1.1/netlib-java-1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/googlecode/netlib-java/netlib-java/1.1/netlib-java-1.1.pom (1.2 kB at 119 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/mbuzdalov/non-dominated-sorting-implementations/0.2.1/non-dominated-sorting-implementations-0.2.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/mbuzdalov/non-dominated-sorting-implementations/0.2.1/non-dominated-sorting-implementations-0.2.1.pom (1.7 kB at 8.9 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/knowm/xchart/xchart/3.2.2/xchart-3.2.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/de/erichseifert/vectorgraphics2d/VectorGraphics2D/0.11/VectorGraphics2D-0.11.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar (123 kB at 1.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/weka-stable/3.8.1/weka-stable-3.8.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.9/commons-lang3-3.9.jar (504 kB at 3.3 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/java-cup-11b/2015.03.26/java-cup-11b-2015.03.26.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar (752 kB at 3.6 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/java-cup-11b-runtime/2015.03.26/java-cup-11b-runtime-2015.03.26.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/de/erichseifert/vectorgraphics2d/VectorGraphics2D/0.11/VectorGraphics2D-0.11.jar (92 kB at 354 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/bounce/0.18/bounce-0.18.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/knowm/xchart/xchart/3.2.2/xchart-3.2.2.jar (183 kB at 625 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/googlecode/matrix-toolkits-java/mtj/1.0.4/mtj-1.0.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/bounce/0.18/bounce-0.18.jar (209 kB at 630 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-osx-x86_64/1.1/netlib-native_ref-osx-x86_64-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/googlecode/matrix-toolkits-java/mtj/1.0.4/mtj-1.0.4.jar (269 kB at 715 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_ref-java/1.1/native_ref-java-1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/java-cup-11b/2015.03.26/java-cup-11b-2015.03.26.jar (96 kB at 248 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/jniloader/1.1/jniloader-1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/thirdparty/java-cup-11b-runtime/2015.03.26/java-cup-11b-runtime-2015.03.26.jar (23 kB at 55 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-x86_64/1.1/netlib-native_ref-linux-x86_64-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/jniloader/1.1/jniloader-1.1.jar (8.7 kB at 18 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-i686/1.1/netlib-native_ref-linux-i686-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_ref-java/1.1/native_ref-java-1.1.jar (54 kB at 113 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-win-x86_64/1.1/netlib-native_ref-win-x86_64-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-i686/1.1/netlib-native_ref-linux-i686-1.1-natives.jar (1.5 MB at 1.3 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-win-i686/1.1/netlib-native_ref-win-i686-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-x86_64/1.1/netlib-native_ref-linux-x86_64-1.1-natives.jar (1.7 MB at 1.5 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-armhf/1.1/netlib-native_ref-linux-armhf-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-osx-x86_64/1.1/netlib-native_ref-osx-x86_64-1.1-natives.jar (1.8 MB at 1.2 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-osx-x86_64/1.1/netlib-native_system-osx-x86_64-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-win-i686/1.1/netlib-native_ref-win-i686-1.1-natives.jar (1.8 MB at 1.0 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_system-java/1.1/native_system-java-1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-osx-x86_64/1.1/netlib-native_system-osx-x86_64-1.1-natives.jar (554 kB at 304 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-x86_64/1.1/netlib-native_system-linux-x86_64-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/native_system-java/1.1/native_system-java-1.1.jar (55 kB at 30 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-i686/1.1/netlib-native_system-linux-i686-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-linux-armhf/1.1/netlib-native_ref-linux-armhf-1.1-natives.jar (1.2 MB at 596 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-armhf/1.1/netlib-native_system-linux-armhf-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-i686/1.1/netlib-native_system-linux-i686-1.1-natives.jar (435 kB at 208 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-win-x86_64/1.1/netlib-native_system-win-x86_64-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-x86_64/1.1/netlib-native_system-linux-x86_64-1.1-natives.jar (459 kB at 211 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-win-i686/1.1/netlib-native_system-win-i686-1.1-natives.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-win-x86_64/1.1/netlib-native_system-win-x86_64-1.1-natives.jar (637 kB at 277 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/sourceforge/f2j/arpack_combined_all/0.1/arpack_combined_all-0.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_ref-win-x86_64/1.1/netlib-native_ref-win-x86_64-1.1-natives.jar (2.3 MB at 998 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/googlecode/netlib-java/netlib-java/1.1/netlib-java-1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-linux-armhf/1.1/netlib-native_system-linux-armhf-1.1-natives.jar (311 kB at 130 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/core/1.1/core-1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/netlib-native_system-win-i686/1.1/netlib-native_system-win-i686-1.1-natives.jar (561 kB at 222 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/mbuzdalov/non-dominated-sorting-implementations/0.2.1/non-dominated-sorting-implementations-0.2.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/googlecode/netlib-java/netlib-java/1.1/netlib-java-1.1.jar (94 kB at 37 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/sourceforge/f2j/arpack_combined_all/0.1/arpack_combined_all-0.1.jar (1.2 MB at 458 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/fommil/netlib/core/1.1/core-1.1.jar (164 kB at 63 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/mbuzdalov/non-dominated-sorting-implementations/0.2.1/non-dominated-sorting-implementations-0.2.1.jar (118 kB at 41 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/nz/ac/waikato/cms/weka/weka-stable/3.8.1/weka-stable-3.8.1.jar (9.1 MB at 2.7 MB/s)
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.5:prepare-agent (default) @ jmetal-core ---
+[INFO] argLine set to -javaagent:/home/user/.m2/repository/org/jacoco/org.jacoco.agent/0.8.5/org.jacoco.agent-0.8.5-runtime.jar=destfile=/home/user/projects/jMetal/jmetal-core/target/jacoco.exec
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ jmetal-core ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 90 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ jmetal-core ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 299 source files to /home/user/projects/jMetal/jmetal-core/target/classes
+[INFO] /home/user/projects/jMetal/jmetal-core/src/main/java/org/uma/jmetal/qualityindicator/impl/GenericIndicator.java: Some input files use or override a deprecated API.
+[INFO] /home/user/projects/jMetal/jmetal-core/src/main/java/org/uma/jmetal/qualityindicator/impl/GenericIndicator.java: Recompile with -Xlint:deprecation for details.
+[INFO] /home/user/projects/jMetal/jmetal-core/src/main/java/org/uma/jmetal/qualityindicator/impl/hypervolume/Hypervolume.java: Some input files use unchecked or unsafe operations.
+[INFO] /home/user/projects/jMetal/jmetal-core/src/main/java/org/uma/jmetal/qualityindicator/impl/hypervolume/Hypervolume.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] -------------------< org.uma.jmetal:jmetal-problem >--------------------
+[INFO] Building org.uma.jmetal:jmetal-problem 5.11-SNAPSHOT               [3/8]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.5:prepare-agent (default) @ jmetal-problem ---
+[INFO] argLine set to -javaagent:/home/user/.m2/repository/org/jacoco/org.jacoco.agent/0.8.5/org.jacoco.agent-0.8.5-runtime.jar=destfile=/home/user/projects/jMetal/jmetal-problem/target/jacoco.exec
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ jmetal-problem ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 113 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ jmetal-problem ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 190 source files to /home/user/projects/jMetal/jmetal-problem/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[1534,17] incompatible types: double[][] cannot be converted to double
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3735,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3736,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3737,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3738,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3739,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3740,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3744,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3745,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3746,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3747,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3748,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3749,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3859,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3866,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3873,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3880,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3887,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3894,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5078,29] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5079,29] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5080,29] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5081,30] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5082,30] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5083,30] array required, but double found
+[INFO] 25 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for org.uma.jmetal:jmetal 5.11-SNAPSHOT:
+[INFO] 
+[INFO] org.uma.jmetal:jmetal .............................. SUCCESS [  1.961 s]
+[INFO] org.uma.jmetal:jmetal-core ......................... SUCCESS [ 11.255 s]
+[INFO] org.uma.jmetal:jmetal-problem ...................... FAILURE [  2.037 s]
+[INFO] org.uma.jmetal:jmetal-algorithm .................... SKIPPED
+[INFO] org.uma.jmetal:jmetal-lab .......................... SKIPPED
+[INFO] org.uma.jmetal:jmetal-example ...................... SKIPPED
+[INFO] org.uma.jmetal:jmetal-experimental ................. SKIPPED
+[INFO] org.uma.jmetal:jmetal-parallel ..................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.200 s
+[INFO] Finished at: 2021-07-20T19:46:11Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.0:compile (default-compile) on project jmetal-problem: Compilation failure: Compilation failure: 
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[1534,17] incompatible types: double[][] cannot be converted to double
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3735,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3736,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3737,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3738,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3739,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3740,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3744,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3745,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3746,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3747,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3748,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3749,16] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3859,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3866,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3873,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3880,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3887,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[3894,18] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5078,29] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5079,29] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5080,29] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5081,30] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5082,30] array required, but double found
+[ERROR] /home/user/projects/jMetal/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java:[5083,30] array required, but double found
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :jmetal-problem

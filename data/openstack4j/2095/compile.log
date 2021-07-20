@@ -1,0 +1,95 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] OpenStack4j Parent                                                 [pom]
+[INFO] OpenStack4j Core                                                   [jar]
+[INFO] OpenStack4j Test Cases                                             [jar]
+[INFO] OpenStack4j Connectors                                             [pom]
+[INFO] OpenStack4j Jersey2 Connector                                      [jar]
+[INFO] OpenStack4j RestEasy Connector                                     [jar]
+[INFO] OpenStack4j HttpComponents-HttpClient Connector                    [jar]
+[INFO] OpenStack4j OKHttp Connector                                       [jar]
+[INFO] OpenStack4j HttpURL Connector                                      [jar]
+[INFO] OpenStack4j Distribution                                           [jar]
+[INFO] OpenStack4j Integration test Cases                                 [pom]
+[INFO] OpenStack4j IntegrationTest Jersey2 Connector                      [jar]
+[INFO] OpenStack4j IntegrationTest RestEasy Connector                     [jar]
+[INFO] OpenStack4j IntegrationTest OKHttp Connector                       [jar]
+[INFO] OpenStack4j IntegrationTest Apache HttpClient                      [jar]
+[INFO] 
+[INFO] -------------------< org.pacesys:openstack4j-parent >-------------------
+[INFO] Building OpenStack4j Parent 3.2.1-SNAPSHOT                        [1/15]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:copy-resources (copy-resources) @ openstack4j-parent ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.4.1:enforce (enforce-maven) @ openstack4j-parent ---
+[INFO] 
+[INFO] --------------------< org.pacesys:openstack4j-core >--------------------
+[INFO] Building OpenStack4j Core 3.2.1-SNAPSHOT                          [2/15]
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-enforcer-plugin:1.4.1:enforce (enforce-maven) @ openstack4j-core ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ openstack4j-core ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.0:compile (default-compile) @ openstack4j-core ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1517 source files to /home/user/projects/openstack4j/core/target/classes
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] /home/user/projects/openstack4j/core/src/main/java/org/openstack4j/openstack/murano/v1/domain/MuranoEnvironment.java:[9,46] sun.reflect.generics.reflectiveObjects.NotImplementedException is internal proprietary API and may be removed in a future release
+[WARNING] /home/user/projects/openstack4j/core/src/main/java/org/openstack4j/core/transport/HttpEntityHandler.java: Some input files use or override a deprecated API.
+[WARNING] /home/user/projects/openstack4j/core/src/main/java/org/openstack4j/core/transport/HttpEntityHandler.java: Recompile with -Xlint:deprecation for details.
+[WARNING] /home/user/projects/openstack4j/core/src/main/java/org/openstack4j/openstack/internal/BaseOpenStackService.java: Some input files use unchecked or unsafe operations.
+[WARNING] /home/user/projects/openstack4j/core/src/main/java/org/openstack4j/openstack/internal/BaseOpenStackService.java: Recompile with -Xlint:unchecked for details.
+[INFO] 5 warnings 
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/openstack4j/core/src/main/java/org/openstack4j/openstack/image/v2/internal/ImageServiceImpl.java:[2,63] org.openstack4j.openstack.internal.BaseOpenStackService.Invocation has protected access in org.openstack4j.openstack.internal.BaseOpenStackService
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for OpenStack4j Parent 3.2.1-SNAPSHOT:
+[INFO] 
+[INFO] OpenStack4j Parent ................................. SUCCESS [  0.606 s]
+[INFO] OpenStack4j Core ................................... FAILURE [  8.877 s]
+[INFO] OpenStack4j Test Cases ............................. SKIPPED
+[INFO] OpenStack4j Connectors ............................. SKIPPED
+[INFO] OpenStack4j Jersey2 Connector ...................... SKIPPED
+[INFO] OpenStack4j RestEasy Connector ..................... SKIPPED
+[INFO] OpenStack4j HttpComponents-HttpClient Connector .... SKIPPED
+[INFO] OpenStack4j OKHttp Connector ....................... SKIPPED
+[INFO] OpenStack4j HttpURL Connector ...................... SKIPPED
+[INFO] OpenStack4j Distribution ........................... SKIPPED
+[INFO] OpenStack4j Integration test Cases ................. SKIPPED
+[INFO] OpenStack4j IntegrationTest Jersey2 Connector ...... SKIPPED
+[INFO] OpenStack4j IntegrationTest RestEasy Connector ..... SKIPPED
+[INFO] OpenStack4j IntegrationTest OKHttp Connector ....... SKIPPED
+[INFO] OpenStack4j IntegrationTest Apache HttpClient ...... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.765 s
+[INFO] Finished at: 2021-07-20T14:08:37Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.0:compile (default-compile) on project openstack4j-core: Compilation failure
+[ERROR] /home/user/projects/openstack4j/core/src/main/java/org/openstack4j/openstack/image/v2/internal/ImageServiceImpl.java:[2,63] org.openstack4j.openstack.internal.BaseOpenStackService.Invocation has protected access in org.openstack4j.openstack.internal.BaseOpenStackService
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :openstack4j-core

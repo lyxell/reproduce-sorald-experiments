@@ -1,0 +1,56 @@
+diff --git a/core/src/main/java/org/modelmapper/internal/Errors.java b/core/src/main/java/org/modelmapper/internal/Errors.java
+index ee4df92..d5a43a7 100644
+--- a/core/src/main/java/org/modelmapper/internal/Errors.java
++++ b/core/src/main/java/org/modelmapper/internal/Errors.java
+@@ -91,30 +91,27 @@ public final class Errors {
+ 
+   /** Returns the formatted message for an exception with the specified messages. */
+   public static String format(String heading, Collection<ErrorMessage> errorMessages) {
+-    @SuppressWarnings("resource")
+-    Formatter fmt = new Formatter().format(heading).format(":%n%n");
+-    int index = 1;
+-    boolean displayCauses = getOnlyCause(errorMessages) == null;
+-
+-    for (ErrorMessage errorMessage : errorMessages) {
+-      fmt.format("%s) %s%n", index++, errorMessage.getMessage());
+-
+-      Throwable cause = errorMessage.getCause();
+-      if (displayCauses && cause != null) {
+-        StringWriter writer = new StringWriter();
+-        cause.printStackTrace(new PrintWriter(writer));
+-        fmt.format("Caused by: %s", writer.getBuffer());
+-      }
+-
+-      fmt.format("%n");
+-    }
+-
+-    if (errorMessages.size() == 1)
+-      fmt.format("1 error");
+-    else
+-      fmt.format("%s errors", errorMessages.size());
+-
+-    return fmt.toString();
++            try (@SuppressWarnings("resource")
++            Formatter fmt = new Formatter().format(heading).format(":%n%n")) {
++                int index = 1;
++                boolean displayCauses = getOnlyCause(errorMessages) == null;
++                for (ErrorMessage errorMessage : errorMessages) {
++                    fmt.format("%s) %s%n", index++, errorMessage.getMessage());
++                    Throwable cause = errorMessage.getCause();
++                    if (displayCauses && cause != null) {
++                        StringWriter writer = new StringWriter();
++                        cause.printStackTrace(new PrintWriter(writer));
++                        fmt.format("Caused by: %s", writer.getBuffer());
++                    }
++                    fmt.format("%n");
++                }
++                if (errorMessages.size() == 1) {
++                    fmt.format("1 error");
++                } else {
++                    fmt.format("%s errors", errorMessages.size());
++                }
++                return fmt.toString();
++            }
+   }
+ 
+   public static String format(String messageFormat, Object... arguments) {

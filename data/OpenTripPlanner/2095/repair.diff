@@ -1,0 +1,211 @@
+diff --git a/src/main/java/org/opentripplanner/api/resource/ServerInfo.java b/src/main/java/org/opentripplanner/api/resource/ServerInfo.java
+index 0c034250d..8cf325d07 100644
+--- a/src/main/java/org/opentripplanner/api/resource/ServerInfo.java
++++ b/src/main/java/org/opentripplanner/api/resource/ServerInfo.java
+@@ -36,19 +36,16 @@ public class ServerInfo {
+      * change while the server is up, so it can safely be cached at startup.
+      */
+     public ServerInfo() {
+-        try {
+-            InputStream fis = new FileInputStream("/proc/cpuinfo");
+-            BufferedReader br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
++        try (BufferedReader br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")))) {
+             String line;
+             while ((line = br.readLine()) != null) {
+                 if (line.startsWith("model name")) {
+                     cpuName = line.split(": ")[1];
+                     nCores += 1;
+                 }
+-            }
++            } 
+             fis.close();
+-        } 
+-        catch (Exception e) {
++        } catch (Exception e) {
+             cpuName = "unknown";
+             nCores = 0;
+         }
+diff --git a/src/main/java/org/opentripplanner/common/StreetUtils.java b/src/main/java/org/opentripplanner/common/StreetUtils.java
+index 010987514..aecb8bbd9 100644
+--- a/src/main/java/org/opentripplanner/common/StreetUtils.java
++++ b/src/main/java/org/opentripplanner/common/StreetUtils.java
+@@ -40,10 +40,8 @@ public class StreetUtils {
+     public static void pruneFloatingIslands(Graph graph, int maxIslandSize, 
+             int islandWithStopMaxSize, String islandLogName, DataImportIssueStore issueStore) {
+         LOG.debug("pruning");
+-        PrintWriter islandLog = null;
+         if (islandLogName != null && !islandLogName.isEmpty()) {
+-            try {
+-                islandLog = new PrintWriter(new File(islandLogName));
++            try (PrintWriter islandLog = new PrintWriter(new File(islandLogName))) {
+             } catch (Exception e) {
+                 LOG.error("Failed to write islands log file", e);
+             }
+diff --git a/src/main/java/org/opentripplanner/graph_builder/module/DownloadableGtfsInputSource.java b/src/main/java/org/opentripplanner/graph_builder/module/DownloadableGtfsInputSource.java
+index 6a8e3eb1c..bb4fbe535 100644
+--- a/src/main/java/org/opentripplanner/graph_builder/module/DownloadableGtfsInputSource.java
++++ b/src/main/java/org/opentripplanner/graph_builder/module/DownloadableGtfsInputSource.java
+@@ -86,19 +86,19 @@ public class DownloadableGtfsInputSource implements CsvInputSource {
+             }
+ 
+             LOG.info("downloading gtfs: url=" + url + " path=" + gtfsFile);
+-
+-            BufferedInputStream in = new BufferedInputStream(url.openStream());
+-            BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(gtfsFile));
+-            try {
+-                copyStreams(in, out);
+-            } catch (RuntimeException e) {
+-                out.close();
+-                if (!gtfsFile.delete()) {
+-                    LOG.error("Failed to delete incomplete file " + gtfsFile);
++            try (BufferedInputStream in = new BufferedInputStream(url.openStream())) {
++                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(gtfsFile));
++                try {
++                    copyStreams(in, out);
++                } catch (RuntimeException e) {
++                    out.close();
++                    if (!gtfsFile.delete()) {
++                        LOG.error("Failed to delete incomplete file " + gtfsFile);
++                    }
++                    throw e;
+                 }
+-                throw e;
++                return gtfsFile;
+             }
+-            return gtfsFile;
+         }
+ 
+         throw new IllegalStateException("DownloadableGtfsInputSource did not include an url");
+diff --git a/src/main/java/org/opentripplanner/graph_builder/module/ned/ElevationModule.java b/src/main/java/org/opentripplanner/graph_builder/module/ned/ElevationModule.java
+index e39fad47d..5da8a3200 100644
+--- a/src/main/java/org/opentripplanner/graph_builder/module/ned/ElevationModule.java
++++ b/src/main/java/org/opentripplanner/graph_builder/module/ned/ElevationModule.java
+@@ -175,14 +175,11 @@ public class ElevationModule implements GraphBuilderModule {
+ 
+         // try to load in the cached elevation data
+         if (readCachedElevations) {
+-            // try to load in the cached elevation data
+-            try {
+-                ObjectInputStream in = new ObjectInputStream(new FileInputStream(cachedElevationsFile));
+-                cachedElevations = (HashMap<String, PackedCoordinateSequence>) in.readObject();
++            try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(cachedElevationsFile))) {
++                cachedElevations = ((HashMap<String, PackedCoordinateSequence>) (in.readObject()));
+                 log.info("Cached elevation data loaded into memory!");
+-            } catch (IOException | ClassNotFoundException e) {
+-                issueStore.add(new Graphwide(
+-                    String.format("Cached elevations file could not be read in due to error: %s!", e.getMessage())));
++            } catch (java.io.IOException | java.lang.ClassNotFoundException e) {
++                issueStore.add(new Graphwide(String.format("Cached elevations file could not be read in due to error: %s!", e.getMessage())));
+             }
+         }
+         log.info("Setting street elevation profiles from digital elevation model...");
+@@ -246,9 +243,7 @@ public class ElevationModule implements GraphBuilderModule {
+                 newCachedElevations.put(PolylineEncoder.createEncodings(streetEdge.getGeometry()).getPoints(),
+                     streetEdge.getElevationProfile());
+             }
+-            try {
+-                ObjectOutputStream out = new ObjectOutputStream(
+-                    new BufferedOutputStream(new FileOutputStream(cachedElevationsFile)));
++            try (ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(cachedElevationsFile)))) {
+                 out.writeObject(newCachedElevations);
+                 out.close();
+             } catch (IOException e) {
+diff --git a/src/main/java/org/opentripplanner/graph_builder/module/ned/NEDGridCoverageFactoryImpl.java b/src/main/java/org/opentripplanner/graph_builder/module/ned/NEDGridCoverageFactoryImpl.java
+index 56aa0b3d9..abfb3a68f 100644
+--- a/src/main/java/org/opentripplanner/graph_builder/module/ned/NEDGridCoverageFactoryImpl.java
++++ b/src/main/java/org/opentripplanner/graph_builder/module/ned/NEDGridCoverageFactoryImpl.java
+@@ -131,23 +131,24 @@ public class NEDGridCoverageFactoryImpl implements ElevationGridCoverageFactory
+     private void fetchDatum() throws Exception {
+         LOG.info("Attempting to fetch datum files from OTP project web server...");
+         URL datumUrl = new URL("http://dev.opentripplanner.org/resources/datum.zip");
+-        ZipInputStream zis = new ZipInputStream(datumUrl.openStream());
+-        /* Silly boilerplate because Java has no simple unzip-to-directory function. */
+-        for (ZipEntry entry = zis.getNextEntry(); entry != null; entry = zis.getNextEntry()) {
+-            if (entry.isDirectory()) {
+-                throw new RuntimeException("ZIP files containing directories are not supported");
+-            }
+-            File file = new File(cacheDirectory, entry.getName());
+-            if (!file.getParentFile().equals(cacheDirectory)) {
+-                throw new RuntimeException("ZIP files containing directories are not supported");
++        try (ZipInputStream zis = new ZipInputStream(datumUrl.openStream())) {
++            /* Silly boilerplate because Java has no simple unzip-to-directory function. */
++            for (ZipEntry entry = zis.getNextEntry(); entry != null; entry = zis.getNextEntry()) {
++                if (entry.isDirectory()) {
++                    throw new RuntimeException("ZIP files containing directories are not supported");
++                }
++                File file = new File(cacheDirectory, entry.getName());
++                if (!file.getParentFile().equals(cacheDirectory)) {
++                    throw new RuntimeException("ZIP files containing directories are not supported");
++                }
++                LOG.info("decompressing {}", file);
++                OutputStream os = new FileOutputStream(file);
++                ByteStreams.copy(zis, os);
++                os.close();
+             }
+-            LOG.info("decompressing {}", file);
+-            OutputStream os = new FileOutputStream(file);
+-            ByteStreams.copy(zis, os);
+-            os.close();
++            zis.close();
++            LOG.info("Done.");
+         }
+-        zis.close();
+-        LOG.info("Done.");
+     }
+ 
+     @Override
+diff --git a/src/main/java/org/opentripplanner/util/xml/XmlDataListDownloader.java b/src/main/java/org/opentripplanner/util/xml/XmlDataListDownloader.java
+index f82ee6c4e..2ace14aeb 100644
+--- a/src/main/java/org/opentripplanner/util/xml/XmlDataListDownloader.java
++++ b/src/main/java/org/opentripplanner/util/xml/XmlDataListDownloader.java
+@@ -1,4 +1,10 @@
+ package org.opentripplanner.util.xml;
++import org.w3c.dom.NamedNodeMap;
++import org.w3c.dom.Element;
++import org.w3c.dom.Attr;
++import org.w3c.dom.Node;
++import org.w3c.dom.Document;
++import org.w3c.dom.NodeList;
+ 
+ import java.io.IOException;
+ import java.io.InputStream;
+@@ -80,9 +86,10 @@ public class XmlDataListDownloader<T> {
+                 LOG.warn("Failed to get data from url " + url);
+                 return null;
+             } else if (zip) {
+-                ZipInputStream zipInputStream = new ZipInputStream(inputStream);
+-                zipInputStream.getNextEntry();
+-                inputStream = zipInputStream;
++                        try (ZipInputStream zipInputStream = new ZipInputStream(inputStream)) {
++                            zipInputStream.getNextEntry();
++                            inputStream = zipInputStream;
++                        }
+             }
+             return parseXML(inputStream);
+         } catch (IOException e) {
+diff --git a/src/test/java/org/opentripplanner/datastore/OtpDataStoreTest.java b/src/test/java/org/opentripplanner/datastore/OtpDataStoreTest.java
+index b83bcc67a..704c213a6 100644
+--- a/src/test/java/org/opentripplanner/datastore/OtpDataStoreTest.java
++++ b/src/test/java/org/opentripplanner/datastore/OtpDataStoreTest.java
+@@ -219,13 +219,14 @@ public class OtpDataStoreTest {
+     }
+ 
+     private static void writeZip(File dir, String filename) throws IOException {
+-        ZipOutputStream out = new ZipOutputStream(new FileOutputStream(new File(dir, filename)));
+-        ZipEntry e = new ZipEntry("stop.txt");
+-        out.putNextEntry(e);
+-        out.write("data".getBytes(StandardCharsets.UTF_8));
+-        out.closeEntry();
+-        out.finish();
+-        out.close();
++        try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(new File(dir, filename)))) {
++            ZipEntry e = new ZipEntry("stop.txt");
++            out.putNextEntry(e);
++            out.write("data".getBytes(StandardCharsets.UTF_8));
++            out.closeEntry();
++            out.finish();
++            out.close();
++        }
+     }
+ 
+     private static void assertNoneExistingFile(DataSource source, String name, FileType type) {

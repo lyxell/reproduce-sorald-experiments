@@ -1,0 +1,36 @@
+{
+    "repairs": [{
+        "nbPerformedRepairs": 1,
+        "ruleName": "UnclosedResources",
+        "crashedRepairsLocations": [],
+        "nbCrashedRepairs": 0,
+        "ruleKey": "2095",
+        "performedRepairsLocations": [{
+            "endLine": 46,
+            "endColumn": 27,
+            "startColumn": 2,
+            "startLine": 46,
+            "filePath": "main/src/test/java/webapp/runner/launch/TomcatBaseDirResolutionTest.java",
+            "violationSpecifier": "2095:main/src/test/java/webapp/runner/launch/TomcatBaseDirResolutionTest.java:46:2:46:27"
+        }],
+        "nbViolationsBefore": 1,
+        "nbViolationsAfter": 1
+    }],
+    "executionInfo": {
+        "soraldVersion": "commit: 38248282",
+        "javaVersion": "11.0.12-ea",
+        "originalArgs": [
+            "repair",
+            "--file-output-strategy=IN_PLACE",
+            "--original-files-path=./",
+            "--rule-keys=2095",
+            "--stats-output-file=repair.json"
+        ]
+    },
+    "totalTimeMs": 6110,
+    "repairTimeMs": 293,
+    "startTimeMs": 1626816462414,
+    "crashes": [],
+    "endTimeMs": 1626816468524,
+    "parseTimeMs": 1344
+}

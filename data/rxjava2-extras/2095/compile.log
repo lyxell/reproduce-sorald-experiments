@@ -1,0 +1,154 @@
+[INFO] Scanning for projects...
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/davidmoten/sonatype-parent/0.1/sonatype-parent-0.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/davidmoten/sonatype-parent/0.1/sonatype-parent-0.1.pom (4.0 kB at 6.6 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonatype/plugins/nexus-staging-maven-plugin/1.6.5/nexus-staging-maven-plugin-1.6.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonatype/plugins/nexus-staging-maven-plugin/1.6.5/nexus-staging-maven-plugin-1.6.5.pom (12 kB at 155 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonatype/nexus/maven/nexus-staging/1.6.5/nexus-staging-1.6.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonatype/nexus/maven/nexus-staging/1.6.5/nexus-staging-1.6.5.pom (2.8 kB at 89 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonatype/nexus/maven/nexus-maven-plugins/1.6.5/nexus-maven-plugins-1.6.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonatype/nexus/maven/nexus-maven-plugins/1.6.5/nexus-maven-plugins-1.6.5.pom (18 kB at 502 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonatype/nexus/maven/nexus-common/1.6.5/nexus-common-1.6.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonatype/nexus/maven/nexus-common/1.6.5/nexus-common-1.6.5.pom (2.2 kB at 69 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonatype/plugins/nexus-staging-maven-plugin/1.6.5/nexus-staging-maven-plugin-1.6.5.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/sonatype/nexus/maven/nexus-common/1.6.5/nexus-common-1.6.5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonatype/nexus/maven/nexus-common/1.6.5/nexus-common-1.6.5.jar (16 kB at 88 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/sonatype/plugins/nexus-staging-maven-plugin/1.6.5/nexus-staging-maven-plugin-1.6.5.jar (248 kB at 1.2 MB/s)
+[INFO] Inspecting build with total of 1 modules...
+[INFO] Installing Nexus Staging features:
+[INFO]   ... total of 1 executions of maven-deploy-plugin replaced with nexus-staging-maven-plugin
+[INFO] 
+[INFO] ----------------< com.github.davidmoten:rxjava2-extras >----------------
+[INFO] Building rxjava2-extras 0.1.39-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-site-plugin/3.4/maven-site-plugin-3.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-site-plugin/3.4/maven-site-plugin-3.4.pom (20 kB at 439 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-site-plugin/3.4/maven-site-plugin-3.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-site-plugin/3.4/maven-site-plugin-3.4.jar (127 kB at 1.6 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava2/rxjava/2.2.17/rxjava-2.2.17.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava2/rxjava/2.2.17/rxjava-2.2.17.pom (2.4 kB at 139 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/davidmoten/guava-mini/0.1.2/guava-mini-0.1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/davidmoten/guava-mini/0.1.2/guava-mini-0.1.2.pom (8.9 kB at 357 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/kryo/4.0.2/kryo-4.0.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/kryo/4.0.2/kryo-4.0.2.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/kryo-parent/4.0.2/kryo-parent-4.0.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/kryo-parent/4.0.2/kryo-parent-4.0.2.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/reflectasm/1.11.3/reflectasm-1.11.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/reflectasm/1.11.3/reflectasm-1.11.3.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis/2.5.1/objenesis-2.5.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis/2.5.1/objenesis-2.5.1.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis-parent/2.5.1/objenesis-parent-2.5.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis-parent/2.5.1/objenesis-parent-2.5.1.pom (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.12/slf4j-log4j12-1.7.12.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.12/slf4j-log4j12-1.7.12.pom (1.6 kB at 87 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/mockito/mockito-core/2.23.4/mockito-core-2.23.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/mockito/mockito-core/2.23.4/mockito-core-2.23.4.pom (18 kB at 606 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.9.3/byte-buddy-1.9.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.9.3/byte-buddy-1.9.3.pom (10 kB at 426 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-parent/1.9.3/byte-buddy-parent-1.9.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-parent/1.9.3/byte-buddy-parent-1.9.3.pom (34 kB at 1.4 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-agent/1.9.3/byte-buddy-agent-1.9.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-agent/1.9.3/byte-buddy-agent-1.9.3.pom (6.0 kB at 241 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava/1.2.7/rxjava-1.2.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava/1.2.7/rxjava-1.2.7.pom (2.4 kB at 22 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava-string/1.1.1/rxjava-string-1.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava-string/1.1.1/rxjava-string-1.1.1.pom (2.7 kB at 13 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava/1.2.3/rxjava-1.2.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava/1.2.3/rxjava-1.2.3.pom (2.4 kB at 23 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/openjdk/jmh/jmh-core/1.16/jmh-core-1.16.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/openjdk/jmh/jmh-core/1.16/jmh-core-1.16.pom (10 kB at 49 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/openjdk/jmh/jmh-parent/1.16/jmh-parent-1.16.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/openjdk/jmh/jmh-parent/1.16/jmh-parent-1.16.pom (5.9 kB at 29 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/openjdk/jmh/jmh-generator-annprocess/1.16/jmh-generator-annprocess-1.16.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/openjdk/jmh/jmh-generator-annprocess/1.16/jmh-generator-annprocess-1.16.pom (4.0 kB at 20 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/davidmoten/junit-extras/0.3/junit-extras-0.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/davidmoten/junit-extras/0.3/junit-extras-0.3.pom (6.5 kB at 32 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava2/rxjava/2.2.17/rxjava-2.2.17.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/davidmoten/guava-mini/0.1.2/guava-mini-0.1.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/kryo/4.0.2/kryo-4.0.2.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/reflectasm/1.11.3/reflectasm-1.11.3.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/kryo/4.0.2/kryo-4.0.2.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis/2.5.1/objenesis-2.5.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis/2.5.1/objenesis-2.5.1.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.12/slf4j-log4j12-1.7.12.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.12/slf4j-log4j12-1.7.12.jar (8.9 kB at 128 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/mockito/mockito-core/2.23.4/mockito-core-2.23.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/minlog/1.3.0/minlog-1.3.0.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.9.3/byte-buddy-1.9.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/esotericsoftware/reflectasm/1.11.3/reflectasm-1.11.3.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-agent/1.9.3/byte-buddy-agent-1.9.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/davidmoten/guava-mini/0.1.2/guava-mini-0.1.2.jar (11 kB at 74 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava/1.2.7/rxjava-1.2.7.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-agent/1.9.3/byte-buddy-agent-1.9.3.jar (43 kB at 250 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava-string/1.1.1/rxjava-string-1.1.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/mockito/mockito-core/2.23.4/mockito-core-2.23.4.jar (565 kB at 1.9 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/openjdk/jmh/jmh-core/1.16/jmh-core-1.16.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava-string/1.1.1/rxjava-string-1.1.1.jar (23 kB at 55 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/openjdk/jmh/jmh-generator-annprocess/1.16/jmh-generator-annprocess-1.16.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava2/rxjava/2.2.17/rxjava-2.2.17.jar (2.4 MB at 3.0 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/davidmoten/junit-extras/0.3/junit-extras-0.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/openjdk/jmh/jmh-generator-annprocess/1.16/jmh-generator-annprocess-1.16.jar (31 kB at 42 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/openjdk/jmh/jmh-core/1.16/jmh-core-1.16.jar (483 kB at 650 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/reactivex/rxjava/1.2.7/rxjava-1.2.7.jar (1.2 MB at 1.3 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/davidmoten/junit-extras/0.3/junit-extras-0.3.jar (4.9 kB at 5.3 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.9.3/byte-buddy-1.9.3.jar (3.2 MB at 3.0 MB/s)
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.2:prepare-agent (default) @ rxjava2-extras ---
+[INFO] argLine set to -javaagent:/home/user/.m2/repository/org/jacoco/org.jacoco.agent/0.8.2/org.jacoco.agent-0.8.2-runtime.jar=destfile=/home/user/projects/rxjava2-extras/target/jacoco.exec
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ rxjava2-extras ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/user/projects/rxjava2-extras/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:compile (default-compile) @ rxjava2-extras ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 70 source files to /home/user/projects/rxjava2-extras/target/classes
+[WARNING] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/buffertofile/UnsafeAccess.java:[5,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/buffertofile/MemoryMappedFile.java:[11,16] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/buffertofile/MemoryMappedFile.java:[12,18] sun.nio.ch.FileChannelImpl is internal proprietary API and may be removed in a future release
+[WARNING] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/buffertofile/UnsafeAccess.java:[14,20] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/buffertofile/UnsafeAccess.java:[18,44] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/buffertofile/UnsafeAccess.java:[20,23] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/buffertofile/UnsafeAccess.java:[26,19] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/buffertofile/MemoryMappedFile.java:[17,26] sun.misc.Unsafe is internal proprietary API and may be removed in a future release
+[WARNING] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/buffertofile/MemoryMappedFile.java:[28,26] sun.nio.ch.FileChannelImpl is internal proprietary API and may be removed in a future release
+[WARNING] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/buffertofile/MemoryMappedFile.java:[29,28] sun.nio.ch.FileChannelImpl is internal proprietary API and may be removed in a future release
+[INFO] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/TransformerStateMachine.java: /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/TransformerStateMachine.java uses or overrides a deprecated API.
+[INFO] /home/user/projects/rxjava2-extras/src/main/java/com/github/davidmoten/rx2/internal/flowable/TransformerStateMachine.java: Recompile with -Xlint:deprecation for details.
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ rxjava2-extras ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 4 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.0:testCompile (default-testCompile) @ rxjava2-extras ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 51 source files to /home/user/projects/rxjava2-extras/target/test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/rxjava2-extras/src/test/java/com/github/davidmoten/rx2/internal/flowable/FlowableServerSocketTest.java:[148,13] try-with-resources is not supported in -source 6
+  (use -source 7 or higher to enable try-with-resources)
+[ERROR] /home/user/projects/rxjava2-extras/src/test/java/com/github/davidmoten/rx2/BytesTest.java:[114,13] try-with-resources is not supported in -source 6
+  (use -source 7 or higher to enable try-with-resources)
+[INFO] 2 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  15.442 s
+[INFO] Finished at: 2021-07-20T21:19:00Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.8.0:testCompile (default-testCompile) on project rxjava2-extras: Compilation failure: Compilation failure: 
+[ERROR] /home/user/projects/rxjava2-extras/src/test/java/com/github/davidmoten/rx2/internal/flowable/FlowableServerSocketTest.java:[148,13] try-with-resources is not supported in -source 6
+[ERROR]   (use -source 7 or higher to enable try-with-resources)
+[ERROR] /home/user/projects/rxjava2-extras/src/test/java/com/github/davidmoten/rx2/BytesTest.java:[114,13] try-with-resources is not supported in -source 6
+[ERROR]   (use -source 7 or higher to enable try-with-resources)
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

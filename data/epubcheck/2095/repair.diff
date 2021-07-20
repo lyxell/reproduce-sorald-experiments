@@ -1,0 +1,165 @@
+diff --git a/src/main/java/com/adobe/epubcheck/api/EpubCheck.java b/src/main/java/com/adobe/epubcheck/api/EpubCheck.java
+index 57fff631..410d5f88 100644
+--- a/src/main/java/com/adobe/epubcheck/api/EpubCheck.java
++++ b/src/main/java/com/adobe/epubcheck/api/EpubCheck.java
+@@ -139,47 +139,19 @@ public class EpubCheck implements DocumentValidator
+   public EpubCheck(InputStream inputStream, Report report, String uri, EPUBProfile profile)
+   {
+     File epubFile;
+-    OutputStream out = null;
+-    try
+-    {
++    try (OutputStream out = new FileOutputStream(epubFile)) {
+       epubFile = File.createTempFile("epub", "." + ResourceUtil.getExtension(uri));
+       epubFile.deleteOnExit();
+-      out = new FileOutputStream(epubFile);
+-
+       byte[] bytes = new byte[1024];
+       int read;
+-      while ((read = inputStream.read(bytes)) != -1)
+-      {
++      while ((read = inputStream.read(bytes)) != -1) {
+         out.write(bytes, 0, read);
+-      }
+-
++      } 
+       this.epubFile = epubFile;
+-      this.profile = profile == null ? EPUBProfile.DEFAULT : profile;
++      this.profile = (profile == null) ? EPUBProfile.DEFAULT : profile;
+       this.report = report;
+-    } catch (IOException e)
+-    {
++    } catch (IOException e) {
+       throw new RuntimeException(e);
+-    } finally
+-    {
+-      if (inputStream != null)
+-      {
+-        try
+-        {
+-          inputStream.close();
+-        } catch (IOException ignored)
+-        {
+-        }
+-      }
+-      if (out != null)
+-      {
+-        try
+-        {
+-          out.flush();
+-          out.close();
+-        } catch (IOException ignored)
+-        {
+-        }
+-      }
+     }
+   }
+   
+diff --git a/src/main/java/com/adobe/epubcheck/bitmap/BitmapChecker.java b/src/main/java/com/adobe/epubcheck/bitmap/BitmapChecker.java
+index 2550fa90..8ea867df 100755
+--- a/src/main/java/com/adobe/epubcheck/bitmap/BitmapChecker.java
++++ b/src/main/java/com/adobe/epubcheck/bitmap/BitmapChecker.java
+@@ -215,45 +215,25 @@ public class BitmapChecker implements ContentChecker
+   private File getTempImageFile(OCFZipPackage ocf, String imgFileName) throws IOException
+   {
+     File file = null;
+-    FileOutputStream os = null;
+     InputStream is = null;
+-    try
+-    {
+-      int pos = imgFileName.lastIndexOf(".");
+-      if (pos == -1)
+-      {
+-        throw new IOException("No extension for file: " + imgFileName);
+-      }
+-      String suffix = imgFileName.substring(pos);
+-      String prefix = "img";
+-
+-      file = File.createTempFile(prefix, suffix);
+-      os = new FileOutputStream(file);
+-
+-      is = ocf.getInputStream(imgFileName);
+-      if (is == null)
+-      {
+-        return null;
+-      }
+-      byte[] bytes = new byte[32 * 1024];
+-      int read;
+-      while ((read = is.read(bytes)) > 0)
+-      {
+-        os.write(bytes, 0, read);
+-      }
+-    }
+-    finally
+-    {
+-      if (os != null)
+-      {
+-        os.flush();
+-        os.close();
+-      }
+-      if (is != null)
+-      {
+-        is.close();
++      try (FileOutputStream os = new FileOutputStream(file)) {
++        int pos = imgFileName.lastIndexOf(".");
++        if (pos == -1) {
++          throw new IOException("No extension for file: " + imgFileName);
++        }
++        String suffix = imgFileName.substring(pos);
++        String prefix = "img";
++        file = File.createTempFile(prefix, suffix);
++        is = ocf.getInputStream(imgFileName);
++        if (is == null) {
++          return null;
++        }
++        byte[] bytes = new byte[32 * 1024];
++        int read;
++        while ((read = is.read(bytes)) > 0) {
++          os.write(bytes, 0, read);
++        } 
+       }
+-    }
+     return file;  //To change body of created methods use File | Settings | File Templates.
+   }
+ 
+diff --git a/src/main/java/com/adobe/epubcheck/util/Archive.java b/src/main/java/com/adobe/epubcheck/util/Archive.java
+index acedd122..ed192dd3 100644
+--- a/src/main/java/com/adobe/epubcheck/util/Archive.java
++++ b/src/main/java/com/adobe/epubcheck/util/Archive.java
+@@ -195,29 +195,14 @@ public class Archive
+ 
+   private long getCRC(String path) throws IOException
+   {
+-    CheckedInputStream cis = null;
+     FileInputStream fis = null;
+-    try
+-    {
+-      fis = new FileInputStream(path);
+-      cis = new CheckedInputStream(fis, new CRC32());
+-      byte[] buf = new byte[128];
+-      while (cis.read(buf) >= 0)
+-      {
+-        // TODO: why is this loop empty?
+-      }
+-    }
+-    finally
+-    {
+-      if (fis != null)
+-      {
+-        fis.close();
+-      }
+-      if (cis != null)
+-      {
+-        cis.close();
+-      }
+-    }
++  try (CheckedInputStream cis = new CheckedInputStream(fis, new CRC32())) {
++   fis = new FileInputStream(path);
++   byte[] buf = new byte[128];
++   while (cis.read(buf) >= 0) {
++    // TODO: why is this loop empty?
++   } 
++  }
+     return cis.getChecksum().getValue();
+   }
+ 

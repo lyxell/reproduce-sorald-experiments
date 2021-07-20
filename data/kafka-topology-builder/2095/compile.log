@@ -1,0 +1,716 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< com.purbon.kafka:kafka-topology-builder >---------------
+[INFO] Building A Kafka topology builder tool 2.0.0-b.0
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/coveo/fmt-maven-plugin/2.9/fmt-maven-plugin-2.9.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/coveo/fmt-maven-plugin/2.9/fmt-maven-plugin-2.9.pom (8.6 kB at 7.0 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/coveo/fmt-maven-plugin/2.9/fmt-maven-plugin-2.9.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/coveo/fmt-maven-plugin/2.9/fmt-maven-plugin-2.9.jar (20 kB at 137 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-assembly-plugin/2.2-beta-5/maven-assembly-plugin-2.2-beta-5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-assembly-plugin/2.2-beta-5/maven-assembly-plugin-2.2-beta-5.pom (15 kB at 233 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/16/maven-plugins-16.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-plugins/16/maven-plugins-16.pom (13 kB at 270 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-assembly-plugin/2.2-beta-5/maven-assembly-plugin-2.2-beta-5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-assembly-plugin/2.2-beta-5/maven-assembly-plugin-2.2-beta-5.jar (209 kB at 1.2 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/typesafe/config/1.4.0/config-1.4.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/typesafe/config/1.4.0/config-1.4.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/typesafe/config/1.4.0/config-1.4.0.pom (2.2 kB at 52 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/hubspot/jinjava/jinjava/2.5.4/jinjava-2.5.4.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/hubspot/jinjava/jinjava/2.5.4/jinjava-2.5.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/hubspot/jinjava/jinjava/2.5.4/jinjava-2.5.4.pom (9.5 kB at 40 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/hubspot/basepom/25.6/basepom-25.6.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/hubspot/basepom/25.6/basepom-25.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/hubspot/basepom/25.6/basepom-25.6.pom (82 kB at 1.1 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/basepom/basepom-oss/25/basepom-oss-25.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/basepom/basepom-oss/25/basepom-oss-25.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/basepom/basepom-oss/25/basepom-oss-25.pom (9.2 kB at 66 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/basepom/basepom-minimal/25/basepom-minimal-25.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/basepom/basepom-minimal/25/basepom-minimal-25.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/basepom/basepom-minimal/25/basepom-minimal-25.pom (12 kB at 219 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/basepom/basepom-foundation/25/basepom-foundation-25.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/basepom/basepom-foundation/25/basepom-foundation-25.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/basepom/basepom-foundation/25/basepom-foundation-25.pom (51 kB at 1.0 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/google/guava/guava/25.0-jre/guava-25.0-jre.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/25.0-jre/guava-25.0-jre.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/25.0-jre/guava-25.0-jre.pom (7.8 kB at 150 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/google/guava/guava-parent/25.0-jre/guava-parent-25.0-jre.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/25.0-jre/guava-parent-25.0-jre.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/25.0-jre/guava-parent-25.0-jre.pom (10 kB at 168 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/javassist/javassist/3.24.1-GA/javassist-3.24.1-GA.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/javassist/javassist/3.24.1-GA/javassist-3.24.1-GA.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/javassist/javassist/3.24.1-GA/javassist-3.24.1-GA.pom (11 kB at 269 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/google/re2j/re2j/1.2/re2j-1.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/re2j/re2j/1.2/re2j-1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/re2j/re2j/1.2/re2j-1.2.pom (933 B at 16 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/commons-net/commons-net/3.3/commons-net-3.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-net/commons-net/3.3/commons-net-3.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-net/commons-net/3.3/commons-net-3.3.pom (19 kB at 684 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/commons/commons-parent/30/commons-parent-30.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/30/commons-parent-30.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/30/commons-parent-30.pom (56 kB at 2.3 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/googlecode/java-ipv6/java-ipv6/0.17/java-ipv6-0.17.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/googlecode/java-ipv6/java-ipv6/0.17/java-ipv6-0.17.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/googlecode/java-ipv6/java-ipv6/0.17/java-ipv6-0.17.pom (5.2 kB at 262 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/google/code/findbugs/annotations/3.0.1/annotations-3.0.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/code/findbugs/annotations/3.0.1/annotations-3.0.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/code/findbugs/annotations/3.0.1/annotations-3.0.1.pom (7.8 kB at 324 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-annotations/2.7.9/jackson-annotations-2.7.9.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.7.9/jackson-annotations-2.7.9.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.7.9/jackson-annotations-2.7.9.pom (1.5 kB at 56 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-databind/2.7.9.5/jackson-databind-2.7.9.5.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.7.9.5/jackson-databind-2.7.9.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.7.9.5/jackson-databind-2.7.9.5.pom (5.2 kB at 226 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/ch/obermuhlner/big-math/2.0.0/big-math-2.0.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/ch/obermuhlner/big-math/2.0.0/big-math-2.0.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/ch/obermuhlner/big-math/2.0.0/big-math-2.0.0.pom (1.4 kB at 45 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-annotations/2.10.3/jackson-annotations-2.10.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.3/jackson-annotations-2.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.3/jackson-annotations-2.10.3.pom (3.4 kB at 132 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/redis/clients/jedis/3.2.0/jedis-3.2.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/redis/clients/jedis/3.2.0/jedis-3.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/redis/clients/jedis/3.2.0/jedis-3.2.0.pom (6.8 kB at 169 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/commons/commons-pool2/2.6.2/commons-pool2-2.6.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-pool2/2.6.2/commons-pool2-2.6.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-pool2/2.6.2/commons-pool2-2.6.2.pom (14 kB at 957 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/kafka-schema-registry-client/5.5.0/kafka-schema-registry-client-5.5.0.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/kafka-schema-registry-client/5.5.0/kafka-schema-registry-client-5.5.0.pom (2.8 kB at 25 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/kafka-schema-registry-parent/5.5.0/kafka-schema-registry-parent-5.5.0.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/kafka-schema-registry-parent/5.5.0/kafka-schema-registry-parent-5.5.0.pom (15 kB at 377 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/rest-utils-parent/5.5.0/rest-utils-parent-5.5.0.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/rest-utils-parent/5.5.0/rest-utils-parent-5.5.0.pom (8.4 kB at 199 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/common/5.5.0/common-5.5.0.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/common/5.5.0/common-5.5.0.pom (1.3 kB at 48 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/common-parent/5.5.0/common-parent-5.5.0.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/common-parent/5.5.0/common-parent-5.5.0.pom (47 kB at 1.4 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/jersey-bom/2.30/jersey-bom-2.30.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/jersey-bom/2.30/jersey-bom-2.30.pom (19 kB at 701 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/kafka/kafka-clients/5.5.0-ccs/kafka-clients-5.5.0-ccs.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/org/apache/kafka/kafka-clients/5.5.0-ccs/kafka-clients-5.5.0-ccs.pom (2.7 kB at 91 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/common-config/5.5.0/common-config-5.5.0.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/common-config/5.5.0/common-config-5.5.0.pom (1.8 kB at 40 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/common-utils/5.5.0/common-utils-5.5.0.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/common-utils/5.5.0/common-utils-5.5.0.pom (1.4 kB at 34 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/avro/avro/1.9.2/avro-1.9.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/avro/avro/1.9.2/avro-1.9.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/avro/avro/1.9.2/avro-1.9.2.pom (8.2 kB at 217 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/avro/avro-parent/1.9.2/avro-parent-1.9.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/avro/avro-parent/1.9.2/avro-parent-1.9.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/avro/avro-parent/1.9.2/avro-parent-1.9.2.pom (24 kB at 698 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/avro/avro-toplevel/1.9.2/avro-toplevel-1.9.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/avro/avro-toplevel/1.9.2/avro-toplevel-1.9.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/avro/avro-toplevel/1.9.2/avro-toplevel-1.9.2.pom (22 kB at 825 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/apache/22/apache-22.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/apache/22/apache-22.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/apache/22/apache-22.pom (18 kB at 467 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-core/2.10.2/jackson-core-2.10.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.2/jackson-core-2.10.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.2/jackson-core-2.10.2.pom (4.6 kB at 166 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/jackson-base/2.10.2/jackson-base-2.10.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.10.2/jackson-base-2.10.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.10.2/jackson-base-2.10.2.pom (7.2 kB at 241 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/jackson-bom/2.10.2/jackson-bom-2.10.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.10.2/jackson-bom-2.10.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-bom/2.10.2/jackson-bom-2.10.2.pom (13 kB at 338 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-databind/2.10.2/jackson-databind-2.10.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.2/jackson-databind-2.10.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.2/jackson-databind-2.10.2.pom (7.2 kB at 550 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-annotations/2.10.2/jackson-annotations-2.10.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.2/jackson-annotations-2.10.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.2/jackson-annotations-2.10.2.pom (3.4 kB at 115 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/commons/commons-compress/1.19/commons-compress-1.19.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.19/commons-compress-1.19.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.19/commons-compress-1.19.pom (18 kB at 1.2 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/ext/jersey-bean-validation/2.30/jersey-bean-validation-2.30.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/ext/jersey-bean-validation/2.30/jersey-bean-validation-2.30.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/ext/jersey-bean-validation/2.30/jersey-bean-validation-2.30.pom (4.6 kB at 37 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/ext/project/2.30/project-2.30.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/ext/project/2.30/project-2.30.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/ext/project/2.30/project-2.30.pom (2.8 kB at 167 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/project/2.30/project-2.30.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/project/2.30/project-2.30.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/project/2.30/project-2.30.pom (97 kB at 2.9 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1.pom (5.2 kB at 346 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/external/2.6.1/external-2.6.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/2.6.1/external-2.6.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/2.6.1/external-2.6.1.pom (1.5 kB at 105 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/hk2-parent/2.6.1/hk2-parent-2.6.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-parent/2.6.1/hk2-parent-2.6.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-parent/2.6.1/hk2-parent-2.6.1.pom (42 kB at 1.4 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/core/jersey-common/2.30/jersey-common-2.30.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-common/2.30/jersey-common-2.30.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-common/2.30/jersey-common-2.30.pom (34 kB at 1.6 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6.pom (35 kB at 1.5 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/osgi-resource-locator/1.0.3/osgi-resource-locator-1.0.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.3/osgi-resource-locator-1.0.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.3/osgi-resource-locator-1.0.3.pom (7.4 kB at 566 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/sun/activation/jakarta.activation/1.2.1/jakarta.activation-1.2.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/sun/activation/jakarta.activation/1.2.1/jakarta.activation-1.2.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/sun/activation/jakarta.activation/1.2.1/jakarta.activation-1.2.1.pom (4.9 kB at 350 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/sun/activation/all/1.2.1/all-1.2.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/sun/activation/all/1.2.1/all-1.2.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/sun/activation/all/1.2.1/all-1.2.1.pom (0 B at 0 B/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/eclipse/ee4j/project/1.0.2/project-1.0.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.2/project-1.0.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/eclipse/ee4j/project/1.0.2/project-1.0.2.pom (0 B at 0 B/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30.pom (12 kB at 695 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30.pom (6.5 kB at 181 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30.pom (6.0 kB at 378 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/media/project/2.30/project-2.30.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/media/project/2.30/project-2.30.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/media/project/2.30/project-2.30.pom (2.0 kB at 155 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.pom (0 B at 0 B/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/jakarta/xml/bind/jakarta.xml.bind-api-parent/2.3.2/jakarta.xml.bind-api-parent-2.3.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api-parent/2.3.2/jakarta.xml.bind-api-parent-2.3.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api-parent/2.3.2/jakarta.xml.bind-api-parent-2.3.2.pom (0 B at 0 B/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.pom (0 B at 0 B/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/hibernate/validator/hibernate-validator/6.0.17.Final/hibernate-validator-6.0.17.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hibernate/validator/hibernate-validator/6.0.17.Final/hibernate-validator-6.0.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hibernate/validator/hibernate-validator/6.0.17.Final/hibernate-validator-6.0.17.Final.pom (15 kB at 748 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/hibernate/validator/hibernate-validator-parent/6.0.17.Final/hibernate-validator-parent-6.0.17.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hibernate/validator/hibernate-validator-parent/6.0.17.Final/hibernate-validator-parent-6.0.17.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hibernate/validator/hibernate-validator-parent/6.0.17.Final/hibernate-validator-parent-6.0.17.Final.pom (61 kB at 1.4 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.pom (6.4 kB at 353 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/jboss/jboss-parent/15/jboss-parent-15.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jboss/jboss-parent/15/jboss-parent-15.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jboss/jboss-parent/15/jboss-parent-15.pom (32 kB at 2.3 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/classmate/1.3.4/classmate-1.3.4.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/classmate/1.3.4/classmate-1.3.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/classmate/1.3.4/classmate-1.3.4.pom (5.8 kB at 416 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/jakarta/el/jakarta.el-api/3.0.3/jakarta.el-api-3.0.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/jakarta/el/jakarta.el-api/3.0.3/jakarta.el-api-3.0.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/jakarta/el/jakarta.el-api/3.0.3/jakarta.el-api-3.0.3.pom (12 kB at 618 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jakarta.el/3.0.2/jakarta.el-3.0.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jakarta.el/3.0.2/jakarta.el-3.0.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jakarta.el/3.0.2/jakarta.el-3.0.2.pom (16 kB at 596 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/swagger/swagger-core/1.5.3/swagger-core-1.5.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-core/1.5.3/swagger-core-1.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-core/1.5.3/swagger-core-1.5.3.pom (8.3 kB at 153 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/swagger/swagger-project/1.5.3/swagger-project-1.5.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-project/1.5.3/swagger-project-1.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-project/1.5.3/swagger-project-1.5.3.pom (24 kB at 385 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/commons/commons-lang3/3.2.1/commons-lang3-3.2.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.2.1/commons-lang3-3.2.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-lang3/3.2.1/commons-lang3-3.2.1.pom (20 kB at 368 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/slf4j/slf4j-api/1.6.3/slf4j-api-1.6.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.6.3/slf4j-api-1.6.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.6.3/slf4j-api-1.6.3.pom (3.0 kB at 77 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/slf4j/slf4j-parent/1.6.3/slf4j-parent-1.6.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.6.3/slf4j-parent-1.6.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-parent/1.6.3/slf4j-parent-1.6.3.pom (11 kB at 196 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-annotations/2.4.5/jackson-annotations-2.4.5.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.4.5/jackson-annotations-2.4.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.4.5/jackson-annotations-2.4.5.pom (1.2 kB at 101 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/jackson-parent/2.4/jackson-parent-2.4.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.4/jackson-parent-2.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-parent/2.4/jackson-parent-2.4.pom (6.4 kB at 289 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/oss-parent/16/oss-parent-16.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/16/oss-parent-16.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/oss-parent/16/oss-parent-16.pom (19 kB at 1.4 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-databind/2.4.5/jackson-databind-2.4.5.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.4.5/jackson-databind-2.4.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.4.5/jackson-databind-2.4.5.pom (5.7 kB at 406 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-core/2.4.5/jackson-core-2.4.5.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.4.5/jackson-core-2.4.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.4.5/jackson-core-2.4.5.pom (4.8 kB at 438 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/datatype/jackson-datatype-joda/2.4.5/jackson-datatype-joda-2.4.5.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-joda/2.4.5/jackson-datatype-joda-2.4.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-joda/2.4.5/jackson-datatype-joda-2.4.5.pom (3.4 kB at 286 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.4.5/jackson-dataformat-yaml-2.4.5.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.4.5/jackson-dataformat-yaml-2.4.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.4.5/jackson-dataformat-yaml-2.4.5.pom (7.4 kB at 566 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/yaml/snakeyaml/1.12/snakeyaml-1.12.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.12/snakeyaml-1.12.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.12/snakeyaml-1.12.pom (22 kB at 599 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/swagger/swagger-models/1.5.3/swagger-models-1.5.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-models/1.5.3/swagger-models-1.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-models/1.5.3/swagger-models-1.5.3.pom (3.4 kB at 168 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/swagger/swagger-annotations/1.5.3/swagger-annotations-1.5.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-annotations/1.5.3/swagger-annotations-1.5.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-annotations/1.5.3/swagger-annotations-1.5.3.pom (1.3 kB at 33 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/kafka-avro-serializer/5.5.0/kafka-avro-serializer-5.5.0.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/kafka-avro-serializer/5.5.0/kafka-avro-serializer-5.5.0.pom (2.4 kB at 28 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/kafka-schema-serializer/5.5.0/kafka-schema-serializer-5.5.0.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/kafka-schema-serializer/5.5.0/kafka-schema-serializer-5.5.0.pom (1.5 kB at 57 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/httpcomponents/httpclient/4.5.11/httpclient-4.5.11.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.11/httpclient-4.5.11.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.11/httpclient-4.5.11.pom (6.6 kB at 441 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/httpcomponents/httpcomponents-client/4.5.11/httpcomponents-client-4.5.11.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.5.11/httpcomponents-client-4.5.11.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpcomponents-client/4.5.11/httpcomponents-client-4.5.11.pom (16 kB at 964 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/zookeeper/zookeeper/3.5.7/zookeeper-3.5.7.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper/3.5.7/zookeeper-3.5.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper/3.5.7/zookeeper-3.5.7.pom (9.5 kB at 559 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/zookeeper/parent/3.5.7/parent-3.5.7.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/parent/3.5.7/parent-3.5.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/parent/3.5.7/parent-3.5.7.pom (28 kB at 1.1 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/zookeeper/zookeeper-jute/3.5.7/zookeeper-jute-3.5.7.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper-jute/3.5.7/zookeeper-jute-3.5.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper-jute/3.5.7/zookeeper-jute-3.5.7.pom (5.7 kB at 514 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.pom (3.4 kB at 178 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-parent/4.1.45.Final/netty-parent-4.1.45.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.1.45.Final/netty-parent-4.1.45.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.1.45.Final/netty-parent-4.1.45.Final.pom (56 kB at 2.2 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.pom (10 kB at 473 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.pom (1.6 kB at 121 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.pom (1.9 kB at 62 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.pom (1.6 kB at 63 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.pom (3.6 kB at 239 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-transport-native-epoll/4.1.45.Final/netty-transport-native-epoll-4.1.45.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-epoll/4.1.45.Final/netty-transport-native-epoll-4.1.45.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-epoll/4.1.45.Final/netty-transport-native-epoll-4.1.45.Final.pom (11 kB at 274 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-transport-native-unix-common/4.1.45.Final/netty-transport-native-unix-common-4.1.45.Final.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.45.Final/netty-transport-native-unix-common-4.1.45.Final.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.45.Final/netty-transport-native-unix-common-4.1.45.Final.pom (16 kB at 622 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25.pom (1.1 kB at 87 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/kafka-client-plugins/5.5.1-ce/kafka-client-plugins-5.5.1-ce.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/kafka-client-plugins/5.5.1-ce/kafka-client-plugins-5.5.1-ce.pom (2.5 kB at 3.5 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/kafka/kafka-clients/5.5.1-ce/kafka-clients-5.5.1-ce.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/org/apache/kafka/kafka-clients/5.5.1-ce/kafka-clients-5.5.1-ce.pom (2.9 kB at 5.2 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/rest-authorizer/5.5.1-ce/rest-authorizer-5.5.1-ce.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/rest-authorizer/5.5.1-ce/rest-authorizer-5.5.1-ce.pom (2.5 kB at 6.2 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/authorizer/5.5.1-ce/authorizer-5.5.1-ce.pom
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/authorizer/5.5.1-ce/authorizer-5.5.1-ce.pom (1.8 kB at 4.1 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.10.2/jackson-datatype-jdk8-2.10.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.10.2/jackson-datatype-jdk8-2.10.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.10.2/jackson-datatype-jdk8-2.10.2.pom (2.2 kB at 23 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/module/jackson-modules-java8/2.10.2/jackson-modules-java8-2.10.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-modules-java8/2.10.2/jackson-modules-java8-2.10.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-modules-java8/2.10.2/jackson-modules-java8-2.10.2.pom (3.2 kB at 39 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/javax/ws/rs/javax.ws.rs-api/2.1.1/javax.ws.rs-api-2.1.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/javax/ws/rs/javax.ws.rs-api/2.1.1/javax.ws.rs-api-2.1.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/javax/ws/rs/javax.ws.rs-api/2.1.1/javax.ws.rs-api-2.1.1.pom (29 kB at 407 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bitbucket/b_c/jose4j/0.6.4/jose4j-0.6.4.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bitbucket/b_c/jose4j/0.6.4/jose4j-0.6.4.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bitbucket/b_c/jose4j/0.6.4/jose4j-0.6.4.pom (9.0 kB at 170 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-api/1.7.21/slf4j-api-1.7.21.pom (2.8 kB at 185 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bouncycastle/bc-fips/1.0.1/bc-fips-1.0.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/1.0.1/bc-fips-1.0.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/1.0.1/bc-fips-1.0.1.pom (1.3 kB at 6.4 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bouncycastle/bcpkix-fips/1.0.3/bcpkix-fips-1.0.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-fips/1.0.3/bcpkix-fips-1.0.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-fips/1.0.3/bcpkix-fips-1.0.3.pom (1.6 kB at 8.2 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bouncycastle/bc-fips/maven-metadata.xml
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/maven-metadata.xml
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/maven-metadata.xml (429 B at 33 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bouncycastle/bc-fips/1.0.0/bc-fips-1.0.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/1.0.0/bc-fips-1.0.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/1.0.0/bc-fips-1.0.0.pom (1.3 kB at 6.6 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bouncycastle/bc-fips/1.0.2/bc-fips-1.0.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/1.0.2/bc-fips-1.0.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/1.0.2/bc-fips-1.0.2.pom (1.3 kB at 6.5 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bouncycastle/bc-fips/1.0.2.1/bc-fips-1.0.2.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/1.0.2.1/bc-fips-1.0.2.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/1.0.2.1/bc-fips-1.0.2.1.pom (1.3 kB at 6.7 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bouncycastle/bctls-fips/1.0.9/bctls-fips-1.0.9.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bctls-fips/1.0.9/bctls-fips-1.0.9.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bctls-fips/1.0.9/bctls-fips-1.0.9.pom (1.6 kB at 8.0 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/core/jersey-common/2.22.2/jersey-common-2.22.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-common/2.22.2/jersey-common-2.22.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-common/2.22.2/jersey-common-2.22.2.pom (10 kB at 416 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/project/2.22.2/project-2.22.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/project/2.22.2/project-2.22.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/project/2.22.2/project-2.22.2.pom (84 kB at 3.4 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/hk2-bom/2.4.0-b34/hk2-bom-2.4.0-b34.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-bom/2.4.0-b34/hk2-bom-2.4.0-b34.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-bom/2.4.0-b34/hk2-bom-2.4.0-b34.pom (21 kB at 1.6 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/javax/ws/rs/javax.ws.rs-api/2.0.1/javax.ws.rs-api-2.0.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/javax/ws/rs/javax.ws.rs-api/2.0.1/javax.ws.rs-api-2.0.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/javax/ws/rs/javax.ws.rs-api/2.0.1/javax.ws.rs-api-2.0.1.pom (0 B at 0 B/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.pom (0 B at 0 B/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/bundles/repackaged/jersey-guava/2.22.2/jersey-guava-2.22.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/bundles/repackaged/jersey-guava/2.22.2/jersey-guava-2.22.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/bundles/repackaged/jersey-guava/2.22.2/jersey-guava-2.22.2.pom (13 kB at 888 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/bundles/repackaged/project/2.22.2/project-2.22.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/bundles/repackaged/project/2.22.2/project-2.22.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/bundles/repackaged/project/2.22.2/project-2.22.2.pom (2.8 kB at 133 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/bundles/project/2.22.2/project-2.22.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/bundles/project/2.22.2/project-2.22.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/bundles/project/2.22.2/project-2.22.2.pom (3.1 kB at 283 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/hk2-api/2.4.0-b34/hk2-api-2.4.0-b34.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-api/2.4.0-b34/hk2-api-2.4.0-b34.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-api/2.4.0-b34/hk2-api-2.4.0-b34.pom (4.6 kB at 414 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/hk2-parent/2.4.0-b34/hk2-parent-2.4.0-b34.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-parent/2.4.0-b34/hk2-parent-2.4.0-b34.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-parent/2.4.0-b34/hk2-parent-2.4.0-b34.pom (48 kB at 2.3 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/hk2-utils/2.4.0-b34/hk2-utils-2.4.0-b34.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-utils/2.4.0-b34/hk2-utils-2.4.0-b34.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-utils/2.4.0-b34/hk2-utils-2.4.0-b34.pom (5.1 kB at 515 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/external/aopalliance-repackaged/2.4.0-b34/aopalliance-repackaged-2.4.0-b34.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/aopalliance-repackaged/2.4.0-b34/aopalliance-repackaged-2.4.0-b34.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/aopalliance-repackaged/2.4.0-b34/aopalliance-repackaged-2.4.0-b34.pom (6.8 kB at 109 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/external/2.4.0-b34/external-2.4.0-b34.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/2.4.0-b34/external-2.4.0-b34.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/2.4.0-b34/external-2.4.0-b34.pom (2.9 kB at 266 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/external/javax.inject/2.4.0-b34/javax.inject-2.4.0-b34.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/javax.inject/2.4.0-b34/javax.inject-2.4.0-b34.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/javax.inject/2.4.0-b34/javax.inject-2.4.0-b34.pom (6.5 kB at 433 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/hk2-locator/2.4.0-b34/hk2-locator-2.4.0-b34.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-locator/2.4.0-b34/hk2-locator-2.4.0-b34.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-locator/2.4.0-b34/hk2-locator-2.4.0-b34.pom (5.6 kB at 63 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.pom (0 B at 0 B/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/osgi-resource-locator/1.0.1/osgi-resource-locator-1.0.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.1/osgi-resource-locator-1.0.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.1/osgi-resource-locator-1.0.1.pom (0 B at 0 B/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/pom/8/pom-8.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/pom/8/pom-8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/pom/8/pom-8.pom (0 B at 0 B/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-databind/2.10.3/jackson-databind-2.10.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.3/jackson-databind-2.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.3/jackson-databind-2.10.3.pom (7.2 kB at 121 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/jackson-base/2.10.3/jackson-base-2.10.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.10.3/jackson-base-2.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/jackson-base/2.10.3/jackson-base-2.10.3.pom (7.2 kB at 87 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-core/2.10.3/jackson-core-2.10.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.3/jackson-core-2.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.3/jackson-core-2.10.3.pom (4.6 kB at 113 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.10.3/jackson-dataformat-yaml-2.10.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.10.3/jackson-dataformat-yaml-2.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.10.3/jackson-dataformat-yaml-2.10.3.pom (2.3 kB at 211 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/dataformat/jackson-dataformats-text/2.10.3/jackson-dataformats-text-2.10.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformats-text/2.10.3/jackson-dataformats-text-2.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformats-text/2.10.3/jackson-dataformats-text-2.10.3.pom (3.0 kB at 333 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/yaml/snakeyaml/1.24/snakeyaml-1.24.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.24/snakeyaml-1.24.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.24/snakeyaml-1.24.pom (38 kB at 1.0 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.10.3/jackson-datatype-jsr310-2.10.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.10.3/jackson-datatype-jsr310-2.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.10.3/jackson-datatype-jsr310-2.10.3.pom (4.5 kB at 207 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/module/jackson-modules-java8/2.10.3/jackson-modules-java8-2.10.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-modules-java8/2.10.3/jackson-modules-java8-2.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/module/jackson-modules-java8/2.10.3/jackson-modules-java8-2.10.3.pom (3.2 kB at 169 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.10.3/jackson-datatype-jdk8-2.10.3.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.10.3/jackson-datatype-jdk8-2.10.3.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.10.3/jackson-datatype-jdk8-2.10.3.pom (2.2 kB at 139 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/hamcrest/hamcrest-library/2.2/hamcrest-library-2.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-library/2.2/hamcrest-library-2.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hamcrest/hamcrest-library/2.2/hamcrest-library-2.2.pom (1.4 kB at 138 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/mockito/mockito-core/3.6.0/mockito-core-3.6.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/mockito/mockito-core/3.6.0/mockito-core-3.6.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/mockito/mockito-core/3.6.0/mockito-core-3.6.0.pom (26 kB at 712 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/net/bytebuddy/byte-buddy/1.10.15/byte-buddy-1.10.15.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.10.15/byte-buddy-1.10.15.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy/1.10.15/byte-buddy-1.10.15.pom (11 kB at 1.0 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/net/bytebuddy/byte-buddy-parent/1.10.15/byte-buddy-parent-1.10.15.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-parent/1.10.15/byte-buddy-parent-1.10.15.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-parent/1.10.15/byte-buddy-parent-1.10.15.pom (40 kB at 2.4 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/net/bytebuddy/byte-buddy-agent/1.10.15/byte-buddy-agent-1.10.15.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-agent/1.10.15/byte-buddy-agent-1.10.15.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/bytebuddy/byte-buddy-agent/1.10.15/byte-buddy-agent-1.10.15.pom (9.6 kB at 797 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/objenesis/objenesis/3.1/objenesis-3.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis/3.1/objenesis-3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis/3.1/objenesis-3.1.pom (3.5 kB at 186 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/objenesis/objenesis-parent/3.1/objenesis-parent-3.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis-parent/3.1/objenesis-parent-3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/objenesis/objenesis-parent/3.1/objenesis-parent-3.1.pom (18 kB at 1.5 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/testcontainers/kafka/1.15.0-rc2/kafka-1.15.0-rc2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/testcontainers/kafka/1.15.0-rc2/kafka-1.15.0-rc2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/testcontainers/kafka/1.15.0-rc2/kafka-1.15.0-rc2.pom (1.5 kB at 7.3 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/testcontainers/testcontainers/1.15.0-rc2/testcontainers-1.15.0-rc2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers/1.15.0-rc2/testcontainers-1.15.0-rc2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/testcontainers/testcontainers/1.15.0-rc2/testcontainers-1.15.0-rc2.pom (2.8 kB at 280 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/rnorth/duct-tape/duct-tape/1.0.8/duct-tape-1.0.8.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/rnorth/duct-tape/duct-tape/1.0.8/duct-tape-1.0.8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/rnorth/duct-tape/duct-tape/1.0.8/duct-tape-1.0.8.pom (6.2 kB at 366 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/rnorth/visible-assertions/visible-assertions/2.1.2/visible-assertions-2.1.2.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/rnorth/visible-assertions/visible-assertions/2.1.2/visible-assertions-2.1.2.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/rnorth/visible-assertions/visible-assertions/2.1.2/visible-assertions-2.1.2.pom (6.6 kB at 390 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/net/java/dev/jna/jna/5.2.0/jna-5.2.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.2.0/jna-5.2.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.2.0/jna-5.2.0.pom (1.6 kB at 29 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/github/docker-java/docker-java-api/3.2.5/docker-java-api-3.2.5.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-api/3.2.5/docker-java-api-3.2.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-api/3.2.5/docker-java-api-3.2.5.pom (1.7 kB at 168 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/github/docker-java/docker-java-parent/3.2.5/docker-java-parent-3.2.5.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-parent/3.2.5/docker-java-parent-3.2.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-parent/3.2.5/docker-java-parent-3.2.5.pom (13 kB at 366 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/github/docker-java/docker-java-transport-zerodep/3.2.5/docker-java-transport-zerodep-3.2.5.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport-zerodep/3.2.5/docker-java-transport-zerodep-3.2.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport-zerodep/3.2.5/docker-java-transport-zerodep-3.2.5.pom (4.0 kB at 396 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/github/docker-java/docker-java-transport/3.2.5/docker-java-transport-3.2.5.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport/3.2.5/docker-java-transport-3.2.5.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/github/docker-java/docker-java-transport/3.2.5/docker-java-transport-3.2.5.pom (1.4 kB at 125 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/net/java/dev/jna/jna/5.5.0/jna-5.5.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.5.0/jna-5.5.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/net/java/dev/jna/jna/5.5.0/jna-5.5.0.pom (1.6 kB at 158 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/assertj/assertj-core/3.15.0/assertj-core-3.15.0.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/assertj/assertj-core/3.15.0/assertj-core-3.15.0.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/assertj/assertj-core/3.15.0/assertj-core-3.15.0.pom (20 kB at 1.5 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/typesafe/config/1.4.0/config-1.4.0.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/hubspot/jinjava/jinjava/2.5.4/jinjava-2.5.4.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/google/guava/guava/25.0-jre/guava-25.0-jre.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/javassist/javassist/3.24.1-GA/javassist-3.24.1-GA.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/google/re2j/re2j/1.2/re2j-1.2.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/commons-net/commons-net/3.3/commons-net-3.3.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/googlecode/java-ipv6/java-ipv6/0.17/java-ipv6-0.17.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/google/code/findbugs/annotations/3.0.1/annotations-3.0.1.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/ch/obermuhlner/big-math/2.0.0/big-math-2.0.0.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-annotations/2.10.3/jackson-annotations-2.10.3.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/redis/clients/jedis/3.2.0/jedis-3.2.0.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/commons/commons-pool2/2.6.2/commons-pool2-2.6.2.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/kafka-schema-registry-client/5.5.0/kafka-schema-registry-client-5.5.0.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/kafka/kafka-clients/5.5.0-ccs/kafka-clients-5.5.0-ccs.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/common-config/5.5.0/common-config-5.5.0.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/ext/jersey-bean-validation/2.30/jersey-bean-validation-2.30.jar
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/common-config/5.5.0/common-config-5.5.0.jar (24 kB at 13 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1.jar
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/kafka-schema-registry-client/5.5.0/kafka-schema-registry-client-5.5.0.jar (106 kB at 58 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/hibernate/validator/hibernate-validator/6.0.17.Final/hibernate-validator-6.0.17.Final.jar
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/org/apache/kafka/kafka-clients/5.5.0-ccs/kafka-clients-5.5.0-ccs.jar (3.4 MB at 1.4 MB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/jakarta/el/jakarta.el-api/3.0.3/jakarta.el-api-3.0.3.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jakarta.el/3.0.2/jakarta.el-3.0.2.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/swagger/swagger-annotations/1.5.22/swagger-annotations-1.5.22.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/swagger/swagger-core/1.5.3/swagger-core-1.5.3.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/datatype/jackson-datatype-joda/2.4.5/jackson-datatype-joda-2.4.5.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/swagger/swagger-models/1.5.3/swagger-models-1.5.3.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/common-utils/5.5.0/common-utils-5.5.0.jar
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/common-utils/5.5.0/common-utils-5.5.0.jar (18 kB at 6.1 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/kafka-avro-serializer/5.5.0/kafka-avro-serializer-5.5.0.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/kafka-schema-serializer/5.5.0/kafka-schema-serializer-5.5.0.jar
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/kafka-avro-serializer/5.5.0/kafka-avro-serializer-5.5.0.jar (25 kB at 8.6 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/avro/avro/1.9.2/avro-1.9.2.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/commons/commons-compress/1.19/commons-compress-1.19.jar
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/kafka-schema-serializer/5.5.0/kafka-schema-serializer-5.5.0.jar (26 kB at 8.7 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/httpcomponents/httpclient/4.5.11/httpclient-4.5.11.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/zookeeper/zookeeper/3.5.7/zookeeper-3.5.7.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/apache/zookeeper/zookeeper-jute/3.5.7/zookeeper-jute-3.5.7.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-transport-native-epoll/4.1.45.Final/netty-transport-native-epoll-4.1.45.Final.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/netty/netty-transport-native-unix-common/4.1.45.Final/netty-transport-native-unix-common-4.1.45.Final.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/kafka-client-plugins/5.5.1-ce/kafka-client-plugins-5.5.1-ce.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/rest-authorizer/5.5.1-ce/rest-authorizer-5.5.1-ce.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/io/confluent/authorizer/5.5.1-ce/authorizer-5.5.1-ce.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bitbucket/b_c/jose4j/0.6.4/jose4j-0.6.4.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bouncycastle/bc-fips/1.0.1/bc-fips-1.0.1.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bouncycastle/bcpkix-fips/1.0.3/bcpkix-fips-1.0.3.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/bouncycastle/bctls-fips/1.0.9/bctls-fips-1.0.9.jar
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/kafka-client-plugins/5.5.1-ce/kafka-client-plugins-5.5.1-ce.jar (26 kB at 5.7 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/core/jersey-common/2.22.2/jersey-common-2.22.2.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/javax/ws/rs/javax.ws.rs-api/2.0.1/javax.ws.rs-api-2.0.1.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/authorizer/5.5.1-ce/authorizer-5.5.1-ce.jar (79 kB at 17 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/jersey/bundles/repackaged/jersey-guava/2.22.2/jersey-guava-2.22.2.jar
+[INFO] Downloaded from confluent: https://packages.confluent.io/maven/io/confluent/rest-authorizer/5.5.1-ce/rest-authorizer-5.5.1-ce.jar (62 kB at 13 kB/s)
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/hk2-api/2.4.0-b34/hk2-api-2.4.0-b34.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/hk2-utils/2.4.0-b34/hk2-utils-2.4.0-b34.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/external/aopalliance-repackaged/2.4.0-b34/aopalliance-repackaged-2.4.0-b34.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/external/javax.inject/2.4.0-b34/javax.inject-2.4.0-b34.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/hk2-locator/2.4.0-b34/hk2-locator-2.4.0-b34.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/glassfish/hk2/osgi-resource-locator/1.0.1/osgi-resource-locator-1.0.1.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-databind/2.10.3/jackson-databind-2.10.3.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.10.3/jackson-dataformat-yaml-2.10.3.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/org/yaml/snakeyaml/1.24/snakeyaml-1.24.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.10.3/jackson-datatype-jsr310-2.10.3.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.10.3/jackson-datatype-jdk8-2.10.3.jar
+[INFO] Downloading from confluent: https://packages.confluent.io/maven/com/fasterxml/jackson/core/jackson-core/2.10.3/jackson-core-2.10.3.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/typesafe/config/1.4.0/config-1.4.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/hubspot/jinjava/jinjava/2.5.4/jinjava-2.5.4.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/25.0-jre/guava-25.0-jre.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/javassist/javassist/3.24.1-GA/javassist-3.24.1-GA.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/re2j/re2j/1.2/re2j-1.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/typesafe/config/1.4.0/config-1.4.0.jar (294 kB at 3.3 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/commons-net/commons-net/3.3/commons-net-3.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/commons-net/commons-net/3.3/commons-net-3.3.jar (281 kB at 2.4 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/googlecode/java-ipv6/java-ipv6/0.17/java-ipv6-0.17.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/googlecode/java-ipv6/java-ipv6/0.17/java-ipv6-0.17.jar (33 kB at 157 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/code/findbugs/annotations/3.0.1/annotations-3.0.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/code/findbugs/annotations/3.0.1/annotations-3.0.1.jar (39 kB at 131 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/ch/obermuhlner/big-math/2.0.0/big-math-2.0.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/re2j/re2j/1.2/re2j-1.2.jar (127 kB at 382 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.3/jackson-annotations-2.10.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/ch/obermuhlner/big-math/2.0.0/big-math-2.0.0.jar (41 kB at 104 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/redis/clients/jedis/3.2.0/jedis-3.2.0.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.10.3/jackson-annotations-2.10.3.jar (68 kB at 173 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-pool2/2.6.2/commons-pool2-2.6.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/javassist/javassist/3.24.1-GA/javassist-3.24.1-GA.jar (778 kB at 1.7 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/ext/jersey-bean-validation/2.30/jersey-bean-validation-2.30.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-pool2/2.6.2/commons-pool2-2.6.2.jar (129 kB at 223 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/ext/jersey-bean-validation/2.30/jersey-bean-validation-2.30.jar (53 kB at 82 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/jakarta.inject/2.6.1/jakarta.inject-2.6.1.jar (18 kB at 28 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/hubspot/jinjava/jinjava/2.5.4/jinjava-2.5.4.jar (557 kB at 708 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-client/2.30/jersey-client-2.30.jar (245 kB at 296 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/media/jersey-media-jaxb/2.30/jersey-media-jaxb-2.30.jar (86 kB at 102 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/jakarta/xml/bind/jakarta.xml.bind-api/2.3.2/jakarta.xml.bind-api-2.3.2.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/hibernate/validator/hibernate-validator/6.0.17.Final/hibernate-validator-6.0.17.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/jakarta/activation/jakarta.activation-api/1.2.1/jakarta.activation-api-1.2.1.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/redis/clients/jedis/3.2.0/jedis-3.2.0.jar (656 kB at 758 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/jboss/logging/jboss-logging/3.3.2.Final/jboss-logging-3.3.2.Final.jar (66 kB at 68 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/jakarta/el/jakarta.el-api/3.0.3/jakarta.el-api-3.0.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/classmate/1.3.4/classmate-1.3.4.jar (65 kB at 66 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jakarta.el/3.0.2/jakarta.el-3.0.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/guava/guava/25.0-jre/guava-25.0-jre.jar (2.7 MB at 2.5 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/jakarta/el/jakarta.el-api/3.0.3/jakarta.el-api-3.0.3.jar (80 kB at 73 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-annotations/1.5.22/swagger-annotations-1.5.22.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jakarta.el/3.0.2/jakarta.el-3.0.2.jar (237 kB at 207 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-core/1.5.3/swagger-core-1.5.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-server/2.30/jersey-server-2.30.jar (928 kB at 807 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-joda/2.4.5/jackson-datatype-joda-2.4.5.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/jakarta/ws/rs/jakarta.ws.rs-api/2.1.6/jakarta.ws.rs-api-2.1.6.jar (140 kB at 122 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-models/1.5.3/swagger-models-1.5.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-annotations/1.5.22/swagger-annotations-1.5.22.jar (22 kB at 19 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/avro/avro/1.9.2/avro-1.9.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/hibernate/validator/hibernate-validator/6.0.17.Final/hibernate-validator-6.0.17.Final.jar (1.2 MB at 965 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.19/commons-compress-1.19.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-core/1.5.3/swagger-core-1.5.3.jar (74 kB at 61 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.11/httpclient-4.5.11.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-joda/2.4.5/jackson-datatype-joda-2.4.5.jar (56 kB at 46 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper/3.5.7/zookeeper-3.5.7.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/swagger/swagger-models/1.5.3/swagger-models-1.5.3.jar (122 kB at 97 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper-jute/3.5.7/zookeeper-jute-3.5.7.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/avro/avro/1.9.2/avro-1.9.2.jar (588 kB at 385 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/httpcomponents/httpclient/4.5.11/httpclient-4.5.11.jar (778 kB at 503 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper-jute/3.5.7/zookeeper-jute-3.5.7.jar (251 kB at 162 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/zookeeper/zookeeper/3.5.7/zookeeper-3.5.7.jar (990 kB at 633 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.45.Final/netty-buffer-4.1.45.Final.jar (278 kB at 162 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.45.Final/netty-common-4.1.45.Final.jar (612 kB at 349 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/commons/commons-compress/1.19/commons-compress-1.19.jar (615 kB at 350 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-epoll/4.1.45.Final/netty-transport-native-epoll-4.1.45.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.45.Final/netty-transport-4.1.45.Final.jar (473 kB at 267 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.45.Final/netty-transport-native-unix-common-4.1.45.Final.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.45.Final/netty-resolver-4.1.45.Final.jar (33 kB at 18 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.45.Final/netty-handler-4.1.45.Final.jar (449 kB at 250 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bitbucket/b_c/jose4j/0.6.4/jose4j-0.6.4.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-epoll/4.1.45.Final/netty-transport-native-epoll-4.1.45.Final.jar (124 kB at 68 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/1.0.1/bc-fips-1.0.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/slf4j/slf4j-log4j12/1.7.25/slf4j-log4j12-1.7.25.jar (12 kB at 6.8 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-fips/1.0.3/bcpkix-fips-1.0.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.45.Final/netty-transport-native-unix-common-4.1.45.Final.jar (33 kB at 18 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bctls-fips/1.0.9/bctls-fips-1.0.9.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.45.Final/netty-codec-4.1.45.Final.jar (318 kB at 174 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-common/2.22.2/jersey-common-2.22.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/core/jersey-common/2.22.2/jersey-common-2.22.2.jar (698 kB at 357 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/javax/ws/rs/javax.ws.rs-api/2.0.1/javax.ws.rs-api-2.0.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/javax/ws/rs/javax.ws.rs-api/2.0.1/javax.ws.rs-api-2.0.1.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/bundles/repackaged/jersey-guava/2.22.2/jersey-guava-2.22.2.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bitbucket/b_c/jose4j/0.6.4/jose4j-0.6.4.jar (260 kB at 124 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-api/2.4.0-b34/hk2-api-2.4.0-b34.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jersey/bundles/repackaged/jersey-guava/2.22.2/jersey-guava-2.22.2.jar (971 kB at 441 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-utils/2.4.0-b34/hk2-utils-2.4.0-b34.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-utils/2.4.0-b34/hk2-utils-2.4.0-b34.jar (119 kB at 51 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/aopalliance-repackaged/2.4.0-b34/aopalliance-repackaged-2.4.0-b34.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-api/2.4.0-b34/hk2-api-2.4.0-b34.jar (179 kB at 77 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/javax.inject/2.4.0-b34/javax.inject-2.4.0-b34.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/aopalliance-repackaged/2.4.0-b34/aopalliance-repackaged-2.4.0-b34.jar (15 kB at 6.2 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-locator/2.4.0-b34/hk2-locator-2.4.0-b34.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/external/javax.inject/2.4.0-b34/javax.inject-2.4.0-b34.jar (6.0 kB at 2.5 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.1/osgi-resource-locator-1.0.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/osgi-resource-locator/1.0.1/osgi-resource-locator-1.0.1.jar (0 B at 0 B/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.3/jackson-databind-2.10.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/hk2/hk2-locator/2.4.0-b34/hk2-locator-2.4.0-b34.jar (181 kB at 73 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.10.3/jackson-dataformat-yaml-2.10.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-yaml/2.10.3/jackson-dataformat-yaml-2.10.3.jar (47 kB at 18 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.24/snakeyaml-1.24.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bctls-fips/1.0.9/bctls-fips-1.0.9.jar (1.1 MB at 427 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.10.3/jackson-datatype-jsr310-2.10.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-fips/1.0.3/bcpkix-fips-1.0.3.jar (944 kB at 358 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.10.3/jackson-datatype-jdk8-2.10.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.10.3/jackson-datatype-jsr310-2.10.3.jar (106 kB at 39 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.3/jackson-core-2.10.3.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/yaml/snakeyaml/1.24/snakeyaml-1.24.jar (303 kB at 112 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.10.3/jackson-datatype-jdk8-2.10.3.jar (34 kB at 13 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-core/2.10.3/jackson-core-2.10.3.jar (349 kB at 123 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.10.3/jackson-databind-2.10.3.jar (1.4 MB at 462 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/bouncycastle/bc-fips/1.0.1/bc-fips-1.0.1.jar (3.4 MB at 1.1 MB/s)
+[INFO] 
+[INFO] --- jacoco-maven-plugin:0.8.5:prepare-agent (default) @ kafka-topology-builder ---
+[INFO] argLine set to -javaagent:/home/user/.m2/repository/org/jacoco/org.jacoco.agent/0.8.5/org.jacoco.agent-0.8.5-runtime.jar=destfile=/home/user/projects/kafka-topology-builder/target/jacoco.exec
+[INFO] 
+[INFO] --- fmt-maven-plugin:2.9:format (default) @ kafka-topology-builder ---
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/googlejavaformat/google-java-format/1.7/google-java-format-1.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/googlejavaformat/google-java-format/1.7/google-java-format-1.7.pom (8.2 kB at 316 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/googlejavaformat/google-java-format-parent/1.7/google-java-format-parent-1.7.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/googlejavaformat/google-java-format-parent/1.7/google-java-format-parent-1.7.pom (8.4 kB at 492 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/javac-shaded/9+181-r4173-1/javac-shaded-9+181-r4173-1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/javac-shaded/9+181-r4173-1/javac-shaded-9+181-r4173-1.pom (1.2 kB at 71 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/googlejavaformat/google-java-format/1.7/google-java-format-1.7.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.2.0/error_prone_annotations-2.2.0.jar
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/google/errorprone/javac-shaded/9+181-r4173-1/javac-shaded-9+181-r4173-1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/googlejavaformat/google-java-format/1.7/google-java-format-1.7.jar (225 kB at 3.6 MB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.2.0/error_prone_annotations-2.2.0.jar (14 kB at 224 kB/s)
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/google/errorprone/javac-shaded/9+181-r4173-1/javac-shaded-9+181-r4173-1.jar (2.9 MB at 6.8 MB/s)
+[INFO] Processed 100 files (1 reformatted).
+[INFO] Processed 123 files (1 reformatted).
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ kafka-topology-builder ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ kafka-topology-builder ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 95 source files to /home/user/projects/kafka-topology-builder/target/classes
+[WARNING] /home/user/projects/kafka-topology-builder/src/main/java/com/purbon/kafka/topology/TopologyBuilderConfig.java: Some input files use unchecked or unsafe operations.
+[WARNING] /home/user/projects/kafka-topology-builder/src/main/java/com/purbon/kafka/topology/TopologyBuilderConfig.java: Recompile with -Xlint:unchecked for details.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:34 min
+[INFO] Finished at: 2021-07-20T19:51:30Z
+[INFO] ------------------------------------------------------------------------

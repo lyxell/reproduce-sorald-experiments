@@ -1,0 +1,419 @@
+diff --git a/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/mombi/util/AbstractUtilityFunctionsSet.java b/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/mombi/util/AbstractUtilityFunctionsSet.java
+index f6158da6e..89f4bb22a 100644
+--- a/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/mombi/util/AbstractUtilityFunctionsSet.java
++++ b/jmetal-algorithm/src/main/java/org/uma/jmetal/algorithm/multiobjective/mombi/util/AbstractUtilityFunctionsSet.java
+@@ -1,4 +1,11 @@
+ package org.uma.jmetal.algorithm.multiobjective.mombi.util;
++import java.io.IOException;
++import java.io.FileNotFoundException;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.Serializable;
++import java.io.BufferedReader;
++import java.io.InputStream;
+ 
+ import org.uma.jmetal.solution.Solution;
+ import org.uma.jmetal.util.errorchecking.JMetalException;
+@@ -114,36 +121,32 @@ public abstract class AbstractUtilityFunctionsSet<S extends Solution<?>> impleme
+ 			}
+ 		}
+ 		InputStreamReader isr = new InputStreamReader(in);
+-		BufferedReader buffer = new BufferedReader(isr);
+-
+-		// First line format: # <num_weights> <num_objectives>
+-		String line = null;
+-		try {
+-			line = buffer.readLine();
+-
+-
+-			StringTokenizer st = new StringTokenizer(line);
+-			st.nextToken(); // reading the #
+-
+-			// reading the number of weights (only used as estimator
+-			// of the number of them)
+-			int number_of_weight_vectors = parseInt(st.nextToken());
+-			this.weightVectors = new ArrayList<>(number_of_weight_vectors);
+-
+-			// reading the number of objectives
+-			int number_of_objectives     = parseInt(st.nextToken());
+-			this.vectorSize 			 = number_of_objectives;
++		try (BufferedReader buffer = new BufferedReader(isr)) {
++			// First line format: # <num_weights> <num_objectives>
++			String line = null;
++			try {
++				line = buffer.readLine();
++				StringTokenizer st = new StringTokenizer(line);
++				st.nextToken();// reading the #
+ 
+-			while ((line = buffer.readLine())!=null) {
+-				st = new StringTokenizer(line);
+-				List<Double> new_vector = new ArrayList<>(number_of_objectives);
+-				for (int i = 0; i < number_of_objectives; i++)
+-					new_vector.add(parseDouble(st.nextToken()));
+-				this.weightVectors.add(new_vector);
++				// reading the number of weights (only used as estimator
++				// of the number of them)
++				int number_of_weight_vectors = parseInt(st.nextToken());
++				this.weightVectors = new ArrayList<>(number_of_weight_vectors);
++				// reading the number of objectives
++				int number_of_objectives = parseInt(st.nextToken());
++				this.vectorSize = number_of_objectives;
++				while ((line = buffer.readLine()) != null) {
++					st = new StringTokenizer(line);
++					List<Double> new_vector = new ArrayList<>(number_of_objectives);
++					for (int i = 0; i < number_of_objectives; i++) {
++						new_vector.add(parseDouble(st.nextToken()));
++					}
++					this.weightVectors.add(new_vector);
++				} 
++			} catch (IOException e) {
++				throw new JMetalException("loadWeightsFromFile: failed when reading for file: " + "/" + filePath);
+ 			}
+-		} catch (IOException e) {
+-			throw new JMetalException("loadWeightsFromFile: failed when reading for file: "
+-							+ "/" + filePath) ;
+-    }
++		}
+ 	}
+ }
+diff --git a/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java b/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java
+index f63318bce..112c9f60f 100644
+--- a/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java
++++ b/jmetal-problem/src/main/java/org/uma/jmetal/problem/multiobjective/ebes/Ebes.java
+@@ -13,6 +13,12 @@
+  * @version 1.0
+  */
+ package org.uma.jmetal.problem.multiobjective.ebes;
++import java.io.FileNotFoundException;
++import java.io.FileInputStream;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.PrintStream;
++import java.io.InputStream;
+ 
+ import org.uma.jmetal.problem.doubleproblem.impl.AbstractDoubleProblem;
+ import org.uma.jmetal.solution.doublesolution.DoubleSolution;
+@@ -505,7 +511,7 @@ public class Ebes extends AbstractDoubleProblem {
+                                     // local
+ 
+   double[][] PQ;
+-  double Reaction_[][];
++  double Reaction_;
+   double[][] Kii = new double[numberOfLibertyDegree_][numberOfLibertyDegree_];
+   double[][] Kij = new double[numberOfLibertyDegree_][numberOfLibertyDegree_];
+   double[][] Kji = new double[numberOfLibertyDegree_][numberOfLibertyDegree_];
+@@ -4880,33 +4886,17 @@ public class Ebes extends AbstractDoubleProblem {
+   }
+ 
+   public void EBEsPrintArchTxtElements() throws JMetalException {
+-    try {
+-      PrintStream ps = new PrintStream("EBEs - Groups Elements.txt");
++    try (PrintStream ps = new PrintStream("EBEs - Groups Elements.txt")) {
+       // impresion de la las caracterÃƒÂ­sticas de las barras
+-      ps.printf(
+-          "Groups    Y      Z      eY_     eZ_    uY    dY   lZ    rZ    A      Az    Ay    Iz      Iy      Ip");
++      ps.printf("Groups    Y      Z      eY_     eZ_    uY    dY   lZ    rZ    A      Az    Ay    Iz      Iy      Ip");
+       ps.println();
+       ps.printf("-----------------------------------------------------------------------------");
+       ps.println();
+       for (int gr = 0; gr < Groups_.length; gr++) {
+-        ps.printf(
+-            "%4d %6.3f %6.3f %7.4f %7.4f %6.3f %6.3f %6.3f %6.3f %9.6f %9.6f %9.6f %9.6f %9.6f",
+-            gr,
+-            Groups_[gr][Y_],
+-            Groups_[gr][Z_],
+-            Groups_[gr][eY_],
+-            Groups_[gr][eZ_],
+-            Groups_[gr][uY_],
+-            Groups_[gr][dY_],
+-            Groups_[gr][lZ_],
+-            Groups_[gr][rZ_],
+-            Groups_[gr][Az_],
+-            Groups_[gr][Ay_],
+-            Groups_[gr][Iz_],
+-            Groups_[gr][Iy_],
+-            Groups_[gr][It_]);
++        ps.printf("%4d %6.3f %6.3f %7.4f %7.4f %6.3f %6.3f %6.3f %6.3f %9.6f %9.6f %9.6f %9.6f %9.6f", gr, Groups_[gr][Y_], Groups_[gr][Z_], Groups_[gr][eY_], Groups_[gr][eZ_], Groups_[gr][uY_], Groups_[gr][dY_], Groups_[gr][lZ_], Groups_[gr][rZ_], Groups_[gr][Az_], Groups_[gr][Ay_], Groups_[gr][Iz_], Groups_[gr][Iy_], Groups_[gr][It_]);
+         ps.println();
+-      } // Next ba
++      }// Next ba
++
+       ps.close();
+     } catch (Exception ex) {
+       System.out.println("Grupos de barras: El archivo no pudo grabarse!");
+@@ -4914,9 +4904,7 @@ public class Ebes extends AbstractDoubleProblem {
+   }
+ 
+   public void EBEsPrintArchTxtMKLB(int e) throws JMetalException {
+-
+-    try {
+-      PrintStream ps = new PrintStream("EBEs-MKLB(" + e + ").txt");
++    try (PrintStream ps = new PrintStream("EBEs-MKLB(" + e + ").txt")) {
+       // impresion de la matriz de rigidez penalizada
+       // extremo ii
+       ps.print("kii" + e + "=[");
+@@ -4925,13 +4913,17 @@ public class Ebes extends AbstractDoubleProblem {
+           ps.printf("%12.3f", Kii[o][p]);
+           if (o != 5 && p == 5) {
+             ps.print(";");
+-          } else if (o == 5 && p == 5) {
+-            ps.print("]");
+-          } else {
+-            ps.print(",");
+-          }
+-        } // Next p
+-      } // Next o
++          } else
++            if (o == 5 && p == 5) {
++              ps.print("]");
++            } else {
++              ps.print(",");
++            }
++
++        }// Next p
++
++      }// Next o
++
+       ps.println();
+       ps.print("kij" + e + "=[");
+       for (int o = 0; o < 6; o++) {
+@@ -4939,13 +4931,17 @@ public class Ebes extends AbstractDoubleProblem {
+           ps.printf("%12.3f", Kij[o][p]);
+           if (o != 5 && p == 5) {
+             ps.print(";");
+-          } else if (o == 5 && p == 5) {
+-            ps.print("]");
+-          } else {
+-            ps.print(",");
+-          }
+-        } // Next p
+-      } // Next o
++          } else
++            if (o == 5 && p == 5) {
++              ps.print("]");
++            } else {
++              ps.print(",");
++            }
++
++        }// Next p
++
++      }// Next o
++
+       ps.println();
+       ps.print("kji" + e + "=[");
+       for (int o = 0; o < 6; o++) {
+@@ -4953,13 +4949,17 @@ public class Ebes extends AbstractDoubleProblem {
+           ps.printf("%12.3f", Kji[o][p]);
+           if (o != 5 && p == 5) {
+             ps.print(";");
+-          } else if (o == 5 && p == 5) {
+-            ps.print("]");
+-          } else {
+-            ps.print(",");
+-          }
+-        } // Next p
+-      } // Next o
++          } else
++            if (o == 5 && p == 5) {
++              ps.print("]");
++            } else {
++              ps.print(",");
++            }
++
++        }// Next p
++
++      }// Next o
++
+       ps.println();
+       ps.print("kjj" + e + "=[");
+       for (int o = 0; o < 6; o++) {
+@@ -4967,13 +4967,17 @@ public class Ebes extends AbstractDoubleProblem {
+           ps.printf("%12.3f", Kjj[o][p]);
+           if (o != 5 && p == 5) {
+             ps.print(";");
+-          } else if (o == 5 && p == 5) {
+-            ps.print("]");
+-          } else {
+-            ps.print(",");
+-          }
+-        } // Next p
+-      } // Next o
++          } else
++            if (o == 5 && p == 5) {
++              ps.print("]");
++            } else {
++              ps.print(",");
++            }
++
++        }// Next p
++
++      }// Next o
++
+       ps.println();
+       ps.close();
+     } catch (Exception ex) {
+@@ -4982,14 +4986,14 @@ public class Ebes extends AbstractDoubleProblem {
+   }
+ 
+   public void EBEsPrintArchTxtMKG(String s, int hi) throws JMetalException {
+-    try {
+-      PrintStream ps = new PrintStream("EBEs-M" + s + "-H(" + hi + ").txt");
++    try (PrintStream ps = new PrintStream("EBEs-M" + s + "-H(" + hi + ").txt")) {
+       // impresion de la matriz de rigidez penalizada
+       // extremo ii
+       for (int o = 0; o < MatrixStiffness_.length; o++) {
+         ps.printf("(%5d) - %15.4f", o, MatrixStiffness_[o]);
+         ps.println();
+-      } // Next o
++      }// Next o
++
+       ps.close();
+     } catch (Exception ex) {
+       System.out.println("Mat Rig Global: El archivo no pudo grabarse!");
+@@ -4997,14 +5001,14 @@ public class Ebes extends AbstractDoubleProblem {
+   }
+ 
+   public void EBEsPrintArchTxtDesp(int hi) throws JMetalException {
+-    try {
+-      PrintStream ps = new PrintStream("EBEs-Desp-H(" + hi + ").txt");
++    try (PrintStream ps = new PrintStream("EBEs-Desp-H(" + hi + ").txt")) {
+       // impresion de la matriz de rigidez penalizada
+       // extremo ii
+       for (int o = 0; o < DisplacementNodes_.length; o++) {
+         ps.printf("(%5d, %2d) = %20.16f", o, hi, DisplacementNodes_[o][hi]);
+         ps.println();
+-      } // Next o
++      }// Next o
++
+       ps.close();
+     } catch (Exception ex) {
+       System.out.println("Desplazamientos: El archivo no pudo grabarse!");
+@@ -5012,37 +5016,19 @@ public class Ebes extends AbstractDoubleProblem {
+   }
+ 
+   public void EBEsPrintArchTxtEfforts(int hi) throws JMetalException {
+-    try {
+-      PrintStream ps = new PrintStream("EBEs-Efforts-H(" + hi + ").txt");
++    try (PrintStream ps = new PrintStream("EBEs-Efforts-H(" + hi + ").txt")) {
+       // impresion de la matriz de rigidez penalizada
+       // extremo ii
+       for (int ba = 0; ba < Element_.length; ba++) {
+-        int ni = (int) Element_[ba][i_];
+-        int nj = (int) Element_[ba][j_];
+-        ps.printf(
+-            "Ei(%3d,%3d)=%10.3f  %10.3f  %10.3f  %10.3f  %10.3f  %10.3f",
+-            ba,
+-            ni,
+-            Efforti_[0][ba][hi],
+-            Efforti_[1][ba][hi],
+-            Efforti_[2][ba][hi],
+-            Efforti_[3][ba][hi],
+-            Efforti_[4][ba][hi],
+-            Efforti_[5][ba][hi]);
++        int ni = ((int) (Element_[ba][i_]));
++        int nj = ((int) (Element_[ba][j_]));
++        ps.printf("Ei(%3d,%3d)=%10.3f  %10.3f  %10.3f  %10.3f  %10.3f  %10.3f", ba, ni, Efforti_[0][ba][hi], Efforti_[1][ba][hi], Efforti_[2][ba][hi], Efforti_[3][ba][hi], Efforti_[4][ba][hi], Efforti_[5][ba][hi]);
+         ps.println();
+-        ps.printf(
+-            "Ej(%3d,%3d)=%10.3f  %10.3f  %10.3f  %10.3f  %10.3f  %10.3f",
+-            ba,
+-            nj,
+-            Effortj_[0][ba][hi],
+-            Effortj_[1][ba][hi],
+-            Effortj_[2][ba][hi],
+-            Effortj_[3][ba][hi],
+-            Effortj_[4][ba][hi],
+-            Effortj_[5][ba][hi]);
++        ps.printf("Ej(%3d,%3d)=%10.3f  %10.3f  %10.3f  %10.3f  %10.3f  %10.3f", ba, nj, Effortj_[0][ba][hi], Effortj_[1][ba][hi], Effortj_[2][ba][hi], Effortj_[3][ba][hi], Effortj_[4][ba][hi], Effortj_[5][ba][hi]);
+         ps.println();
+         ps.println();
+-      } // Next ba
++      }// Next ba
++
+       ps.close();
+     } catch (Exception ex) {
+       System.out.println("Esfuerzos: El archivo no pudo grabarse!");
+@@ -5053,35 +5039,25 @@ public class Ebes extends AbstractDoubleProblem {
+     try {
+ 
+       for (int hi = 0; hi < numberOfWeigthHypothesis_; hi++) {
+-        PrintStream ps = new PrintStream("EBEs-Strain-H(" + hi + ").txt");
+-        // impresion de la matriz de rigidez penalizada
+-        // extremo ii
+-        ps.printf("Elements  Nodo   Stracc    Scomp     Scut");
+-        ps.println();
+-        ps.printf("--------------------------------------------");
+-        ps.println();
+-        for (int ba = 0; ba < Element_.length; ba++) {
+-          int ni = (int) Element_[ba][i_];
+-          int nj = (int) Element_[ba][j_];
+-          ps.printf(
+-              "%4d  %4d  %10.3f  %10.3f  %10.3f",
+-              ba,
+-              ni,
+-              Straini_[STRAIN_TRACTION][ba][hi],
+-              Straini_[STRAIN_COMPRESS][ba][hi],
+-              Straini_[STRAIN_CUT][ba][hi]);
+-          ps.println();
+-          ps.printf(
+-              "%4d  %4d  %10.3f  %10.3f  %10.3f",
+-              ba,
+-              nj,
+-              Strainj_[STRAIN_TRACTION][ba][hi],
+-              Strainj_[STRAIN_COMPRESS][ba][hi],
+-              Strainj_[STRAIN_CUT][ba][hi]);
++        try (PrintStream ps = new PrintStream("EBEs-Strain-H(" + hi + ").txt")) {
++          // impresion de la matriz de rigidez penalizada
++          // extremo ii
++          ps.printf("Elements  Nodo   Stracc    Scomp     Scut");
+           ps.println();
++          ps.printf("--------------------------------------------");
+           ps.println();
+-        } // Next ba
+-        ps.close();
++          for (int ba = 0; ba < Element_.length; ba++) {
++            int ni = ((int) (Element_[ba][i_]));
++            int nj = ((int) (Element_[ba][j_]));
++            ps.printf("%4d  %4d  %10.3f  %10.3f  %10.3f", ba, ni, Straini_[STRAIN_TRACTION][ba][hi], Straini_[STRAIN_COMPRESS][ba][hi], Straini_[STRAIN_CUT][ba][hi]);
++            ps.println();
++            ps.printf("%4d  %4d  %10.3f  %10.3f  %10.3f", ba, nj, Strainj_[STRAIN_TRACTION][ba][hi], Strainj_[STRAIN_COMPRESS][ba][hi], Strainj_[STRAIN_CUT][ba][hi]);
++            ps.println();
++            ps.println();
++          }// Next ba
++
++          ps.close();
++        }
+       } // hi
+     } catch (Exception ex) {
+       System.out.println("Tensiones: El archivo no pudo grabarse!");
+@@ -5089,8 +5065,7 @@ public class Ebes extends AbstractDoubleProblem {
+   }
+ 
+   public void EBEsPrintArchTxtReaction(int hi) throws JMetalException {
+-    try {
+-      PrintStream ps = new PrintStream("EBEs-Reaction-H(" + hi + ").txt");
++    try (PrintStream ps = new PrintStream("EBEs-Reaction-H(" + hi + ").txt")) {
+       ps.printf("Nodo   Restriction   X    Y   Z   MX    MY    MZ");
+       ps.println();
+       ps.printf("--------------------------------------------");
+@@ -5098,8 +5073,8 @@ public class Ebes extends AbstractDoubleProblem {
+       // impresion de la matriz de rigidez penalizada
+       // extremo ii
+       for (int o = 0; o < NodeRestrict_.length; o++) {
+-        int no = (int) NodeRestrict_[o][0];
+-        int ap = (int) NodeRestrict_[o][1];
++        int no = ((int) (NodeRestrict_[o][0]));
++        int ap = ((int) (NodeRestrict_[o][1]));
+         double x = Reaction_[6 * no + aX_][hi];
+         double y = Reaction_[6 * no + aY_][hi];
+         double z = Reaction_[6 * no + aZ_][hi];
+@@ -5108,7 +5083,8 @@ public class Ebes extends AbstractDoubleProblem {
+         double mz = Reaction_[6 * no + gZ_][hi];
+         ps.printf("%5d  %6d  %8.3f %8.3f %8.3f %8.3f %8.3f %8.3f", no, ap, x, y, z, mx, my, mz);
+         ps.println();
+-      } // Next o
++      }// Next o
++
+       ps.close();
+     } catch (Exception ex) {
+       System.out.println("Reacciones: El archivo no pudo grabarse!");

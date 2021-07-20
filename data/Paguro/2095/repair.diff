@@ -1,0 +1,350 @@
+diff --git a/tupleGenerator/TupleGenerator.java b/tupleGenerator/TupleGenerator.java
+index 57acc21..ba7d939 100644
+--- a/tupleGenerator/TupleGenerator.java
++++ b/tupleGenerator/TupleGenerator.java
+@@ -104,160 +104,93 @@ public class TupleGenerator {
+     }
+ 
+     static void genTuple(int i) throws IOException {
+-        FileWriter fr = new FileWriter("../src/main/java/org/organicdesign/fp/tuple/Tuple" + i + ".java");
+-        fr.write(copyright() +
+-                 "package org.organicdesign.fp.tuple;\n" +
+-                 "\n" +
+-                 "import java.io.Serializable;\n" +
+-                 "import java.util.Objects;\n" +
+-                 "\n" +
+-                 "import static org.organicdesign.fp.FunctionUtils.stringify;\n" +
+-                 generatedWarning() +
+-                 "/**\n" +
+-                 " Holds " + i + " items of potentially different types.  Designed to let you easily create immutable\n" +
+-                 " subclasses (to give your data structures meaningful names) with correct equals(), hashCode(), and\n" +
+-                 " toString() methods.\n" +
+-                 " */\n" +
+-                 "public class Tuple" + i + "<");
+-        fr.write(types(i));
+-        fr.write("> implements Serializable {\n" +
+-                 "\n" +
+-                 "    // For serializable.  Make sure to change whenever internal data format changes.\n" +
+-                 "    // Implemented because implementing serializable only on a sub-class of an\n" +
+-                 "    // immutable class requires a serialization proxy.  That's probably worse than\n" +
+-                 "    // the conceptual burdeon of all tuples being Serializable." +
+-                 "    private static final long serialVersionUID = 20160906065500L;\n" +
+-                 "\n" +
+-                 "    // Fields are protected so that sub-classes can make accessor methods with meaningful names.\n");
+-        for (int l = 1; l <= i; l++) {
+-            fr.write("    protected final ");
+-            fr.write(intToChar(l));
+-            fr.write(" _");
+-            fr.write(String.valueOf(l));
+-            fr.write(";\n");
+-        }
+-
+-        fr.write("\n" +
+-                 "    /**\n" +
+-                 "     Constructor is protected (not public) for easy inheritance.  Josh Bloch's \"Item 1\" says public\n" +
+-                 "     static factory methods are better than constructors because they have names, they can return\n" +
+-                 "     an existing object instead of a new one, and they can return a sub-type.  Therefore, you\n" +
+-                 "     have more flexibility with a static factory as part of your public API then with a public\n" +
+-                 "     constructor.\n" +
+-                 "     */\n" +
+-                 "    protected Tuple" + i + "(");
+-        fr.write(factoryParams(i));
+-        fr.write(") {\n       ");
+-        for (int l = 1; l <= i; l++) {
+-            if ((l % 10) == 0) {
+-                fr.write("\n       ");
++        try (FileWriter fr = new FileWriter("../src/main/java/org/organicdesign/fp/tuple/Tuple" + i + ".java")) {
++            fr.write(copyright() + "package org.organicdesign.fp.tuple;\n" + "\n" + "import java.io.Serializable;\n" + "import java.util.Objects;\n" + "\n" + "import static org.organicdesign.fp.FunctionUtils.stringify;\n" + generatedWarning() + "/**\n" + " Holds " + i + " items of potentially different types.  Designed to let you easily create immutable\n" + " subclasses (to give your data structures meaningful names) with correct equals(), hashCode(), and\n" + " toString() methods.\n" + " */\n" + "public class Tuple" + i + "<");
++            fr.write(types(i));
++            fr.write("> implements Serializable {\n" + ("\n" + "    // For serializable.  Make sure to change whenever internal data format changes.\n" + "    // Implemented because implementing serializable only on a sub-class of an\n" + "    // immutable class requires a serialization proxy.  That\'s probably worse than\n" + "    // the conceptual burdeon of all tuples being Serializable." + "    private static final long serialVersionUID = 20160906065500L;\n" + "\n" + "    // Fields are protected so that sub-classes can make accessor methods with meaningful names.\n"));
++            for (int l = 1; l <= i; l++) {
++                fr.write("    protected final ");
++                fr.write(intToChar(l));
++                fr.write(" _");
++                fr.write(String.valueOf(l));
++                fr.write(";\n");
+             }
+-            fr.write(" _");
+-            fr.write(String.valueOf(l));
+-            fr.write(" = ");
+-            fr.write(intToChar(l).toLowerCase());
+-            fr.write(";");
+-        }
+-        fr.write("\n" +
+-                 "    }\n" +
+-                 "\n" +
+-                 "    /** Public static factory method */\n" +
+-                 "    public static <");
+-        fr.write(types(i));
+-        fr.write("> Tuple" + i + "<");
+-        fr.write(types(i));
+-        fr.write(">");
+-        if (i > 7) {
+-            fr.write("\n   ");
+-        }
+-        fr.write(" of(");
+-        fr.write(factoryParams(i));
+-        fr.write(") {\n" +
+-                 "        return new Tuple" + i + "<>(");
+-        boolean isFirst = true;
+-        for (int l = 1; l <= i; l++) {
+-            if (isFirst) {
+-                isFirst = false;
+-            } else {
+-                fr.write(", ");
++            fr.write("\n" + ("    /**\n" + "     Constructor is protected (not public) for easy inheritance.  Josh Bloch\'s \"Item 1\" says public\n" + "     static factory methods are better than constructors because they have names, they can return\n" + "     an existing object instead of a new one, and they can return a sub-type.  Therefore, you\n" + "     have more flexibility with a static factory as part of your public API then with a public\n" + "     constructor.\n" + "     */\n" + "    protected Tuple") + i + "(");
++            fr.write(factoryParams(i));
++            fr.write(") {\n       ");
++            for (int l = 1; l <= i; l++) {
++                if (l % 10 == 0) {
++                    fr.write("\n       ");
++                }
++                fr.write(" _");
++                fr.write(String.valueOf(l));
++                fr.write(" = ");
++                fr.write(intToChar(l).toLowerCase());
++                fr.write(";");
+             }
+-            fr.write(intToChar(l).toLowerCase());
+-        }
+-        fr.write(");\n" +
+-                 "    }\n" +
+-                 "\n");
+-
+-        for (int l = 1; l <= i; l++) {
+-            fr.write("    /** Returns the " + ordinal(l) + " field */\n" +
+-                     "    public ");
+-            fr.write(intToChar(l));
+-            fr.write(" _");
+-            fr.write(String.valueOf(l));
+-            fr.write("() { return _");
+-            fr.write(String.valueOf(l));
+-            fr.write("; }\n");
+-        }
+-
+-        fr.write("\n" +
+-                 "    @Override\n" +
+-                 "    public String toString() {\n" +
+-                 "        return getClass().getSimpleName() + \"(\" +\n" +
+-                 "               stringify(_");
+-        isFirst = true;
+-        for (int l = 1; l <= i; l++) {
+-            if (isFirst) {
+-                isFirst = false;
+-            } else {
+-                if ((l % 3) == 0) {
+-                    fr.write(" + \",\" +\n" +
+-                             "               stringify(_");
++            fr.write("\n" + ("    }\n" + "\n" + "    /** Public static factory method */\n" + "    public static <"));
++            fr.write(types(i));
++            fr.write("> Tuple" + i + "<");
++            fr.write(types(i));
++            fr.write(">");
++            if (i > 7) {
++                fr.write("\n   ");
++            }
++            fr.write(" of(");
++            fr.write(factoryParams(i));
++            fr.write(") {\n" + "        return new Tuple" + i + "<>(");
++            boolean isFirst = true;
++            for (int l = 1; l <= i; l++) {
++                if (isFirst) {
++                    isFirst = false;
+                 } else {
+-                    fr.write(" + \",\" + stringify(_");
++                    fr.write(", ");
+                 }
++                fr.write(intToChar(l).toLowerCase());
+             }
+-            fr.write(String.valueOf(l));
+-            fr.write(")");
+-        }
+-        fr.write(" + \")\";\n" +
+-                 "    }\n" +
+-                 "\n" +
+-                 "    @Override\n" +
+-                 "    public boolean equals(Object other) {\n" +
+-                 "        // Cheapest operation first...\n" +
+-                 "        if (this == other) { return true; }\n" +
+-                 "        if (!(other instanceof Tuple" + i + ")) { return false; }\n" +
+-                 "        // Details...\n" +
+-                 "        @SuppressWarnings(\"rawtypes\") final Tuple" + i + " that = (Tuple" + i + ") other;\n" +
+-                 "\n" +
+-                 "        return ");
+-        isFirst = true;
+-        for (int l = 1; l <= i; l++) {
+-            if (isFirst) {
+-                isFirst = false;
+-            } else {
+-                fr.write(" &&\n" +
+-                         "               ");
++            fr.write(");\n" + ("    }\n" + "\n"));
++            for (int l = 1; l <= i; l++) {
++                fr.write("    /** Returns the " + ordinal(l) + " field */\n" + "    public ");
++                fr.write(intToChar(l));
++                fr.write(" _");
++                fr.write(String.valueOf(l));
++                fr.write("() { return _");
++                fr.write(String.valueOf(l));
++                fr.write("; }\n");
+             }
+-            fr.write("Objects.equals(this._" + l + ", that._" + l + "())");
+-        }
+-        fr.write(";\n" +
+-                 "    }\n" +
+-                 "\n" +
+-                 "    @Override\n" +
+-                 "    public int hashCode() {\n" +
+-                 "        // First 2 fields match Tuple2 which implements java.util.Map.Entry as part of the map\n" +
+-                 "        // contract and therefore must match java.util.HashMap.Node.hashCode().\n" +
+-                 "        int ret = 0;\n" +
+-                 "        if (_1 != null) { ret = _1.hashCode(); }\n" +
+-                 "        if (_2 != null) { ret = ret ^ _2.hashCode(); }\n");
+-        for (int l = 3; l <= i; l++) {
+-            fr.write("        if (_" + l + " != null) { ret = ret + _" + l + ".hashCode(); }\n");
++            fr.write("\n" + ("    @Override\n" + "    public String toString() {\n" + "        return getClass().getSimpleName() + \"(\" +\n" + "               stringify(_"));
++            isFirst = true;
++            for (int l = 1; l <= i; l++) {
++                if (isFirst) {
++                    isFirst = false;
++                } else {
++                    if (l % 3 == 0) {
++                        fr.write(" + \",\" +\n" + "               stringify(_");
++                    } else {
++                        fr.write(" + \",\" + stringify(_");
++                    }
++                }
++                fr.write(String.valueOf(l));
++                fr.write(")");
++            }
++            fr.write(" + \")\";\n" + ("    }\n" + "\n" + "    @Override\n" + "    public boolean equals(Object other) {\n" + "        // Cheapest operation first...\n" + "        if (this == other) { return true; }\n" + "        if (!(other instanceof Tuple") + i + ")) { return false; }\n" + "        // Details...\n" + "        @SuppressWarnings(\"rawtypes\") final Tuple" + i + " that = (Tuple" + i + ") other;\n" + "\n" + "        return ");
++            isFirst = true;
++            for (int l = 1; l <= i; l++) {
++                if (isFirst) {
++                    isFirst = false;
++                } else {
++                    fr.write(" &&\n" + "               ");
++                }
++                fr.write("Objects.equals(this._" + l + ", that._" + l + "())");
++            }
++            fr.write(";\n" + ("    }\n" + "\n" + "    @Override\n" + "    public int hashCode() {\n" + "        // First 2 fields match Tuple2 which implements java.util.Map.Entry as part of the map\n" + "        // contract and therefore must match java.util.HashMap.Node.hashCode().\n" + "        int ret = 0;\n" + "        if (_1 != null) { ret = _1.hashCode(); }\n" + "        if (_2 != null) { ret = ret ^ _2.hashCode(); }\n"));
++            for (int l = 3; l <= i; l++) {
++                fr.write("        if (_" + l + " != null) { ret = ret + _" + l + ".hashCode(); }\n");
++            }
++            fr.write("        return ret;\n" + ("    }\n" + "}"));
++            fr.flush();
++            fr.close();
+         }
+-        fr.write("        return ret;\n" +
+-                 "    }\n" +
+-                 "}");
+-        fr.flush();
+-        fr.close();
+     }
+ 
+     static String tupleTestParams(int i) {
+@@ -320,73 +253,38 @@ public class TupleGenerator {
+     }
+ 
+     static void genTupleTest(int i) throws IOException {
+-        FileWriter fr = new FileWriter("../src/test/java/org/organicdesign/fp/tuple/Tuple" + i +
+-                                       "Test.java");
+-        fr.write(copyright() +
+-                 "package org.organicdesign.fp.tuple;\n" +
+-                 "\n" +
+-                 "import org.junit.Test;\n" +
+-                 "\n" +
+-                 "import static org.junit.Assert.assertEquals;\n" +
+-                 "import static org.organicdesign.fp.TestUtilities.serializeDeserialize;" +
+-                 "import static org.organicdesign.testUtils.EqualsContract.equalsDistinctHashCode;\n" +
+-                 "import static org.organicdesign.testUtils.EqualsContract.equalsSameHashCode;\n" +
+-                 generatedWarning() +
+-                 "public class Tuple" + i + "Test {\n" +
+-                 "    @Test public void constructionAndAccess() {\n" +
+-                 "        Tuple" + i + "<");
+-        List<String> strs = new ArrayList<String>(i);
+-        for (int j = 1; j <= i; j++) {
+-            strs.add("String");
+-        }
+-        String types = commas(strs);
+-        fr.write(types);
+-        fr.write("> a = Tuple" + i + ".of(" + tupleTestParams(i) + ");\n" +
+-                 "\n");
+-        fr.write("        Tuple" + i + "<");
+-        fr.write(types);
+-        fr.write("> ser = serializeDeserialize(a);\n" +
+-                 "\n");
+-        for (int j = 1; j <= i; j++) {
+-            fr.write("        assertEquals(\"" + ordinal(j) + "\", a._" + j + "());\n");
+-        }
+-        fr.write("\n");
+-        for (int j = 1; j <= i; j++) {
+-            fr.write("        assertEquals(\"" + ordinal(j) + "\", ser._" + j + "());\n");
+-        }
+-        for (int j = 1; j <= i; j++) {
+-            fr.write("\n" +
+-                     "        equalsDistinctHashCode(a, ser,\n" +
+-                     "                               Tuple" + i + ".of(" + tupleTestParams(i) + "),\n" +
+-                     "                               Tuple" + i + ".of(" + tupleTestParamsReplace(i, j, "wrong") + "));\n" +
+-                     "\n");
+-        }
+-        fr.write("        equalsDistinctHashCode(Tuple" + i + ".of(" + tupleTestParamsEvenNull(i) + "),\n" +
+-                 "                               serializeDeserialize(Tuple" + i + ".of(" + tupleTestParamsEvenNull(i) + ")),\n" +
+-                 "                               Tuple" + i + ".of(" + tupleTestParamsEvenNull(i) + "),\n" +
+-                 "                               Tuple" + i + ".of(" + tupleTestParamsEvenNull(i-1) + ",\"wrong\"));\n" +
+-                 "\n" +
+-                 "        equalsDistinctHashCode(Tuple" + i + ".of(" + tupleTestParamsOddNull(i) + "),\n" +
+-                 "                               serializeDeserialize(Tuple" + i + ".of(" + tupleTestParamsOddNull(i) + ")),\n" +
+-                 "                               Tuple" + i + ".of(" + tupleTestParamsOddNull(i) + "),\n" +
+-                 "                               Tuple" + i + ".of(" + tupleTestParamsOddNull(i-1) + ",\"wrong\"));\n" +
+-                 "\n" +
+-                 "        equalsSameHashCode(a, ser,\n" +
+-                 "                           Tuple" + i + ".of(" + tupleTestParams(i) + "),\n" +
+-                 "                           Tuple" + i + ".of(");
+-        // Switch order of first 2 params for same hashcode.
+-        fr.write("\"" + ordinal(2) + "\",\"" + ordinal(1) + "\"");
+-        for (int j = 3; j <= i; j++) {
+-            fr.write(",\"" + ordinal(j) + "\"");
++        try (FileWriter fr = new FileWriter("../src/test/java/org/organicdesign/fp/tuple/Tuple" + i + "Test.java")) {
++            fr.write(copyright() + "package org.organicdesign.fp.tuple;\n" + "\n" + "import org.junit.Test;\n" + "\n" + "import static org.junit.Assert.assertEquals;\n" + "import static org.organicdesign.fp.TestUtilities.serializeDeserialize;" + "import static org.organicdesign.testUtils.EqualsContract.equalsDistinctHashCode;\n" + "import static org.organicdesign.testUtils.EqualsContract.equalsSameHashCode;\n" + generatedWarning() + "public class Tuple" + i + "Test {\n" + "    @Test public void constructionAndAccess() {\n" + "        Tuple" + i + "<");
++            List<String> strs = new ArrayList<String>(i);
++            for (int j = 1; j <= i; j++) {
++                strs.add("String");
++            }
++            String types = commas(strs);
++            fr.write(types);
++            fr.write("> a = Tuple" + i + ".of(" + tupleTestParams(i) + ");\n" + "\n");
++            fr.write("        Tuple" + i + "<");
++            fr.write(types);
++            fr.write("> ser = serializeDeserialize(a);\n" + "\n");
++            for (int j = 1; j <= i; j++) {
++                fr.write("        assertEquals(\"" + ordinal(j) + "\", a._" + j + "());\n");
++            }
++            fr.write("\n");
++            for (int j = 1; j <= i; j++) {
++                fr.write("        assertEquals(\"" + ordinal(j) + "\", ser._" + j + "());\n");
++            }
++            for (int j = 1; j <= i; j++) {
++                fr.write("\n" + ("        equalsDistinctHashCode(a, ser,\n" + "                               Tuple") + i + ".of(" + tupleTestParams(i) + "),\n" + "                               Tuple" + i + ".of(" + tupleTestParamsReplace(i, j, "wrong") + "));\n" + "\n");
++            }
++            fr.write("        equalsDistinctHashCode(Tuple" + i + ".of(" + tupleTestParamsEvenNull(i) + "),\n" + "                               serializeDeserialize(Tuple" + i + ".of(" + tupleTestParamsEvenNull(i) + ")),\n" + "                               Tuple" + i + ".of(" + tupleTestParamsEvenNull(i) + "),\n" + "                               Tuple" + i + ".of(" + tupleTestParamsEvenNull(i - 1) + ",\"wrong\"));\n" + "\n" + "        equalsDistinctHashCode(Tuple" + i + ".of(" + tupleTestParamsOddNull(i) + "),\n" + "                               serializeDeserialize(Tuple" + i + ".of(" + tupleTestParamsOddNull(i) + ")),\n" + "                               Tuple" + i + ".of(" + tupleTestParamsOddNull(i) + "),\n" + "                               Tuple" + i + ".of(" + tupleTestParamsOddNull(i - 1) + ",\"wrong\"));\n" + "\n" + "        equalsSameHashCode(a, ser,\n" + "                           Tuple" + i + ".of(" + tupleTestParams(i) + "),\n" + "                           Tuple" + i + ".of(");
++            // Switch order of first 2 params for same hashcode.
++            fr.write("\"" + ordinal(2) + "\",\"" + ordinal(1) + "\"");
++            for (int j = 3; j <= i; j++) {
++                fr.write(",\"" + ordinal(j) + "\"");
++            }
++            fr.write("));\n" + ("\n" + "        assertEquals(\"Tuple") + i + "(" + tupleTestParams(i).replace("\"", "\\\"") + ")\", a.toString());\n" + "        assertEquals(\"Tuple" + i + "(" + tupleTestParams(i).replace("\"", "\\\"") + ")\", ser.toString());\n" + "    }\n" + "}\n");
++            fr.flush();
++            fr.close();
+         }
+-        fr.write("));\n" +
+-                 "\n" +
+-                 "        assertEquals(\"Tuple" + i + "(" + tupleTestParams(i).replace("\"", "\\\"") + ")\", a.toString());\n" +
+-                 "        assertEquals(\"Tuple" + i + "(" + tupleTestParams(i).replace("\"", "\\\"") + ")\", ser.toString());\n" +
+-                 "    }\n" +
+-                 "}\n");
+-        fr.flush();
+-        fr.close();
+     }
+ 
+     public static void main(String... args) throws IOException {

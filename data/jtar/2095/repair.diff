@@ -1,0 +1,129 @@
+diff --git a/src/main/java/org/kamranzafar/jtar/TarOutputStream.java b/src/main/java/org/kamranzafar/jtar/TarOutputStream.java
+index e483d40..63054a6 100755
+--- a/src/main/java/org/kamranzafar/jtar/TarOutputStream.java
++++ b/src/main/java/org/kamranzafar/jtar/TarOutputStream.java
+@@ -51,13 +51,14 @@ public class TarOutputStream extends OutputStream {
+ 	 * Opens a file for writing. 
+ 	 */
+ 	public TarOutputStream(final File fout, final boolean append) throws IOException {
+-		@SuppressWarnings("resource")
+-		RandomAccessFile raf = new RandomAccessFile(fout, "rw");
+-		final long fileSize = fout.length();
+-		if (append && fileSize > TarConstants.EOF_BLOCK) {
+-			raf.seek(fileSize - TarConstants.EOF_BLOCK);
+-		}
+-		out = new BufferedOutputStream(new FileOutputStream(raf.getFD()));
++        try (@SuppressWarnings("resource")
++        RandomAccessFile raf = new RandomAccessFile(fout, "rw")) {
++            final long fileSize = fout.length();
++            if (append && fileSize > TarConstants.EOF_BLOCK) {
++                raf.seek(fileSize - TarConstants.EOF_BLOCK);
++            }
++            out = new BufferedOutputStream(new FileOutputStream(raf.getFD()));
++        }
+ 	}
+ 
+     /**
+diff --git a/src/test/java/org/kamranzafar/jtar/JTarTest.java b/src/test/java/org/kamranzafar/jtar/JTarTest.java
+index 042550c..3433055 100755
+--- a/src/test/java/org/kamranzafar/jtar/JTarTest.java
++++ b/src/test/java/org/kamranzafar/jtar/JTarTest.java
+@@ -150,23 +150,22 @@ public class JTarTest {
+ 		// All of the files in the tartest.tar file are smaller than DATA_BLOCK
+ 		assertEquals(TarConstants.HEADER_BLOCK * 3 + TarConstants.DATA_BLOCK * 2, tis.getCurrentOffset());
+ 		tis.close();
+-		
+-		RandomAccessFile rif = new RandomAccessFile(zf, "r");
+-		rif.seek(TarConstants.HEADER_BLOCK * 3 + TarConstants.DATA_BLOCK * 2);
+-		byte[] data = new byte[(int)entry.getSize()];
+-		rif.read(data);
+-		assertEquals("gTzyuQjfhrnyX9cTBSy", new String(data, "UTF-8"));
+-		rif.close();
++		try (RandomAccessFile rif = new RandomAccessFile(zf, "r")) {
++			rif.seek(TarConstants.HEADER_BLOCK * 3 + TarConstants.DATA_BLOCK * 2);
++			byte[] data = new byte[((int) (entry.getSize()))];
++			rif.read(data);
++			assertEquals("gTzyuQjfhrnyX9cTBSy", new String(data, "UTF-8"));
++			rif.close();
++		}
+ 	}
+ 	
+ 	private void untar(TarInputStream tis, String destFolder) throws IOException {
+-		BufferedOutputStream dest = null;
+ 
+ 		TarEntry entry;
+ 		while ((entry = tis.getNextEntry()) != null) {
+ 			System.out.println("Extracting: " + entry.getName());
+ 			int count;
+-			byte data[] = new byte[BUFFER];
++			byte data = new byte[BUFFER];
+ 
+ 			if (entry.isDirectory()) {
+ 				new File(destFolder + "/" + entry.getName()).mkdirs();
+@@ -179,21 +178,19 @@ public class JTarTest {
+ 			}
+ 
+ 			FileOutputStream fos = new FileOutputStream(destFolder + "/" + entry.getName());
+-			dest = new BufferedOutputStream(fos);
+-
+-			while ((count = tis.read(data)) != -1) {
+-				dest.write(data, 0, count);
++			try (BufferedOutputStream dest = new BufferedOutputStream(fos)) {
++				while ((count = tis.read(data)) != -1) {
++					dest.write(data, 0, count);
++				} 
++				dest.flush();
++				dest.close();
+ 			}
+-
+-			dest.flush();
+-			dest.close();
+ 		}
+ 	}
+ 
+ 	public void tarFolder(String parent, String path, TarOutputStream out) throws IOException {
+-		BufferedInputStream origin = null;
+ 		File f = new File(path);
+-		String files[] = f.list();
++		String files = f.list();
+ 
+ 		// is file
+ 		if (files == null) {
+@@ -206,7 +203,7 @@ public class JTarTest {
+ 		for (int i = 0; i < files.length; i++) {
+ 			System.out.println("Adding: " + files[i]);
+ 			File fe = f;
+-			byte data[] = new byte[BUFFER];
++			byte data = new byte[BUFFER];
+ 
+ 			if (f.isDirectory()) {
+ 				fe = new File(f, files[i]);
+@@ -224,19 +221,16 @@ public class JTarTest {
+ 			}
+ 
+ 			FileInputStream fi = new FileInputStream(fe);
+-			origin = new BufferedInputStream(fi);
+-			TarEntry entry = new TarEntry(fe, parent + files[i]);
+-			out.putNextEntry(entry);
+-
+-			int count;
+-
+-			while ((count = origin.read(data)) != -1) {
+-				out.write(data, 0, count);
++			try (BufferedInputStream origin = new BufferedInputStream(fi)) {
++				TarEntry entry = new TarEntry(fe, parent + files[i]);
++				out.putNextEntry(entry);
++				int count;
++				while ((count = origin.read(data)) != -1) {
++					out.write(data, 0, count);
++				} 
++				out.flush();
++				origin.close();
+ 			}
+-
+-			out.flush();
+-
+-			origin.close();
+ 		}
+ 	}
+ 

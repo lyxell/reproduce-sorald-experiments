@@ -1,0 +1,49 @@
+diff --git a/openhtmltopdf-examples/src/test/java/com/openhtmltopdf/freemarker/FreeMarkerGeneratorTest.java b/openhtmltopdf-examples/src/test/java/com/openhtmltopdf/freemarker/FreeMarkerGeneratorTest.java
+index 71880fc5..e87ca6db 100644
+--- a/openhtmltopdf-examples/src/test/java/com/openhtmltopdf/freemarker/FreeMarkerGeneratorTest.java
++++ b/openhtmltopdf-examples/src/test/java/com/openhtmltopdf/freemarker/FreeMarkerGeneratorTest.java
+@@ -1,4 +1,8 @@
+ package com.openhtmltopdf.freemarker;
++import java.io.IOException;
++import java.io.FileOutputStream;
++import java.io.File;
++import Charsets.UTF_8;
+ 
+ import com.openhtmltopdf.freemarker.FreeMarkerGenerator.FreemarkerRootObject;
+ import com.openhtmltopdf.util.XRLog;
+@@ -20,12 +24,13 @@ public class FreeMarkerGeneratorTest {
+ 		FreemarkerRootObject object = new FreemarkerRootObject();
+ 		String html = freeMarkerGenerator.generateHTML("featuredocumentation.ftl", Locale.GERMAN, object);
+ 		byte[] pdf = freeMarkerGenerator.generatePDF(html);
+-		FileOutputStream fileOutputStream = new FileOutputStream(new File(targetDir, "featuredocumentation.html"));
+-		fileOutputStream.write(html.getBytes(Charsets.UTF_8));
+-		fileOutputStream.close();
+-		fileOutputStream = new FileOutputStream(new File(targetDir, "featuredocumentation.pdf"));
+-		fileOutputStream.write(pdf);
+-		fileOutputStream.close();
++		try (FileOutputStream fileOutputStream = new FileOutputStream(new File(targetDir, "featuredocumentation.html"))) {
++			fileOutputStream.write(html.getBytes(UTF_8));
++			fileOutputStream.close();
++			fileOutputStream = new FileOutputStream(new File(targetDir, "featuredocumentation.pdf"));
++			fileOutputStream.write(pdf);
++			fileOutputStream.close();
++		}
+ 	}
+ 
+ 	@Test
+@@ -42,9 +47,10 @@ public class FreeMarkerGeneratorTest {
+ 		File htmlFile = new File(targetDir, "many_pages.html");
+ 		freeMarkerGenerator.generateHTMLToFile("many_pages.ftl", Locale.GERMAN, object, htmlFile);
+ 		byte[] pdf = freeMarkerGenerator.generatePDF(htmlFile);
+-		FileOutputStream fileOutputStream = new FileOutputStream(new File(targetDir, "many_pages.pdf"));
+-		fileOutputStream.write(pdf);
+-		fileOutputStream.close();
+-		XRLog.setLoggingEnabled(true);
++		try (FileOutputStream fileOutputStream = new FileOutputStream(new File(targetDir, "many_pages.pdf"))) {
++			fileOutputStream.write(pdf);
++			fileOutputStream.close();
++			XRLog.setLoggingEnabled(true);
++		}
+ 	}
+ }
+\ No newline at end of file

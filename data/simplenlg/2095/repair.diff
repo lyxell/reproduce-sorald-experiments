@@ -1,0 +1,249 @@
+diff --git a/src/main/java/simplenlg/lexicon/util/NIHLexiconXMLDumpUtil.java b/src/main/java/simplenlg/lexicon/util/NIHLexiconXMLDumpUtil.java
+index 5ed869a..4093eab 100644
+--- a/src/main/java/simplenlg/lexicon/util/NIHLexiconXMLDumpUtil.java
++++ b/src/main/java/simplenlg/lexicon/util/NIHLexiconXMLDumpUtil.java
+@@ -84,56 +84,68 @@ public class NIHLexiconXMLDumpUtil {
+ 			                                                       && !WORDLIST_FILENAME.isEmpty()) && (
+ 					   null != XML_FILENAME && !XML_FILENAME.isEmpty()) && dbDriverAvaliable) {
+ 				lex = new NIHDBLexicon(DB_FILENAME);
+-
+-				try {
+-					LineNumberReader wordListFile = new LineNumberReader(new FileReader(WORDLIST_FILENAME));
+-					FileWriter xmlFile = new FileWriter(XML_FILENAME);
++				try (FileWriter xmlFile = new FileWriter(XML_FILENAME)) {
+ 					xmlFile.write(String.format("<lexicon>%n"));
+ 					String line = wordListFile.readLine();
+-					while(line != null) {
++					while (line != null) {
+ 						String[] cols = line.split(",");
+ 						String base = cols[0];
+ 						String cat = cols[1];
+ 						WordElement word = null;
+-						if(cat.equalsIgnoreCase("noun"))
++						if (cat.equalsIgnoreCase("noun"))
+ 							word = lex.getWord(base, LexicalCategory.NOUN);
+-						else if(cat.equalsIgnoreCase("verb"))
+-							word = lex.getWord(base, LexicalCategory.VERB);
+-						else if(cat.equalsIgnoreCase("adv"))
+-							word = lex.getWord(base, LexicalCategory.ADVERB);
+-						else if(cat.equalsIgnoreCase("adj"))
+-							word = lex.getWord(base, LexicalCategory.ADJECTIVE);
+-						else if(cat.equalsIgnoreCase("det"))
+-							word = lex.getWord(base, LexicalCategory.DETERMINER);
+-						else if(cat.equalsIgnoreCase("prep"))
+-							word = lex.getWord(base, LexicalCategory.PREPOSITION);
+-						else if(cat.equalsIgnoreCase("pron"))
+-							word = lex.getWord(base, LexicalCategory.PRONOUN);
+-						else if(cat.equalsIgnoreCase("conj"))
+-							word = lex.getWord(base, LexicalCategory.CONJUNCTION);
+-						else if(cat.equalsIgnoreCase("modal"))
+-							word = lex.getWord(base, LexicalCategory.MODAL);
+-						else if(cat.equalsIgnoreCase("interjection"))
+-							word = lex.getWord(base,
+-							                   LexicalCategory.NOUN); // Kilgarriff;s interjections are mostly nouns in the lexicon
+-
+-						if(word == null)
+-							System.out.println(
+-									"*** The following baseform and POS tag is not found: " + base + ":" + cat);
++						// Kilgarriff;s interjections are mostly nouns in the lexicon
++						else
++							if (cat.equalsIgnoreCase("verb"))
++								word = lex.getWord(base, LexicalCategory.VERB);
++							else
++								if (cat.equalsIgnoreCase("adv"))
++									word = lex.getWord(base, LexicalCategory.ADVERB);
++								else
++									if (cat.equalsIgnoreCase("adj"))
++										word = lex.getWord(base, LexicalCategory.ADJECTIVE);
++									else
++										if (cat.equalsIgnoreCase("det"))
++											word = lex.getWord(base, LexicalCategory.DETERMINER);
++										else
++											if (cat.equalsIgnoreCase("prep"))
++												word = lex.getWord(base, LexicalCategory.PREPOSITION);
++											else
++												if (cat.equalsIgnoreCase("pron"))
++													word = lex.getWord(base, LexicalCategory.PRONOUN);
++												else
++													if (cat.equalsIgnoreCase("conj"))
++														word = lex.getWord(base, LexicalCategory.CONJUNCTION);
++													else
++														if (cat.equalsIgnoreCase("modal"))
++															word = lex.getWord(base, LexicalCategory.MODAL);
++														else
++															if (cat.equalsIgnoreCase("interjection"))
++																word = lex.getWord(base, LexicalCategory.NOUN);
++
++
++
++
++
++
++
++
++
++						// Kilgarriff;s interjections are mostly nouns in the lexicon
++
++						if (word == null)
++							System.out.println("*** The following baseform and POS tag is not found: " + base + ":" + cat);
+ 						else
+ 							xmlFile.write(word.toXML());
++
+ 						line = wordListFile.readLine();
+-						;
+-					}
++					} 
+ 					xmlFile.write(String.format("</lexicon>%n"));
+ 					wordListFile.close();
+ 					xmlFile.close();
+-
+ 					lex.close();
+-
+ 					System.out.println("*** XML Lexicon Export Completed.");
+-
+-				} catch(Exception e) {
++				} catch (Exception e) {
+ 					System.err.println("*** An Error occured during the export. The Exception message is below: ");
+ 					System.err.println(e.getMessage());
+ 					System.err.println("************************");
+diff --git a/src/main/java/simplenlg/server/SimpleServer.java b/src/main/java/simplenlg/server/SimpleServer.java
+index baec02e..3fb24ae 100644
+--- a/src/main/java/simplenlg/server/SimpleServer.java
++++ b/src/main/java/simplenlg/server/SimpleServer.java
+@@ -17,6 +17,13 @@
+  * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
+  */
+ package simplenlg.server;
++import java.io.IOException;
++import java.io.FileReader;
++import java.io.File;
++import java.io.OutputStreamWriter;
++import java.io.InputStreamReader;
++import java.io.BufferedReader;
++import java.io.BufferedWriter;
+ 
+ import java.io.*;
+ import java.net.ServerSocket;
+@@ -96,20 +103,16 @@ public class SimpleServer implements Runnable {
+ 		serverSocket.setSoTimeout(0);
+ 
+ 		System.out.println("Port Number used by Server is: " + serverSocket.getLocalPort());
+-
+-		// try to read the lexicon path from lexicon.properties file
+-		try {
++		try (FileReader reader = new FileReader(new File("./src/main/resources/lexicon.properties"))) {
+ 			Properties prop = new Properties();
+-			FileReader reader = new FileReader(new File("./src/main/resources/lexicon.properties"));
+ 			prop.load(reader);
+-
+ 			String dbFile = prop.getProperty("DB_FILENAME");
+-
+-			if(null != dbFile)
++			if (null != dbFile)
+ 				lexiconPath = dbFile;
+ 			else
+ 				throw new Exception("No DB_FILENAME in lexicon.properties");
+-		} catch(Exception e) {
++
++		} catch (Exception e) {
+ 			e.printStackTrace();
+ 		}
+ 
+diff --git a/src/main/java/simplenlg/xmlrealiser/Recording.java b/src/main/java/simplenlg/xmlrealiser/Recording.java
+index fee7acc..f46e4c3 100644
+--- a/src/main/java/simplenlg/xmlrealiser/Recording.java
++++ b/src/main/java/simplenlg/xmlrealiser/Recording.java
+@@ -17,6 +17,18 @@
+  * Contributor(s): Ehud Reiter, Albert Gatt, Dave Westwater, Roman Kutlak, Margaret Mitchell, and Saad Mahamood.
+  */
+ package simplenlg.xmlrealiser;
++import javax.xml.transform.TransformerFactory;
++import javax.xml.transform.Source;
++import javax.xml.transform.TransformerException;
++import java.io.IOException;
++import javax.xml.transform.Transformer;
++import java.io.FileOutputStream;
++import java.io.File;
++import java.io.OutputStream;
++import java.io.StringReader;
++import java.io.StringWriter;
++import java.io.OutputStreamWriter;
++import javax.xml.transform.OutputKeys;
+ 
+ import java.io.*;
+ 
+@@ -147,9 +159,10 @@ public class Recording {
+ 		}
+ 
+ 		recordingOn = false;
+-		FileOutputStream os = new FileOutputStream(recordingFile);
+-		os.getChannel().truncate(0);
+-		writeRecording(record, os);
++		try (FileOutputStream os = new FileOutputStream(recordingFile)) {
++			os.getChannel().truncate(0);
++			writeRecording(record, os);
++		}
+ 	}
+ 
+ 	/**
+diff --git a/src/test/java/simplenlg/lexicon/english/MultipleLexiconTest.java b/src/test/java/simplenlg/lexicon/english/MultipleLexiconTest.java
+index dcfa6c1..ec4fa6c 100644
+--- a/src/test/java/simplenlg/lexicon/english/MultipleLexiconTest.java
++++ b/src/test/java/simplenlg/lexicon/english/MultipleLexiconTest.java
+@@ -46,16 +46,13 @@ public class MultipleLexiconTest {
+ 
+ 	@Before
+ 	public void setUp() throws Exception {
+-		try {
++		try (FileReader reader = new FileReader(new File("./src/main/resources/lexicon.properties"))) {
+ 			Properties prop = new Properties();
+-			FileReader reader = new FileReader(new File("./src/main/resources/lexicon.properties"));
+ 			prop.load(reader);
+-
+ 			String xmlFile = prop.getProperty("XML_FILENAME");
+ 			String dbFile = prop.getProperty("DB_FILENAME");
+-
+ 			this.lexicon = new MultipleLexicon(new XMLLexicon(xmlFile), new NIHDBLexicon(dbFile));
+-		} catch(Exception e) {
++		} catch (Exception e) {
+ 			e.printStackTrace();
+ 			this.lexicon = new MultipleLexicon(new XMLLexicon(XML_FILENAME), new NIHDBLexicon(DB_FILENAME));
+ 		}
+diff --git a/src/test/java/simplenlg/server/SimpleClientExample.java b/src/test/java/simplenlg/server/SimpleClientExample.java
+index 83361a3..6ba49ac 100644
+--- a/src/test/java/simplenlg/server/SimpleClientExample.java
++++ b/src/test/java/simplenlg/server/SimpleClientExample.java
+@@ -60,31 +60,24 @@ public class SimpleClientExample {
+ 	 * @return The realised {@link String} output from the {@link simplenlg.xmlrealiser.XMLRealiser}.
+ 	 */
+ 	protected String run(String serverAddress, int port) {
+-		try {
++		try (Socket client = new Socket(serverAddress, port)) {
+ 			System.out.println("Connecting to " + serverAddress + " on port " + port);
+-			Socket client = new Socket(serverAddress, port);
+ 			OutputStream outToServer = client.getOutputStream();
+ 			DataOutputStream out = new DataOutputStream(outToServer);
+-
+ 			byte[] tmp = request.getBytes("UTF-8");
+ 			out.writeInt(tmp.length);
+ 			out.write(tmp);
+-
+ 			InputStream inFromServer = client.getInputStream();
+ 			DataInputStream in = new DataInputStream(inFromServer);
+ 			int len = in.readInt();
+ 			byte[] data = new byte[len];
+ 			// read the entire message (blocks until complete)
+ 			in.readFully(data);
+-
+ 			String text = new String(data, "UTF-8");
+-
+ 			System.out.println("Realisation: " + text);
+-
+ 			client.close();
+-
+ 			return text;
+-		} catch(Exception e) {
++		} catch (Exception e) {
+ 			System.err.println(e.getMessage());
+ 			e.printStackTrace();
+ 		}

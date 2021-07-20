@@ -1,0 +1,36 @@
+diff --git a/MyPerf4J-ASM/src/test/java/MyPerf4J/dynamic/Test.java b/MyPerf4J-ASM/src/test/java/MyPerf4J/dynamic/Test.java
+index 436a232..354e60c 100644
+--- a/MyPerf4J-ASM/src/test/java/MyPerf4J/dynamic/Test.java
++++ b/MyPerf4J-ASM/src/test/java/MyPerf4J/dynamic/Test.java
+@@ -36,9 +36,10 @@ public final class Test {
+     private static void rewriteClass(byte[] toByte) throws IOException {
+         File tofile = new File("/Users/linshunkang/WorkSpace/personal/MyPerf4J/MyPerf4J-ASM/target" +
+                 "/test-classes/MyPerf4J/dynamic/DaoInvocationHandler.class");
+-        FileOutputStream fout = new FileOutputStream(tofile);
+-        fout.write(toByte);
+-        fout.close();
++        try (FileOutputStream fout = new FileOutputStream(tofile)) {
++            fout.write(toByte);
++            fout.close();
++        }
+     }
+ 
+     private static void runNewHandler() {
+diff --git a/MyPerf4J-ASM/src/test/java/MyPerf4J/test1/Test.java b/MyPerf4J-ASM/src/test/java/MyPerf4J/test1/Test.java
+index 66b844f..4158c81 100644
+--- a/MyPerf4J-ASM/src/test/java/MyPerf4J/test1/Test.java
++++ b/MyPerf4J-ASM/src/test/java/MyPerf4J/test1/Test.java
+@@ -34,9 +34,10 @@ public final class Test {
+     private static void rewriteClass(byte[] toByte) throws IOException {
+         File tofile = new File("/Users/thinker/WorkSpace/personal/MyPerf4J/MyPerf4J-ASM/target/test-classes" +
+                 "/MyPerf4J/Foo.class");
+-        FileOutputStream fout = new FileOutputStream(tofile);
+-        fout.write(toByte);
+-        fout.close();
++        try (FileOutputStream fout = new FileOutputStream(tofile)) {
++            fout.write(toByte);
++            fout.close();
++        }
+     }
+ 
+     private static void runNewFoo() {

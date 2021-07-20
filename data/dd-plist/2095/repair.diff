@@ -1,0 +1,131 @@
+diff --git a/src/main/java/com/dd/plist/NSData.java b/src/main/java/com/dd/plist/NSData.java
+index 6bad76a..f81ed98 100644
+--- a/src/main/java/com/dd/plist/NSData.java
++++ b/src/main/java/com/dd/plist/NSData.java
+@@ -69,9 +69,10 @@ public class NSData extends NSObject {
+      */
+     public NSData(File file) throws IOException {
+         this.bytes = new byte[(int) file.length()];
+-        RandomAccessFile raf = new RandomAccessFile(file, "r");
+-        raf.read(this.bytes);
+-        raf.close();
++        try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
++            raf.read(this.bytes);
++            raf.close();
++        }
+     }
+ 
+     /**
+diff --git a/src/main/java/com/dd/plist/NSString.java b/src/main/java/com/dd/plist/NSString.java
+index 37a3c42..9d54be3 100644
+--- a/src/main/java/com/dd/plist/NSString.java
++++ b/src/main/java/com/dd/plist/NSString.java
+@@ -37,8 +37,11 @@ import java.util.Scanner;
+  * @author Daniel Dreibrodt
+  * @see <a href="https://developer.apple.com/reference/foundation/nsstring" target="_blank">Foundation NSString documentation</a>
+  */
+-public class NSString extends NSObject implements Comparable<Object> {
+-    private static CharsetEncoder asciiEncoder, utf16beEncoder, utf8Encoder;
++public class NSString extends NSObject implements Comparable<Object> {private static CharsetEncoder asciiEncoder;
++
++    private static CharsetEncoder utf16beEncoder;
++
++    private static CharsetEncoder utf8Encoder;
+ 
+     private String content;
+ 
+@@ -131,12 +134,12 @@ public class NSString extends NSObject implements Comparable<Object> {
+      *         a valid decimal representation of a floating-point number, 0 is returned.
+      */
+     public double doubleValue() {
+-        Scanner s = new Scanner(this.content.trim()).useLocale(Locale.ROOT).useDelimiter("[^0-9.+-]+");
+-        if(s.hasNextDouble()) {
+-            return s.nextDouble();
+-        }
+-        else {
+-            return 0d;
++        try (Scanner s = new Scanner(this.content.trim()).useLocale(Locale.ROOT).useDelimiter("[^0-9.+-]+")) {
++            if (s.hasNextDouble()) {
++                return s.nextDouble();
++            } else {
++                return 0.0;
++            }
+         }
+     }
+ 
+@@ -163,8 +166,9 @@ public class NSString extends NSObject implements Comparable<Object> {
+      *         "FALSE1" is false
+      */
+     public boolean boolValue() {
+-        Scanner s = new Scanner(this.content.trim()).useLocale(Locale.ROOT);
+-        return s.hasNext("([+-]?[0]*)?[YyTt1-9].*");
++        try (Scanner s = new Scanner(this.content.trim()).useLocale(Locale.ROOT)) {
++            return s.hasNext("([+-]?[0]*)?[YyTt1-9].*");
++        }
+     }
+ 
+     /**
+diff --git a/src/test/java/com/dd/plist/test/IssueTest.java b/src/test/java/com/dd/plist/test/IssueTest.java
+index eb8e586..242ea90 100644
+--- a/src/test/java/com/dd/plist/test/IssueTest.java
++++ b/src/test/java/com/dd/plist/test/IssueTest.java
+@@ -1,4 +1,10 @@
+ package com.dd.plist.test;
++import java.io.ByteArrayOutputStream;
++import java.io.File;
++import java.io.OutputStream;
++import java.io.ByteArrayInputStream;
++import java.io.FileInputStream;
++import java.io.InputStream;
+ 
+ import com.dd.plist.*;
+ import org.junit.jupiter.api.Test;
+@@ -17,30 +23,25 @@ public class IssueTest  {
+     @Test
+     public void testGzipInputStream() throws Exception {
+         File plistFile = new File("test-files/test-gzipinputstream-issue.plist");
+-
+-        //Get the file input stream
+-        InputStream fileInputStream = new FileInputStream(plistFile);
+-
+-        //GZIP that file
+-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+-        OutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream);
+-
+-        byte[] buffer = new byte[1024];
+-        for (int length; (length = fileInputStream.read(buffer)) != -1; ) {
+-            gzipOutputStream.write(buffer, 0, length);
++        try (// Get the file input stream
++        InputStream fileInputStream = new FileInputStream(plistFile)) {
++            // GZIP that file
++            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
++            OutputStream gzipOutputStream = new GZIPOutputStream(byteArrayOutputStream);
++            byte[] buffer = new byte[1024];
++            for (int length; (length = fileInputStream.read(buffer)) != -1;) {
++                gzipOutputStream.write(buffer, 0, length);
++            }
++            fileInputStream.close();
++            gzipOutputStream.close();
++            // Create an GZIP input stream from the zipped byte array
++            InputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
++            InputStream gzipInputStream = new GZIPInputStream(byteArrayInputStream);
++            // Parse the property list from that stream
++            NSObject zippedObject = PropertyListParser.parse(gzipInputStream);
++            NSObject normalObject = PropertyListParser.parse(plistFile);
++            assertEquals(zippedObject, normalObject);
+         }
+-
+-        fileInputStream.close();
+-        gzipOutputStream.close();
+-
+-        //Create an GZIP input stream from the zipped byte array
+-        InputStream byteArrayInputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+-        InputStream gzipInputStream = new GZIPInputStream(byteArrayInputStream);
+-
+-        //Parse the property list from that stream
+-        NSObject zippedObject = PropertyListParser.parse(gzipInputStream);
+-        NSObject normalObject = PropertyListParser.parse(plistFile);
+-        assertEquals(zippedObject, normalObject);
+     }
+ 
+     @Test

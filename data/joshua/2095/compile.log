@@ -1,0 +1,45 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< org.apache.joshua:joshua >----------------------
+[INFO] Building Apache Joshua Machine Translation Toolkit 6.3-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-remote-resources-plugin:1.5:process (process-resource-bundles) @ joshua ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.7:resources (default-resources) @ joshua ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.5.1:compile (default-compile) @ joshua ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 259 source files to /home/user/projects/joshua/target/classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/joshua/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java:[232,54] '{' expected
+[ERROR] /home/user/projects/joshua/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java:[233,9] 'else' without 'if'
+[ERROR] /home/user/projects/joshua/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java:[319,7] 'catch' without 'try'
+[ERROR] /home/user/projects/joshua/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java:[227,5] 'try' without 'catch', 'finally' or resource declarations
+[ERROR] /home/user/projects/joshua/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java:[324,2] reached end of file while parsing
+[INFO] 5 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.606 s
+[INFO] Finished at: 2021-07-20T13:51:01Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.5.1:compile (default-compile) on project joshua: Compilation failure: Compilation failure: 
+[ERROR] /home/user/projects/joshua/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java:[232,54] '{' expected
+[ERROR] /home/user/projects/joshua/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java:[233,9] 'else' without 'if'
+[ERROR] /home/user/projects/joshua/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java:[319,7] 'catch' without 'try'
+[ERROR] /home/user/projects/joshua/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java:[227,5] 'try' without 'catch', 'finally' or resource declarations
+[ERROR] /home/user/projects/joshua/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java:[324,2] reached end of file while parsing
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

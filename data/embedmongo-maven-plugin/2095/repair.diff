@@ -1,0 +1,36 @@
+diff --git a/src/test/java/com/github/joelittlejohn/embedmongo/NetworkUtilsTest.java b/src/test/java/com/github/joelittlejohn/embedmongo/NetworkUtilsTest.java
+index 02ce5fc..7b8e456 100644
+--- a/src/test/java/com/github/joelittlejohn/embedmongo/NetworkUtilsTest.java
++++ b/src/test/java/com/github/joelittlejohn/embedmongo/NetworkUtilsTest.java
+@@ -47,8 +47,7 @@ public class NetworkUtilsTest {
+     public void testAllocateRandomPort() throws Exception {
+         final int testAllocationCount = 10000;
+         final CountDownLatch allocationsCounter = new CountDownLatch(testAllocationCount);
+-
+-        final Runnable allocatePort = new Runnable() {
++        try (final Runnable allocatePort = new Runnable() {
+             @Override
+             public void run() {
+                 int port = -1;
+@@ -62,14 +61,14 @@ public class NetworkUtilsTest {
+                     allocationsCounter.countDown();
+                 }
+             }
+-        };
+-
+-        final Random randomGenerator = new Random();
+-        for (int i = 0; i < testAllocationCount; i++) {
+-            // schedule execution a little to in the future to simulate less predictable environment
+-            testPooledExecutor.schedule(allocatePort, randomGenerator.nextInt(10), TimeUnit.MILLISECONDS);
++        }) {
++            final Random randomGenerator = new Random();
++            for (int i = 0; i < testAllocationCount; i++) {
++                // schedule execution a little to in the future to simulate less predictable environment
++                testPooledExecutor.schedule(allocatePort, randomGenerator.nextInt(10), TimeUnit.MILLISECONDS);
++            }
++            allocationsCounter.await(10, TimeUnit.SECONDS);
+         }
+-        allocationsCounter.await(10, TimeUnit.SECONDS);
+     }
+ 
+ }

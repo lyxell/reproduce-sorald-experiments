@@ -1,0 +1,26 @@
+diff --git a/src/main/java/me/botsko/prism/database/mysql/MySqlPrismDataSource.java b/src/main/java/me/botsko/prism/database/mysql/MySqlPrismDataSource.java
+index 557e9e64..be02c010 100644
+--- a/src/main/java/me/botsko/prism/database/mysql/MySqlPrismDataSource.java
++++ b/src/main/java/me/botsko/prism/database/mysql/MySqlPrismDataSource.java
+@@ -1,4 +1,5 @@
+ package me.botsko.prism.database.mysql;
++import static me.botsko.prism.database.sql.SqlPrismDataSource.database;
+ 
+ import com.zaxxer.hikari.HikariConfig;
+ import com.zaxxer.hikari.HikariDataSource;
+@@ -109,13 +110,11 @@ public class MySqlPrismDataSource extends SqlPrismDataSource {
+                     prop.setProperty("dataSource." + name, val);
+                 }
+             }
+-            try {
++            try (OutputStream out = new FileOutputStream(propFile)) {
+                 if (!propFile.getParentFile().exists() && !propFile.getParentFile().mkdirs()) {
+                     Prism.log("Prism Directory couldn't be created");
+                 }
+-                OutputStream out = new FileOutputStream(propFile);
+-                prop.store(out, "Prism Hikari Datasource Properties for"
+-                        + " advanced database Configuration");
++                prop.store(out, "Prism Hikari Datasource Properties for" + " advanced database Configuration");
+                 Prism.log("Database Configuration saved to - " + propFile.getPath());
+             } catch (IOException e) {
+                 Prism.log("Could not save Hikari.properties - " + e.getMessage());

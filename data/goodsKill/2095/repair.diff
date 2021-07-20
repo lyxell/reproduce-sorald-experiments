@@ -1,0 +1,48 @@
+diff --git a/goodsKill-spring-boot-provider/goodsKill-service/src/main/java/org/seckill/service/impl/SeckillServiceImpl.java b/goodsKill-spring-boot-provider/goodsKill-service/src/main/java/org/seckill/service/impl/SeckillServiceImpl.java
+index 80c6040..d4cf5d2 100644
+--- a/goodsKill-spring-boot-provider/goodsKill-service/src/main/java/org/seckill/service/impl/SeckillServiceImpl.java
++++ b/goodsKill-spring-boot-provider/goodsKill-service/src/main/java/org/seckill/service/impl/SeckillServiceImpl.java
+@@ -1,4 +1,5 @@
+ package org.seckill.service.impl;
++import org.seckill.api.enums.SeckillSolutionEnum;
+ 
+ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+@@ -50,8 +51,6 @@ import java.util.List;
+ import java.util.concurrent.ThreadPoolExecutor;
+ import java.util.concurrent.TimeUnit;
+ 
+-import static org.seckill.api.enums.SeckillSolutionEnum.REDIS_MONGO_REACTIVE;
+-
+ /**
+  * <p>
+  * 秒杀库存表 服务实现类
+@@ -259,17 +258,18 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
+     @Override
+     public SeckillResponseDto getQrcode(String fileName) throws IOException {
+         SeckillResponseDto seckillResponseDto = new SeckillResponseDto();
+-        FileInputStream inputStream = new FileInputStream(new File(qrcodeImagePath + "/" + fileName + ".png"));
+-        int b;
+-        // 二维码一般不超过10KB
+-        byte[] data = new byte[1024*10];
+-        int i = 0;
+-        while ((b = inputStream.read()) != -1) {
+-            data[i] = (byte) b;
+-            i++;
++        try (FileInputStream inputStream = new FileInputStream(new File(qrcodeImagePath + "/" + fileName + ".png"))) {
++            int b;
++            // 二维码一般不超过10KB
++            byte[] data = new byte[1024 * 10];
++            int i = 0;
++            while ((b = inputStream.read()) != -1) {
++                data[i] = ((byte) (b));
++                i++;
++            } 
++            seckillResponseDto.setData(data);
++            return seckillResponseDto;
+         }
+-        seckillResponseDto.setData(data);
+-        return seckillResponseDto;
+     }
+ 
+     @Override

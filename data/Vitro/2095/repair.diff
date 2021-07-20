@@ -1,0 +1,503 @@
+diff --git a/api/src/main/java/edu/cornell/mannlib/semservices/util/SKOSUtils.java b/api/src/main/java/edu/cornell/mannlib/semservices/util/SKOSUtils.java
+index 028b59fed..eeb2eadf2 100644
+--- a/api/src/main/java/edu/cornell/mannlib/semservices/util/SKOSUtils.java
++++ b/api/src/main/java/edu/cornell/mannlib/semservices/util/SKOSUtils.java
+@@ -44,23 +44,17 @@ public class SKOSUtils {
+ 		log.debug("loading concept uri " + conceptUriString);
+ 
+ 		String results = null;
+-		try {
+-
++		try (BufferedReader in = new BufferedReader(new InputStreamReader(conceptURL.openStream()))) {
+ 			StringWriter sw = new StringWriter();
+-
+-			BufferedReader in = new BufferedReader(new InputStreamReader(
+-					conceptURL.openStream()));
+ 			String inputLine;
+ 			while ((inputLine = in.readLine()) != null) {
+ 				sw.write(inputLine);
+-			}
++			} 
+ 			in.close();
+-
+ 			results = sw.toString();
+ 			log.debug(results);
+ 		} catch (Exception ex) {
+-			log.error("Error occurred in getting concept from the URL "
+-					+ conceptUriString, ex);
++			log.error("Error occurred in getting concept from the URL " + conceptUriString, ex);
+ 			return null;
+ 		}
+ 		return results;
+diff --git a/api/src/main/java/edu/cornell/mannlib/vedit/tags/DynamicFieldsTag.java b/api/src/main/java/edu/cornell/mannlib/vedit/tags/DynamicFieldsTag.java
+index ce1fcd34b..c9d146753 100644
+--- a/api/src/main/java/edu/cornell/mannlib/vedit/tags/DynamicFieldsTag.java
++++ b/api/src/main/java/edu/cornell/mannlib/vedit/tags/DynamicFieldsTag.java
+@@ -52,71 +52,67 @@ public class DynamicFieldsTag extends EditTag {
+     }
+ 
+     public void parseMarkup() throws JspException{
+-        try {
+-
++        try (BufferedReader in = new BufferedReader(new InputStreamReader(bis))) {
+             int preStart = -1;
+             int templateStart = -1;
+             int postStart = -1;
+-
+-            InputStream fis = new FileInputStream (pageContext.getServletContext().getRealPath("")+PATH_SEP+MARKUP_FILE_PATH+usePage);
++            InputStream fis = new FileInputStream(pageContext.getServletContext().getRealPath("") + PATH_SEP + MARKUP_FILE_PATH + usePage);
+             InputStream bis = new BufferedInputStream(fis);
+-            BufferedReader in = new BufferedReader(new InputStreamReader(bis));
+             List<String> lines = new ArrayList<String>();
+-            lines.add(""); // 0th line
++            lines.add("");// 0th line
++
+             int lineIndex = 0;
+             while (in.ready()) {
+                 ++lineIndex;
+                 String currentLine = in.readLine();
+-                if (currentLine != null && currentLine.indexOf("<!--") ==0 && currentLine.indexOf("@pre")>0  ) {
+-                   preStart = lineIndex;
+-                } else if (currentLine != null && currentLine.indexOf("<!--") ==0 && currentLine.indexOf("@template")>0 ) {
+-                   templateStart = lineIndex;
+-                } else if (currentLine != null && currentLine.indexOf("<!--") ==0 && currentLine.indexOf("@post")>0 ) {
+-                   postStart = lineIndex;
+-                }
++                if (currentLine != null && currentLine.indexOf("<!--") == 0 && currentLine.indexOf("@pre") > 0) {
++                    preStart = lineIndex;
++                } else
++                    if (currentLine != null && currentLine.indexOf("<!--") == 0 && currentLine.indexOf("@template") > 0) {
++                        templateStart = lineIndex;
++                    } else
++                        if (currentLine != null && currentLine.indexOf("<!--") == 0 && currentLine.indexOf("@post") > 0) {
++                            postStart = lineIndex;
++                        }
++
++
+                 lines.add(currentLine);
+-            }
++            } 
+             in.close();
+-
+             StringBuilder preMarkupB = new StringBuilder();
+             StringBuilder postMarkupB = new StringBuilder();
+             StringBuilder templateMarkupB = new StringBuilder();
+-
+-            if (templateStart>preStart  && preStart>0) {
+-                for (int i=preStart+1; i<templateStart; i++) {
++            if (templateStart > preStart && preStart > 0) {
++                for (int i = preStart + 1; i < templateStart; i++) {
+                     preMarkupB.append(lines.get(i)).append("\n");
+                 }
+             } else {
+-                System.out.println("DynamicFieldsTag could not find @pre markup in "+MARKUP_FILE_PATH+usePage);
++                System.out.println("DynamicFieldsTag could not find @pre markup in " + MARKUP_FILE_PATH + usePage);
+                 throw new JspException("DynamicFieldsTag could not parse @pre markup section");
+             }
+             preMarkup = preMarkupB.toString();
+-
+-
+-            if (postStart>templateStart && templateStart>0) {
+-                for (int i=templateStart+1; i<postStart; i++) {
++            if (postStart > templateStart && templateStart > 0) {
++                for (int i = templateStart + 1; i < postStart; i++) {
+                     templateMarkupB.append(lines.get(i)).append("\n");
+                 }
+             } else {
+-                System.out.println("DynamicFieldsTag could not find @template markup in "+MARKUP_FILE_PATH+usePage);
++                System.out.println("DynamicFieldsTag could not find @template markup in " + MARKUP_FILE_PATH + usePage);
+                 throw new JspException("DynamicFieldsTag could not parse @template markup section");
+             }
+             templateMarkup = templateMarkupB.toString();
+-
+-            if (postStart>0) {
+-                for (int i=postStart+1; i<lines.size(); i++) {
++            if (postStart > 0) {
++                for (int i = postStart + 1; i < lines.size(); i++) {
+                     postMarkupB.append(lines.get(i)).append("\n");
+                 }
+             } else {
+-                System.out.println("DynamicFieldsTag could not find @post markup in "+MARKUP_FILE_PATH+usePage);
++                System.out.println("DynamicFieldsTag could not find @post markup in " + MARKUP_FILE_PATH + usePage);
+                 throw new JspException("DynamicFieldsTag could not parse @post markup section");
+             }
+             postMarkup = postMarkupB.toString();
+-
+         } catch (FileNotFoundException e) {
+-            System.out.println("DynamicFieldsTag could not find markup file at "+pageContext.getServletContext().getRealPath("")+"\\"+MARKUP_FILE_PATH+usePage);
++            System.out.println("DynamicFieldsTag could not find markup file at " + pageContext.getServletContext().getRealPath("") + "\\" + MARKUP_FILE_PATH + usePage);
+         } catch (IOException ioe) {
+-            System.out.println("DynamicFieldsTag encountered IOException reading "+pageContext.getServletContext().getRealPath("")+"\\"+MARKUP_FILE_PATH+usePage);
++            System.out.println("DynamicFieldsTag encountered IOException reading " + pageContext.getServletContext().getRealPath("") + "\\" + MARKUP_FILE_PATH + usePage);
+         }
+ 
+     }
+diff --git a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/dao/jena/DisplayModelDaoJena.java b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/dao/jena/DisplayModelDaoJena.java
+index 2c9cfa27e..cc848f1ce 100644
+--- a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/dao/jena/DisplayModelDaoJena.java
++++ b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/dao/jena/DisplayModelDaoJena.java
+@@ -105,25 +105,25 @@ public class DisplayModelDaoJena implements DisplayModelDao {
+             //text of file is not yet in model
+             File oldMenuFile = new File(context.getRealPath(MENU_N3_FILE));
+             StringBuilder str = new StringBuilder(2000);
+-            BufferedReader reader = new BufferedReader(new FileReader(oldMenuFile));
+-            char[] buf = new char[1024];
+-            int numRead=0;
+-            while((numRead=reader.read(buf)) != -1){
+-                String readData = String.valueOf(buf, 0, numRead);
+-                str.append(readData);
++            try (BufferedReader reader = new BufferedReader(new FileReader(oldMenuFile))) {
++                char[] buf = new char[1024];
++                int numRead = 0;
++                while ((numRead = reader.read(buf)) != -1) {
++                    String readData = String.valueOf(buf, 0, numRead);
++                    str.append(readData);
++                } 
++                reader.close();
++                // Now write the file contents into the display model so that on
++                // future edits, the user can be presented with their last input.
++                String menuN3Content = str.toString();
++                displayModel.enterCriticalSection(true);
++                try {
++                    displayModel.add(MENU_TEXT_RES, HAS_TEXT_REPRESENTATION, menuN3Content);
++                } finally {
++                    displayModel.leaveCriticalSection();
++                }
++                return menuN3Content;
+             }
+-            reader.close();
+-
+-            //Now write the file contents into the display model so that on
+-            //future edits, the user can be presented with their last input.
+-            String menuN3Content = str.toString();
+-            displayModel.enterCriticalSection(true);
+-            try{
+-                displayModel.add(MENU_TEXT_RES, HAS_TEXT_REPRESENTATION, menuN3Content);
+-            }finally{
+-                displayModel.leaveCriticalSection();
+-            }
+-            return menuN3Content;
+         }else{
+             return text;
+         }
+@@ -133,22 +133,9 @@ public class DisplayModelDaoJena implements DisplayModelDao {
+         if(!destFile.exists()) {
+          destFile.createNewFile();
+         }
+-
+-        FileChannel source = null;
+-        FileChannel destination = null;
+-        try {
+-         source = new FileInputStream(sourceFile).getChannel();
+-         destination = new FileOutputStream(destFile).getChannel();
+-         destination.transferFrom(source, 0, source.size());
++        try (FileChannel destination = new FileOutputStream(destFile).getChannel()) {
++            destination.transferFrom(source, 0, source.size());
+         }
+-        finally {
+-         if(source != null) {
+-          source.close();
+-         }
+-         if(destination != null) {
+-          destination.close();
+-         }
+-       }
+     }
+ 
+ 
+diff --git a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/email/FreemarkerEmailFactory.java b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/email/FreemarkerEmailFactory.java
+index b7987979c..183e5b127 100644
+--- a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/email/FreemarkerEmailFactory.java
++++ b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/email/FreemarkerEmailFactory.java
+@@ -193,47 +193,24 @@ public class FreemarkerEmailFactory {
+ 		 *             If anything goes wrong.
+ 		 */
+ 		public void test(String smtpHost) throws InvalidSmtpHost {
+-			Socket socket = null;
+ 			PrintStream out = null;
+ 			Scanner in = null;
+-			try {
+-				InetAddress hostAddr = InetAddress.getByName(smtpHost);
+-				socket = new Socket(hostAddr, SMTP_PORT);
+-
+-				out = new PrintStream(socket.getOutputStream());
+-				in = new Scanner(new InputStreamReader(socket.getInputStream()));
+-
+-				int smtpCode = in.nextInt();
+-				if (smtpCode != SMTP_SUCCESS_CODE) {
+-					throw new InvalidSmtpHost(smtpHost,
+-							"host will not converse: "
+-									+ "SMTP initialization code is " + smtpCode);
+-				}
+-
+-				out.println("QUIT");
+-			} catch (UnknownHostException e) {
+-				throw new InvalidSmtpHost(smtpHost,
+-						"host name is not recognized");
+-			} catch (ConnectException e) {
+-				throw new InvalidSmtpHost(smtpHost,
+-						"refused connection on port " + SMTP_PORT);
+-			} catch (IOException e) {
+-				throw new RuntimeException("unrecognized problem: ", e);
+-			} finally {
+-				if (in != null) {
+-					in.close();
+-				}
+-				if (out != null) {
+-					out.close();
+-				}
+-				if ((socket != null) && (!socket.isClosed())) {
+-					try {
+-						socket.close();
+-					} catch (IOException e) {
+-						log.error("failed to close socket", e);
+-					}
+-				}
+-			}
++						try (Socket socket = new Socket(hostAddr, SMTP_PORT)) {
++							InetAddress hostAddr = InetAddress.getByName(smtpHost);
++							out = new PrintStream(socket.getOutputStream());
++							in = new Scanner(new InputStreamReader(socket.getInputStream()));
++							int smtpCode = in.nextInt();
++							if (smtpCode != SMTP_SUCCESS_CODE) {
++								throw new InvalidSmtpHost(smtpHost, "host will not converse: " + "SMTP initialization code is " + smtpCode);
++							}
++							out.println("QUIT");
++						} catch (UnknownHostException e) {
++							throw new InvalidSmtpHost(smtpHost, "host name is not recognized");
++						} catch (ConnectException e) {
++							throw new InvalidSmtpHost(smtpHost, "refused connection on port " + SMTP_PORT);
++						} catch (IOException e) {
++							throw new RuntimeException("unrecognized problem: ", e);
++						}
+ 		}
+ 	}
+ 
+diff --git a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/i18n/VitroResourceBundle.java b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/i18n/VitroResourceBundle.java
+index 8a8b0053c..d3d640e0f 100644
+--- a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/i18n/VitroResourceBundle.java
++++ b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/i18n/VitroResourceBundle.java
+@@ -1,6 +1,7 @@
+ /* $This file is distributed under the terms of the license in LICENSE$ */
+ 
+ package edu.cornell.mannlib.vitro.webapp.i18n;
++import java.util.ResourceBundle.Control;
+ 
+ import java.io.File;
+ import java.io.FileInputStream;
+@@ -161,19 +162,18 @@ public class VitroResourceBundle extends ResourceBundle {
+ 		}
+ 
+ 		log.debug("Loading bundle '" + bundleName + "' defaults from '" + file + "'");
+-		FileInputStream stream = new FileInputStream(file);
+-		Reader reader = new InputStreamReader(stream, "UTF-8");
+-		try {
+-			props.load(reader);
+-		} finally {
+-			reader.close();
+-		}
+-
+-		if (props.size() > 0) {
+-			return props;
++		try (FileInputStream stream = new FileInputStream(file)) {
++			Reader reader = new InputStreamReader(stream, "UTF-8");
++			try {
++				props.load(reader);
++			} finally {
++				reader.close();
++			}
++			if (props.size() > 0) {
++				return props;
++			}
++			return defProps;
+ 		}
+-
+-		return defProps;
+ 	}
+ 
+ 	private void loadReferencedFiles() throws IOException {
+diff --git a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/ontology/update/KnowledgeBaseUpdater.java b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/ontology/update/KnowledgeBaseUpdater.java
+index d2edb4dcb..0153f0f6e 100644
+--- a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/ontology/update/KnowledgeBaseUpdater.java
++++ b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/ontology/update/KnowledgeBaseUpdater.java
+@@ -172,19 +172,17 @@ public class KnowledgeBaseUpdater {
+                 continue;
+             }
+             StringBuilder fileContents = new StringBuilder();
+-            try {
+-                BufferedReader reader = new BufferedReader(new FileReader(sparqlFile));
+-                String ln;
+-                while ( (ln = reader.readLine()) != null) {
+-                    fileContents.append(ln).append('\n');
+-                }
+-            } catch (FileNotFoundException fnfe) {
+-                String logMsg = "WARNING: performSparqlConstructs() could not find " +
+-                        " SPARQL CONSTRUCT file " + sparqlFile + ". Skipping.";
+-                logger.log(logMsg);
+-                log.info(logMsg);
+-                continue;
+-            }
++			try (BufferedReader reader = new BufferedReader(new FileReader(sparqlFile))) {
++				String ln;
++				while ((ln = reader.readLine()) != null) {
++					fileContents.append(ln).append('\n');
++				} 
++			} catch (FileNotFoundException fnfe) {
++				String logMsg = "WARNING: performSparqlConstructs() could not find " + " SPARQL CONSTRUCT file " + sparqlFile + ". Skipping.";
++				logger.log(logMsg);
++				log.info(logMsg);
++				continue;
++			}
+             Model anonModel = ModelFactory.createDefaultModel();
+             try {
+                 log.debug("\t\tprocessing SPARQL construct query from file " + sparqlFile.getName());
+@@ -370,13 +368,14 @@ public class KnowledgeBaseUpdater {
+ 		if (!file.exists()) {
+ 			throw new RuntimeException("SPARQL file not found at " + filePath);
+ 		}
+-		BufferedReader reader = new BufferedReader(new FileReader(file));
+-		StringBuilder fileContents = new StringBuilder();
+-		String ln;
+-		while ((ln = reader.readLine()) != null) {
+-			fileContents.append(ln).append('\n');
++		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
++			StringBuilder fileContents = new StringBuilder();
++			String ln;
++			while ((ln = reader.readLine()) != null) {
++				fileContents.append(ln).append('\n');
++			} 
++			return fileContents.toString();
+ 		}
+-		return fileContents.toString();
+ 	}
+ 
+ 	private void assertSuccess(ServletContext servletContext) throws FileNotFoundException, IOException {
+diff --git a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/ontology/update/SimpleChangeRecord.java b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/ontology/update/SimpleChangeRecord.java
+index 6516e72ff..2da4e1657 100644
+--- a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/ontology/update/SimpleChangeRecord.java
++++ b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/ontology/update/SimpleChangeRecord.java
+@@ -32,18 +32,14 @@ public class SimpleChangeRecord implements ChangeRecord {
+ 	public SimpleChangeRecord(
+ 			String additionsFile, String retractionsFile) {
+ 		this.additionsFile = new File(additionsFile);
+-		try {
+-			FileWriter test = new FileWriter(additionsFile);
++		try (FileWriter test = new FileWriter(additionsFile)) {
+ 		} catch (IOException ioe) {
+-				throw new RuntimeException(this.getClass().getName() +
+-					" unable to create required file at " + additionsFile);
++			throw new RuntimeException(this.getClass().getName() + " unable to create required file at " + additionsFile);
+ 		}
+ 		this.retractionsFile = new File(retractionsFile);
+-		try {
+-			FileWriter test = new FileWriter(retractionsFile);
++		try (FileWriter test = new FileWriter(retractionsFile)) {
+ 		} catch (IOException ioe) {
+-			throw new RuntimeException(this.getClass().getName() +
+-					" unable to create required file at " + retractionsFile);
++			throw new RuntimeException(this.getClass().getName() + " unable to create required file at " + retractionsFile);
+ 		}
+ 	}
+ 
+diff --git a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/servlet/setup/RunSparqlConstructs.java b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/servlet/setup/RunSparqlConstructs.java
+index 69175a480..752a5c1f7 100644
+--- a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/servlet/setup/RunSparqlConstructs.java
++++ b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/servlet/setup/RunSparqlConstructs.java
+@@ -60,14 +60,13 @@ public class RunSparqlConstructs implements ServletContextListener {
+ 			for (String path : resourcePaths) {
+ 				log.debug("Attempting to execute SPARQL at " + path);
+ 				File file = new File(ctx.getRealPath(path));
+-				try {
+-					BufferedReader reader = new BufferedReader(new FileReader(file));
++				try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+ 					StringBuilder fileContents = new StringBuilder();
+ 					String ln;
+ 					try {
+-						while ( (ln = reader.readLine()) != null) {
++						while ((ln = reader.readLine()) != null) {
+ 							fileContents.append(ln).append('\n');
+-						}
++						} 
+ 						try {
+ 							Query q = QueryFactory.create(fileContents.toString(), Syntax.syntaxARQ);
+ 							QueryExecution qe = QueryExecutionFactory.create(q, baseOntModel);
+diff --git a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/servlet/setup/UpdateKnowledgeBase.java b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/servlet/setup/UpdateKnowledgeBase.java
+index 00fdcf1b0..1e27995c6 100644
+--- a/api/src/main/java/edu/cornell/mannlib/vitro/webapp/servlet/setup/UpdateKnowledgeBase.java
++++ b/api/src/main/java/edu/cornell/mannlib/vitro/webapp/servlet/setup/UpdateKnowledgeBase.java
+@@ -529,22 +529,22 @@ public class UpdateKnowledgeBase {
+ 
+ 
+ 	private void readFile(File f, OntModel om, String path) {
+-		try {
+-			FileInputStream fis = new FileInputStream(f);
++		try (FileInputStream fis = new FileInputStream(f)) {
+ 			try {
+ 				if (f.getName().endsWith(".md")) {
+ 					// Markdown files are documentation - skip.
+-				} else if (f.getName().endsWith(".n3")) {
+-					om.read(fis, null, "N3");
+-				} else {
+-					om.read(fis, null, "RDF/XML");
+-				}
++				} else
++					if (f.getName().endsWith(".n3")) {
++						om.read(fis, null, "N3");
++					} else {
++						om.read(fis, null, "RDF/XML");
++					}
++
+ 			} catch (Exception e) {
+ 				log.error("Unable to load RDF from " + f.getName(), e);
+ 			}
+ 		} catch (FileNotFoundException fnfe) {
+-			log.error(f.getName() + " not found. Unable to load" +
+-					" RDF from this location: " + path);
++			log.error(f.getName() + " not found. Unable to load" + " RDF from this location: " + path);
+ 		}
+ 	}
+ 
+diff --git a/api/src/main/java/edu/ucsf/vitro/opensocial/OpenSocialManager.java b/api/src/main/java/edu/ucsf/vitro/opensocial/OpenSocialManager.java
+index 3b4466afe..7b3cda4a3 100644
+--- a/api/src/main/java/edu/ucsf/vitro/opensocial/OpenSocialManager.java
++++ b/api/src/main/java/edu/ucsf/vitro/opensocial/OpenSocialManager.java
+@@ -316,25 +316,20 @@ public class OpenSocialManager {
+ 				"OpenSocial.tokenService").split(":");
+ 		String request = "c=default" + (viewer != null ? "&v=" + URLEncoder.encode(viewer, "UTF-8") : "") +
+ 				(owner != null ? "&o=" + URLEncoder.encode(owner, "UTF-8") : "") + "&g=" + gadget + "\r\n";
+-
+-		// Create a socket connection with the specified server and port.
+-		Socket s = new Socket(tokenService[0],
+-				Integer.parseInt(tokenService[1]));
+-
+-		// Send request to the server.
+-		s.getOutputStream().write(request.getBytes());
+-
+-		// Receive the encoded content.
+-		int bytes = 0;
+-		StringBuilder page = new StringBuilder();
+-		byte[] bytesReceived = new byte[256];
+-
+-		// The following will block until the page is transmitted.
+-		while ((bytes = s.getInputStream().read(bytesReceived)) > 0) {
+-			page.append(new String(bytesReceived, 0, bytes));
+-		};
+-
+-		return page.toString();
++		try (// Create a socket connection with the specified server and port.
++		Socket s = new Socket(tokenService[0], Integer.parseInt(tokenService[1]))) {
++			// Send request to the server.
++			s.getOutputStream().write(request.getBytes());
++			// Receive the encoded content.
++			int bytes = 0;
++			StringBuilder page = new StringBuilder();
++			byte[] bytesReceived = new byte[256];
++			// The following will block until the page is transmitted.
++			while ((bytes = s.getInputStream().read(bytesReceived)) > 0) {
++				page.append(new String(bytesReceived, 0, bytes));
++			} 
++			return page.toString();
++		}
+ 	}
+ 
+ 	public String getContainerJavascriptSrc() {

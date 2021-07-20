@@ -1,0 +1,20 @@
+diff --git a/src/test/fitnesse/smartrics/rest/test/fitnesse/fixture/FileUtilFixture.java b/src/test/fitnesse/smartrics/rest/test/fitnesse/fixture/FileUtilFixture.java
+index cf896e0..5d86a75 100644
+--- a/src/test/fitnesse/smartrics/rest/test/fitnesse/fixture/FileUtilFixture.java
++++ b/src/test/fitnesse/smartrics/rest/test/fitnesse/fixture/FileUtilFixture.java
+@@ -53,10 +53,11 @@ public class FileUtilFixture extends ActionFixture {
+         File f = new File(fileName);
+         int pos = f.getPath().indexOf(f.getName());
+         new File(f.getPath().substring(0, pos)).mkdirs();
+-		FileWriter fw = new FileWriter(f);
+-		fw.write(fileContents);
+-		fw.close();
+-        return true;
++        try (FileWriter fw = new FileWriter(f)) {
++            fw.write(fileContents);
++            fw.close();
++            return true;
++        }
+ 	}
+ 
+     public boolean delete() throws Exception {

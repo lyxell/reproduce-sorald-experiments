@@ -1,0 +1,36 @@
+diff --git a/src/main/java/com/github/vincentrussell/query/mongodb/sql/converter/Main.java b/src/main/java/com/github/vincentrussell/query/mongodb/sql/converter/Main.java
+index c95d464..1fb4656 100644
+--- a/src/main/java/com/github/vincentrussell/query/mongodb/sql/converter/Main.java
++++ b/src/main/java/com/github/vincentrussell/query/mongodb/sql/converter/Main.java
+@@ -373,8 +373,7 @@ public final class Main {
+ 
+     private static String getCharacterInput(final String question) throws IOException {
+         final ExecutorService executorService = Executors.newFixedThreadPool(1);
+-
+-        Future<String> future = executorService.submit(new Callable<String>() {
++        try (Future<String> future = executorService.submit(new Callable<String>() {
+             @SuppressWarnings("checkstyle:magicnumber")
+             @Override
+             public String call() throws Exception {
+@@ -389,14 +388,14 @@ public final class Main {
+                         continue;
+                     }
+                     return choice;
+-                }
++                } 
++            }
++        })) {
++            try {
++                return future.get(1, TimeUnit.MINUTES);
++            } catch (InterruptedException | ExecutionException | TimeoutException e) {
++                throw new IOException(e);
+             }
+-        });
+-
+-        try {
+-            return future.get(1, TimeUnit.MINUTES);
+-        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+-            throw new IOException(e);
+         }
+ 
+     }

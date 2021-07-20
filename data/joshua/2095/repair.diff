@@ -1,0 +1,1249 @@
+diff --git a/src/main/java/org/apache/joshua/adagrad/AdaGradCore.java b/src/main/java/org/apache/joshua/adagrad/AdaGradCore.java
+index c6c7a6eb..19a02d6a 100755
+--- a/src/main/java/org/apache/joshua/adagrad/AdaGradCore.java
++++ b/src/main/java/org/apache/joshua/adagrad/AdaGradCore.java
+@@ -183,10 +183,14 @@ public class AdaGradCore {
+   // seed used to create random number generators
+ 
+   private boolean randInit;
++
++  private int maxMERTIterations;
++
++  private int minMERTIterations;
++
+   // if true, parameters are initialized randomly. If false, parameters
+   // are initialized using values from parameter file.
+-
+-  private int maxMERTIterations, minMERTIterations, prevMERTIterations;
++  private int prevMERTIterations;
+   // max: maximum number of MERT iterations
+   // min: minimum number of MERT iterations before an early MERT exit
+   // prev: number of previous MERT iterations from which to consider candidates (in addition to
+@@ -246,10 +250,28 @@ public class AdaGradCore {
+                                       // when returnBest = true
+ 
+   private String dirPrefix; // where are all these files located?
+-  private String paramsFileName, docInfoFileName, finalLambdaFileName;
+-  private String sourceFileName, refFileName, decoderOutFileName;
+-  private String decoderConfigFileName, decoderCommandFileName;
+-  private String fakeFileNameTemplate, fakeFileNamePrefix, fakeFileNameSuffix;
++
++  private String paramsFileName;
++
++  private String docInfoFileName;
++
++  private String finalLambdaFileName;
++
++  private String sourceFileName;
++
++  private String refFileName;
++
++  private String decoderOutFileName;
++
++  private String decoderConfigFileName;
++
++  private String decoderCommandFileName;
++
++  private String fakeFileNameTemplate;
++
++  private String fakeFileNamePrefix;
++
++  private String fakeFileNameSuffix;
+ 
+   // e.g. output.it[1-x].someOldRun would be specified as:
+   // output.it?.someOldRun
+@@ -1889,32 +1911,26 @@ public class AdaGradCore {
+   }
+ 
+   private boolean copyFile(String origFileName, String newFileName) {
+-    try {
++    try (OutputStream out = new FileOutputStream(outputFile)) {
+       File inputFile = new File(origFileName);
+       File outputFile = new File(newFileName);
+-
+-      InputStream in = new FileInputStream(inputFile);
+-      OutputStream out = new FileOutputStream(outputFile);
+-
+       byte[] buffer = new byte[1024];
+       int len;
+       while ((len = in.read(buffer)) > 0) {
+         out.write(buffer, 0, len);
+-      }
++      } 
+       in.close();
+       out.close();
++      /* InputStream inStream = new FileInputStream(new File(origFileName)); BufferedReader inFile =
++      new BufferedReader(new InputStreamReader(inStream, "utf8"));
+ 
+-      /*
+-       * InputStream inStream = new FileInputStream(new File(origFileName)); BufferedReader inFile =
+-       * new BufferedReader(new InputStreamReader(inStream, "utf8"));
+-       *
+-       * FileOutputStream outStream = new FileOutputStream(newFileName, false); OutputStreamWriter
+-       * outStreamWriter = new OutputStreamWriter(outStream, "utf8"); BufferedWriter outFile = new
+-       * BufferedWriter(outStreamWriter);
+-       *
+-       * String line; while(inFile.ready()) { line = inFile.readLine(); writeLine(line, outFile); }
+-       *
+-       * inFile.close(); outFile.close();
++      FileOutputStream outStream = new FileOutputStream(newFileName, false); OutputStreamWriter
++      outStreamWriter = new OutputStreamWriter(outStream, "utf8"); BufferedWriter outFile = new
++      BufferedWriter(outStreamWriter);
++
++      String line; while(inFile.ready()) { line = inFile.readLine(); writeLine(line, outFile); }
++
++      inFile.close(); outFile.close();
+        */
+       return true;
+     } catch (IOException e) {
+diff --git a/src/main/java/org/apache/joshua/corpus/Vocabulary.java b/src/main/java/org/apache/joshua/corpus/Vocabulary.java
+index 0a26822b..ed155ede 100644
+--- a/src/main/java/org/apache/joshua/corpus/Vocabulary.java
++++ b/src/main/java/org/apache/joshua/corpus/Vocabulary.java
+@@ -90,29 +90,27 @@ public class Vocabulary implements Externalizable {
+    * @throws IOException of the file cannot be found or read properly
+    */
+   public static boolean read(final File vocab_file) throws IOException {
+-    DataInputStream vocab_stream =
+-        new DataInputStream(new BufferedInputStream(new FileInputStream(vocab_file)));
+-    int size = vocab_stream.readInt();
+-    LOG.info("Read {} entries from the vocabulary", size);
+-    clear();
+-    for (int i = 0; i < size; i++) {
+-      int id = vocab_stream.readInt();
+-      String token = vocab_stream.readUTF();
+-      if (id != Math.abs(id(token))) {
+-        vocab_stream.close();
+-        return false;
++    try (DataInputStream vocab_stream = new DataInputStream(new BufferedInputStream(new FileInputStream(vocab_file)))) {
++      int size = vocab_stream.readInt();
++      LOG.info("Read {} entries from the vocabulary", size);
++      clear();
++      for (int i = 0; i < size; i++) {
++        int id = vocab_stream.readInt();
++        String token = vocab_stream.readUTF();
++        if (id != Math.abs(id(token))) {
++          vocab_stream.close();
++          return false;
++        }
+       }
++      vocab_stream.close();
++      return size + 1 == idToString.size();
+     }
+-    vocab_stream.close();
+-    return (size + 1 == idToString.size());
+   }
+ 
+   public static void write(String file_name) throws IOException {
+     long lock_stamp =lock.readLock();
+-    try {
++    try (DataOutputStream vocab_stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(vocab_file)))) {
+       File vocab_file = new File(file_name);
+-      DataOutputStream vocab_stream =
+-          new DataOutputStream(new BufferedOutputStream(new FileOutputStream(vocab_file)));
+       vocab_stream.writeInt(idToString.size() - 1);
+       LOG.info("Writing vocabulary: {} tokens", idToString.size() - 1);
+       for (int i = 1; i < idToString.size(); i++) {
+@@ -121,9 +119,6 @@ public class Vocabulary implements Externalizable {
+       }
+       vocab_stream.close();
+     }
+-    finally{
+-      lock.unlockRead(lock_stamp);
+-    }
+   }
+ 
+   /**
+diff --git a/src/main/java/org/apache/joshua/decoder/JoshuaConfiguration.java b/src/main/java/org/apache/joshua/decoder/JoshuaConfiguration.java
+index f882e2ef..42d8ff5b 100644
+--- a/src/main/java/org/apache/joshua/decoder/JoshuaConfiguration.java
++++ b/src/main/java/org/apache/joshua/decoder/JoshuaConfiguration.java
+@@ -203,12 +203,12 @@ public class JoshuaConfiguration {
+   public ArrayList<String> weights = new ArrayList<>();
+ 
+   /* Determines whether to expect JSON input or plain lines */
+-  public enum INPUT_TYPE { plain, json }
++  public enum INPUT_TYPE { plain, json; }
+ 
+   public INPUT_TYPE input_type = INPUT_TYPE.plain;
+ 
+   /* Type of server. Not sure we need to keep the regular TCP one around. */
+-  public enum SERVER_TYPE { none, TCP, HTTP }
++  public enum SERVER_TYPE { none, TCP, HTTP; }
+ 
+   public SERVER_TYPE server_type = SERVER_TYPE.TCP;
+ 
+@@ -475,26 +475,22 @@ public class JoshuaConfiguration {
+           } else if (parameter.equals(normalize_key("oov-list"))) {
+             if (new File(fds[1]).exists()) {
+               oovList = new ArrayList<>();
+-              try {
+-                File file = new File(fds[1]);
+-                BufferedReader br = new BufferedReader(new FileReader(file));
+-                try {
+-                  String str = br.readLine();
+-                  while (str != null) {
+-                    String[] tokens = str.trim().split("\\s+");
+-
+-                    oovList.add(new OOVItem(FormatUtils.ensureNonTerminalBrackets(tokens[0]),
+-                            (float) Math.log(Float.parseFloat(tokens[1]))));
+-
+-                    str = br.readLine();
+-                  }
+-                  br.close();
+-                } catch(IOException e){
+-                  System.out.println(e);
+-                }
+-              } catch(IOException e){
+-                System.out.println(e);
+-              }
++                        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
++                          File file = new File(fds[1]);
++                          try {
++                            String str = br.readLine();
++                            while (str != null) {
++                              String[] tokens = str.trim().split("\\s+");
++                              oovList.add(new OOVItem(FormatUtils.ensureNonTerminalBrackets(tokens[0]), ((float) (Math.log(Float.parseFloat(tokens[1]))))));
++                              str = br.readLine();
++                            } 
++                            br.close();
++                          } catch (IOException e) {
++                            System.out.println(e);
++                          }
++                        } catch (IOException e) {
++                          System.out.println(e);
++                        }
+               Collections.sort(oovList);
+ 
+             } else {
+diff --git a/src/main/java/org/apache/joshua/decoder/JoshuaDecoder.java b/src/main/java/org/apache/joshua/decoder/JoshuaDecoder.java
+index de5ab36f..8bb50141 100644
+--- a/src/main/java/org/apache/joshua/decoder/JoshuaDecoder.java
++++ b/src/main/java/org/apache/joshua/decoder/JoshuaDecoder.java
+@@ -102,9 +102,6 @@ public class JoshuaDecoder {
+     BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+     TranslationRequestStream fileRequest = new TranslationRequestStream(reader, joshuaConfiguration);
+     TranslationResponseStream translationResponseStream = decoder.decodeAll(fileRequest);
+-
+-    // Create the n-best output stream
+-    FileWriter nbest_out = null;
+     if (joshuaConfiguration.n_best_file != null)
+       nbest_out = new FileWriter(joshuaConfiguration.n_best_file);
+ 
+diff --git a/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java b/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java
+index 01d2f391..ca3d3d50 100644
+--- a/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java
++++ b/src/main/java/org/apache/joshua/decoder/ff/lm/ArpaFile.java
+@@ -192,29 +192,26 @@ public class ArpaFile implements Iterable<ArpaNgram> {
+ 
+     Pattern pattern = Pattern.compile("^ngram (\\d+)=\\d+$"); 
+     LOG.debug("Pattern is {}", pattern);
+-    @SuppressWarnings("resource")
+-    final Scanner scanner = new Scanner(arpaFile); 
+-
+-    int order = 0; 
+-
+-    // Eat initial header lines 
+-    while (scanner.hasNextLine()) { 
+-      String line = scanner.nextLine(); 
+-
+-      if (NGRAM_HEADER.matches(line)) { 
+-        break; 
+-      } else { 
+-        Matcher matcher = pattern.matcher(line); 
+-        if (matcher.matches()) { 
+-          LOG.debug("DOES  match: '{}'", line);
+-          order = Integer.valueOf(matcher.group(1)); 
++    try (@SuppressWarnings("resource")
++    final Scanner scanner = new Scanner(arpaFile)) {
++      int order = 0;
++      // Eat initial header lines
++      while (scanner.hasNextLine()) {
++        String line = scanner.nextLine();
++        if (NGRAM_HEADER.matches(line)) {
++          break;
+         } else {
+-          LOG.debug("Doesn't match: '{}'", line);
+-        } 
++          Matcher matcher = pattern.matcher(line);
++          if (matcher.matches()) {
++            LOG.debug("DOES  match: '{}'", line);
++            order = Integer.valueOf(matcher.group(1));
++          } else {
++            LOG.debug("Doesn't match: '{}'", line);
++          }
++        }
+       } 
++      return order;
+     } 
+-
+-    return order; 
+   } 
+ 
+   /**
+@@ -228,12 +225,11 @@ public class ArpaFile implements Iterable<ArpaNgram> {
+   public Iterator<ArpaNgram> iterator() { 
+ 
+     try { 
+-      final Scanner scanner; 
+ 
+       if (arpaFile.getName().endsWith("gz")) { 
+         InputStream in = new GZIPInputStream( 
+-            new FileInputStream(arpaFile)); 
+-        scanner = new Scanner(in); 
++            new FileInputStream(arpaFile));
++        try (final Scanner scanner = new Scanner(in))  
+       } else { 
+         scanner = new Scanner(arpaFile); 
+       } 
+diff --git a/src/main/java/org/apache/joshua/decoder/ff/lm/bloomfilter_lm/BloomFilterLanguageModel.java b/src/main/java/org/apache/joshua/decoder/ff/lm/bloomfilter_lm/BloomFilterLanguageModel.java
+index 79323644..0ecc6739 100644
+--- a/src/main/java/org/apache/joshua/decoder/ff/lm/bloomfilter_lm/BloomFilterLanguageModel.java
++++ b/src/main/java/org/apache/joshua/decoder/ff/lm/bloomfilter_lm/BloomFilterLanguageModel.java
+@@ -366,14 +366,12 @@ public class BloomFilterLanguageModel extends DefaultNGramLanguageModel implemen
+    */
+   private void populateBloomFilter(int bloomFilterSize, String filename) {
+     HashMap<String, Long> typesAfter = new HashMap<>();
+-    try {
+-      FileInputStream file_in = new FileInputStream(filename);
+-      FileInputStream file_in_copy = new FileInputStream(filename);
+-      InputStream in;
++    try (FileInputStream file_in_copy = new FileInputStream(filename)) {
+       InputStream estimateStream;
+       if (filename.endsWith(".gz")) {
+-        in = new GZIPInputStream(file_in);
+-        estimateStream = new GZIPInputStream(file_in_copy);
++        try (InputStream in = new GZIPInputStream(file_in)) {
++          estimateStream = new GZIPInputStream(file_in_copy);
++        }
+       } else {
+         in = file_in;
+         estimateStream = file_in_copy;
+diff --git a/src/main/java/org/apache/joshua/decoder/ff/similarity/EdgePhraseSimilarityFF.java b/src/main/java/org/apache/joshua/decoder/ff/similarity/EdgePhraseSimilarityFF.java
+index 93dab1d6..16221802 100644
+--- a/src/main/java/org/apache/joshua/decoder/ff/similarity/EdgePhraseSimilarityFF.java
++++ b/src/main/java/org/apache/joshua/decoder/ff/similarity/EdgePhraseSimilarityFF.java
+@@ -17,6 +17,7 @@
+  * under the License.
+  */
+ package org.apache.joshua.decoder.ff.similarity;
++import org.apache.joshua.decoder.ff.FeatureFunction.Accumulator;
+ 
+ import java.io.BufferedReader;
+ import java.io.IOException;
+@@ -72,9 +73,10 @@ public class EdgePhraseSimilarityFF extends StatefulFF implements SourceDependen
+ 
+   private void initializeConnection() throws NumberFormatException, IOException {
+     LOG.info("Opening connection.");
+-    Socket socket = new Socket(host, port);
+-    serverAsk = new PrintWriter(socket.getOutputStream(), true);
+-    serverReply = new BufferedReader(new InputStreamReader(socket.getInputStream()));
++    try (Socket socket = new Socket(host, port)) {
++      serverAsk = new PrintWriter(socket.getOutputStream(), true);
++      serverReply = new BufferedReader(new InputStreamReader(socket.getInputStream()));
++    }
+   }
+ 
+   @Override
+diff --git a/src/main/java/org/apache/joshua/decoder/ff/tm/hash_based/MemoryBasedBatchGrammar.java b/src/main/java/org/apache/joshua/decoder/ff/tm/hash_based/MemoryBasedBatchGrammar.java
+index f53affa3..16c2ea6a 100644
+--- a/src/main/java/org/apache/joshua/decoder/ff/tm/hash_based/MemoryBasedBatchGrammar.java
++++ b/src/main/java/org/apache/joshua/decoder/ff/tm/hash_based/MemoryBasedBatchGrammar.java
+@@ -266,18 +266,14 @@ public class MemoryBasedBatchGrammar extends AbstractGrammar {
+   public void save() {
+     
+     LOG.info("Saving custom grammar to file '{}'", grammarFile);
+-    
+-    try {
+-      BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
+-          new FileOutputStream(grammarFile), "UTF-8"));
+-
++    try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(grammarFile), "UTF-8"))) {
+       ArrayList<Trie> nodes = new ArrayList<Trie>();
+       nodes.add(root);
+       while (nodes.size() > 0) {
+         Trie trie = nodes.remove(0);
+         // find all rules at the current node, print them
+         if (trie.hasRules()) {
+-          for (Rule rule: trie.getRuleCollection().getRules()) {
++          for (Rule rule : trie.getRuleCollection().getRules()) {
+             try {
+               LOG.info("  rule: {}", rule.textFormat());
+               out.write(rule.textFormat() + "\n");
+@@ -287,12 +283,11 @@ public class MemoryBasedBatchGrammar extends AbstractGrammar {
+             }
+           }
+         }
+-
+         // graph is acyclical so we shouldn't have to check for having visited
+         if (trie.hasExtensions())
+           nodes.addAll(trie.getExtensions());
+-      }
+-      
++
++      } 
+       out.close();
+     } catch (IOException e) {
+       // TODO Auto-generated catch block
+diff --git a/src/main/java/org/apache/joshua/metrics/GradeLevelBLEU.java b/src/main/java/org/apache/joshua/metrics/GradeLevelBLEU.java
+index 8bda9b8c..31351252 100644
+--- a/src/main/java/org/apache/joshua/metrics/GradeLevelBLEU.java
++++ b/src/main/java/org/apache/joshua/metrics/GradeLevelBLEU.java
+@@ -35,7 +35,12 @@ public class GradeLevelBLEU extends BLEU {
+   // syllable pattern matches /C*V+/
+   private static final Pattern syllable = Pattern.compile("([^aeiouy]*[aeiouy]+)");
+   private static final Pattern silentE = Pattern.compile("[^aeiou]e$");
+-  private static final int SOURCE = 0, CANDIDATE = 1, REFERENCE = 2;
++
++  private static final int SOURCE = 0;
++
++  private static final int CANDIDATE = 1;
++
++  private static final int REFERENCE = 2;
+   private final int srcIndex = 1;
+   private int sentCountIndex;
+   private SourceBLEU srcBLEU;
+@@ -73,15 +78,16 @@ public class GradeLevelBLEU extends BLEU {
+   // accordance with SourceBLEU)
+   public void loadSources(String filepath) throws IOException {
+     String[][] newRefSentences = new String[numSentences][refsPerSen + 1];
+-    BufferedReader br = new BufferedReader(new FileReader(filepath));
+-    String line;
+-    int i = 0;
+-    while (i < numSentences && (line = br.readLine()) != null) {
+-      System.arraycopy(refSentences[i], 0, newRefSentences[i], 0, refsPerSen);
+-      newRefSentences[i][refsPerSen] = line.trim();
+-      i++;
++    try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
++      String line;
++      int i = 0;
++      while (i < numSentences && (line = br.readLine()) != null) {
++        System.arraycopy(refSentences[i], 0, newRefSentences[i], 0, refsPerSen);
++        newRefSentences[i][refsPerSen] = line.trim();
++        i++;
++      } 
++      br.close();
+     }
+-    br.close();
+   }
+ 
+   public void initialize() {
+diff --git a/src/main/java/org/apache/joshua/metrics/SARI.java b/src/main/java/org/apache/joshua/metrics/SARI.java
+index 990690bd..d7e075a0 100644
+--- a/src/main/java/org/apache/joshua/metrics/SARI.java
++++ b/src/main/java/org/apache/joshua/metrics/SARI.java
+@@ -341,17 +341,17 @@ public class SARI extends EvaluationMetric {
+ 
+   public void loadSources(String filepath) throws IOException {
+     srcSentences = new String[numSentences];
+-    // BufferedReader br = new BufferedReader(new FileReader(filepath));
+-    InputStream inStream = new FileInputStream(new File(filepath));
+-    BufferedReader br = new BufferedReader(new InputStreamReader(inStream, "utf8"));
+-
+-    String line;
+-    int i = 0;
+-    while (i < numSentences && (line = br.readLine()) != null) {
+-      srcSentences[i] = line.trim();
+-      i++;
++    try (// BufferedReader br = new BufferedReader(new FileReader(filepath));
++    InputStream inStream = new FileInputStream(new File(filepath))) {
++      BufferedReader br = new BufferedReader(new InputStreamReader(inStream, "utf8"));
++      String line;
++      int i = 0;
++      while (i < numSentences && (line = br.readLine()) != null) {
++        srcSentences[i] = line.trim();
++        i++;
++      } 
++      br.close();
+     }
+-    br.close();
+   }
+ 
+   public double sumHashMapByDoubleValues(HashMap<String, Double> counter) {
+@@ -622,7 +622,7 @@ public class SARI extends EvaluationMetric {
+   }
+ 
+   private enum StatIndex {
+-    KEEPBOTH, KEEPCAND, KEEPREF, DELBOTH, DELCAND, DELREF, ADDBOTH, ADDCAND, ADDREF, KEEPBOTH2
++    KEEPBOTH, KEEPCAND, KEEPREF, DELBOTH, DELCAND, DELREF, ADDBOTH, ADDCAND, ADDREF, KEEPBOTH2;
+   }
+ 
+ }
+diff --git a/src/main/java/org/apache/joshua/mira/MIRACore.java b/src/main/java/org/apache/joshua/mira/MIRACore.java
+index 3272115e..04f17eaa 100755
+--- a/src/main/java/org/apache/joshua/mira/MIRACore.java
++++ b/src/main/java/org/apache/joshua/mira/MIRACore.java
+@@ -179,10 +179,14 @@ public class MIRACore {
+   // seed used to create random number generators
+ 
+   private boolean randInit;
++
++  private int maxMERTIterations;
++
++  private int minMERTIterations;
++
+   // if true, parameters are initialized randomly. If false, parameters
+   // are initialized using values from parameter file.
+-
+-  private int maxMERTIterations, minMERTIterations, prevMERTIterations;
++  private int prevMERTIterations;
+   // max: maximum number of MERT iterations
+   // min: minimum number of MERT iterations before an early MERT exit
+   // prev: number of previous MERT iterations from which to consider candidates (in addition to
+@@ -239,13 +243,25 @@ public class MIRACore {
+   // private double sentForScale = 0.15; //percentage of sentences for scale factor estimation
+   private double scoreRatio = 5.0; // sclale so that model_score/metric_score = scoreratio
+   private double prevMetricScore = 0; // final metric score of the previous iteration, used only
+-                                      // when returnBest = true
+ 
+-  private String paramsFileName, docInfoFileName, finalLambdaFileName;
++  private String paramsFileName;
++
++  private String docInfoFileName;
++
++  // when returnBest = true
++  private String finalLambdaFileName;
+   private String refFileName;
+   private String decoderOutFileName;
+-  private String decoderConfigFileName, decoderCommandFileName;
+-  private String fakeFileNameTemplate, fakeFileNamePrefix, fakeFileNameSuffix;
++
++  private String decoderConfigFileName;
++
++  private String decoderCommandFileName;
++
++  private String fakeFileNameTemplate;
++
++  private String fakeFileNamePrefix;
++
++  private String fakeFileNameSuffix;
+ 
+   // e.g. output.it[1-x].someOldRun would be specified as:
+   // output.it?.someOldRun
+@@ -1897,32 +1913,26 @@ public class MIRACore {
+   }
+ 
+   private boolean copyFile(String origFileName, String newFileName) {
+-    try {
++    try (OutputStream out = new FileOutputStream(outputFile)) {
+       File inputFile = new File(origFileName);
+       File outputFile = new File(newFileName);
+-
+-      InputStream in = new FileInputStream(inputFile);
+-      OutputStream out = new FileOutputStream(outputFile);
+-
+       byte[] buffer = new byte[1024];
+       int len;
+       while ((len = in.read(buffer)) > 0) {
+         out.write(buffer, 0, len);
+-      }
++      } 
+       in.close();
+       out.close();
++      /* InputStream inStream = new FileInputStream(new File(origFileName)); BufferedReader inFile =
++      new BufferedReader(new InputStreamReader(inStream, "utf8"));
+ 
+-      /*
+-       * InputStream inStream = new FileInputStream(new File(origFileName)); BufferedReader inFile =
+-       * new BufferedReader(new InputStreamReader(inStream, "utf8"));
+-       *
+-       * FileOutputStream outStream = new FileOutputStream(newFileName, false); OutputStreamWriter
+-       * outStreamWriter = new OutputStreamWriter(outStream, "utf8"); BufferedWriter outFile = new
+-       * BufferedWriter(outStreamWriter);
+-       *
+-       * String line; while(inFile.ready()) { line = inFile.readLine(); writeLine(line, outFile); }
+-       *
+-       * inFile.close(); outFile.close();
++      FileOutputStream outStream = new FileOutputStream(newFileName, false); OutputStreamWriter
++      outStreamWriter = new OutputStreamWriter(outStream, "utf8"); BufferedWriter outFile = new
++      BufferedWriter(outStreamWriter);
++
++      String line; while(inFile.ready()) { line = inFile.readLine(); writeLine(line, outFile); }
++
++      inFile.close(); outFile.close();
+        */
+       return true;
+     } catch (IOException e) {
+diff --git a/src/main/java/org/apache/joshua/pro/PROCore.java b/src/main/java/org/apache/joshua/pro/PROCore.java
+index 8571bf26..f6380f57 100755
+--- a/src/main/java/org/apache/joshua/pro/PROCore.java
++++ b/src/main/java/org/apache/joshua/pro/PROCore.java
+@@ -180,10 +180,14 @@ public class PROCore {
+   // seed used to create random number generators
+ 
+   private boolean randInit;
++
++  private int maxMERTIterations;
++
++  private int minMERTIterations;
++
+   // if true, parameters are initialized randomly. If false, parameters
+   // are initialized using values from parameter file.
+-
+-  private int maxMERTIterations, minMERTIterations, prevMERTIterations;
++  private int prevMERTIterations;
+   // max: maximum number of MERT iterations
+   // min: minimum number of MERT iterations before an early MERT exit
+   // prev: number of previous MERT iterations from which to consider candidates (in addition to
+@@ -234,11 +238,23 @@ public class PROCore {
+                                       // when returnBest = true
+   private boolean returnBest = false; // return the best weight during tuning
+ 
+-  private String paramsFileName, docInfoFileName, finalLambdaFileName;
++  private String paramsFileName;
++
++  private String docInfoFileName;
++
++  private String finalLambdaFileName;
+   private String refFileName;
+   private String decoderOutFileName;
+-  private String decoderConfigFileName, decoderCommandFileName;
+-  private String fakeFileNameTemplate, fakeFileNamePrefix, fakeFileNameSuffix;
++
++  private String decoderConfigFileName;
++
++  private String decoderCommandFileName;
++
++  private String fakeFileNameTemplate;
++
++  private String fakeFileNamePrefix;
++
++  private String fakeFileNameSuffix;
+ 
+   // e.g. output.it[1-x].someOldRun would be specified as:
+   // output.it?.someOldRun
+@@ -1872,32 +1888,26 @@ public class PROCore {
+   }
+ 
+   private boolean copyFile(String origFileName, String newFileName) {
+-    try {
++    try (OutputStream out = new FileOutputStream(outputFile)) {
+       File inputFile = new File(origFileName);
+       File outputFile = new File(newFileName);
+-
+-      InputStream in = new FileInputStream(inputFile);
+-      OutputStream out = new FileOutputStream(outputFile);
+-
+       byte[] buffer = new byte[1024];
+       int len;
+       while ((len = in.read(buffer)) > 0) {
+         out.write(buffer, 0, len);
+-      }
++      } 
+       in.close();
+       out.close();
++      /* InputStream inStream = new FileInputStream(new File(origFileName)); BufferedReader inFile =
++      new BufferedReader(new InputStreamReader(inStream, "utf8"));
+ 
+-      /*
+-       * InputStream inStream = new FileInputStream(new File(origFileName)); BufferedReader inFile =
+-       * new BufferedReader(new InputStreamReader(inStream, "utf8"));
+-       *
+-       * FileOutputStream outStream = new FileOutputStream(newFileName, false); OutputStreamWriter
+-       * outStreamWriter = new OutputStreamWriter(outStream, "utf8"); BufferedWriter outFile = new
+-       * BufferedWriter(outStreamWriter);
+-       *
+-       * String line; while(inFile.ready()) { line = inFile.readLine(); writeLine(line, outFile); }
+-       *
+-       * inFile.close(); outFile.close();
++      FileOutputStream outStream = new FileOutputStream(newFileName, false); OutputStreamWriter
++      outStreamWriter = new OutputStreamWriter(outStream, "utf8"); BufferedWriter outFile = new
++      BufferedWriter(outStreamWriter);
++
++      String line; while(inFile.ready()) { line = inFile.readLine(); writeLine(line, outFile); }
++
++      inFile.close(); outFile.close();
+        */
+       return true;
+     } catch (IOException e) {
+diff --git a/src/main/java/org/apache/joshua/server/ServerThread.java b/src/main/java/org/apache/joshua/server/ServerThread.java
+index c3297d11..76af5b11 100644
+--- a/src/main/java/org/apache/joshua/server/ServerThread.java
++++ b/src/main/java/org/apache/joshua/server/ServerThread.java
+@@ -194,14 +194,14 @@ public class ServerThread extends Thread implements HttpHandler {
+           translation, translation.getStructuredTranslations().size());
+       message.addTranslation(translation);
+     }
+-
+-    OutputStream out = new HttpWriter(client);
+-    out.write(message.toString().getBytes());
+-    if (LOG.isDebugEnabled())
+-      LOG.debug(message.toString());
+-    out.close();
+-    
+-    reader.close();
++            try (OutputStream out = new HttpWriter(client)) {
++                out.write(message.toString().getBytes());
++                if (LOG.isDebugEnabled()) {
++                    LOG.debug(message.toString());
++                }
++                out.close();
++                reader.close();
++            }
+   }
+   
+   /**
+diff --git a/src/main/java/org/apache/joshua/subsample/BiCorpus.java b/src/main/java/org/apache/joshua/subsample/BiCorpus.java
+index 9dc1e387..b5badc5a 100644
+--- a/src/main/java/org/apache/joshua/subsample/BiCorpus.java
++++ b/src/main/java/org/apache/joshua/subsample/BiCorpus.java
+@@ -94,13 +94,9 @@ public class BiCorpus implements Iterable<PhrasePair> {
+   public Iterator<PhrasePair> iterator() {
+     PhraseReader closureRF;
+     PhraseReader closureRE;
+-    BufferedReader closureRA;
+-    try {
+-      closureRF = new PhraseReader(new FileReader(this.foreignFileName), (byte) 1);
+-      closureRE = new PhraseReader(new FileReader(this.nativeFileName), (byte) 0);
+-      closureRA =
+-          (null == this.alignmentFileName ? null : new BufferedReader(new FileReader(
+-              this.alignmentFileName)));
++    try (BufferedReader closureRA = (null == this.alignmentFileName) ? null : new BufferedReader(new FileReader(this.alignmentFileName))) {
++      closureRF = new PhraseReader(new FileReader(this.foreignFileName), ((byte) (1)));
++      closureRE = new PhraseReader(new FileReader(this.nativeFileName), ((byte) (0)));
+     } catch (FileNotFoundException e) {
+       throw new RuntimeException("File not found", e);
+     }
+diff --git a/src/main/java/org/apache/joshua/subsample/Subsampler.java b/src/main/java/org/apache/joshua/subsample/Subsampler.java
+index 04662c9e..4df11c3e 100644
+--- a/src/main/java/org/apache/joshua/subsample/Subsampler.java
++++ b/src/main/java/org/apache/joshua/subsample/Subsampler.java
+@@ -121,19 +121,12 @@ public class Subsampler {
+       List<String> files = new ArrayList<>();
+       {
+         FileReader fr = null;
+-        BufferedReader br = null;
+-        try {
++        try (BufferedReader br = new BufferedReader(fr)) {
+           fr = new FileReader(filelist);
+-          br = new BufferedReader(fr);
+           String file;
+           while ((file = br.readLine()) != null) {
+             files.add(file);
+-          }
+-        } finally {
+-          // Maybe redundant, but UMD's FixBugs says to
+-          // close br (and close is idempotent anyways)
+-          if (null != fr) fr.close();
+-          if (null != br) br.close();
++          } 
+         }
+       }
+ 
+diff --git a/src/main/java/org/apache/joshua/tools/GrammarPacker.java b/src/main/java/org/apache/joshua/tools/GrammarPacker.java
+index 0599ae76..6b3acfcf 100644
+--- a/src/main/java/org/apache/joshua/tools/GrammarPacker.java
++++ b/src/main/java/org/apache/joshua/tools/GrammarPacker.java
+@@ -203,29 +203,28 @@ public class GrammarPacker {
+ 
+     String configFile = output + File.separator + "config";
+     LOG.info("Writing config to '{}'", configFile);
+-    // Write config options
+-    FileWriter config = new FileWriter(configFile);
+-    config.write(String.format("version = %d\n", VERSION));
+-    config.write(String.format("max-source-len = %d\n", max_source_len));
+-    config.close();
+-
+-    // Read previously written encoder configuration to match up to changed
+-    // vocabulary id's.
+-    LOG.info("Reading encoding.");
+-    encoderConfig = new EncoderConfiguration();
+-    encoderConfig.load(output + File.separator + "encoding");
+-
+-    LOG.info("Beginning packing pass.");
+-    // Actual binarization pass. Slice and pack source, target and data.
+-    grammarReader = getGrammarReader();
+-    LineReader alignment_reader = null;
+-    if (packAlignments && !grammarAlignments)
+-      alignment_reader = new LineReader(alignments);
+-    binarize(grammarReader, alignment_reader);
+-    LOG.info("Packing complete.");
+-
+-    LOG.info("Packed grammar in: {}", output);
+-    LOG.info("Done.");
++    try (// Write config options
++    FileWriter config = new FileWriter(configFile)) {
++      config.write(String.format("version = %d\n", VERSION));
++      config.write(String.format("max-source-len = %d\n", max_source_len));
++      config.close();
++      // Read previously written encoder configuration to match up to changed
++      // vocabulary id's.
++      LOG.info("Reading encoding.");
++      encoderConfig = new EncoderConfiguration();
++      encoderConfig.load(output + File.separator + "encoding");
++      LOG.info("Beginning packing pass.");
++      // Actual binarization pass. Slice and pack source, target and data.
++      grammarReader = getGrammarReader();
++      LineReader alignment_reader = null;
++      if (packAlignments && !grammarAlignments) {
++        alignment_reader = new LineReader(alignments);
++      }
++      binarize(grammarReader, alignment_reader);
++      LOG.info("Packing complete.");
++      LOG.info("Packed grammar in: {}", output);
++      LOG.info("Done.");
++    }
+   }
+ 
+   /**
+diff --git a/src/main/java/org/apache/joshua/util/encoding/EncoderConfiguration.java b/src/main/java/org/apache/joshua/util/encoding/EncoderConfiguration.java
+index e09d6e13..a8d673ed 100644
+--- a/src/main/java/org/apache/joshua/util/encoding/EncoderConfiguration.java
++++ b/src/main/java/org/apache/joshua/util/encoding/EncoderConfiguration.java
+@@ -17,6 +17,7 @@
+  * under the License.
+  */
+ package org.apache.joshua.util.encoding;
++import java.io.Serializable;
+ 
+ import java.io.BufferedInputStream;
+ import java.io.DataInputStream;
+@@ -59,52 +60,50 @@ public class EncoderConfiguration {
+   public void load(String file_name) throws IOException {
+     File encoding_file = new File(file_name);
+     BufferedInputStream buf_stream = new BufferedInputStream(new FileInputStream(encoding_file));
+-    DataInputStream in_stream = new DataInputStream(buf_stream);
+-
+-    String id_key = in_stream.readUTF();
+-    idEncoder = EncoderFactory.getIntEncoder(id_key);
+-    idEncoder.readState(in_stream);
+-    ID_SIZE = idEncoder.size();
+-    labeled = in_stream.readBoolean();
+-
+-    int num_encoders = in_stream.readInt();
+-    encoders = new FloatEncoder[num_encoders];
+-    for (int i = 0; i < num_encoders; i++) {
+-      String key = in_stream.readUTF();
+-      FloatEncoder e = EncoderFactory.getFloatEncoder(key);
+-      e.readState(in_stream);
+-      encoders[i] = e;
+-    }
+-    int num_features = in_stream.readInt();
+-    encoderById = new FloatEncoder[num_features];
+-    innerToOuter = new int[num_features];
+-    for (int i = 0; i < num_features; i++) {
+-      int outer_id;
+-      if (labeled) {
+-        String feature_name = in_stream.readUTF();
+-        outer_id = Vocabulary.id(feature_name);
+-        try {
+-          Integer.parseInt(feature_name);
+-          numDenseFeatures++;
+-        } catch (NumberFormatException e) {}
+-      } else {
+-        outer_id = in_stream.readInt();
++    try (DataInputStream in_stream = new DataInputStream(buf_stream)) {
++      String id_key = in_stream.readUTF();
++      idEncoder = EncoderFactory.getIntEncoder(id_key);
++      idEncoder.readState(in_stream);
++      ID_SIZE = idEncoder.size();
++      labeled = in_stream.readBoolean();
++      int num_encoders = in_stream.readInt();
++      encoders = new FloatEncoder[num_encoders];
++      for (int i = 0; i < num_encoders; i++) {
++        String key = in_stream.readUTF();
++        FloatEncoder e = EncoderFactory.getFloatEncoder(key);
++        e.readState(in_stream);
++        encoders[i] = e;
++      }
++      int num_features = in_stream.readInt();
++      encoderById = new FloatEncoder[num_features];
++      innerToOuter = new int[num_features];
++      for (int i = 0; i < num_features; i++) {
++        int outer_id;
++        if (labeled) {
++          String feature_name = in_stream.readUTF();
++          outer_id = Vocabulary.id(feature_name);
++          try {
++            Integer.parseInt(feature_name);
++            numDenseFeatures++;
++          } catch (NumberFormatException e) {
++          }
++        } else {
++          outer_id = in_stream.readInt();
++        }
++        int inner_id = in_stream.readInt();
++        int encoder_index = in_stream.readInt();
++        if (encoder_index >= num_encoders) {
++          throw new RuntimeException("Error deserializing EncoderConfig. " + "Feature " + (labeled ? Vocabulary.word(outer_id) : outer_id) + " referring to encoder " + encoder_index + " when only " + num_encoders + " known.");
++        }
++        encoderById[inner_id] = encoders[encoder_index];
++        innerToOuter[inner_id] = outer_id;
+       }
+-      int inner_id = in_stream.readInt();
+-      int encoder_index = in_stream.readInt();
+-      if (encoder_index >= num_encoders) {
+-        throw new RuntimeException("Error deserializing EncoderConfig. " + "Feature "
+-            + (labeled ? Vocabulary.word(outer_id) : outer_id) + " referring to encoder "
+-            + encoder_index + " when only " + num_encoders + " known.");
++      in_stream.close();
++      outerToInner.clear();
++      for (int i = 0; i < innerToOuter.length; ++i) {
++        outerToInner.put(innerToOuter[i], i);
+       }
+-      encoderById[inner_id] = encoders[encoder_index];
+-      innerToOuter[inner_id] = outer_id;
+     }
+-    in_stream.close();
+-    
+-    outerToInner.clear();
+-    for (int i = 0; i < innerToOuter.length; ++i)
+-      outerToInner.put(innerToOuter[i], i);
+   }
+ 
+   public FloatEncoder encoder(int inner_id) {
+diff --git a/src/main/java/org/apache/joshua/util/quantization/QuantizerConfiguration.java b/src/main/java/org/apache/joshua/util/quantization/QuantizerConfiguration.java
+index 3f754e42..a9c3aebf 100644
+--- a/src/main/java/org/apache/joshua/util/quantization/QuantizerConfiguration.java
++++ b/src/main/java/org/apache/joshua/util/quantization/QuantizerConfiguration.java
+@@ -71,43 +71,42 @@ public class QuantizerConfiguration {
+     quantizerByFeatureId.clear();
+ 
+     File quantizer_file = new File(file_name);
+-    DataInputStream in_stream =
+-        new DataInputStream(new BufferedInputStream(new FileInputStream(quantizer_file)));
+-    int num_quantizers = in_stream.readInt();
+-    quantizers.ensureCapacity(num_quantizers);
+-    for (int i = 0; i < num_quantizers; i++) {
+-      String key = in_stream.readUTF();
+-      Quantizer q = QuantizerFactory.get(key);
+-      q.readState(in_stream);
+-      quantizers.add(q);
+-    }
+-    int num_mappings = in_stream.readInt();
+-    for (int i = 0; i < num_mappings; i++) {
+-      String feature_name = in_stream.readUTF();
+-      int feature_id = Vocabulary.id(feature_name);
+-      int quantizer_index = in_stream.readInt();
+-      if (quantizer_index >= num_quantizers) {
+-        throw new RuntimeException("Error deserializing QuanitzerConfig. " + "Feature "
+-            + feature_name + " referring to quantizer " + quantizer_index + " when only "
+-            + num_quantizers + " known.");
++    try (DataInputStream in_stream = new DataInputStream(new BufferedInputStream(new FileInputStream(quantizer_file)))) {
++      int num_quantizers = in_stream.readInt();
++      quantizers.ensureCapacity(num_quantizers);
++      for (int i = 0; i < num_quantizers; i++) {
++        String key = in_stream.readUTF();
++        Quantizer q = QuantizerFactory.get(key);
++        q.readState(in_stream);
++        quantizers.add(q);
++      }
++      int num_mappings = in_stream.readInt();
++      for (int i = 0; i < num_mappings; i++) {
++        String feature_name = in_stream.readUTF();
++        int feature_id = Vocabulary.id(feature_name);
++        int quantizer_index = in_stream.readInt();
++        if (quantizer_index >= num_quantizers) {
++          throw new RuntimeException("Error deserializing QuanitzerConfig. " + "Feature " + feature_name + " referring to quantizer " + quantizer_index + " when only " + num_quantizers + " known.");
++        }
++        this.quantizerByFeatureId.put(feature_id, quantizer_index);
+       }
+-      this.quantizerByFeatureId.put(feature_id, quantizer_index);
++      in_stream.close();
+     }
+-    in_stream.close();
+   }
+ 
+   public void write(String file_name) throws IOException {
+     File vocab_file = new File(file_name);
+-    DataOutputStream out_stream =
+-        new DataOutputStream(new BufferedOutputStream(new FileOutputStream(vocab_file)));
+-    out_stream.writeInt(quantizers.size());
+-    for (Quantizer quantizer : quantizers)
+-      quantizer.writeState(out_stream);
+-    out_stream.writeInt(quantizerByFeatureId.size());
+-    for (int feature_id : quantizerByFeatureId.keySet()) {
+-      out_stream.writeUTF(Vocabulary.word(feature_id));
+-      out_stream.writeInt(quantizerByFeatureId.get(feature_id));
++    try (DataOutputStream out_stream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(vocab_file)))) {
++      out_stream.writeInt(quantizers.size());
++      for (Quantizer quantizer : quantizers) {
++        quantizer.writeState(out_stream);
++      }
++      out_stream.writeInt(quantizerByFeatureId.size());
++      for (int feature_id : quantizerByFeatureId.keySet()) {
++        out_stream.writeUTF(Vocabulary.word(feature_id));
++        out_stream.writeInt(quantizerByFeatureId.get(feature_id));
++      }
++      out_stream.close();
+     }
+-    out_stream.close();
+   }
+ }
+\ No newline at end of file
+diff --git a/src/main/java/org/apache/joshua/zmert/MertCore.java b/src/main/java/org/apache/joshua/zmert/MertCore.java
+index 47cede9c..d1ed6673 100644
+--- a/src/main/java/org/apache/joshua/zmert/MertCore.java
++++ b/src/main/java/org/apache/joshua/zmert/MertCore.java
+@@ -201,9 +201,13 @@ public class MertCore {
+   // are initialized using values from parameter file.
+ 
+   private int initsPerIt;
+-  // number of intermediate initial points per iteration
+ 
+-  private int maxMERTIterations, minMERTIterations, prevMERTIterations;
++  private int maxMERTIterations;
++
++  private int minMERTIterations;
++
++  // number of intermediate initial points per iteration
++  private int prevMERTIterations;
+   // max: maximum number of MERT iterations
+   // min: minimum number of MERT iterations before an early MERT exit
+   // prev: number of previous MERT iterations from which to consider candidates (in addition to
+@@ -245,10 +249,28 @@ public class MertCore {
+   // If 1, iteration number is passed. If 0, launch with no arguments.
+ 
+   private String dirPrefix; // where are all these files located?
+-  private String paramsFileName, docInfoFileName, finalLambdaFileName;
+-  private String sourceFileName, refFileName, decoderOutFileName;
+-  private String decoderConfigFileName, decoderCommandFileName;
+-  private String fakeFileNameTemplate, fakeFileNamePrefix, fakeFileNameSuffix;
++
++  private String paramsFileName;
++
++  private String docInfoFileName;
++
++  private String finalLambdaFileName;
++
++  private String sourceFileName;
++
++  private String refFileName;
++
++  private String decoderOutFileName;
++
++  private String decoderConfigFileName;
++
++  private String decoderCommandFileName;
++
++  private String fakeFileNameTemplate;
++
++  private String fakeFileNamePrefix;
++
++  private String fakeFileNameSuffix;
+ 
+   // e.g. output.it[1-x].someOldRun would be specified as:
+   // output.it?.someOldRun
+@@ -1934,32 +1956,26 @@ public class MertCore {
+   }
+ 
+   private boolean copyFile(String origFileName, String newFileName) {
+-    try {
++    try (OutputStream out = new FileOutputStream(outputFile)) {
+       File inputFile = new File(origFileName);
+       File outputFile = new File(newFileName);
+-
+-      InputStream in = new FileInputStream(inputFile);
+-      OutputStream out = new FileOutputStream(outputFile);
+-
+       byte[] buffer = new byte[1024];
+       int len;
+       while ((len = in.read(buffer)) > 0) {
+         out.write(buffer, 0, len);
+-      }
++      } 
+       in.close();
+       out.close();
++      /* InputStream inStream = new FileInputStream(new File(origFileName)); BufferedReader inFile =
++      new BufferedReader(new InputStreamReader(inStream, "utf8"));
+ 
+-      /*
+-       * InputStream inStream = new FileInputStream(new File(origFileName)); BufferedReader inFile =
+-       * new BufferedReader(new InputStreamReader(inStream, "utf8"));
+-       *
+-       * FileOutputStream outStream = new FileOutputStream(newFileName, false); OutputStreamWriter
+-       * outStreamWriter = new OutputStreamWriter(outStream, "utf8"); BufferedWriter outFile = new
+-       * BufferedWriter(outStreamWriter);
+-       *
+-       * String line; while(inFile.ready()) { line = inFile.readLine(); writeLine(line, outFile); }
+-       *
+-       * inFile.close(); outFile.close();
++      FileOutputStream outStream = new FileOutputStream(newFileName, false); OutputStreamWriter
++      outStreamWriter = new OutputStreamWriter(outStream, "utf8"); BufferedWriter outFile = new
++      BufferedWriter(outStreamWriter);
++
++      String line; while(inFile.ready()) { line = inFile.readLine(); writeLine(line, outFile); }
++
++      inFile.close(); outFile.close();
+        */
+       return true;
+     } catch (IOException e) {
+diff --git a/src/test/java/org/apache/joshua/decoder/TestTranslation.java b/src/test/java/org/apache/joshua/decoder/TestTranslation.java
+index bf4eaaba..840ff701 100644
+--- a/src/test/java/org/apache/joshua/decoder/TestTranslation.java
++++ b/src/test/java/org/apache/joshua/decoder/TestTranslation.java
+@@ -89,22 +89,20 @@ public class TestTranslation {
+   }
+ 
+   private void compareFileContents(Path newFile, File expectedFile) throws IOException {
+-
+-    BufferedReader reader1 = new BufferedReader(new FileReader(new File(newFile.toFile().getPath())));
+-    BufferedReader reader2 = new BufferedReader(new FileReader(new File(expectedFile.getPath())));
+-
+-    String line1 = null;
+-    String line2 = null;
+-    while (((line1 = reader1.readLine()) != null)
+-        && ((line2 = reader2.readLine()) != null)) {
+-      if (line1.equals(line2)) {
+-        Assert.assertTrue(line1.equals(line2), "Contents (each line) of input files should be identical.");
+-      } else {
+-        Assert.fail("Contents of input files is not identical.");
+-      }
++    try (BufferedReader reader1 = new BufferedReader(new FileReader(new File(newFile.toFile().getPath())))) {
++      BufferedReader reader2 = new BufferedReader(new FileReader(new File(expectedFile.getPath())));
++      String line1 = null;
++      String line2 = null;
++      while ((line1 = reader1.readLine()) != null && (line2 = reader2.readLine()) != null) {
++        if (line1.equals(line2)) {
++          Assert.assertTrue(line1.equals(line2), "Contents (each line) of input files should be identical.");
++        } else {
++          Assert.fail("Contents of input files is not identical.");
++        }
++      } 
++      reader1.close();
++      reader2.close();
+     }
+-    reader1.close();
+-    reader2.close();
+   }
+ 
+   private void getStructuredTranslations(Path tmpFile, Translation translations) {
+@@ -130,11 +128,11 @@ public class TestTranslation {
+         " ||| " + sTranslation.getTranslationString() + 
+         " ||| " + sTranslation.getTranslationFeatures().entrySet().iterator().next().toString() + 
+         " ||| " + Float.toString(sTranslation.getTranslationScore()) + "\n").getBytes(Charset.forName("UTF-8"));
+-
+-    FileOutputStream fos = new FileOutputStream(tmpFile.toFile(), true);
+-    fos.write(bTranslation);
+-    fos.close();
+-    return tmpFile;
++    try (FileOutputStream fos = new FileOutputStream(tmpFile.toFile(), true)) {
++      fos.write(bTranslation);
++      fos.close();
++      return tmpFile;
++    }
+   }
+ 
+ }
+diff --git a/src/test/java/org/apache/joshua/packed/PrintRules.java b/src/test/java/org/apache/joshua/packed/PrintRules.java
+index af6507f4..59714313 100644
+--- a/src/test/java/org/apache/joshua/packed/PrintRules.java
++++ b/src/test/java/org/apache/joshua/packed/PrintRules.java
+@@ -65,52 +65,47 @@ public class PrintRules {
+     // Read the quantizer setup.
+     quantization = new QuantizerConfiguration();
+     quantization.read(dir + "/quantization");
+-
+-    // Get the channels etc.
+-    @SuppressWarnings("resource")
+-    FileChannel source_channel = new FileInputStream(source_file).getChannel();
+-    int source_size = (int) source_channel.size();
+-    IntBuffer source_buffer = source_channel.map(MapMode.READ_ONLY, 0,
+-        source_size).asIntBuffer();
+-    source = new int[source_size / 4];
+-    source_buffer.get(source);
+-
++    try (// Get the channels etc.
+     @SuppressWarnings("resource")
+-    FileChannel target_channel = new FileInputStream(target_file).getChannel();
+-    int target_size = (int) target_channel.size();
+-    IntBuffer target_buffer = target_channel.map(MapMode.READ_ONLY, 0, 
+-        target_size).asIntBuffer();
+-    target = new int[target_size / 4];
+-    target_buffer.get(target);
+-
+-    @SuppressWarnings("resource")
+-    FileChannel feature_channel = new FileInputStream(feature_file).getChannel();
+-    int feature_size = (int) feature_channel.size();
+-    features = feature_channel.map(MapMode.READ_ONLY, 0, feature_size);
+-
+-    if (have_alignments) {
++    FileChannel source_channel = new FileInputStream(source_file).getChannel()) {
++      int source_size = ((int) (source_channel.size()));
++      IntBuffer source_buffer = source_channel.map(MapMode.READ_ONLY, 0, source_size).asIntBuffer();
++      source = new int[source_size / 4];
++      source_buffer.get(source);
+       @SuppressWarnings("resource")
+-      FileChannel alignment_channel = new FileInputStream(alignment_file).getChannel();
+-      int alignment_size = (int) alignment_channel.size();
+-      alignments = alignment_channel.map(MapMode.READ_ONLY, 0, alignment_size);
++      FileChannel target_channel = new FileInputStream(target_file).getChannel();
++      int target_size = ((int) (target_channel.size()));
++      IntBuffer target_buffer = target_channel.map(MapMode.READ_ONLY, 0, target_size).asIntBuffer();
++      target = new int[target_size / 4];
++      target_buffer.get(target);
++      @SuppressWarnings("resource")
++      FileChannel feature_channel = new FileInputStream(feature_file).getChannel();
++      int feature_size = ((int) (feature_channel.size()));
++      features = feature_channel.map(MapMode.READ_ONLY, 0, feature_size);
++      if (have_alignments) {
++        @SuppressWarnings("resource")
++        FileChannel alignment_channel = new FileInputStream(alignment_file).getChannel();
++        int alignment_size = ((int) (alignment_channel.size()));
++        alignments = alignment_channel.map(MapMode.READ_ONLY, 0, alignment_size);
++      }
++      int num_feature_blocks = features.getInt();
++      featureLookup = new int[num_feature_blocks];
++      // Read away data size.
++      features.getInt();
++      for (int i = 0; i < num_feature_blocks; i++) {
++        featureLookup[i] = features.getInt();
++      }
++      int num_alignment_blocks = alignments.getInt();
++      alignmentLookup = new int[num_alignment_blocks];
++      // Read away data size.
++      alignments.getInt();
++      for (int i = 0; i < num_alignment_blocks; i++) {
++        alignmentLookup[i] = alignments.getInt();
++      }
++      if (num_alignment_blocks != num_feature_blocks) {
++        throw new RuntimeException("Number of blocks doesn't match up.");
++      }
+     }
+-
+-    int num_feature_blocks = features.getInt();
+-    featureLookup = new int[num_feature_blocks];
+-    // Read away data size.
+-    features.getInt();
+-    for (int i = 0; i < num_feature_blocks; i++)
+-      featureLookup[i] = features.getInt();
+-
+-    int num_alignment_blocks = alignments.getInt(); 
+-    alignmentLookup = new int[num_alignment_blocks];
+-    // Read away data size.
+-    alignments.getInt();
+-    for (int i = 0; i < num_alignment_blocks; i++)
+-      alignmentLookup[i] = alignments.getInt();
+-
+-    if (num_alignment_blocks != num_feature_blocks)
+-      throw new RuntimeException("Number of blocks doesn't match up.");
+   }
+ 
+   public void traverse() {
+diff --git a/src/test/java/org/apache/joshua/zmert/BLEUTest.java b/src/test/java/org/apache/joshua/zmert/BLEUTest.java
+index 9423d889..1e9eddb8 100644
+--- a/src/test/java/org/apache/joshua/zmert/BLEUTest.java
++++ b/src/test/java/org/apache/joshua/zmert/BLEUTest.java
+@@ -117,16 +117,13 @@ public class BLEUTest {
+   @Parameters({"referenceFile","testFile"})
+   @Test(enabled=false)
+   public void fileTest(String referenceFile, String testFile) throws FileNotFoundException {
+-
+-    //TODO You can now read in the files, and do something useful with them.
+-
++    try (// TODO You can now read in the files, and do something useful with them.
+     @SuppressWarnings("resource")
+-    Scanner refScanner = new Scanner(new File(referenceFile));
+-
+-    while (refScanner.hasNextLine()) {
+-
+-      @SuppressWarnings("unused")
+-      String refLine = refScanner.nextLine();
++    Scanner refScanner = new Scanner(new File(referenceFile))) {
++      while (refScanner.hasNextLine()) {
++        @SuppressWarnings("unused")
++        String refLine = refScanner.nextLine();
++      } 
+     }
+   }
+ }

@@ -1,0 +1,220 @@
+diff --git a/obfuscator-core/src/main/java/me/superblaubeere27/jobf/JObfImpl.java b/obfuscator-core/src/main/java/me/superblaubeere27/jobf/JObfImpl.java
+index 068f3cb..81da9b5 100644
+--- a/obfuscator-core/src/main/java/me/superblaubeere27/jobf/JObfImpl.java
++++ b/obfuscator-core/src/main/java/me/superblaubeere27/jobf/JObfImpl.java
+@@ -9,6 +9,30 @@
+  */
+ 
+ package me.superblaubeere27.jobf;
++import java.util.HashMap;
++import java.util.HashSet;
++import java.util.zip.ZipOutputStream;
++import java.io.IOException;
++import java.util.Enumeration;
++import java.io.ByteArrayOutputStream;
++import java.io.FileNotFoundException;
++import java.util.LinkedList;
++import java.util.zip.ZipInputStream;
++import java.io.FileOutputStream;
++import java.util.zip.ZipEntry;
++import java.util.Map;
++import java.util.Set;
++import java.io.File;
++import java.util.List;
++import java.io.OutputStream;
++import java.util.zip.CRC32;
++import java.util.ArrayList;
++import java.util.zip.Deflater;
++import java.io.FileInputStream;
++import java.util.zip.ZipFile;
++import java.io.BufferedInputStream;
++import Arrays;
++import java.io.BufferedOutputStream;
+ 
+ import com.google.common.io.ByteStreams;
+ import me.superblaubeere27.jobf.processors.*;
+@@ -167,22 +191,19 @@ public class JObfImpl {
+ //        return map;
+ //    }
+     private List<byte[]> loadClasspathFile(File file) throws IOException {
+-        ZipFile zipIn = new ZipFile(file);
+-        Enumeration<? extends ZipEntry> entries = zipIn.entries();
+-
+-        boolean isJmod = file.getName().endsWith(".jmod");
+-
+-        List<byte[]> byteList = new ArrayList<>(zipIn.size());
+-
+-        while (entries.hasMoreElements()) {
+-            ZipEntry ent = entries.nextElement();
+-            if (ent.getName().endsWith(".class") && (!isJmod || !ent.getName().endsWith("module-info.class") && ent.getName().startsWith("classes/"))) {
+-                byteList.add(ByteStreams.toByteArray(zipIn.getInputStream(ent)));
+-            }
++        try (ZipFile zipIn = new ZipFile(file)) {
++            Enumeration<? extends ZipEntry> entries = zipIn.entries();
++            boolean isJmod = file.getName().endsWith(".jmod");
++            List<byte[]> byteList = new ArrayList<>(zipIn.size());
++            while (entries.hasMoreElements()) {
++                ZipEntry ent = entries.nextElement();
++                if (ent.getName().endsWith(".class") && (!isJmod || !ent.getName().endsWith("module-info.class") && ent.getName().startsWith("classes/"))) {
++                    byteList.add(ByteStreams.toByteArray(zipIn.getInputStream(ent)));
++                }
++            } 
++            zipIn.close();
++            return byteList;
+         }
+-        zipIn.close();
+-
+-        return byteList;
+     }
+ 
+     private void loadClasspath() throws IOException {
+diff --git a/obfuscator-core/src/main/java/me/superblaubeere27/jobf/utils/Utils.java b/obfuscator-core/src/main/java/me/superblaubeere27/jobf/utils/Utils.java
+index f24bba0..c7e40a5 100644
+--- a/obfuscator-core/src/main/java/me/superblaubeere27/jobf/utils/Utils.java
++++ b/obfuscator-core/src/main/java/me/superblaubeere27/jobf/utils/Utils.java
+@@ -9,6 +9,23 @@
+  */
+ 
+ package me.superblaubeere27.jobf.utils;
++import FrameNode;
++import VarInsnNode;
++import FieldNode;
++import AbstractInsnNode;
++import MethodInsnNode;
++import static me.superblaubeere27.jobf.utils.values.DeprecationLevel.OK;
++import static me.superblaubeere27.jobf.utils.values.DeprecationLevel.BAD;
++import static me.superblaubeere27.jobf.utils.values.DeprecationLevel.GOOD;
++import java.awt.Color;
++import java.awt.Component;
++import InsnList;
++import javax.swing.JFileChooser;
++import JumpInsnNode;
++import MethodNode;
++import LineNumberNode;
++import LabelNode;
++import ClassNode;
+ 
+ import com.google.gson.Gson;
+ import com.google.gson.GsonBuilder;
+diff --git a/obfuscator-core/src/test/java/me/superblaubeere27/ObfuscatorTest.java b/obfuscator-core/src/test/java/me/superblaubeere27/ObfuscatorTest.java
+index 92c5b57..2e72ac9 100644
+--- a/obfuscator-core/src/test/java/me/superblaubeere27/ObfuscatorTest.java
++++ b/obfuscator-core/src/test/java/me/superblaubeere27/ObfuscatorTest.java
+@@ -73,30 +73,27 @@ public class ObfuscatorTest {
+     @Test
+     public void testObfuscatedJar() throws IOException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+         int rightValue = 704643072;
+-        JarFile jarFile = new JarFile(obfuscatedFile);
+-        Enumeration<JarEntry> e = jarFile.entries();
+-
+-        URL[] urls = {new URL("jar:file:" + obfuscatedFile.getAbsolutePath() + "!/")};
+-        URLClassLoader cl = URLClassLoader.newInstance(urls);
+-        Class<?> c = null;
+-
+-        while (e.hasMoreElements()) {
+-            JarEntry je = e.nextElement();
+-            if (je.isDirectory() || !je.getName().endsWith(".class")) {
+-                continue;
+-            }
+-            // -6 because of .class
+-            String className = je.getName().substring(0, je.getName().length() - 6);
+-            className = className.replace('/', '.');
+-            if (className.equals("JFT")) {
+-                c = cl.loadClass(className);
++        try (JarFile jarFile = new JarFile(obfuscatedFile)) {
++            Enumeration<JarEntry> e = jarFile.entries();
++            URL[] urls = new URL[]{ new URL("jar:file:" + obfuscatedFile.getAbsolutePath() + "!/") };
++            URLClassLoader cl = URLClassLoader.newInstance(urls);
++            Class<?> c = null;
++            while (e.hasMoreElements()) {
++                JarEntry je = e.nextElement();
++                if (je.isDirectory() || !je.getName().endsWith(".class")) {
++                    continue;
++                }
++                // -6 because of .class
++                String className = je.getName().substring(0, je.getName().length() - 6);
++                className = className.replace('/', '.');
++                if (className.equals("JFT")) {
++                    c = cl.loadClass(className);
++                }
++            } 
++            if (c == null) {
++                fail("JFT.class wasn't found");
+             }
++            assertEquals(((int) (c.getMethod("test").invoke(null))), rightValue);
+         }
+-
+-        if (c == null) {
+-            fail("JFT.class wasn't found");
+-        }
+-
+-        assertEquals(((int) c.getMethod("test").invoke(null)), rightValue);
+     }
+ }
+diff --git a/watermark/src/main/java/me/superblaubeere27/obfuscator/watermark/Main.java b/watermark/src/main/java/me/superblaubeere27/obfuscator/watermark/Main.java
+index be54e44..365d985 100644
+--- a/watermark/src/main/java/me/superblaubeere27/obfuscator/watermark/Main.java
++++ b/watermark/src/main/java/me/superblaubeere27/obfuscator/watermark/Main.java
+@@ -85,39 +85,31 @@ public class Main {
+                             System.err.println("Failed to create input file");
+                             return;
+                         }
+-
+-                        ZipFile zipFile = new ZipFile(input);
+-                        ZipOutputStream outStream = new ZipOutputStream(new FileOutputStream(output));
+-
+-                        Enumeration<? extends ZipEntry> entries = zipFile.entries();
+-
+-                        while (entries.hasMoreElements()) {
+-                            ZipEntry zipEntry = entries.nextElement();
+-
+-                            byte[] entryData = ByteStreams.toByteArray(zipFile.getInputStream(zipEntry));
+-
+-                            if (zipEntry.getName().endsWith(".class")) {
+-                                try {
+-                                    ClassReader reader = new ClassReader(entryData);
+-
+-                                    ClassWriter writer = new ClassWriter(0);
+-                                    reader.accept(writer, 0);
+-
+-                                    writer.newUTF8(config.getMagicBytes() + Encryption.encrypt(watermark, config.getKey()));
+-
+-                                    entryData = writer.toByteArray();
+-                                    System.out.println(watermark + " -> " + zipEntry.getName());
+-                                } catch (ClassTooLargeException | MethodTooLargeException e) {
+-                                    System.err.println("ERROR in " + zipEntry.getName());
+-                                    e.printStackTrace();
++                        try (ZipFile zipFile = new ZipFile(input)) {
++                            ZipOutputStream outStream = new ZipOutputStream(new FileOutputStream(output));
++                            Enumeration<? extends ZipEntry> entries = zipFile.entries();
++                            while (entries.hasMoreElements()) {
++                                ZipEntry zipEntry = entries.nextElement();
++                                byte[] entryData = ByteStreams.toByteArray(zipFile.getInputStream(zipEntry));
++                                if (zipEntry.getName().endsWith(".class")) {
++                                    try {
++                                        ClassReader reader = new ClassReader(entryData);
++                                        ClassWriter writer = new ClassWriter(0);
++                                        reader.accept(writer, 0);
++                                        writer.newUTF8(config.getMagicBytes() + Encryption.encrypt(watermark, config.getKey()));
++                                        entryData = writer.toByteArray();
++                                        System.out.println(watermark + " -> " + zipEntry.getName());
++                                    } catch (ClassTooLargeException | MethodTooLargeException e) {
++                                        System.err.println("ERROR in " + zipEntry.getName());
++                                        e.printStackTrace();
++                                    }
+                                 }
+-                            }
+-
+-                            outStream.putNextEntry(new ZipEntry(zipEntry.getName()));
+-                            outStream.write(entryData);
+-                            outStream.closeEntry();
++                                outStream.putNextEntry(new ZipEntry(zipEntry.getName()));
++                                outStream.write(entryData);
++                                outStream.closeEntry();
++                            } 
++                            outStream.close();
+                         }
+-                        outStream.close();
+                     } else if (optionSet.has(extract)) {
+                         File input = inputOption.value(optionSet);
+ 

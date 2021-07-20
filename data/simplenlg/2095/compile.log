@@ -1,0 +1,87 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------------< uk.ac.abdn:SimpleNLG >------------------------
+[INFO] Building SimpleNLG 4.5.1-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-javadoc-plugin/2.9/maven-javadoc-plugin-2.9.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-javadoc-plugin/2.9/maven-javadoc-plugin-2.9.pom (15 kB at 22 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-javadoc-plugin/2.9/maven-javadoc-plugin-2.9.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-javadoc-plugin/2.9/maven-javadoc-plugin-2.9.jar (362 kB at 1.9 MB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-antrun-plugin/1.8/maven-antrun-plugin-1.8.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-antrun-plugin/1.8/maven-antrun-plugin-1.8.pom (3.3 kB at 184 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-antrun-plugin/1.8/maven-antrun-plugin-1.8.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-antrun-plugin/1.8/maven-antrun-plugin-1.8.jar (36 kB at 1.1 MB/s)
+[INFO] Downloading from clojars.org: https://repo.clojars.org/gov/nih/nlm/nls/lexaccess/lexaccess-dist/2013/lexaccess-dist-2013.pom
+[INFO] Downloaded from clojars.org: https://repo.clojars.org/gov/nih/nlm/nls/lexaccess/lexaccess-dist/2013/lexaccess-dist-2013.pom (436 B at 602 B/s)
+[INFO] Downloading from clojars.org: https://repo.clojars.org/com/sun/xml/bind/jaxb-impl/2.3.1/jaxb-impl-2.3.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-impl/2.3.1/jaxb-impl-2.3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-impl/2.3.1/jaxb-impl-2.3.1.pom (15 kB at 430 kB/s)
+[INFO] Downloading from clojars.org: https://repo.clojars.org/com/sun/xml/bind/mvn/jaxb-bundles/2.3.1/jaxb-bundles-2.3.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-bundles/2.3.1/jaxb-bundles-2.3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-bundles/2.3.1/jaxb-bundles-2.3.1.pom (2.9 kB at 160 kB/s)
+[INFO] Downloading from clojars.org: https://repo.clojars.org/com/sun/xml/bind/mvn/jaxb-parent/2.3.1/jaxb-parent-2.3.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-parent/2.3.1/jaxb-parent-2.3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/sun/xml/bind/mvn/jaxb-parent/2.3.1/jaxb-parent-2.3.1.pom (41 kB at 1.1 MB/s)
+[INFO] Downloading from clojars.org: https://repo.clojars.org/com/sun/xml/bind/jaxb-bom-ext/2.3.1/jaxb-bom-ext-2.3.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-bom-ext/2.3.1/jaxb-bom-ext-2.3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-bom-ext/2.3.1/jaxb-bom-ext-2.3.1.pom (5.0 kB at 312 kB/s)
+[INFO] Downloading from clojars.org: https://repo.clojars.org/org/glassfish/jaxb/jaxb-bom/2.3.1/jaxb-bom-2.3.1.pom
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-bom/2.3.1/jaxb-bom-2.3.1.pom
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/org/glassfish/jaxb/jaxb-bom/2.3.1/jaxb-bom-2.3.1.pom (10 kB at 262 kB/s)
+[INFO] Downloading from clojars.org: https://repo.clojars.org/gov/nih/nlm/nls/lexaccess/lexaccess-dist/2013/lexaccess-dist-2013.jar
+[INFO] Downloading from clojars.org: https://repo.clojars.org/com/sun/xml/bind/jaxb-impl/2.3.1/jaxb-impl-2.3.1.jar
+[INFO] Downloaded from clojars.org: https://repo.clojars.org/gov/nih/nlm/nls/lexaccess/lexaccess-dist/2013/lexaccess-dist-2013.jar (2.3 MB at 835 kB/s)
+[INFO] Downloading from central: https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-impl/2.3.1/jaxb-impl-2.3.1.jar
+[INFO] Downloaded from central: https://repo.maven.apache.org/maven2/com/sun/xml/bind/jaxb-impl/2.3.1/jaxb-impl-2.3.1.jar (1.1 MB at 4.6 MB/s)
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ SimpleNLG ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 8 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ SimpleNLG ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 99 source files to /home/user/projects/simplenlg/target/classes
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] /home/user/projects/simplenlg/src/main/java/simplenlg/framework/NLGElement.java: Some input files use or override a deprecated API.
+[WARNING] /home/user/projects/simplenlg/src/main/java/simplenlg/framework/NLGElement.java: Recompile with -Xlint:deprecation for details.
+[INFO] 2 warnings 
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/user/projects/simplenlg/src/main/java/simplenlg/lexicon/util/NIHLexiconXMLDumpUtil.java:[89,55] cannot find symbol
+  symbol:   variable wordListFile
+  location: class simplenlg.lexicon.util.NIHLexiconXMLDumpUtil
+[ERROR] /home/user/projects/simplenlg/src/main/java/simplenlg/lexicon/util/NIHLexiconXMLDumpUtil.java:[141,56] cannot find symbol
+  symbol:   variable wordListFile
+  location: class simplenlg.lexicon.util.NIHLexiconXMLDumpUtil
+[ERROR] /home/user/projects/simplenlg/src/main/java/simplenlg/lexicon/util/NIHLexiconXMLDumpUtil.java:[144,41] cannot find symbol
+  symbol:   variable wordListFile
+  location: class simplenlg.lexicon.util.NIHLexiconXMLDumpUtil
+[INFO] 3 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.988 s
+[INFO] Finished at: 2021-07-20T21:22:41Z
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.1:compile (default-compile) on project SimpleNLG: Compilation failure: Compilation failure: 
+[ERROR] /home/user/projects/simplenlg/src/main/java/simplenlg/lexicon/util/NIHLexiconXMLDumpUtil.java:[89,55] cannot find symbol
+[ERROR]   symbol:   variable wordListFile
+[ERROR]   location: class simplenlg.lexicon.util.NIHLexiconXMLDumpUtil
+[ERROR] /home/user/projects/simplenlg/src/main/java/simplenlg/lexicon/util/NIHLexiconXMLDumpUtil.java:[141,56] cannot find symbol
+[ERROR]   symbol:   variable wordListFile
+[ERROR]   location: class simplenlg.lexicon.util.NIHLexiconXMLDumpUtil
+[ERROR] /home/user/projects/simplenlg/src/main/java/simplenlg/lexicon/util/NIHLexiconXMLDumpUtil.java:[144,41] cannot find symbol
+[ERROR]   symbol:   variable wordListFile
+[ERROR]   location: class simplenlg.lexicon.util.NIHLexiconXMLDumpUtil
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

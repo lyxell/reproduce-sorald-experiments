@@ -1,0 +1,54 @@
+diff --git a/src/test/java/net/lingala/zip4j/io/outputstream/ZipOutputStreamIT.java b/src/test/java/net/lingala/zip4j/io/outputstream/ZipOutputStreamIT.java
+index ae01c4c..6d06023 100644
+--- a/src/test/java/net/lingala/zip4j/io/outputstream/ZipOutputStreamIT.java
++++ b/src/test/java/net/lingala/zip4j/io/outputstream/ZipOutputStreamIT.java
+@@ -1,4 +1,7 @@
+ package net.lingala.zip4j.io.outputstream;
++import static net.lingala.zip4j.AbstractIT.FILES_TO_ADD;
++import static net.lingala.zip4j.AbstractIT.CHARSET_CP_949;
++import static net.lingala.zip4j.AbstractIT.PASSWORD;
+ 
+ import net.lingala.zip4j.AbstractIT;
+ import net.lingala.zip4j.ZipFile;
+@@ -190,13 +193,13 @@ public class ZipOutputStreamIT extends AbstractIT {
+ 
+         zipParameters.setFileNameInZip(fileToAdd.getName());
+         zipOutputStream.putNextEntry(zipParameters);
+-        InputStream inputStream = new FileInputStream(fileToAdd);
+-        while ((readLen = inputStream.read(buff)) != -1) {
+-          zipOutputStream.write(buff, 0, readLen);
++        try (InputStream inputStream = new FileInputStream(fileToAdd)) {
++          while ((readLen = inputStream.read(buff)) != -1) {
++            zipOutputStream.write(buff, 0, readLen);
++          } 
++          inputStream.close();
++          zipOutputStream.closeEntry();
+         }
+-
+-        inputStream.close();
+-        zipOutputStream.closeEntry();
+       }
+     }
+ 
+diff --git a/src/test/java/net/lingala/zip4j/testutils/HeaderVerifier.java b/src/test/java/net/lingala/zip4j/testutils/HeaderVerifier.java
+index a683450..8cfc2ac 100644
+--- a/src/test/java/net/lingala/zip4j/testutils/HeaderVerifier.java
++++ b/src/test/java/net/lingala/zip4j/testutils/HeaderVerifier.java
+@@ -61,12 +61,11 @@ public class HeaderVerifier {
+       throw new RuntimeException("Cannot find an entry with name: " + fileNameInZip + " in zip file: "
+           + generatedZipFile);
+     }
+-
+-    InputStream inputStream = new FileInputStream(generatedZipFile);
+-    if (inputStream.skip(fileHeader.getOffsetLocalHeader()) != fileHeader.getOffsetLocalHeader()) {
+-      throw new IOException("Cannot skip " + fileHeader.getOffsetLocalHeader() + " bytes for entry "
+-          + fileHeader.getFileName());
++    try (InputStream inputStream = new FileInputStream(generatedZipFile)) {
++      if (inputStream.skip(fileHeader.getOffsetLocalHeader()) != fileHeader.getOffsetLocalHeader()) {
++        throw new IOException("Cannot skip " + fileHeader.getOffsetLocalHeader() + " bytes for entry " + fileHeader.getFileName());
++      }
++      return inputStream;
+     }
+-    return inputStream;
+   }
+ }
