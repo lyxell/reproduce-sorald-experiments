@@ -1,10 +1,15 @@
 ## Rule 2095
 
+* Original claim: 160/161 (99%) projects compile successfully and has no
+  failing tests
+
+### Replication
+
 * Number of projects with changed files: 48
 * Number of projects with compile errors: 32/48
 * Number of projects with other errors: 2/48
 * Number of projects with test failures: 1/48
-* Number of projects without errors and without test failures: 14/48
+* Number of projects that compile successfully and has no failing tests: 14/48 (29%)
 
 Project                               | Author              | Result    
 --------------------------------------|---------------------|--------------
