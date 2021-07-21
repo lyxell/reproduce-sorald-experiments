@@ -5,6 +5,8 @@
 
 ### Replication
 
+Out of the 161 projects only 48 had violations that led Sorald to perform a repair.
+
 * Number of projects with changed files: 48
 * Number of projects with compile errors: 32/48
 * Number of projects with other errors: 2/48
